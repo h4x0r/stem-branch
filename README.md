@@ -23,7 +23,7 @@ const pillars = computeFourPillars(new Date(2024, 1, 10, 14, 30));
 npm install stembranch
 ```
 
-Zero production dependencies. Self-contained VSOP87B implementation (2,564 terms) for sub-minute solar term precision.
+Zero production dependencies. Self-contained VSOP87D implementation (2,425 terms) with sub-second solar term precision.
 
 ## Quickstart
 
@@ -105,7 +105,7 @@ const b = getChineseZodiac(new Date(2024, 1, 10), 'lunar-new-year');
 
 The 干支 year starts at 立春, the moment the sun reaches ecliptic longitude 315°. This falls around February 3-5 each year. A person born on January 20, 2024 belongs to the 癸卯 year (2023's stem-branch), not 甲辰 (2024's).
 
-The library computes the exact 立春 moment using the full VSOP87B planetary theory (2,564 terms).
+The library computes the exact 立春 moment using full VSOP87D planetary theory (2,425 terms) with DE405 correction and sxwnl-derived DeltaT.
 
 ### 子時 (Midnight Hour) crosses calendar days
 
@@ -126,28 +126,30 @@ Validated against [sxwnl](https://github.com/sxwnl/sxwnl), the gold standard Chi
 | Day Pillar (日柱) | 5,683 dates | 1583-2500 | **100%** match |
 | Year Pillar (年柱) | 2,412 dates | 1900-2100 | **100%** match |
 | Month Pillar (月柱) | 2,412 dates | 1900-2100 | **100%** match |
-| Solar Terms (節氣) | 4,824 terms | 1900-2100 | avg **58.2s** deviation |
+| Solar Terms (節氣) | 4,824 terms | 1900-2100 | avg **0.6s** deviation |
 
 Solar term timing detail:
 
 | Percentile | Deviation |
 |---|---|
-| P50 | 1.01 minutes |
-| P95 | 2.26 minutes |
-| P99 | 2.51 minutes |
-| Max | 2.63 minutes |
-| Within 5 min | 100% |
+| P50 | 0.5 seconds |
+| P95 | 1.4 seconds |
+| P99 | 2.0 seconds |
+| Max | 3.1 seconds |
+| Within 1 min | 100% |
 
 ### Data sources
 
 | Component | Source | Method |
 |---|---|---|
-| Solar longitude | Self-contained VSOP87B | Full 2,564-term planetary theory |
+| Solar longitude | Self-contained VSOP87D | Full 2,425-term planetary theory + DE405 correction |
+| DeltaT (ΔT) | Espenak & Meeus + sxwnl | Polynomial (pre-2016), sxwnl cubic table (2016-2050), parabolic extrapolation (2050+) |
+| Nutation | IAU2000B | 77-term lunisolar nutation series |
 | Day pillar | Arithmetic | Epoch: 2000-01-07 = 甲子日 |
 | Stem/branch cycles | Lookup tables | Standard 10-stem, 12-branch sequences |
 | Lunar New Year dates | Hardcoded table | 58 dates (1990-2050) |
 | Equation of Time | Spencer 1971 Fourier | Accurate to ~30 seconds |
-| Eclipse dates | NASA Five Millennium Canon | 9,624 eclipses (1000–3000 CE) |
+| Eclipse dates | NASA Five Millennium Canon | 23,962 eclipses (-1999 to 3000 CE) |
 
 ## API Reference
 
@@ -288,6 +290,13 @@ Solar term timing detail:
 |---|---|
 | `computeFourPillars(date)` | Compute year, month, day, and hour pillars |
 
+### DeltaT (ΔT)
+
+| Export | Description |
+|---|---|
+| `deltaT(date)` | ΔT in seconds for a Date (TT = UT + ΔT) |
+| `deltaTForYear(y)` | ΔT in seconds for a decimal year |
+
 ### True Solar Time (真太陽時)
 
 | Export | Description |
@@ -307,13 +316,13 @@ Solar term timing detail:
 
 | Export | Description |
 |---|---|
-| `getAllSolarEclipses()` | All solar eclipses (1000–3000 CE), sorted by date |
-| `getAllLunarEclipses()` | All lunar eclipses (1000–3000 CE), sorted by date |
+| `getAllSolarEclipses()` | All solar eclipses (-1999 to 3000 CE), sorted by date |
+| `getAllLunarEclipses()` | All lunar eclipses (-1999 to 3000 CE), sorted by date |
 | `getEclipsesForYear(year)` | All eclipses for a given year |
 | `getEclipsesInRange(start, end, kind?)` | Eclipses in a date range, optionally filtered |
 | `findNearestEclipse(date, kind?)` | Nearest eclipse to a given date |
 | `isEclipseDate(date)` | Check if a UTC date has an eclipse |
-| `ECLIPSE_DATA_RANGE` | `{ min: 1000, max: 3000 }` |
+| `ECLIPSE_DATA_RANGE` | `{ min: -1999, max: 3000 }` |
 
 ### Western Zodiac (星座)
 
@@ -349,7 +358,6 @@ interface Eclipse { date: Date; kind: EclipseKind; type: SolarEclipseType | Luna
 ## Limitations
 
 - **No lunar calendar.** The library computes solar terms and stem-branch cycles. It does not compute lunar months, new moons, or 閏月 (intercalary months). The Lunar New Year zodiac function uses a hardcoded lookup table (1990-2050) with a February 1 fallback outside that range.
-- **No DeltaT handling.** The library does not account for the difference between Terrestrial Time and Universal Time. This affects solar term timing (current avg ~58s deviation from sxwnl). Day pillars are unaffected.
 - **Proleptic Gregorian calendar.** JavaScript's `Date` uses the proleptic Gregorian calendar for all dates. Day pillar computations before 1582 may differ from sxwnl, which uses the Julian calendar for those dates.
 
 ## License
