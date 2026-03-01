@@ -104,16 +104,18 @@ export function getSolarMonthExact(date: Date): { monthIndex: number; effectiveY
   const prevJieTerms = getJieTermsForYear(year - 1);
 
   // Check each 節 boundary from latest to earliest
-  for (let j = 11; j >= 1; j--) {
+  // j=0 is 小寒 (丑月), j=1 is 立春 (寅月), ..., j=11 is 大雪 (子月)
+  // Mapping: solarMonthIdx = (j - 1 + 12) % 12
+  for (let j = 11; j >= 0; j--) {
     if (date >= jieTerms[j].date) {
-      // Since j >= 1, monthIndex = j - 1 is always >= 0, so effectiveYear = year
-      return { monthIndex: j - 1, effectiveYear: year };
+      const monthIndex = (j - 1 + 12) % 12;
+      // 小寒 (j=0) is still in the previous GanZhi year (before 立春)
+      const effectiveYear = j >= 1 ? year : year - 1;
+      return { monthIndex, effectiveYear };
     }
   }
 
-  // Before 立春 of current year — in 子月 or 丑月 from previous year
-  // In practice, any date reaching here is after the previous year's 大雪 (~Dec 7),
-  // so the else branch of this if is unreachable.
+  // Before 小寒 of current year — in 子月 from previous year's 大雪
   if (date >= prevJieTerms[11].date) {
     return { monthIndex: 10, effectiveYear: year - 1 };
   /* c8 ignore next 5 */
