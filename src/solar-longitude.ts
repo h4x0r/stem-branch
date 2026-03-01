@@ -7,30 +7,36 @@
  */
 
 import { EARTH_L, EARTH_R, evaluateVsopSeries } from './vsop87b-earth';
+import { deltaT } from './delta-t';
 
 const DEG_TO_RAD = Math.PI / 180;
 const RAD_TO_DEG = 180 / Math.PI;
 const ARCSEC_TO_RAD = Math.PI / 180 / 3600;
 
 /**
- * Convert a Date to Julian Date (JD).
+ * Convert a UT Date to Julian Date in Terrestrial Time (JD_TT).
+ *
+ * VSOP87B is formulated in TT (Terrestrial Time), but JavaScript Date
+ * objects are in UT. We add ΔT to convert:  TT = UT + ΔT
  */
-function dateToJD(date: Date): number {
-  return date.getTime() / 86400000 + 2440587.5;
+function dateToJD_TT(date: Date): number {
+  const jdUT = date.getTime() / 86400000 + 2440587.5;
+  const dtSeconds = deltaT(date);
+  return jdUT + dtSeconds / 86400;
 }
 
 /**
- * Convert a Date to Julian millennia from J2000.0 (for VSOP87B).
+ * Convert a UT Date to Julian millennia from J2000.0 in TT (for VSOP87B).
  */
 function dateToJulianMillennia(date: Date): number {
-  return (dateToJD(date) - 2451545.0) / 365250.0;
+  return (dateToJD_TT(date) - 2451545.0) / 365250.0;
 }
 
 /**
- * Convert a Date to Julian centuries from J2000.0 (for nutation formulas).
+ * Convert a UT Date to Julian centuries from J2000.0 in TT (for nutation formulas).
  */
 function dateToJulianCenturies(date: Date): number {
-  return (dateToJD(date) - 2451545.0) / 36525.0;
+  return (dateToJD_TT(date) - 2451545.0) / 36525.0;
 }
 
 /**

@@ -85,6 +85,9 @@ export { CYCLE_ELEMENTS, getCycleElement, getCycleElementName } from './cycle-el
 // ── 旬空 (Void Branches) ──────────────────────────────────
 export { computeVoidBranches } from './void-branches';
 
+// ── ΔT (DeltaT) ─────────────────────────────────────────────
+export { deltaT, deltaTForYear } from './delta-t';
+
 // ── 節氣 (Solar Terms) ─────────────────────────────────────
 export {
   SOLAR_TERM_NAMES, SOLAR_TERM_LONGITUDES, MONTH_BOUNDARY_INDICES,
