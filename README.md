@@ -138,6 +138,8 @@ Solar term timing detail:
 | Max | 3.1 seconds |
 | Within 1 min | 100% |
 
+Full analysis with statistical charts: [docs/accuracy.md](docs/accuracy.md)
+
 ### Data sources
 
 | Component | Source | Method |
