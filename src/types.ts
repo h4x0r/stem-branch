@@ -28,8 +28,31 @@ export interface FourPillars {
   hour: Pillar;
 }
 
+// ── 地支藏干 (Hidden Stems) ──────────────────────────────────
+export interface HiddenStem {
+  stem: Stem;
+  proportion: number; // 0-1 (本氣 >= 0.5)
+}
+
 // ── 地支關係 ────────────────────────────────────────────────
 export type DayRelation = '生' | '剋' | '合' | '沖' | '比和';
+export type PunishmentType = '無恩' | '恃勢' | '無禮';
+
+// ── 濕土燥土 (Earth Types) ──────────────────────────────────
+export type EarthType = '濕' | '燥';
+
+// ── 長生十二神 (Twelve Life Stages) ─────────────────────────
+export type LifeStage =
+  | '長生' | '沐浴' | '冠帶' | '臨官' | '帝旺' | '衰'
+  | '病' | '死' | '墓' | '絕' | '胎' | '養';
+
+// ── 十神 (Ten Relations) ────────────────────────────────────
+export type TenRelation =
+  | '比肩' | '劫財'   // same element
+  | '食神' | '傷官'   // I generate
+  | '偏財' | '正財'   // I conquer
+  | '七殺' | '正官'   // conquers me
+  | '偏印' | '正印';  // generates me
 
 // ── 節氣 (Solar Terms) ─────────────────────────────────────
 export interface SolarTerm {

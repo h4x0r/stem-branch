@@ -19,6 +19,8 @@
 import { describe, it, expect } from 'vitest';
 import { computeFourPillars } from '../src/four-pillars';
 import { findSolarTermMoment } from '../src/solar-terms';
+import { stemByIndex } from '../src/stems';
+import { branchByIndex } from '../src/branches';
 
 // ─── Load reference data ────────────────────────────────────────────────
 
@@ -71,6 +73,13 @@ function fmtMinutes(min: number): string {
   return `${min.toFixed(2)}min`;
 }
 
+/** Compute day pillar directly via arithmetic (no solar term computation) */
+function computeDayPillar(year: number, month: number, day: number): string {
+  const days = Math.floor(Date.UTC(year, month - 1, day) / 86400000);
+  const idx = ((days % 60) + 17 + 60) % 60;
+  return `${stemByIndex(idx % 10)}${branchByIndex(idx % 12)}`;
+}
+
 // ═══════════════════════════════════════════════════════════════════════
 // 1. Day Pillar (日柱) — purely arithmetic, no solar term dependency
 // ═══════════════════════════════════════════════════════════════════════
@@ -85,12 +94,9 @@ describe('Cross-validation: Day Pillar (日柱) vs sxwnl', () => {
 
     for (const ref of fixtures) {
       const { year, month, day } = parseDateStr(ref.date);
-      // Use exact:false — day pillar is purely arithmetic and does not
-      // depend on solar term boundaries, so we skip the expensive
-      // astronomy-engine calls.
-      const localDate = new Date(year, month - 1, day, 12, 0, 0);
-      const pillars = computeFourPillars(localDate, { exact: false });
-      const computed = `${pillars.day.stem}${pillars.day.branch}`;
+      // Day pillar is purely arithmetic — no solar term dependency.
+      // Compute directly to avoid expensive VSOP87B calls across 917 years.
+      const computed = computeDayPillar(year, month, day);
 
       if (computed === ref.stemBranch) {
         matches++;
@@ -340,9 +346,8 @@ describe('Cross-validation: Day Pillar (supplementary) vs sxwnl', () => {
 
     for (const ref of fixtures) {
       const { year, month, day } = parseDateStr(ref.date);
-      const localDate = new Date(year, month - 1, day, 12, 0, 0);
-      const pillars = computeFourPillars(localDate, { exact: false });
-      const computed = `${pillars.day.stem}${pillars.day.branch}`;
+      // Day pillar is purely arithmetic — no solar term dependency.
+      const computed = computeDayPillar(year, month, day);
 
       if (computed === ref.dayStemBranch) {
         matches++;

@@ -8,7 +8,12 @@ export type {
   Strength,
   Pillar,
   FourPillars,
+  HiddenStem,
   DayRelation,
+  PunishmentType,
+  EarthType,
+  LifeStage,
+  TenRelation,
   SolarTerm,
   ChineseZodiacAnimal,
   YearBoundary,
@@ -33,11 +38,45 @@ export { makeStemBranch, stemBranchByCycleIndex, stemBranchCycleIndex, parseStem
 // ── 地支關係 (Branch Relations) ─────────────────────────────
 export {
   HARMONY_PAIRS, CLASH_PAIRS,
-  isHarmony, isClash, getDayRelation,
+  THREE_HARMONIES, SEASONAL_UNIONS, HALF_HARMONIES,
+  PUNISHMENT_GROUPS, SELF_PUNISHMENT, HARM_PAIRS, DESTRUCTION_PAIRS,
+  isHarmony, isClash,
+  isThreeHarmony, getThreeHarmonyElement,
+  isSeasonalUnion, getSeasonalUnionElement,
+  isPunishment, getPunishmentType, isSelfPunishment,
+  isHarm, isDestruction,
+  getDayRelation,
 } from './branch-relations';
 
 // ── 旺相休囚死 (Element Strength) ───────────────────────────
 export { STRENGTH, getStrength } from './element-strength';
+
+// ── 地支藏干 (Hidden Stems) ──────────────────────────────────
+export { HIDDEN_STEMS, getHiddenStems } from './hidden-stems';
+
+// ── 長生十二神 (Twelve Life Stages) ─────────────────────────
+export { TWELVE_STAGES, getLifeStage } from './twelve-stages';
+
+// ── 十神 (Ten Relations) ────────────────────────────────────
+export { TEN_RELATION_NAMES, getTenRelation, getTenRelationForBranch } from './ten-relations';
+
+// ── 濕土燥土 (Earth Types) ──────────────────────────────────
+export {
+  EARTH_BRANCHES, STORAGE_MAP,
+  isWetEarth, isDryEarth, getEarthType, getStorageElement,
+} from './earth-types';
+
+// ── 暗合 (Hidden Harmony) ───────────────────────────────────
+export { HIDDEN_HARMONY_PAIRS, isHiddenHarmony, getHiddenHarmonyPairs } from './hidden-harmony';
+
+// ── 天干關係 (Stem Relations) ────────────────────────────────
+export {
+  STEM_COMBINATIONS, STEM_CLASHES,
+  isStemCombination, isStemClash, getCombinedElement,
+} from './stem-relations';
+
+// ── 納音 (Cycle Elements) ───────────────────────────────────
+export { CYCLE_ELEMENTS, getCycleElement, getCycleElementName } from './cycle-elements';
 
 // ── 旬空 (Void Branches) ──────────────────────────────────
 export { computeVoidBranches } from './void-branches';
@@ -51,7 +90,6 @@ export {
 
 // ── 四柱 (Four Pillars) ────────────────────────────────────
 export { computeFourPillars } from './four-pillars';
-export type { ComputeOptions } from './four-pillars';
 
 // ── 真太陽時 (True Solar Time) ─────────────────────────────
 export { equationOfTime, trueSolarTime } from './true-solar-time';

@@ -23,7 +23,7 @@ const pillars = computeFourPillars(new Date(2024, 1, 10, 14, 30));
 npm install stembranch
 ```
 
-One dependency: [`astronomy-engine`](https://github.com/cosinekitty/astronomy) for solar longitude computation.
+Zero production dependencies. Uses a self-contained VSOP87B implementation (2,564 terms) for sub-minute solar term precision.
 
 ## Quickstart
 
@@ -32,11 +32,7 @@ One dependency: [`astronomy-engine`](https://github.com/cosinekitty/astronomy) f
 ```typescript
 import { computeFourPillars } from 'stembranch';
 
-// Exact mode (default): uses astronomy-engine for sub-minute solar term precision
-const exact = computeFourPillars(new Date(2024, 1, 10, 14, 30));
-
-// Approximate mode: no astronomy calls, accurate to +/-1 day
-const fast = computeFourPillars(new Date(2024, 1, 10, 14, 30), { exact: false });
+const pillars = computeFourPillars(new Date(2024, 1, 10, 14, 30));
 ```
 
 ### Solar Terms (節氣)
