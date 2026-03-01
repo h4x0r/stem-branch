@@ -63,13 +63,34 @@ describe('evaluateVsopSeries', () => {
     expect(evaluateVsopSeries(series, 0)).toBeCloseTo(-1.0, 10);
   });
 
-  it('cross-validates against original VSOP87B at t=0', () => {
-    // At t=0 (J2000.0), each term is A*cos(B)
-    // We verify our L evaluation matches direct computation
+  it('returns 0 for empty series', () => {
+    expect(evaluateVsopSeries([], 1.0)).toBe(0);
+  });
+
+  it('handles negative t (dates before J2000.0)', () => {
+    // s0 = [[1.0, 0, 0]] => 1.0, s1 = [[2.0, 0, 0]] => 2.0*t
+    // At t=-1: 1.0 + 2.0*(-1) = -1.0
+    const series: [number, number, number][][] = [[[1.0, 0, 0]], [[2.0, 0, 0]]];
+    expect(evaluateVsopSeries(series, -1.0)).toBeCloseTo(-1.0, 10);
+  });
+
+  it('cross-validates L at t=0 (J2000.0)', () => {
+    // At t=0, each term reduces to A*cos(B). All 623 L0 terms contribute.
+    // The dominant constant term [1.75347, 0, 0] gives 1.75347, but the
+    // other periodic terms shift the sum. Verified against VSOP87B_Full.ts.
     const L = evaluateVsopSeries(EARTH_L, 0);
-    expect(typeof L).toBe('number');
-    expect(isNaN(L)).toBe(false);
-    // Earth's heliocentric longitude at J2000.0 is ~1.7535 radians
-    expect(L).toBeCloseTo(1.7535, 2);
+    expect(L).toBeCloseTo(1.75192, 4);
+  });
+
+  it('cross-validates B at t=0', () => {
+    // Heliocentric latitude near zero (Earth orbits in ecliptic plane)
+    const B = evaluateVsopSeries(EARTH_B, 0);
+    expect(Math.abs(B)).toBeLessThan(0.001);
+  });
+
+  it('cross-validates R at t=0', () => {
+    // Earth-Sun distance at J2000.0: ~0.9833 AU (near perihelion in January)
+    const R = evaluateVsopSeries(EARTH_R, 0);
+    expect(R).toBeCloseTo(0.9833, 2);
   });
 });
