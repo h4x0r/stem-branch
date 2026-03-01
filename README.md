@@ -23,7 +23,7 @@ const pillars = computeFourPillars(new Date(2024, 1, 10, 14, 30));
 npm install stembranch
 ```
 
-Zero production dependencies. Uses a self-contained VSOP87B implementation (2,564 terms) for sub-minute solar term precision.
+Zero production dependencies. Self-contained VSOP87B implementation (2,564 terms) for sub-minute solar term precision.
 
 ## Quickstart
 
@@ -44,7 +44,46 @@ const terms = getSolarTermsForYear(2024);
 // → 24 SolarTerm objects with exact UTC moments
 
 const springStart = findSpringStart(2024);
-// → 2024-02-04T00:27:... UTC (立春, solar longitude 315 degrees)
+// → 2024-02-04T00:27:... UTC (立春, solar longitude 315°)
+```
+
+### Ten Relations (十神)
+
+```typescript
+import { getTenRelation, getTenRelationForBranch } from 'stembranch';
+
+getTenRelation('甲', '庚');      // → '七殺'
+getTenRelationForBranch('甲', '子'); // → '正印'
+```
+
+### Hidden Stems (地支藏干)
+
+```typescript
+import { getHiddenStems } from 'stembranch';
+
+getHiddenStems('寅');
+// → [{ stem: '甲', proportion: 0.6 },
+//    { stem: '丙', proportion: 0.2 },
+//    { stem: '戊', proportion: 0.2 }]
+```
+
+### Branch Relations
+
+```typescript
+import { isThreeHarmony, getThreeHarmonyElement, isPunishment } from 'stembranch';
+
+isThreeHarmony('申', '子', '辰');        // → true
+getThreeHarmonyElement('申', '子', '辰'); // → '水'
+isPunishment('寅', '巳');                 // → true (無恩之刑)
+```
+
+### Cycle Elements (納音)
+
+```typescript
+import { getCycleElement, getCycleElementName } from 'stembranch';
+
+getCycleElement('甲子');     // → '金'
+getCycleElementName('甲子'); // → '海中金'
 ```
 
 ### Chinese Zodiac (生肖)
@@ -62,63 +101,15 @@ const b = getChineseZodiac(new Date(2024, 1, 10), 'lunar-new-year');
 
 ## Design Decisions
 
-This library makes explicit choices where Chinese calendar traditions diverge. Each decision is documented here so you know what your app computes and why.
-
 ### Year boundary: 立春 (Start of Spring), not January 1
 
-The 干支 (stem-branch) year starts at 立春, the moment the sun reaches ecliptic longitude 315 degrees. This falls around February 3-5 each year. A person born on January 20, 2024 belongs to the 癸卯 year (2023's stem-branch), not 甲辰 (2024's).
+The 干支 year starts at 立春, the moment the sun reaches ecliptic longitude 315°. This falls around February 3-5 each year. A person born on January 20, 2024 belongs to the 癸卯 year (2023's stem-branch), not 甲辰 (2024's).
 
-The library computes the exact 立春 moment using VSOP87 planetary theory (via `astronomy-engine`). The approximate mode uses February 4 as a fixed boundary, accurate to +/-1 day.
-
-### 生肖 (zodiac animal) follows the year branch
-
-The zodiac animal maps directly from the year pillar's earthly branch. 子=鼠, 丑=牛, 寅=虎, and so on. The year boundary determines when the animal changes. The library supports both conventions:
-
-| Convention | Boundary | Use case | Function |
-|---|---|---|---|
-| 立春派 | Start of Spring (~Feb 4) | 四柱八字, divination | `getChineseZodiac(date)` |
-| 初一派 | Lunar New Year (varies) | Popular culture, horoscopes | `getChineseZodiac(date, 'lunar-new-year')` |
-
-### 真太陽時 (True Solar Time)
-
-True solar time corrects clock time for two effects: the observer's longitude offset from the standard meridian, and the Equation of Time (Earth's orbital eccentricity and axial tilt). The formula:
-
-```
-TST = Clock Time + (Longitude - Standard Meridian) * 4 min/deg + EoT
-```
-
-Two properties of this calculation:
-
-1. **Latitude has no effect.** True solar time depends on longitude and date. Two observers at the same longitude see the same solar time regardless of latitude.
-2. **Sign convention: positive = sundial ahead of clock.** The Equation of Time uses the "apparent minus mean" convention (Spencer 1971, negated). When EoT is positive, the sundial reads ahead of the clock.
-
-```typescript
-import { trueSolarTime } from 'stembranch';
-
-// Beijing: longitude 116.4E, standard meridian 120E (UTC+8)
-const result = trueSolarTime(new Date(2024, 6, 15, 12, 0), 116.4);
-// result.trueSolarTime  → corrected Date
-// result.totalCorrection → minutes of adjustment
-```
-
-The standard meridian is inferred from the Date's timezone offset if not provided. Pass it explicitly when computing for a location in a different timezone than your machine.
-
-### Exact vs. approximate modes
-
-`computeFourPillars` accepts an `exact` option (default: `true`).
-
-| | Exact mode | Approximate mode |
-|---|---|---|
-| Year pillar | Astronomy-engine 立春 | Fixed Feb 4 boundary |
-| Month pillar | Astronomy-engine 節 terms | Hardcoded date ranges |
-| Day pillar | Arithmetic (both modes identical) | Arithmetic |
-| Hour pillar | 2-hour divisions (both modes identical) | 2-hour divisions |
-
-Use exact mode for birth chart calculations. Use approximate mode for batch processing or UI where +/-1 day tolerance is acceptable.
+The library computes the exact 立春 moment using the full VSOP87B planetary theory (2,564 terms).
 
 ### 子時 (Midnight Hour) crosses calendar days
 
-子時 runs from 23:00 to 00:59, crossing the calendar midnight boundary. The library handles this: at 23:00+, the hour branch is 子 and the hour stem uses the *next* day's stem for the 甲己還加甲 rule. The day pillar itself does not advance until 00:00.
+子時 runs from 23:00 to 00:59, crossing the calendar midnight boundary. At 23:00+, the hour branch is 子 and the hour stem uses the *next* day's stem for the 甲己還加甲 rule. The day pillar itself does not advance until 00:00.
 
 ### 小寒 (Minor Cold) starts 丑月
 
@@ -128,37 +119,34 @@ The 12 month boundaries are defined by 節 (Jie) solar terms. 小寒 (~January 6
 
 ### Cross-validation against 寿星万年历 (sxwnl)
 
-The library is validated against [sxwnl](https://github.com/sxwnl/sxwnl), the gold standard Chinese calendar library by 許劍偉. Results:
+Validated against [sxwnl](https://github.com/sxwnl/sxwnl), the gold standard Chinese calendar library by 許劍偉:
 
 | Test | Samples | Range | Result |
 |---|---|---|---|
 | Day Pillar (日柱) | 5,683 dates | 1583-2500 | **100%** match |
 | Year Pillar (年柱) | 2,412 dates | 1900-2100 | **100%** match |
 | Month Pillar (月柱) | 2,412 dates | 1900-2100 | **100%** match |
-| Solar Terms (節氣) | 4,824 terms | 1900-2100 | avg **12.6s** deviation |
+| Solar Terms (節氣) | 4,824 terms | 1900-2100 | avg **58.2s** deviation |
 
 Solar term timing detail:
 
 | Percentile | Deviation |
 |---|---|
-| P50 | 10.4 seconds |
-| P95 | 31.8 seconds |
-| P99 | 43.7 seconds |
-| Max | 1.04 minutes |
-| Within 1 min | 99.9% |
+| P50 | 1.01 minutes |
+| P95 | 2.26 minutes |
+| P99 | 2.51 minutes |
+| Max | 2.63 minutes |
 | Within 5 min | 100% |
 
 ### Data sources
 
 | Component | Source | Method |
 |---|---|---|
-| Solar longitude | [astronomy-engine](https://github.com/cosinekitty/astronomy) | Truncated VSOP87 planetary theory |
+| Solar longitude | Self-contained VSOP87B | Full 2,564-term planetary theory |
 | Day pillar | Arithmetic | Epoch: 2000-01-07 = 甲子日 |
 | Stem/branch cycles | Lookup tables | Standard 10-stem, 12-branch sequences |
 | Lunar New Year dates | Hardcoded table | 58 dates (1990-2050) |
 | Equation of Time | Spencer 1971 Fourier | Accurate to ~30 seconds |
-
-The solar term deviation from sxwnl comes from truncation: `astronomy-engine` uses a subset of VSOP87's 2,425 terms. The full series achieves 0.1 arcsecond precision; the truncated version achieves ~1 arcminute. For calendar purposes (determining which day a solar term falls on), this is sufficient.
 
 ## API Reference
 
@@ -174,8 +162,6 @@ The solar term deviation from sxwnl comes from truncation: `astronomy-engine` us
 | `branchByIndex(n)` | Get branch by index (mod 12) |
 | `stemPolarity(stem)` | `'陽'` or `'陰'` |
 | `branchPolarity(branch)` | `'陽'` or `'陰'` |
-| `branchFromHour(hour)` | Hour (0-23) to branch |
-| `branchFromMonth(monthIdx)` | Solar month index to branch |
 
 ### Stem-Branch Pairs (60-cycle)
 
@@ -196,15 +182,80 @@ The solar term deviation from sxwnl comes from truncation: `astronomy-engine` us
 | `ELEMENT_ORDER` | `['金','木','水','火','土']` |
 | `getElementRelation(from, to)` | Returns `'生'`, `'剋'`, `'被生'`, `'被剋'`, or `'比和'` |
 
-### Branch Relations (六合/六沖)
+### Hidden Stems (地支藏干)
 
 | Export | Description |
 |---|---|
-| `HARMONY_PAIRS` | Six harmony pairs (六合): 子丑, 寅亥, 卯戌, 辰酉, 巳申, 午未 |
-| `CLASH_PAIRS` | Six clash pairs (六沖): 子午, 丑未, 寅申, 卯酉, 辰戌, 巳亥 |
-| `isHarmony(a, b)` | Check if two branches form a harmony pair |
-| `isClash(a, b)` | Check if two branches form a clash pair |
-| `getDayRelation(dayBranch, lineBranch)` | Priority: harmony > clash > element relation |
+| `HIDDEN_STEMS` | `Record<Branch, HiddenStem[]>` — main, middle, residual stems |
+| `getHiddenStems(branch)` | Hidden stems for a branch (main stem first) |
+
+### Stem Relations (天干五合/相沖)
+
+| Export | Description |
+|---|---|
+| `STEM_COMBINATIONS` | Five stem combinations with transformed elements |
+| `STEM_CLASHES` | Four stem clash pairs |
+| `isStemCombination(a, b)` | Check if two stems form a 五合 |
+| `isStemClash(a, b)` | Check if two stems clash |
+| `getCombinedElement(a, b)` | Transformed element of a combination, or null |
+
+### Branch Relations
+
+| Export | Description |
+|---|---|
+| `HARMONY_PAIRS` | 六合: 子丑, 寅亥, 卯戌, 辰酉, 巳申, 午未 |
+| `CLASH_PAIRS` | 六沖: 子午, 丑未, 寅申, 卯酉, 辰戌, 巳亥 |
+| `THREE_HARMONIES` | 三合: 申子辰水, 寅午戌火, 巳酉丑金, 亥卯未木 |
+| `SEASONAL_UNIONS` | 三會: 寅卯辰木, 巳午未火, 申酉戌金, 亥子丑水 |
+| `HALF_HARMONIES` | 半合: pairs from three-harmony groups |
+| `PUNISHMENT_GROUPS` | 刑: 寅巳申無恩, 丑戌未恃勢, 子卯無禮 |
+| `SELF_PUNISHMENT` | 自刑: 辰午酉亥 |
+| `HARM_PAIRS` | 六害: 子未, 丑午, 寅巳, 卯辰, 申亥, 酉戌 |
+| `DESTRUCTION_PAIRS` | 六破: 子酉, 丑辰, 寅亥, 卯午, 巳申, 未戌 |
+| `isThreeHarmony(a, b, c)` | Check three-harmony group |
+| `isPunishment(a, b)` | Check punishment relationship |
+| `isSelfPunishment(branch)` | Check self-punishment |
+| `isHarm(a, b)` | Check harm pair |
+| `isDestruction(a, b)` | Check destruction pair |
+
+### Hidden Harmony (暗合)
+
+| Export | Description |
+|---|---|
+| `HIDDEN_HARMONY_PAIRS` | Pre-computed pairs where main hidden stems form 五合 |
+| `isHiddenHarmony(a, b)` | Check if two branches have 暗合 |
+
+### Earth Types (濕土/燥土)
+
+| Export | Description |
+|---|---|
+| `EARTH_BRANCHES` | `['辰','丑','戌','未']` |
+| `isWetEarth(branch)` | 辰丑 are wet earth |
+| `isDryEarth(branch)` | 戌未 are dry earth |
+| `getStorageElement(branch)` | 庫/墓: 辰→水, 戌→火, 丑→金, 未→木 |
+
+### Ten Relations (十神)
+
+| Export | Description |
+|---|---|
+| `TEN_RELATION_NAMES` | All 10 relation names |
+| `getTenRelation(dayStem, otherStem)` | Derive the ten-relation |
+| `getTenRelationForBranch(dayStem, branch)` | Ten-relation using main hidden stem |
+
+### Twelve Life Stages (長生十二神)
+
+| Export | Description |
+|---|---|
+| `TWELVE_STAGES` | `['長生','沐浴','冠帶','臨官','帝旺','衰','病','死','墓','絕','胎','養']` |
+| `getLifeStage(stem, branch)` | Life stage of a stem at a branch |
+
+### Cycle Elements (納音)
+
+| Export | Description |
+|---|---|
+| `CYCLE_ELEMENTS` | Full 60-pair lookup table with element and poetic name |
+| `getCycleElement(sb)` | 納音 element for a stem-branch pair |
+| `getCycleElementName(sb)` | 納音 poetic name (e.g. 海中金, 爐中火) |
 
 ### Element Strength (旺相休囚死)
 
@@ -224,21 +275,17 @@ The solar term deviation from sxwnl comes from truncation: `astronomy-engine` us
 | Export | Description |
 |---|---|
 | `SOLAR_TERM_NAMES` | 24 term names (小寒 through 冬至) |
-| `SOLAR_TERM_LONGITUDES` | Ecliptic longitudes (285 through 270 degrees) |
-| `MONTH_BOUNDARY_INDICES` | Indices of the 12 節 terms that define month boundaries |
+| `SOLAR_TERM_LONGITUDES` | Ecliptic longitudes (285° through 270°) |
 | `findSolarTermMoment(longitude, year, startMonth?)` | Exact UTC moment for a solar longitude |
 | `getSolarTermsForYear(year)` | All 24 terms with exact dates |
-| `findSpringStart(year)` | Exact moment of 立春 (longitude 315 degrees) |
-| `getMonthBoundaryTerms(year)` | The 12 節 terms that define month boundaries |
+| `findSpringStart(year)` | Exact moment of 立春 |
 | `getSolarMonthExact(date)` | Which solar month a date falls in |
 
 ### Four Pillars (四柱)
 
 | Export | Description |
 |---|---|
-| `computeFourPillars(date, options?)` | Compute year, month, day, and hour pillars |
-
-Options: `{ exact?: boolean }` (default `true`)
+| `computeFourPillars(date)` | Compute year, month, day, and hour pillars |
 
 ### True Solar Time (真太陽時)
 
@@ -253,11 +300,7 @@ Options: `{ exact?: boolean }` (default `true`)
 |---|---|
 | `ZODIAC_ANIMALS` | `['鼠','牛','虎','兔','龍','蛇','馬','羊','猴','雞','狗','豬']` |
 | `ZODIAC_ENGLISH` | `Record<ChineseZodiacAnimal, string>` (鼠→Rat, etc.) |
-| `animalFromBranch(branch)` | Branch to zodiac animal |
-| `branchFromAnimal(animal)` | Zodiac animal to branch |
 | `getChineseZodiac(date, boundary?)` | Zodiac with configurable year boundary |
-| `getZodiacBySpringStart(date)` | Zodiac using 立春 boundary |
-| `getChineseZodiacLunarNewYear(date)` | Zodiac using Lunar New Year boundary |
 
 ### Western Zodiac (星座)
 
@@ -275,8 +318,12 @@ type Element = '金' | '木' | '水' | '火' | '土';
 type ElementRelation = '生' | '剋' | '被生' | '被剋' | '比和';
 type Strength = '旺' | '相' | '休' | '囚' | '死';
 type DayRelation = '生' | '剋' | '合' | '沖' | '比和';
-type YearBoundary = 'spring-start' | 'lunar-new-year';
+type PunishmentType = '無恩' | '恃勢' | '無禮';
+type EarthType = '濕' | '燥';
+type TenRelation = '比肩' | '劫財' | '食神' | '傷官' | '偏財' | '正財' | '七殺' | '正官' | '偏印' | '正印';
+type LifeStage = '長生' | '沐浴' | '冠帶' | '臨官' | '帝旺' | '衰' | '病' | '死' | '墓' | '絕' | '胎' | '養';
 
+interface HiddenStem { stem: Stem; proportion: number; }
 interface Pillar { stem: Stem; branch: Branch; }
 interface FourPillars { year: Pillar; month: Pillar; day: Pillar; hour: Pillar; }
 interface SolarTerm { name: string; longitude: number; date: Date; }
@@ -285,9 +332,8 @@ interface SolarTerm { name: string; longitude: number; date: Date; }
 ## Limitations
 
 - **No lunar calendar.** The library computes solar terms and stem-branch cycles. It does not compute lunar months, new moons, or 閏月 (intercalary months). The Lunar New Year zodiac function uses a hardcoded lookup table (1990-2050) with a February 1 fallback outside that range.
-- **No DeltaT handling.** The library does not account for the difference between Terrestrial Time and Universal Time. This matters for historical dates (pre-1900) where DeltaT exceeds 10 seconds.
-- **Proleptic Gregorian calendar.** JavaScript's `Date` uses the proleptic Gregorian calendar for all dates. The library does not handle the Julian/Gregorian transition (October 15, 1582). Day pillar computations before 1582 will differ from sxwnl, which uses the Julian calendar for those dates.
-- **Approximate Western zodiac boundaries.** Sign boundaries use fixed dates (+/-1 day). For dates near a boundary, compute the exact solar longitude instead.
+- **No DeltaT handling.** The library does not account for the difference between Terrestrial Time and Universal Time. This affects solar term timing (current avg ~58s deviation from sxwnl). Day pillars are unaffected.
+- **Proleptic Gregorian calendar.** JavaScript's `Date` uses the proleptic Gregorian calendar for all dates. Day pillar computations before 1582 may differ from sxwnl, which uses the Julian calendar for those dates.
 
 ## License
 
