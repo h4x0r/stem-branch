@@ -205,12 +205,10 @@ describe('Cross-validation: Solar Terms (節氣) vs sxwnl', () => {
         `  Within 5 min: ${within5min}/${computed} (${((within5min / computed) * 100).toFixed(1)}%)`,
       );
 
-      // Core precision: P50 < 3s (median is sub-second with VSOP87D + DE405 correction)
-      expect(p50).toBeLessThan(0.05); // 3 seconds
-      // Edge tolerance: max < 2 min (DeltaT prediction uncertainty for 2090-2100)
-      expect(maxDevMinutes).toBeLessThan(2);
-      // Average: < 15s (pulled up by DeltaT-induced tail at range edges)
-      expect(avgDevMinutes).toBeLessThan(0.25);
+      // Tight precision with VSOP87D + DE405 correction + sxwnl DeltaT:
+      expect(p50).toBeLessThan(0.025); // P50 < 1.5s
+      expect(maxDevMinutes).toBeLessThan(0.1); // max < 6s
+      expect(avgDevMinutes).toBeLessThan(0.025); // avg < 1.5s
       expect(failed).toBe(0);
     },
   );
