@@ -3,7 +3,7 @@
 Astronomical Chinese calendar computation for TypeScript.
 
 [![npm](https://img.shields.io/npm/v/stembranch)](https://www.npmjs.com/package/stembranch)
-[![license](https://img.shields.io/npm/l/stembranch)](LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7+-blue)](https://www.typescriptlang.org/)
 
