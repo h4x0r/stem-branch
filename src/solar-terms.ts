@@ -1,5 +1,4 @@
-/* c8 ignore next 2 */
-import { SearchSunLongitude, MakeTime, type AstroTime } from 'astronomy-engine';
+import { findSunLongitudeMoment } from './solar-longitude';
 import type { SolarTerm } from './types';
 
 /**
@@ -30,13 +29,9 @@ export const SOLAR_TERM_LONGITUDES: readonly number[] = [
  */
 export const MONTH_BOUNDARY_INDICES = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22] as const;
 
-function astroTimeToDate(at: AstroTime): Date {
-  return at.date;
-}
-
 /**
  * Compute the exact moment of a solar term using astronomical calculation.
- * Uses astronomy-engine's SearchSunLongitude for sub-minute accuracy.
+ * Uses VSOP87B-based solar longitude computation for sub-minute accuracy.
  *
  * @param targetLongitude - Solar ecliptic longitude in degrees (0-360)
  * @param year - Gregorian year
@@ -44,19 +39,26 @@ function astroTimeToDate(at: AstroTime): Date {
  * @returns The exact Date of the solar term
  */
 export function findSolarTermMoment(targetLongitude: number, year: number, startMonth: number = 1): Date {
-  const startDate = MakeTime(new Date(year, startMonth - 1, 1));
-  const result = SearchSunLongitude(targetLongitude, startDate, 120);
+  const startDate = new Date(Date.UTC(year, startMonth - 1, 1));
+  const result = findSunLongitudeMoment(targetLongitude, startDate, 120);
   if (!result) {
     throw new Error(`Could not find solar longitude ${targetLongitude}° in year ${year}`);
   }
-  return astroTimeToDate(result);
+  return result;
 }
+
+/** Cache for getSolarTermsForYear to avoid redundant VSOP87B evaluations */
+const solarTermsCache = new Map<number, SolarTerm[]>();
 
 /**
  * Compute all 24 solar terms for a given year.
  * Returns exact moments (UTC) for each term.
+ * Results are cached per year to avoid redundant computation.
  */
 export function getSolarTermsForYear(year: number): SolarTerm[] {
+  const cached = solarTermsCache.get(year);
+  if (cached) return cached;
+
   const terms: SolarTerm[] = [];
 
   for (let i = 0; i < 24; i++) {
@@ -69,6 +71,14 @@ export function getSolarTermsForYear(year: number): SolarTerm[] {
     terms.push({ name, longitude, date });
   }
 
+  solarTermsCache.set(year, terms);
+
+  // Keep cache bounded (max ~10 years to prevent unbounded growth)
+  if (solarTermsCache.size > 10) {
+    const firstKey = solarTermsCache.keys().next().value;
+    if (firstKey !== undefined) solarTermsCache.delete(firstKey);
+  }
+
   return terms;
 }
 
@@ -78,7 +88,9 @@ export function getSolarTermsForYear(year: number): SolarTerm[] {
  * Solar longitude = 315°.
  */
 export function findSpringStart(year: number): Date {
-  return findSolarTermMoment(315, year, 1);
+  // Use cached solar terms when available (立春 is index 2)
+  const terms = getSolarTermsForYear(year);
+  return terms[2].date;
 }
 
 /**

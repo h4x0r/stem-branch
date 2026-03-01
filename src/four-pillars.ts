@@ -36,8 +36,8 @@ function getSolarMonthApprox(m: number, d: number): number {
 
 export interface ComputeOptions {
   /**
-   * Use exact astronomical solar term boundaries (via astronomy-engine).
-   * When false, uses ±1 day approximation (faster, no external dependency at runtime).
+   * Use exact astronomical solar term boundaries (via VSOP87B).
+   * When false, uses ±1 day approximation (faster, no VSOP evaluation at runtime).
    * Default: true
    */
   exact?: boolean;

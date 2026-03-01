@@ -47,9 +47,6 @@
   ],
   "author": "h4x0r",
   "license": "MIT",
-  "dependencies": {
-    "astronomy-engine": "^2.1.19"
-  },
   "devDependencies": {
     "@vitest/coverage-v8": "^3.0.0",
     "tsup": "^8.4.0",

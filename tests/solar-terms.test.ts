@@ -54,9 +54,9 @@ describe('findSolarTermMoment', () => {
     expect(date.getDate()).toBeLessThanOrEqual(22);
   });
 
-  it('throws when SearchSunLongitude returns null', async () => {
-    const astro = await import('astronomy-engine');
-    const spy = vi.spyOn(astro, 'SearchSunLongitude').mockReturnValue(null as any);
+  it('throws when findSunLongitudeMoment returns null', async () => {
+    const solarLon = await import('../src/solar-longitude');
+    const spy = vi.spyOn(solarLon, 'findSunLongitudeMoment').mockReturnValue(null);
     try {
       expect(() => findSolarTermMoment(0, 2024, 3)).toThrow('Could not find solar longitude');
     } finally {

@@ -51,12 +51,15 @@ function normalizeRadians(rad: number): number {
 /**
  * Compute apparent geocentric ecliptic longitude of the Sun in degrees [0, 360).
  *
- * Steps:
+ * VSOP87B gives heliocentric coordinates referred to the ecliptic of J2000.0.
+ * To obtain the apparent longitude referred to the ecliptic of date, we apply:
  * 1. Evaluate VSOP87B heliocentric longitude L and radius R
  * 2. Convert to geocentric: lon = L + PI
- * 3. Apply aberration correction
- * 4. Apply nutation in longitude (simplified dominant terms)
- * 5. Normalize to [0, 360)
+ * 3. Apply FK5 correction (~-0.09" offset)
+ * 4. Precess from J2000 ecliptic to ecliptic of date
+ * 5. Apply nutation in longitude (IAU 1980 simplified)
+ * 6. Apply aberration correction
+ * 7. Normalize to [0, 360)
  *
  * @param date - The moment to compute longitude for
  * @returns Solar longitude in degrees [0, 360)
@@ -72,12 +75,18 @@ export function getSunLongitude(date: Date): number {
   // Convert heliocentric to geocentric: add 180 degrees (PI radians)
   let lon = L + Math.PI;
 
-  // Aberration correction (Ron & Vondrak, ~20.4898" constant of aberration)
-  lon += (-20.4898 / R) * ARCSEC_TO_RAD;
+  // FK5 correction (Meeus, p. 166): small frame rotation ~-0.09033"
+  lon += (-0.09033) * ARCSEC_TO_RAD;
+
+  // Precession: convert from J2000 ecliptic to ecliptic of date
+  // General precession in longitude (Lieske 1979, Meeus eq. 21.3):
+  //   pA = (5029.0966 + 2.22226*T - 0.000042*T²) * T  arcseconds
+  const pA = (5029.0966 + 2.22226 * T - 0.000042 * T * T) * T;
+  lon += pA * ARCSEC_TO_RAD;
 
   // Nutation in longitude (simplified dominant terms, IAU 1980 truncated)
   const omega = (125.04452 - 1934.136261 * T) * DEG_TO_RAD;
-  const Lsun = (280.4664567 + 360007.6982779 * T) * DEG_TO_RAD;
+  const Lsun = (280.4664567 + 36000.76983 * T) * DEG_TO_RAD;
   const Lmoon = (218.3165 + 481267.8813 * T) * DEG_TO_RAD;
   const dpsi = (
     -17.20 * Math.sin(omega)
@@ -87,6 +96,9 @@ export function getSunLongitude(date: Date): number {
   ) * ARCSEC_TO_RAD;
 
   lon += dpsi;
+
+  // Aberration correction (Ron & Vondrak, ~20.4898" constant of aberration)
+  lon += (-20.4898 / R) * ARCSEC_TO_RAD;
 
   // Normalize to [0, 2*PI) then convert to degrees
   lon = normalizeRadians(lon);
@@ -138,8 +150,8 @@ export function findSunLongitudeMoment(
 
   // Coarse scan: step 1 day at a time, find the bracket where longitude crosses target
   let prevLon = getSunLongitude(startDate);
-  let bracketStartMs = -1;
-  let bracketEndMs = -1;
+  let bracketStartMs: number | null = null;
+  let bracketEndMs: number | null = null;
 
   for (let d = 1; d <= searchDays; d++) {
     const currentMs = startMs + d * dayMs;
@@ -154,7 +166,7 @@ export function findSunLongitudeMoment(
     prevLon = currentLon;
   }
 
-  if (bracketStartMs < 0) return null;
+  if (bracketStartMs === null || bracketEndMs === null) return null;
 
   // Binary search within the bracket to ~1 second precision (1000ms)
   let lo = bracketStartMs;

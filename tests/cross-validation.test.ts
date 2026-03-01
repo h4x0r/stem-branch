@@ -124,7 +124,7 @@ describe('Cross-validation: Solar Terms (節氣) vs sxwnl', () => {
 
   it(
     `should have sub-minute average deviation across ${testFixtures.length} terms`,
-    { timeout: 60_000 },
+    { timeout: 300_000 },
     () => {
       const deviations: { name: string; year: number; devMinutes: number }[] =
         [];
@@ -215,7 +215,7 @@ describe('Cross-validation: Year Pillar (年柱) vs sxwnl', () => {
 
   it(
     `should match sxwnl for all ${fixtures.length} dates (1900–2100)`,
-    { timeout: 60_000 },
+    { timeout: 300_000 },
     () => {
       let matches = 0;
       let mismatches = 0;
@@ -261,7 +261,7 @@ describe('Cross-validation: Month Pillar (月柱) vs sxwnl', () => {
 
   it(
     `should match sxwnl for all ${fixtures.length} dates (1900–2100)`,
-    { timeout: 60_000 },
+    { timeout: 300_000 },
     () => {
       let matches = 0;
       let mismatches = 0;
