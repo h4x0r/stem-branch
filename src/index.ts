@@ -165,6 +165,29 @@ export {
 } from './almanac-flags';
 export type { AlmanacCategory, AlmanacFlagInfo, AlmanacFlagResult } from './almanac-flags';
 
+// ── 彭祖百忌 (Peng Zu Taboos) ───────────────────────────────
+export { getPengZuTaboo, getPengZuTabooForDate } from './peng-zu';
+export type { PengZuTaboo } from './peng-zu';
+
+// ── 沖煞 (Day Clash Direction) ──────────────────────────────
+export { getDayClash, getDayClashForDate } from './day-clash';
+export type { DayClash } from './day-clash';
+
+// ── 神煞方位 (Deity Directions) ─────────────────────────────
+export { getDeityDirections, getDeityDirectionsForDate } from './deity-directions';
+export type { DeityDirections } from './deity-directions';
+
+// ── 胎神 (Fetal Deity) ──────────────────────────────────────
+export { getFetalDeity, getFetalDeityForDate } from './fetal-deity';
+
+// ── 值神 (Duty Deity) ───────────────────────────────────────
+export { DUTY_DEITIES, getDutyDeity, getDutyDeityForDate } from './duty-deity';
+export type { DutyDeityResult, DayPath } from './duty-deity';
+
+// ── 二十八星宿 (28 Lunar Mansions) ──────────────────────────
+export { LUNAR_MANSIONS, getLunarMansion, getLunarMansionForDate } from './lunar-mansions';
+export type { LunarMansion, Luminary } from './lunar-mansions';
+
 // ── 日曆總覽 (Daily Almanac) ────────────────────────────────
 export { dailyAlmanac } from './daily-almanac';
 export type { DailyAlmanac } from './daily-almanac';
