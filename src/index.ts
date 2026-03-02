@@ -130,12 +130,12 @@ export { newMoonJDE, findNewMoonsInRange } from './new-moon';
 export { getLunarMonthsForYear, getLunarNewYear, gregorianToLunar } from './lunar-calendar';
 export type { LunarMonth, LunarDate } from './lunar-calendar';
 
-// ── 建除十二神 (Twelve Day Officers) ─────────────────────────
+// ── 建除十二神 (Twelve Day Fitness) ──────────────────────────
 export {
-  DAY_OFFICERS, DAY_OFFICER_AUSPICIOUS,
-  getDayOfficer, getDayOfficerForDate,
-} from './day-officers';
-export type { DayOfficer } from './day-officers';
+  DAY_FITNESS_CYCLE, DAY_FITNESS_AUSPICIOUS,
+  getDayFitness, getDayFitnessForDate,
+} from './day-fitness';
+export type { DayFitness } from './day-fitness';
 
 // ── 紫白九星 (Purple-White Nine Stars) ───────────────────────
 export {

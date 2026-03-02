@@ -1,9 +1,9 @@
 /**
- * 建除十二神 (Twelve Day Officers)
+ * 建除十二神 (Twelve Day Fitness Cycle)
  *
- * The 12-day officer cycle used in Chinese almanacs (通書/黃曆).
+ * The 12-day fitness cycle used in Chinese almanacs (通書/黃曆).
  * The day whose branch matches the month branch is 建日.
- * Officers cycle forward from there: 建除滿平定執破危成收開閉.
+ * Fitness values cycle forward from there: 建除滿平定執破危成收開閉.
  *
  * Month determination uses solar month boundaries (節氣),
  * the same as the month pillar in 四柱.
@@ -15,25 +15,24 @@ import { computeFourPillars } from './four-pillars';
 
 // ── Types ────────────────────────────────────────────────────
 
-export type DayOfficer =
+export type DayFitness =
   | '建' | '除' | '滿' | '平' | '定' | '執'
   | '破' | '危' | '成' | '收' | '開' | '閉';
 
 // ── Constants ────────────────────────────────────────────────
 
-/** The twelve officers in cycle order */
-export const DAY_OFFICERS: readonly DayOfficer[] = [
+/** The twelve fitness values in cycle order */
+export const DAY_FITNESS_CYCLE: readonly DayFitness[] = [
   '建', '除', '滿', '平', '定', '執',
   '破', '危', '成', '收', '開', '閉',
 ];
 
 /**
  * Auspicious/inauspicious classification.
- * 建除滿平定執破危成收開閉 traditional meanings:
  * - 吉 (auspicious): 建, 除, 滿, 定, 成, 開
  * - 凶 (inauspicious): 平, 執, 破, 危, 收, 閉
  */
-export const DAY_OFFICER_AUSPICIOUS: Record<DayOfficer, boolean> = {
+export const DAY_FITNESS_AUSPICIOUS: Record<DayFitness, boolean> = {
   '建': true,  // 建 — establishing
   '除': true,  // 除 — removing
   '滿': true,  // 滿 — fullness
@@ -51,34 +50,34 @@ export const DAY_OFFICER_AUSPICIOUS: Record<DayOfficer, boolean> = {
 // ── Functions ────────────────────────────────────────────────
 
 /**
- * Get the 建除 officer for a given day branch and month branch.
+ * Get the 建除 fitness for a given day branch and month branch.
  *
  * The day whose branch matches the month branch is 建日.
- * Subsequent branches cycle through the 12 officers.
+ * Subsequent branches cycle through the 12 fitness values.
  *
  * @param dayBranch - The day's earthly branch
  * @param monthBranch - The month's earthly branch (from solar month)
  */
-export function getDayOfficer(dayBranch: Branch, monthBranch: Branch): DayOfficer {
+export function getDayFitness(dayBranch: Branch, monthBranch: Branch): DayFitness {
   const dayIdx = BRANCHES.indexOf(dayBranch);
   const monthIdx = BRANCHES.indexOf(monthBranch);
   const offset = ((dayIdx - monthIdx) % 12 + 12) % 12;
-  return DAY_OFFICERS[offset];
+  return DAY_FITNESS_CYCLE[offset];
 }
 
 /**
- * Get the 建除 officer for a specific date.
+ * Get the 建除 fitness for a specific date.
  *
  * Uses the astronomical solar month boundary (same as month pillar)
  * to determine the month branch, and the day pillar for the day branch.
  *
  * @param date - The date to compute for
- * @returns Officer name and auspicious flag
+ * @returns Fitness value and auspicious flag
  */
-export function getDayOfficerForDate(date: Date): { officer: DayOfficer; auspicious: boolean } {
+export function getDayFitnessForDate(date: Date): { fitness: DayFitness; auspicious: boolean } {
   const pillars = computeFourPillars(date);
   const dayBranch = pillars.day.branch;
   const monthBranch = pillars.month.branch;
-  const officer = getDayOfficer(dayBranch, monthBranch);
-  return { officer, auspicious: DAY_OFFICER_AUSPICIOUS[officer] };
+  const fitness = getDayFitness(dayBranch, monthBranch);
+  return { fitness, auspicious: DAY_FITNESS_AUSPICIOUS[fitness] };
 }
