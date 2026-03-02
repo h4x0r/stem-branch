@@ -501,6 +501,7 @@ interface DailyAlmanac { date: Date; julianDay: number; lunar: LunarDate; pillar
 
 ## Used By
 
+- [stembranch-almanac](https://stembranch-almanac.vercel.app) — daily Chinese almanac showcasing `dailyAlmanac()` with all modules
 - [iching4d](https://iching4d.vercel.app) — interactive I Ching explorer with 3D hexagram visualization
 
 ## License
