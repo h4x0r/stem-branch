@@ -110,6 +110,24 @@ const chart = computeSixRenForDate(new Date(2024, 5, 15, 14));
 // → { plates, lessons, transmissions, method: '賊剋', generals, ... }
 ```
 
+### Daily Almanac (日曆總覽)
+
+One call, everything at once — four pillars, lunar date, solar terms, zodiac, day fitness, flying stars, almanac flags, Six Ren chart, eclipses, and element analysis:
+
+```typescript
+import { dailyAlmanac } from 'stembranch';
+
+const almanac = dailyAlmanac(new Date(2024, 5, 15, 14, 30));
+// almanac.pillars     → { year: {stem:'甲', branch:'辰'}, month: ..., day: ..., hour: ... }
+// almanac.lunar       → { year: 2024, month: 5, day: 10, isLeapMonth: false }
+// almanac.dayFitness  → { fitness: '成', auspicious: true }
+// almanac.flyingStars → { year: {...}, month: {...}, day: {...}, hour: {...} }
+// almanac.almanacFlags → [{ name: '天乙貴人', english: 'Heavenly Noble', ... }, ...]
+// almanac.sixRen      → { method: '賊剋', lessons: [...], transmissions: {...}, ... }
+// almanac.dayElement   → '水'
+// almanac.dayStrength  → '死'
+```
+
 ## Design Decisions
 
 ### Year boundary: 立春 (Start of Spring), not January 1
@@ -172,6 +190,12 @@ Full analysis with statistical charts: [docs/accuracy.md](docs/accuracy.md)
 
 ## API Reference
 
+### Daily Almanac (日曆總覽)
+
+| Export | Description |
+|---|---|
+| `dailyAlmanac(date)` | Complete almanac: pillars, lunar date, solar terms, zodiac, day fitness, flying stars, almanac flags, Six Ren, eclipses, element analysis |
+
 ### Four Pillars (四柱)
 
 | Export | Description |
@@ -231,7 +255,7 @@ Full analysis with statistical charts: [docs/accuracy.md](docs/accuracy.md)
 | `stemPolarity(stem)` | `'陽'` or `'陰'` |
 | `branchPolarity(branch)` | `'陽'` or `'陰'` |
 
-### Stem-Branch Pairs (六十甲子)
+### Sexagenary Cycle (六十甲子)
 
 | Export | Description |
 |---|---|
@@ -472,7 +496,12 @@ interface Eclipse { date: Date; kind: EclipseKind; type: SolarEclipseType | Luna
 type CalendarType = 'julian' | 'gregorian' | 'auto';
 interface LunarMonth { monthNumber: number; isLeapMonth: boolean; startDate: Date; days: number; }
 interface LunarDate { year: number; month: number; day: number; isLeapMonth: boolean; }
+interface DailyAlmanac { date: Date; julianDay: number; lunar: LunarDate; pillars: FourPillars; solarTerm: { current: { name: string; date: Date } | null; next: { name: string; date: Date } }; chineseZodiac: ChineseZodiacResult; westernZodiac: WesternZodiacResult; dayFitness: { fitness: DayFitness; auspicious: boolean }; flyingStars: { year: FlyingStarInfo; month: FlyingStarInfo; day: FlyingStarInfo; hour: FlyingStarInfo }; almanacFlags: AlmanacFlagResult[]; sixRen: SixRenChart; nearestEclipse: Eclipse; isEclipseDay: boolean; dayElement: Element; dayStrength: Strength; }
 ```
+
+## Used By
+
+- [iching4d](https://iching4d.vercel.app) — interactive I Ching explorer with 3D hexagram visualization
 
 ## License
 

@@ -165,6 +165,10 @@ export {
 } from './almanac-flags';
 export type { AlmanacCategory, AlmanacFlagInfo, AlmanacFlagResult } from './almanac-flags';
 
+// ── 日曆總覽 (Daily Almanac) ────────────────────────────────
+export { dailyAlmanac } from './daily-almanac';
+export type { DailyAlmanac } from './daily-almanac';
+
 // ── 大六壬 (Grand Six Ren) ──────────────────────────────────
 export {
   STEM_LODGING, HEAVENLY_GENERALS,
