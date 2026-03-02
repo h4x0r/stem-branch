@@ -203,14 +203,14 @@ export type {
   SixRenLesson, SixRenChart,
 } from './six-ren';
 
-// ── 奇門遁甲 (Qi Men Dun Jia) ───────────────────────────────
+// ── 奇門遁甲 (Qi Men Dun Jia / Mystery Gates) ──────────────
 export {
   NINE_STARS, EIGHT_DOORS, EIGHT_DEITIES, SAN_QI_LIU_YI,
   getEscapeMode, getJuShu,
   buildEarthPlate, buildHeavenPlate,
   computeQiMen, computeQiMenForDate,
-} from './qimen';
-export type { QiMenChart } from './qimen';
+} from './mystery-gates';
+export type { QiMenChart } from './mystery-gates';
 
 // ── 紫微斗數 (Zi Wei Dou Shu / Polaris Astrology) ───────────
 export {

@@ -5,8 +5,8 @@ import {
   getEscapeMode, getJuShu,
   buildEarthPlate, buildHeavenPlate,
   computeQiMen, computeQiMenForDate,
-} from '../src/qimen';
-import type { QiMenChart } from '../src/qimen';
+} from '../src/mystery-gates';
+import type { QiMenChart } from '../src/mystery-gates';
 
 // ── Constants ─────────────────────────────────────────────────
 
