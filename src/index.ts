@@ -143,3 +143,24 @@ export {
   getYearStar, getMonthStar, getDayStar, getHourStar, getFlyingStars,
 } from './flying-stars';
 export type { FlyingStar, FlyingStarInfo } from './flying-stars';
+
+// ── 神煞 (Almanac Flags) ────────────────────────────────────
+export {
+  // Day stem derivations
+  getHeavenlyNoble, getSupremeNoble, getLiteraryStar,
+  getProsperityStar, getRamBlade, getGoldenCarriage,
+  // Branch derivations (三合)
+  getTravelingHorse, getPeachBlossom, getCanopy,
+  getGeneralStar, getRobberyStar, getDeathSpirit,
+  // Branch derivations (other)
+  getRedPhoenix, getHeavenlyJoy, getLonelyStar, getWidowStar,
+  // Day pillar predicates
+  isCommandingStar, isTenEvils, isYinYangError,
+  // Calendar predicates
+  isHeavensPardon, isMonthBreak, isYearBreak,
+  // Aggregate
+  getAlmanacFlags, getAlmanacFlagsForPillars,
+  // Registry
+  ALMANAC_FLAG_REGISTRY,
+} from './almanac-flags';
+export type { AlmanacCategory, AlmanacFlagInfo, AlmanacFlagResult } from './almanac-flags';
