@@ -20,7 +20,7 @@ import { getSolarMonthExact } from './solar-terms';
 
 export type AlmanacCategory =
   | 'noble' | 'academic' | 'romance' | 'travel'
-  | 'wealth' | 'protection' | 'inauspicious';
+  | 'wealth' | 'protection' | 'health' | 'inauspicious';
 
 export interface AlmanacFlagInfo {
   name: string;
@@ -253,6 +253,81 @@ export function isYearBreak(dayBranch: Branch, yearBranch: Branch): boolean {
 }
 
 // ═══════════════════════════════════════════════════════════════
+//  Additional BaZi Stars
+// ═══════════════════════════════════════════════════════════════
+
+/** 天醫 — year branch + 1 (the "healer" position) */
+export function getHeavenlyDoctor(yearBranch: Branch): Branch {
+  return BRANCHES[(branchIdx(yearBranch) + 1) % 12];
+}
+
+/** 學堂 — day stem's 長生 (birth) position */
+const STUDY_HALL: Record<Stem, Branch> = {
+  '甲': '亥', '乙': '午',
+  '丙': '寅', '丁': '酉',
+  '戊': '寅', '己': '酉',
+  '庚': '巳', '辛': '子',
+  '壬': '申', '癸': '卯',
+};
+
+export function getStudyHall(stem: Stem): Branch {
+  return STUDY_HALL[stem];
+}
+
+/** 金神 — specific day pillars with strong metal energy */
+const GOLD_SPIRIT_SET = new Set(['己巳', '癸酉', '乙丑']);
+
+export function isGoldSpirit(stem: Stem, branch: Branch): boolean {
+  return GOLD_SPIRIT_SET.has(`${stem}${branch}`);
+}
+
+/** 十靈日 — 10 specific day pillars with spiritual sensitivity */
+const TEN_SPIRITS_SET = new Set([
+  '甲辰', '乙亥', '丙辰', '丁酉', '戊午',
+  '庚戌', '庚寅', '辛亥', '壬寅', '癸未',
+]);
+
+export function isTenSpirits(stem: Stem, branch: Branch): boolean {
+  return TEN_SPIRITS_SET.has(`${stem}${branch}`);
+}
+
+/** 天羅 — 戌亥 (entrapment for fire-element people) */
+export function isHeavenNet(branch: Branch): boolean {
+  return branch === '戌' || branch === '亥';
+}
+
+/** 地網 — 辰巳 (entrapment for water-element people) */
+export function isEarthTrap(branch: Branch): boolean {
+  return branch === '辰' || branch === '巳';
+}
+
+/** 四廢 — day pillar whose element is dead/extinct in the current season */
+const FOUR_WASTE: [Stem, Branch][][] = [
+  [['庚', '申'], ['辛', '酉']],  // spring: metal dead
+  [['壬', '子'], ['癸', '亥']],  // summer: water dead
+  [['甲', '寅'], ['乙', '卯']],  // autumn: wood dead
+  [['丙', '午'], ['丁', '巳']],  // winter: fire dead
+];
+
+export function isFourWaste(stem: Stem, branch: Branch, season: number): boolean {
+  return FOUR_WASTE[season]?.some(([s, b]) => stem === s && branch === b) ?? false;
+}
+
+/** 三奇貴人 — three consecutive pillar stems match a special pattern */
+export function getThreeWonders(
+  pillars: FourPillars,
+): 'heaven' | 'earth' | 'human' | null {
+  const stems = [pillars.year.stem, pillars.month.stem, pillars.day.stem, pillars.hour.stem];
+  for (let i = 0; i <= 1; i++) {
+    const triple = stems.slice(i, i + 3).join('');
+    if (triple === '乙丙丁') return 'heaven';  // 天上三奇
+    if (triple === '甲戊庚') return 'earth';    // 地上三奇
+    if (triple === '壬癸辛') return 'human';    // 人中三奇
+  }
+  return null;
+}
+
+// ═══════════════════════════════════════════════════════════════
 //  Registry — all known flags with metadata
 // ═══════════════════════════════════════════════════════════════
 
@@ -383,6 +458,40 @@ export const ALMANAC_FLAG_REGISTRY: readonly FlagRule[] = [
   {
     name: '天赦日', english: "Heaven's Pardon", auspicious: true, category: 'protection',
     check: (p, season) => isHeavensPardon(p.day.stem, p.day.branch, season) ? ['day'] : [],
+  },
+
+  // ── Additional BaZi Stars ──
+  {
+    name: '天醫', english: 'Heavenly Doctor', auspicious: true, category: 'health',
+    check: (p) => yearBranchCheck(p, getHeavenlyDoctor(p.year.branch)),
+  },
+  {
+    name: '學堂', english: 'Study Hall', auspicious: true, category: 'academic',
+    check: (p) => stemToBranchCheck(p, [getStudyHall(p.day.stem)]),
+  },
+  {
+    name: '金神', english: 'Gold Spirit', auspicious: true, category: 'wealth',
+    check: (p) => isGoldSpirit(p.day.stem, p.day.branch) ? ['day'] : [],
+  },
+  {
+    name: '十靈日', english: 'Ten Spirits', auspicious: true, category: 'protection',
+    check: (p) => isTenSpirits(p.day.stem, p.day.branch) ? ['day'] : [],
+  },
+  {
+    name: '天羅', english: 'Heaven Net', auspicious: false, category: 'inauspicious',
+    check: (p) => isHeavenNet(p.day.branch) ? ['day'] : [],
+  },
+  {
+    name: '地網', english: 'Earth Trap', auspicious: false, category: 'inauspicious',
+    check: (p) => isEarthTrap(p.day.branch) ? ['day'] : [],
+  },
+  {
+    name: '四廢', english: 'Four Waste', auspicious: false, category: 'inauspicious',
+    check: (p, season) => isFourWaste(p.day.stem, p.day.branch, season) ? ['day'] : [],
+  },
+  {
+    name: '三奇貴人', english: 'Three Wonders', auspicious: true, category: 'noble',
+    check: (p) => getThreeWonders(p) ? ['year', 'month', 'day'] : [],
   },
 ];
 

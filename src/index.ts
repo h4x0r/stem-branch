@@ -158,6 +158,11 @@ export {
   isCommandingStar, isTenEvils, isYinYangError,
   // Calendar predicates
   isHeavensPardon, isMonthBreak, isYearBreak,
+  // Additional BaZi stars
+  getHeavenlyDoctor, getStudyHall,
+  isGoldSpirit, isTenSpirits,
+  isHeavenNet, isEarthTrap,
+  isFourWaste, getThreeWonders,
   // Aggregate
   getAlmanacFlags, getAlmanacFlagsForPillars,
   // Registry
@@ -221,3 +226,20 @@ export {
 export type {
   ZiWeiPalace, ZiWeiBirthData, SiHua, ZiWeiChart,
 } from './polaris';
+
+// ── 祿神 (Salary Star) ───────────────────────────────────────
+export { SALARY_STAR, getSalaryStar } from './salary-star';
+
+// ── 天德月德 (Virtue Stars) ──────────────────────────────────
+export {
+  getMonthlyVirtue, getHeavenlyVirtue,
+  getMonthlyVirtueCombo, getHeavenlyVirtueCombo,
+} from './virtue-stars';
+
+// ── 大運小運 (Luck Periods) ──────────────────────────────────
+export {
+  getLuckDirection, computeMajorLuck, computeMinorLuck,
+} from './luck-pillars';
+export type {
+  LuckDirection, MajorLuckPeriod, MajorLuckResult, MinorLuckYear,
+} from './luck-pillars';

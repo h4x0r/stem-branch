@@ -33,6 +33,16 @@ import {
   isMonthBreak,
   isYearBreak,
 
+  // Additional BaZi stars
+  getHeavenlyDoctor,
+  getStudyHall,
+  isGoldSpirit,
+  isTenSpirits,
+  isHeavenNet,
+  isEarthTrap,
+  isFourWaste,
+  getThreeWonders,
+
   // Aggregate
   getAlmanacFlags,
 
@@ -386,6 +396,151 @@ describe('isHeavensPardon (天赦日)', () => {
 
   it('甲子 in spring is not pardoned', () => expect(isHeavensPardon('甲', '子', 0)).toBe(false));
   it('戊寅 in summer is not pardoned', () => expect(isHeavensPardon('戊', '寅', 1)).toBe(false));
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  Additional BaZi Stars
+// ═══════════════════════════════════════════════════════════════
+
+describe('getHeavenlyDoctor (天醫)', () => {
+  // Year branch + 1
+  const cases: [Branch, Branch][] = [
+    ['子', '丑'], ['丑', '寅'], ['寅', '卯'], ['卯', '辰'],
+    ['辰', '巳'], ['巳', '午'], ['午', '未'], ['未', '申'],
+    ['申', '酉'], ['酉', '戌'], ['戌', '亥'], ['亥', '子'],
+  ];
+
+  cases.forEach(([yearBranch, expected]) => {
+    it(`${yearBranch}年 → ${expected}`, () => {
+      expect(getHeavenlyDoctor(yearBranch)).toBe(expected);
+    });
+  });
+});
+
+describe('getStudyHall (學堂)', () => {
+  // Day stem → 長生 position
+  const cases: [Stem, Branch][] = [
+    ['甲', '亥'], ['乙', '午'], ['丙', '寅'], ['丁', '酉'], ['戊', '寅'],
+    ['己', '酉'], ['庚', '巳'], ['辛', '子'], ['壬', '申'], ['癸', '卯'],
+  ];
+
+  cases.forEach(([stem, expected]) => {
+    it(`${stem} → ${expected}`, () => {
+      expect(getStudyHall(stem)).toBe(expected);
+    });
+  });
+});
+
+describe('isGoldSpirit (金神)', () => {
+  it('己巳 is gold spirit', () => expect(isGoldSpirit('己', '巳')).toBe(true));
+  it('癸酉 is gold spirit', () => expect(isGoldSpirit('癸', '酉')).toBe(true));
+  it('乙丑 is gold spirit', () => expect(isGoldSpirit('乙', '丑')).toBe(true));
+
+  it('甲子 is not gold spirit', () => expect(isGoldSpirit('甲', '子')).toBe(false));
+  it('己午 is not gold spirit', () => expect(isGoldSpirit('己', '午')).toBe(false));
+});
+
+describe('isTenSpirits (十靈日)', () => {
+  const spirits: [Stem, Branch][] = [
+    ['甲', '辰'], ['乙', '亥'], ['丙', '辰'], ['丁', '酉'], ['戊', '午'],
+    ['庚', '戌'], ['庚', '寅'], ['辛', '亥'], ['壬', '寅'], ['癸', '未'],
+  ];
+
+  spirits.forEach(([stem, branch]) => {
+    it(`${stem}${branch} is ten spirits`, () => {
+      expect(isTenSpirits(stem, branch)).toBe(true);
+    });
+  });
+
+  it('甲子 is not ten spirits', () => expect(isTenSpirits('甲', '子')).toBe(false));
+});
+
+describe('isHeavenNet (天羅)', () => {
+  it('戌 is heaven net', () => expect(isHeavenNet('戌')).toBe(true));
+  it('亥 is heaven net', () => expect(isHeavenNet('亥')).toBe(true));
+  it('子 is not heaven net', () => expect(isHeavenNet('子')).toBe(false));
+  it('酉 is not heaven net', () => expect(isHeavenNet('酉')).toBe(false));
+});
+
+describe('isEarthTrap (地網)', () => {
+  it('辰 is earth trap', () => expect(isEarthTrap('辰')).toBe(true));
+  it('巳 is earth trap', () => expect(isEarthTrap('巳')).toBe(true));
+  it('午 is not earth trap', () => expect(isEarthTrap('午')).toBe(false));
+  it('卯 is not earth trap', () => expect(isEarthTrap('卯')).toBe(false));
+});
+
+describe('isFourWaste (四廢)', () => {
+  // Spring: metal dead → 庚申, 辛酉
+  it('庚申 in spring is four waste', () => expect(isFourWaste('庚', '申', 0)).toBe(true));
+  it('辛酉 in spring is four waste', () => expect(isFourWaste('辛', '酉', 0)).toBe(true));
+  it('甲寅 in spring is not four waste', () => expect(isFourWaste('甲', '寅', 0)).toBe(false));
+
+  // Summer: water dead → 壬子, 癸亥
+  it('壬子 in summer is four waste', () => expect(isFourWaste('壬', '子', 1)).toBe(true));
+  it('癸亥 in summer is four waste', () => expect(isFourWaste('癸', '亥', 1)).toBe(true));
+
+  // Autumn: wood dead → 甲寅, 乙卯
+  it('甲寅 in autumn is four waste', () => expect(isFourWaste('甲', '寅', 2)).toBe(true));
+  it('乙卯 in autumn is four waste', () => expect(isFourWaste('乙', '卯', 2)).toBe(true));
+
+  // Winter: fire dead → 丙午, 丁巳
+  it('丙午 in winter is four waste', () => expect(isFourWaste('丙', '午', 3)).toBe(true));
+  it('丁巳 in winter is four waste', () => expect(isFourWaste('丁', '巳', 3)).toBe(true));
+
+  // Cross-season negative
+  it('庚申 in summer is not four waste', () => expect(isFourWaste('庚', '申', 1)).toBe(false));
+});
+
+describe('getThreeWonders (三奇貴人)', () => {
+  it('returns null for typical pillars', () => {
+    const p = {
+      year: { stem: '甲' as Stem, branch: '子' as Branch },
+      month: { stem: '丁' as Stem, branch: '卯' as Branch },
+      day: { stem: '庚' as Stem, branch: '午' as Branch },
+      hour: { stem: '壬' as Stem, branch: '申' as Branch },
+    };
+    expect(getThreeWonders(p)).toBeNull();
+  });
+
+  it('detects 天上三奇 (乙丙丁) in year-month-day', () => {
+    const p = {
+      year: { stem: '乙' as Stem, branch: '丑' as Branch },
+      month: { stem: '丙' as Stem, branch: '寅' as Branch },
+      day: { stem: '丁' as Stem, branch: '卯' as Branch },
+      hour: { stem: '庚' as Stem, branch: '午' as Branch },
+    };
+    expect(getThreeWonders(p)).toBe('heaven');
+  });
+
+  it('detects 天上三奇 (乙丙丁) in month-day-hour', () => {
+    const p = {
+      year: { stem: '甲' as Stem, branch: '子' as Branch },
+      month: { stem: '乙' as Stem, branch: '丑' as Branch },
+      day: { stem: '丙' as Stem, branch: '寅' as Branch },
+      hour: { stem: '丁' as Stem, branch: '卯' as Branch },
+    };
+    expect(getThreeWonders(p)).toBe('heaven');
+  });
+
+  it('detects 地上三奇 (甲戊庚)', () => {
+    const p = {
+      year: { stem: '甲' as Stem, branch: '子' as Branch },
+      month: { stem: '戊' as Stem, branch: '辰' as Branch },
+      day: { stem: '庚' as Stem, branch: '申' as Branch },
+      hour: { stem: '壬' as Stem, branch: '子' as Branch },
+    };
+    expect(getThreeWonders(p)).toBe('earth');
+  });
+
+  it('detects 人中三奇 (壬癸辛)', () => {
+    const p = {
+      year: { stem: '壬' as Stem, branch: '子' as Branch },
+      month: { stem: '癸' as Stem, branch: '丑' as Branch },
+      day: { stem: '辛' as Stem, branch: '酉' as Branch },
+      hour: { stem: '甲' as Stem, branch: '寅' as Branch },
+    };
+    expect(getThreeWonders(p)).toBe('human');
+  });
 });
 
 // ═══════════════════════════════════════════════════════════════
