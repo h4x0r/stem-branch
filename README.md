@@ -1,6 +1,8 @@
 # stembranch
 
-Astronomical Chinese calendar, 四柱八字, and divination computation for TypeScript. Solar terms, lunar calendar, stem-branch cycles, Eight-Character analysis, and three classical divination systems — all from first principles.
+Deterministic Chinese calendar and stem-branch algorithms for TypeScript. Solar terms, lunar calendar, sexagenary cycles, eight-character derivations, and three classical divination chart layouts — all from first principles.
+
+**Scope:** This library computes factual, deterministic results from astronomical and combinatoric algorithms. It does not provide interpretation, analysis, or advice (e.g. chart reading, 用神 prescription, fortune assessment). Consumers can build interpretive layers on top of the computed data.
 
 [![npm](https://img.shields.io/npm/v/stembranch)](https://www.npmjs.com/package/stembranch)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
