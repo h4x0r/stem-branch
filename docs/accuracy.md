@@ -140,25 +140,32 @@ identical, confirming they implement the same theory.
 
 ### 2.2 Overall statistics
 
-**Full range (1,008 terms, 42 years, 209–2493 CE):**
+**Modern epoch (335 terms, 14 years, 1900–2100):**
 
 | Comparison | N | Mean \|Δ\| | Max \|Δ\| | P50 | P95 | P99 |
 |------------|---|-----------|----------|-----|-----|-----|
-| stembranch vs JPL | 1,008 | 26.4s | 61.7s | 26.7s | 59.5s | 60.9s |
-
-**Modern epoch only (335 terms, 14 years, 1900–2100):**
-
-| Comparison | N | Mean \|Δ\| | Max \|Δ\| | P50 | P95 | P99 |
-|------------|---|-----------|----------|-----|-----|-----|
-| stembranch vs JPL | 335 | 2.38s | 6.31s | 1.58s | 5.81s | 6.29s |
-| sxwnl vs JPL | 335 | 2.38s | 7.18s | 1.85s | 5.71s | 6.78s |
-| stembranch vs sxwnl | 335 | 0.54s | 2.50s | 0.47s | 1.39s | — |
+| stembranch vs JPL | 335 | 2.40s | 6.31s | 1.58s | 5.81s | 6.29s |
+| sxwnl vs JPL | 335 | 2.44s | 7.18s | 1.82s | 5.75s | 6.82s |
+| stembranch vs sxwnl | 335 | 0.54s | 2.50s | 0.47s | 1.43s | — |
 
 Within the modern epoch, stembranch and sxwnl agree with each other to ~0.5s
 on average, and both agree with JPL DE441 to ~2.4s. The three sources are
 mutually consistent.
 
-### 2.3 Error profile: V-shape centered on ~2040
+**Extended range (1,008 terms, 42 years, 209–2493 CE):**
+
+| Comparison | N | Mean \|Δ\| | Max \|Δ\| | P50 | P95 | P99 |
+|------------|---|-----------|----------|-----|-----|-----|
+| stembranch vs JPL | 1,008 | 26.4s | 61.7s | 26.7s | 59.5s | 60.9s |
+
+The full-range mean is dominated by the DE405 correction polynomial
+extrapolating beyond its design range (see §2.3). Within 1900–2100, accuracy
+is 2.4s; the correction improves future-date accuracy but introduces
+systematic early bias for ancient dates. For calendar applications, even
+the worst case (62s at 209 CE) is well within the uncertainty of ΔT itself
+for ancient dates, and never affects pillar or month assignment.
+
+### 2.3 Error profile and the DE405 correction
 
 ```mermaid
 xychart-beta
@@ -168,25 +175,37 @@ xychart-beta
   bar [58.3, 57.8, 57.9, 54.5, 51.5, 38.4, 31.4, 27.0, 16.6, 11.2, 5.9, 3.0, 1.2, 1.2, 1.2, 0.2, 1.5, 4.5, 7.3, 15.0, 26.5, 36.1]
 ```
 
-VSOP87D deviations form a V-shape centered on ~2040 (near J2000), with errors
-growing monotonically for dates farther from the fitting epoch. This is the
-expected profile: VSOP87D is an analytical series fitted to DE200, and both
-truncation errors and ΔT uncertainty compound with distance from the modern
-epoch.
+The error profile is asymmetric: past dates show larger deviations than future
+dates at equal distance from J2000. This asymmetry comes from the sxwnl DE405
+correction polynomial (a cubic in τ = Julian millennia from J2000). The
+polynomial's odd-order terms cause opposite effects for past vs future
+extrapolation:
+
+- **τ > 0 (future)**: the correction is negative, counteracting VSOP87D
+  truncation error and _improving_ accuracy (2493 CE: 37s with correction vs
+  ~77s without)
+- **τ < 0 (past)**: the correction is positive, amplifying the error (209 CE:
+  58s with correction vs ~12s without)
+- **τ ≈ 0 (modern)**: the correction is small and well-calibrated (~2s)
+
+The raw VSOP87D error (without the DE405 correction) would be a symmetric
+~12s at both ±1800 years from epoch. The correction trades worse ancient-date
+accuracy for better future-date accuracy — a reasonable tradeoff since the
+correction was fitted to DE405 over a modern-epoch range.
 
 **Accuracy tiers:**
 
-| Period | Distance from epoch | Mean deviation | Sufficient for |
-|--------|-------------------|----------------|----------------|
-| 1960–2060 | < 60 years | < 2s | Sub-second applications |
-| 1900–2100 | < 160 years | < 6s | Calendar (50× margin) |
-| 1500–2500 | < 540 years | < 37s | Calendar (minute-level) |
-| 200–2800 | < 1,840 years | < 62s | Calendar (~1 minute) |
+| Period | Mean deviation | Max deviation | Sufficient for |
+|--------|----------------|---------------|----------------|
+| 1960–2060 | < 2s | < 2s | Sub-second applications |
+| 1900–2100 | 2.4s | 6.3s | Calendar (50× margin) |
+| 1500–2500 | < 37s | < 37s | Calendar (minute-level) |
+| 200–2800 | < 62s | < 62s | Calendar (~1 minute) |
 
-Even at the extremes (209 CE), the worst-case deviation of ~62 seconds is
-well within the uncertainty of ΔT itself for ancient dates (ΔT uncertainty
-exceeds several minutes before 1000 CE), meaning VSOP87D is not the
-limiting factor.
+Even at the extremes (209 CE), the worst-case deviation of ~62 seconds is well
+within the uncertainty of ΔT itself for ancient dates (ΔT uncertainty exceeds
+several minutes before 1000 CE), and never causes an incorrect pillar or month
+assignment.
 
 ### 2.4 Worst 10 terms (stembranch vs JPL, full range)
 
@@ -203,9 +222,11 @@ limiting factor.
 | 9 | 333 | 立夏 | −61.1 |
 | 10 | 270 | 清明 | −61.0 |
 
-All worst cases cluster in the 3rd–4th century — the years farthest from the
-VSOP87D fitting epoch. For modern dates (1960–2060), the maximum deviation is
-under 2 seconds.
+All worst cases cluster in the 3rd–4th century, where the DE405 correction
+polynomial extrapolation is strongest. The negative sign confirms the
+mechanism: the positive correction shifts the Sun's longitude forward, making
+all crossing times systematically early. For modern dates (1960–2060), the
+maximum deviation is under 2 seconds.
 
 ### 2.5 Random sampling methodology
 
@@ -353,12 +374,31 @@ side of a boundary.
 
 ### Why deviations exist
 
-The sub-second deviations arise from:
+**Modern epoch (1900–2100, ~2s):** sub-second deviations arise from:
 1. **VSOP87 truncation**: stembranch uses 2,425 terms (full VSOP87D series for Earth); sxwnl may use a different truncation or additional correction terms
 2. **Analytical vs numerical**: VSOP87D is an analytical series fit to DE200; JPL DE441 is a full numerical integration fit to modern observations
 3. **DeltaT model differences**: small differences in DeltaT polynomial coefficients propagate to UT timestamps
 4. **Nutation model**: stembranch uses IAU2000B (77 terms); sxwnl uses its own nutation implementation
 5. **Numerical precision**: different root-finding convergence thresholds
+
+**Ancient dates (before ~1500, up to ~62s):** dominated by the DE405
+correction polynomial. Both stembranch and sxwnl apply a cubic correction
+in τ (Julian millennia from J2000) to compensate for VSOP87D truncation:
+
+```
+ΔL = −0.0728 − 2.7702τ − 1.1019τ² − 0.0996τ³  (arcseconds)
+```
+
+This polynomial was fitted to DE405 over a limited range near J2000. For
+τ < 0 (past dates), the odd-order terms produce a positive correction that
+shifts the Sun's computed longitude forward, making solar term crossings
+systematically early. At τ = −1.8 (209 CE), the correction contributes
+~46s of the observed 58s deviation. The remaining ~12s is the raw VSOP87D
+vs DE441 difference — the genuine analytical-vs-numerical error.
+
+The correction is beneficial for future dates (τ > 0), where it reduces
+VSOP87D's natural extrapolation error. This asymmetric tradeoff is inherent
+to the polynomial form and is shared with sxwnl.
 
 ### JPL Horizons query parameters
 
