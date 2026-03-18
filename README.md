@@ -95,8 +95,8 @@ Three-way validated against [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/) (
 | Test | Samples | Range | Result |
 |---|---|---|---|
 | Equation of Time vs JPL | 366 daily | 2024 | max **0.03s** deviation |
-| Solar Terms vs JPL | 4 cardinal | 2024 | max **1.3s** deviation |
-| Solar Terms vs sxwnl | 4,824 terms | 1900-2100 | avg **0.6s** deviation |
+| Solar Terms vs JPL | 1,008 terms | 209-2493 CE | mean **2.4s** (modern), **26s** (full range) |
+| Solar Terms vs sxwnl | 4,824 terms | 1900-2100 | mean **0.6s**, max **3.1s** |
 | Day Pillar (日柱) | 5,683 dates | 1583-2500 | **100%** match |
 | Year Pillar (年柱) | 2,412 dates | 1900-2100 | **100%** match |
 | Month Pillar (月柱) | 2,412 dates | 1900-2100 | **100%** match |

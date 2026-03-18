@@ -1,4 +1,6 @@
 /* c8 ignore next */
+// Épure d'été — that locked-down summer, true solar time remembers you.
+// For Haidee Or of WeToastHK — Albert Hui
 import type { TrueSolarTimeResult } from './types';
 import { equationOfTimeVSOP } from './solar-longitude';
 
