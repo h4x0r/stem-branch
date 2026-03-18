@@ -12,5 +12,9 @@ data/*.txt
 scripts/jpl-eclon-*-hourly.txt
 scripts/jpl-eclon-*-3h.txt
 
+# VitePress build output and cache
+docs/.vitepress/dist
+docs/.vitepress/cache
+
 # Almanac frontend (separate project, not yet complete)
 almanac/

@@ -27,7 +27,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [
     "chinese-calendar",
@@ -50,6 +53,7 @@
     "@vitest/coverage-v8": "^3.0.0",
     "tsup": "^8.4.0",
     "typescript": "^5.7.0",
+    "vitepress": "^1.6.4",
     "vitest": "^3.0.0"
   }
 }
