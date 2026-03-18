@@ -205,10 +205,12 @@ describe('Cross-validation: Solar Terms (節氣) vs sxwnl', () => {
         `  Within 5 min: ${within5min}/${computed} (${((within5min / computed) * 100).toFixed(1)}%)`,
       );
 
-      // Tight precision with VSOP87D + DE405 correction + sxwnl DeltaT:
-      expect(p50).toBeLessThan(0.025); // P50 < 1.5s
-      expect(maxDevMinutes).toBeLessThan(0.1); // max < 6s
-      expect(avgDevMinutes).toBeLessThan(0.025); // avg < 1.5s
+      // Cross-validation with sxwnl (which uses an older DE405 correction).
+      // Our DE441-fitted correction is more accurate vs JPL (mean 1.27s, max 3.76s)
+      // but diverges from sxwnl by up to ~9s due to the DE405→DE441 correction gap.
+      expect(p50).toBeLessThan(0.07); // P50 < 4.2s
+      expect(maxDevMinutes).toBeLessThan(0.17); // max < 10.2s (DE405 vs DE441 gap)
+      expect(avgDevMinutes).toBeLessThan(0.07); // avg < 4.2s
       expect(failed).toBe(0);
     },
   );
