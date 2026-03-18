@@ -5,7 +5,7 @@ Deterministic Chinese calendar and stem-branch algorithms for TypeScript. Solar 
 **Scope:** This library computes factual, deterministic results from astronomical and combinatoric algorithms. It does not provide interpretation, analysis, or advice (e.g. chart reading, 用神 prescription, fortune assessment). Consumers can build interpretive layers on top of the computed data.
 
 [![npm](https://img.shields.io/npm/v/stembranch)](https://www.npmjs.com/package/stembranch)
-[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7+-blue)](https://www.typescriptlang.org/)
 

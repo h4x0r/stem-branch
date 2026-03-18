@@ -11,3 +11,6 @@ data/*.txt
 # JPL Horizons ephemeris data (re-fetch via scripts/jpl-3way-solar-terms.mjs)
 scripts/jpl-eclon-*-hourly.txt
 scripts/jpl-eclon-*-3h.txt
+
+# Almanac frontend (separate project, not yet complete)
+almanac/
