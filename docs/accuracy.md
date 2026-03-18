@@ -258,7 +258,7 @@ not implementation errors — both are validated independently against JPL.
 ```mermaid
 xychart-beta
   title "stembranch vs sxwnl Deviation Distribution (N=4,824)"
-  x-axis ["<=0.25s", "0.25-0.5s", "0.5-1.0s", "1.0-1.5s", "1.5-2.0s", "2.0-2.5s", "2.5-3.0s", "3.0-3.5s"]
+  x-axis ["0-0.25s", "0.25-0.5s", "0.5-1.0s", "1.0-1.5s", "1.5-2.0s", "2.0-2.5s", "2.5-3.0s", "3.0-3.5s"]
   y-axis "Number of terms" 0 --> 1500
   bar [1410, 1209, 1470, 540, 149, 42, 3, 1]
 ```
