@@ -12,8 +12,8 @@ hero:
       text: Algorithms
       link: /algorithms/overview
     - theme: alt
-      text: npm install stembranch
-      link: https://www.npmjs.com/package/stembranch
+      text: GitHub
+      link: https://github.com/h4x0r/stembranch
 
 features:
   - title: 29 Almanac Flags (神煞)
