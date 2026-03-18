@@ -244,3 +244,16 @@ export {
 export type {
   LuckDirection, MajorLuckPeriod, MajorLuckResult, MinorLuckYear,
 } from './luck-pillars';
+
+// ── 時區 (Timezone Conversion) ──────────────────────────────
+export {
+  localToUtc, getUtcOffset, timezoneFromLongitude, wallClockToSolarTime,
+  isDst, getStandardMeridian, utcToLocal, formatUtcOffset,
+} from './timezone';
+
+// ── 城市 (City Database) ────────────────────────────────────
+export {
+  CITIES, CITY_REGIONS,
+  searchCities, getCitiesByRegion, findNearestCity,
+} from './cities';
+export type { CityTimezone, CityRegionKey, CityRegion } from './cities';

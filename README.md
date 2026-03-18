@@ -88,27 +88,9 @@ const chart = computeZiWei({ year: 1990, month: 8, day: 15, hour: 6, gender: 'ma
 // → { palaces: [...14 major stars placed...], siHua, elementPattern, taiSuiIndex, ... }
 ```
 
-## Design Decisions
-
-### Year boundary: 立春 (Start of Spring), not January 1
-
-The 干支 year starts at 立春, the moment the sun reaches ecliptic longitude 315°. This falls around February 3-5 each year. A person born on January 20, 2024 belongs to the 癸卯 year (2023's stem-branch), not 甲辰 (2024's).
-
-The library computes the exact 立春 moment using full VSOP87D planetary theory (2,425 terms) with DE405 correction and sxwnl-derived DeltaT.
-
-### 子時 (Midnight Hour) crosses calendar days
-
-子時 runs from 23:00 to 00:59, crossing the calendar midnight boundary. At 23:00+, the hour branch is 子 and the hour stem uses the *next* day's stem for the 甲己還加甲 rule. The day pillar itself does not advance until 00:00.
-
-### 小寒 (Minor Cold) starts 丑月
-
-The 12 month boundaries are defined by 節 (Jie) solar terms. 小寒 (~January 6) starts 丑月, and 立春 (~February 4) starts 寅月. Dates between 小寒 and 立春 belong to 丑月 of the *previous* stem-branch year.
-
 ## Accuracy
 
-### Cross-validation against 寿星万年历 (sxwnl)
-
-Validated against [sxwnl](https://github.com/sxwnl/sxwnl), the gold standard Chinese calendar library by 許劍偉:
+Cross-validated against [sxwnl](https://github.com/sxwnl/sxwnl) (寿星万年历), the gold standard Chinese calendar library by 許劍偉:
 
 | Test | Samples | Range | Result |
 |---|---|---|---|
@@ -119,34 +101,9 @@ Validated against [sxwnl](https://github.com/sxwnl/sxwnl), the gold standard Chi
 | Lunar New Year (農曆) | 61 dates | 1990-2050 | **100%** match |
 | Intercalary Months (閏月) | 10 years | 2001-2025 | **100%** match |
 
-Lunar calendar validated against Hong Kong Observatory / USNO data, including correct handling of the 二〇三三年問題 (2033 problem).
+Lunar calendar validated against Hong Kong Observatory / USNO data, including correct handling of the [2033 problem](docs/technical-notes.md#the-2033-problem-二〇三三年問題).
 
-Solar term timing detail:
-
-| Percentile | Deviation |
-|---|---|
-| P50 | 0.5 seconds |
-| P95 | 1.4 seconds |
-| P99 | 2.0 seconds |
-| Max | 3.1 seconds |
-| Within 1 min | 100% |
-
-Full analysis with statistical charts: [docs/accuracy.md](docs/accuracy.md)
-
-### Data sources
-
-| Component | Source | Method |
-|---|---|---|
-| Solar longitude | VSOP87D | Full 2,425-term planetary theory + DE405 correction |
-| New moon | Meeus Ch. 49 | 25 periodic + 14 planetary correction terms |
-| Lunar calendar | Computed | 冬至-anchor algorithm with zhongqi month numbering |
-| Julian Day | Meeus Ch. 7 | Julian/Gregorian calendar conversion |
-| DeltaT (ΔT) | Espenak & Meeus + sxwnl | Polynomial (pre-2016), sxwnl cubic table (2016-2050), parabolic extrapolation (2050+) |
-| Nutation | IAU2000B | 77-term lunisolar nutation series |
-| Equation of Time | Spencer 1971 Fourier | Accurate to ~30 seconds |
-| Eclipse dates | NASA Five Millennium Canon | 23,962 eclipses (-1999 to 3000 CE) |
-| Day pillar | Arithmetic | Epoch: 2000-01-07 = 甲子日 |
-| Stem/branch cycles | Lookup tables | Standard 10-stem, 12-branch sequences |
+Detailed percentile analysis, design decisions, data sources, and timezone reference analysis: [docs/technical-notes.md](docs/technical-notes.md)
 
 ## API Reference
 
@@ -518,6 +475,8 @@ Multi-pillar patterns:
 | `equationOfTime(date)` | EoT in minutes (Spencer 1971) |
 | `trueSolarTime(clockTime, longitude, standardMeridian?)` | Corrected solar time with breakdown |
 
+For timezone-aware true solar time (wall clock → UTC → solar time with DST handling), see [`wallClockToSolarTime`](#timezone-conversion) in section 7.
+
 ### 6. Divination Systems (三式)
 
 #### Six Ren (大六壬)
@@ -558,7 +517,56 @@ Multi-pillar patterns:
 | `getZiWeiPosition(birthDay, elementPattern)` | 紫微 star palace index |
 | `computeZiWei(birthData)` | Full chart: 12 palaces, 14 stars, 四化, 流太歲 |
 
-### 7. Composite
+### 7. Timezone & Location (時區)
+
+Historically-accurate timezone conversion using an embedded IANA transition table (78 timezones, 11,742 transitions, 1900-2026) for deterministic, platform-independent results. Handles PRC DST 1986-1991, Taiwan DST 1946-1979, Hong Kong summer time 1946-1979, Singapore UTC+7:30→UTC+8, and all other historical timezone changes. Falls back to `Intl.DateTimeFormat` only for timezones not in the embedded database.
+
+Full technical references, source analysis, and known discrepancies: [docs/technical-notes.md](docs/technical-notes.md#timezone--dst)
+
+#### Timezone Conversion
+
+| Export | Description |
+|---|---|
+| `localToUtc(year, month, day, hour, minute, timezoneId)` | Convert local wall-clock time to UTC Date |
+| `utcToLocal(date, timezoneId)` | Convert UTC Date to local `{ year, month, day, hour, minute, second }` |
+| `getUtcOffset(year, month, day, hour, minute, timezoneId)` | UTC offset in minutes (positive = east) at a local moment |
+| `isDst(year, month, day, hour, minute, timezoneId)` | Whether DST/summer time is in effect |
+| `getStandardMeridian(year, month, day, hour, minute, timezoneId)` | Standard meridian in degrees from UTC offset |
+| `formatUtcOffset(offsetMinutes)` | Format offset as `"+08:00"`, `"-05:00"`, `"+05:45"` |
+| `timezoneFromLongitude(longitude)` | Derive `Etc/GMT±N` timezone from longitude (fallback) |
+| `wallClockToSolarTime(year, month, day, hour, minute, timezoneId, longitude)` | Full pipeline: wall clock → UTC → true solar time |
+
+```typescript
+import { localToUtc, getUtcOffset, isDst, wallClockToSolarTime } from 'stembranch';
+
+// Convert 1988-07-15 12:00 Shanghai time (PRC DST active) to UTC
+const utc = localToUtc(1988, 7, 15, 12, 0, 'Asia/Shanghai');
+// → 1988-07-15T03:00:00Z (UTC+9 during DST)
+
+// Check DST status
+isDst(1988, 7, 15, 12, 0, 'Asia/Shanghai'); // → true (PRC DST 1986-1991)
+isDst(1992, 7, 15, 12, 0, 'Asia/Shanghai'); // → false (DST abolished)
+
+// Full true solar time pipeline for Beijing (116.4°E)
+const solar = wallClockToSolarTime(2024, 6, 15, 12, 0, 'Asia/Shanghai', 116.4);
+// → { trueSolarTime: Date, longitudeCorrection: -14.4, equationOfTime: ~0, ... }
+```
+
+#### City Database (城市)
+
+143 cities across 11 regions with IANA timezone IDs and coordinates for true solar time computation.
+
+| Export | Description |
+|---|---|
+| `CITIES` | Full city array: `{ name, nameEn, timezoneId, longitude, latitude, region }` |
+| `CITY_REGIONS` | Region metadata: `{ key, label, labelEn }` |
+| `searchCities(query)` | Search by Chinese name, English name, or pinyin |
+| `getCitiesByRegion(regionKey)` | Filter cities by region |
+| `findNearestCity(longitude, latitude)` | Find closest city by coordinates |
+
+Regions: China (44), Taiwan (8), Hong Kong (2), Southeast Asia (20), East Asia (12), South Asia (10), Middle East (11), Europe (24), Americas (20), Oceania (7), Africa (5).
+
+### 8. Composite
 
 #### Daily Almanac (日曆總覽)
 
@@ -617,11 +625,6 @@ type SolarEclipseType = 'T' | 'A' | 'P' | 'H';
 type LunarEclipseType = 'T' | 'P' | 'N';
 interface Eclipse { date: Date; kind: EclipseKind; type: SolarEclipseType | LunarEclipseType; magnitude: number; }
 ```
-
-## Used By
-
-- [stembranch-almanac](https://stembranch-almanac.vercel.app) — daily Chinese almanac with 三式合盤 (unified chart) showcasing all modules
-- [iching4d](https://iching4d.vercel.app) — interactive I Ching explorer with 3D hexagram visualization
 
 ## License
 
