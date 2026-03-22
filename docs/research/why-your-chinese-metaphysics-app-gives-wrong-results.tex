@@ -1500,7 +1500,7 @@ astronomical fidelity, these systems gained immunity to the table-error
 accumulation that nearly destroyed \zh{七政四餘}.
 
 \textbf{The shared chart problem (\zh{共盤問題}).}
-\zh{八字}'s algorithmic simplification has a well-known information-theoretic
+\zh{八字}'s algorithmic simplification has a well-known statistical
 consequence: the system produces only 518,400 calendrically valid unique
 charts ($60 \times 12 \times 60 \times 12$, since the month stem is
 determined by the year stem via \zh{五虎遁月}, and the hour stem by the
@@ -1512,21 +1512,20 @@ pillars (\zh{三柱}) to four (\zh{四柱}) by Xu Ziping (\zh{徐子平}) was
 itself partly a response, reducing the number sharing a chart by a factor
 of~12~\cite{smith_fortune_2019}.
 
-The classical resolution is not denial but \emph{stratification}.
-The ``Cosmic Trinity'' model (\zh{天地人}---Heaven, Earth, Human) holds
-that the birth chart constitutes only one-third of destiny; the remaining
-two-thirds come from geography (\zh{風水}, \zh{地利}) and individual
-cultivation (\zh{修行}, \zh{人和}).
-The well-known \zh{同命不同運} (``same chart, different fortune'')
-principle is illustrated by the Emperor-and-Beekeeper fable: both
-share identical \zh{八字}, but one commands an empire and the other
-commands a hive.  The chart describes the \emph{pattern}, not the
-\emph{scale}---a framework that Geng~Li's ethnography of modern
-practitioners confirms remains central to professional
-practice~\cite{geng_li_2019}.
-Lisa Raphals has argued that this allowance for human agency
-distinguishes Chinese fate calculation from Greek deterministic
-fate~\cite{raphals_2003}.
+The philosophical debates surrounding \zh{共盤問題} are extensive and
+not necessarily falsifiable---the classical ``Cosmic Trinity'' model
+(\zh{天地人}---Heaven, Earth, Human) and \zh{同命不同運} (``same chart,
+different fortune'') involve metaphysical commitments that lie outside
+the scope of this paper.  We confine ourselves to a statistical
+observation: people born within the same two-hour \zh{時辰} demonstrably
+do not share the same life trajectory.  Major life events---age at
+marriage, number of children, career path, cause and age of
+death---diverge dramatically among individuals sharing identical
+four-pillar charts.  This is not a subtle philosophical point but a
+brute empirical fact verifiable from any birth registry cross-referenced
+with vital statistics.  Any system that maps $\sim$8~billion people onto
+518,400~bins and claims predictive specificity from the bin assignment
+alone must contend with this variance.
 
 The contrast with \zh{七政四餘} and Western horoscopic astrology is
 structurally revealing.  Both \zh{七政四餘} (via 7~bodies in 28~mansions)
@@ -1537,10 +1536,154 @@ chart problem is nearly absent.  Their resolution comes from
 interpretive calibration.  \zh{八字}'s lossy compression of the celestial
 state means it \emph{structurally requires} the practitioner to use the
 client's life history, environment, and choices to tune the reading.
-This is not a deficiency to be apologized for but a deliberate
-architectural trade-off: what was lost in astronomical resolution was
-gained in computational permanence and interpretive
-flexibility~\cite{smith_fortune_2019, ho_peng_yoke_2003}.
+
+\textbf{Sampling bias and heuristic validation.}
+The \zh{共盤問題} is one instance of a broader methodological challenge:
+many heuristics in Chinese metaphysics were derived without systematic
+empirical scrutiny.  The tradition itself has recognized this problem.
+
+The most significant historical effort at quality control was the
+\zh{協紀辯方書} (\textit{Xieji Bianfang Shu}, ``Treatise on the
+Harmonization of Times and Distinction of Directions''), completed in
+1739 under the supervision of Prince Yunlu (\zh{允祿}), with
+Mei~Juecheng (\zh{梅瑴成}) and He~Guozong (\zh{何國宗}) as
+co-compilers~\cite{xieji_bianfangshu, aylward_imperial_guide}.  Commissioned
+by the Qianlong Emperor, it was an imperially mandated audit of
+calendrical and divinatory practices.  Its stated purpose was to purge
+fabricated calendar spirits: ``\zh{一經考核即行刪除}'' (``once
+verified [as fabricated], will be deleted'').  The compilers identified
+two systemic corruptions: \zh{同術異名} (different names for the same
+technique, creating illusory diversity) and \zh{異術同名} (the same
+name applied to different techniques, creating dangerous
+ambiguity)~\cite{xieji_bianfangshu}.
+
+The \zh{三命通會} (\textit{Sanming Tonghui}, ``Comprehensive
+Compendium of the Three Fates'') by Wan~Minying (\zh{萬民英},
+\textit{jinshi} 1550, work completed c.~1578) represents an earlier and
+complementary effort~\cite{sanming_tonghui}.  At over 600,000~characters,
+it assembled chart-outcome cases from more than thirty masters across
+two centuries---the largest known corpus of birth-chart-to-life-outcome
+data in the pre-modern tradition.  While it lacked formal statistical
+controls, it functioned as a proto-empirical encyclopedic synthesis:
+by placing the \zh{正五行} (Orthodox Five Elements / day-pillar) system,
+the older \zh{納音} (NaYin / year-pillar) system, and \zh{神煞}
+(spirit-star) heuristics side by side with case evidence, it enabled
+readers to evaluate which framework demonstrated superior explanatory
+reach~\cite{ho_peng_yoke_2003, smith_fortune_2019}.  Later canonical
+texts---\zh{滴天髓}~\cite{ditian_sui}, \zh{子平真詮}~\cite{ziping_zhenquan},
+\zh{窮通寶鑑}~\cite{qiongtong_baojian}---progressively abandoned the
+NaYin and most \zh{神煞} heuristics, a winnowing process that the
+\zh{三命通會}'s comprehensive compilation made possible.
+
+The \zh{神煞} debate remains active: many modern practitioners reject
+the majority of \zh{神煞} as statistically unfounded folk accretions
+while retaining a small subset (such as \zh{桃花}, \zh{驛馬},
+\zh{華蓋}) that they consider empirically grounded.  No peer-reviewed
+statistical study has tested these heuristics against demographic
+data---a gap that modern computational tools and vital-statistics
+databases could, in principle, close.
+
+\textbf{The degrees-of-freedom problem: \zh{天地人盤} and
+\zh{鐵板神數}.}
+Two further phenomena illustrate the tension between computational
+precision and interpretive over-fitting.
+
+In \zh{風水} compass (\zh{羅盤}) practice and some \zh{奇門遁甲}
+systems, the practitioner works with three overlaid graduated rings: the
+\zh{天盤} (Heaven plate), \zh{地盤} (Earth plate), and \zh{人盤}
+(Human plate), each offset by a different angular correction.  Critics
+describe the choice of which plate to apply as \zh{自由心證} (free
+conviction---i.e., arbitrary judgment), or in the Cantonese idiom,
+``\zh{試到啱為止}'' (keep trying until it fits).  This is a
+degrees-of-freedom problem~\cite{bruun_fengshui}: with three plates and
+multiple ring layers, the practitioner has enough free parameters to
+rationalize almost any reading post-hoc.
+Fernandez-Beanato has formalized this critique, arguing that the
+interpretive flexibility of \zh{風水} constitutes a ``karmic
+stratagem'' that renders the system unfalsifiable---not because its
+claims are necessarily wrong, but because its practitioners can always
+find a combination of plates and rings that accommodates the observed
+outcome~\cite{fernandez_beanato_2021}.
+
+At the opposite extreme, \zh{鐵板神數} (\textit{Tieban Shenshu},
+``Iron Plate Divination'') claims to achieve extraordinary predictive
+precision by determining the subject's birth time to sub-\zh{時辰}
+resolution---down to individual \zh{刻} (quarter-hours).  The system
+is traditionally attributed to Shao~Yong (\zh{邵雍}/\zh{邵康節},
+1011--1077~CE), but this attribution is
+pseudepigraphical~\cite{lackner_zhao_2022}: the text is a Ming-Qing
+compilation that post-dates Shao~Yong by centuries.  The system's
+method is circular: it asks the client about known past events
+(marriages, bereavements, number of children) to ``calibrate'' the
+exact birth moment, then uses that calibrated moment to ``predict'' life
+events---which include the very events used for calibration.
+Wang~Tingzhi (\zh{王亭之}), a prominent Hong Kong metaphysics critic,
+has documented cases where \zh{鐵板神數} practitioners supplemented
+their readings with private investigation of the client's background
+rather than genuine divinatory computation.
+
+Both phenomena---the \zh{天地人盤}'s surplus degrees of freedom and
+\zh{鐵板神數}'s circular calibration---are relevant to this paper's
+computational theme because they represent opposite failure modes.
+The three-plate system has too many free parameters (under-constrained),
+while \zh{鐵板神數} over-fits by using output data as input
+(over-constrained on training data, zero generalization).  Rigorous
+computational tools cannot remedy either problem; they are
+methodological, not computational.
+
+\textbf{The birth-time uncertainty floor.}
+All systems discussed in this paper depend on knowing the subject's
+birth time.  Yet the question ``\emph{when} was the person born?'' is
+less straightforward than it appears.
+
+Classical Chinese metaphysics generally takes the moment of
+\emph{first breath} (\zh{第一口氣}) as the defining
+instant~\cite{ho_peng_yoke_2003}.  In Traditional Chinese Medicine
+(TCM), this reflects the theoretical transition from prenatal
+\zh{元氣} (primordial Qi, sustained through the umbilical connection)
+to postnatal \zh{空氣} (ambient Qi, acquired through
+respiration)~\cite{huangdi_neijing}.  Modern Western obstetric practice
+typically records the moment the infant is fully delivered, which may
+precede first breath by seconds to minutes.  For Caesarean deliveries,
+the gap between extraction and first breath can be longer still.
+These different definitions can diverge by 1--5~minutes---small in
+absolute terms, but comparable to the $\sim$3-minute solar-term timing
+precision that this paper's ephemeris pipeline achieves.
+
+The more fundamental problem is \emph{recording precision}.  In
+pre-modern China, the \zh{時辰} system divided the day into 12
+two-hour blocks---a granularity that implicitly acknowledges the
+impossibility of minute-level precision in an era when accurate
+timekeeping was a privilege of courts and monasteries.  Water clocks
+(\zh{漏壺}/\zh{漏刻}) achieved remarkable precision in imperial
+settings: Su~Song's (\zh{蘇頌}) 11th-century astronomical clock tower
+maintained accuracy of approximately 1~second per
+day~\cite{needham1959}.  But such instruments were unavailable to
+midwives (\zh{接生婆}/\zh{穩婆}), who had at best sundials (useless at
+night or in overcast weather), incense clocks (\zh{香鐘}, accurate to
+$\sim$15~minutes), or the sound of the night-watch drum (\zh{更鼓},
+marking 2-hour intervals)~\cite{hashimoto_2004}.  There is no scholarly
+evidence that midwives systematically recorded birth times to better
+than \zh{時辰} precision.
+
+The \zh{刻} system adds a further complication.  The number of \zh{刻}
+per day changed over Chinese history: 100~\zh{刻} in the Han dynasty
+(each $\approx 14.4$~min), briefly 108 and 120 at various points, and
+finally 96~\zh{刻} in the Qing dynasty (each $= 15$~min
+exactly)~\cite{hashimoto_2004}.  A ``birth at the third \zh{刻} of
+\zh{午時}'' thus refers to different absolute times depending on which
+dynasty's \zh{刻} convention is assumed.
+
+This creates a fundamental irony: modern computational tools can
+determine solar term boundaries to sub-second precision and planetary
+positions to sub-arcsecond accuracy, but the birth-time input---the
+single most important parameter for all five systems---is typically
+uncertain by $\pm 15$--30~minutes for any birth before the
+20th~century, and often $\pm 5$~minutes even for modern hospital births.
+The precision of the computation vastly exceeds the precision of the
+input.  As noted in Section~\ref{subsec:deltaT}, this is structurally
+analogous to the $\Delta T$ problem: both impose floors below which
+additional computational precision yields no practical benefit.
 
 For further study of the classical Chinese fate-calculation tradition,
 the principal primary sources are: \zh{三命通會}~\cite{sanming_tonghui}
@@ -2975,6 +3118,53 @@ Comprehensive Research,'' \texttt{docs/research/east-asia-dst-history.md}.
 Complete IANA rule definitions for 7~regions: PRC, Taiwan, Hong Kong,
 Macau, Japan, South Korea, Mongolia.
 \url{https://github.com/h4x0r/stem-branch}
+
+% ── Methodological references ────────────────────────────────
+
+\bibitem{xieji_bianfangshu}
+\zh{允祿} (Prince Yunlu), \zh{梅瑴成} (Mei Juecheng),
+\zh{何國宗} (He Guozong), et~al., ``\zh{協紀辯方書}''
+(\textit{Treatise on the Harmonization of Times and Distinction of
+Directions}), 1739. Imperially commissioned compendium that
+systematically audited and purged fabricated calendar spirits and
+divinatory heuristics.
+
+\bibitem{aylward_imperial_guide}
+Thomas~F. Aylward, \textit{The Imperial Guide to Feng Shui \&
+Chinese Astrology: The Only Authentic Translation from the Original
+Chinese}, London: Watkins, 2007. Partial English translation of the
+\zh{協紀辯方書}.
+
+\bibitem{bruun_fengshui}
+Ole Bruun, \textit{Fengshui in China: Geomantic Divination Between
+State Orthodoxy and Popular Religion}, Honolulu: University of
+Hawai'i Press, 2003; also \textit{An Introduction to Feng Shui},
+Cambridge University Press, 2008.
+
+\bibitem{fernandez_beanato_2021}
+Dami\'{a}n Fernandez-Beanato, ``Feng Shui and the Demarcation
+Project,'' \textit{Science \& Education}, vol.~30, pp.~1333--1351,
+2021. Analyzes the ``karmic stratagem'' that renders \zh{風水}
+unfalsifiable through surplus interpretive degrees of freedom.
+
+\bibitem{lackner_zhao_2022}
+Michael Lackner and Zhao~Lu, eds., \textit{Handbook of Divination
+and Prognostication in China}, Leiden: Brill, 2022. Comprehensive
+scholarly reference; discusses \zh{鐵板神數} attribution and
+dating.
+
+\bibitem{huangdi_neijing}
+\zh{黃帝內經} (\textit{Huangdi Neijing}, ``Inner Canon of the
+Yellow Emperor''), compiled Warring States--Han dynasty. Foundational
+TCM text establishing the prenatal \zh{元氣}/postnatal \zh{空氣}
+framework that underpins the ``first breath'' birth-time convention.
+
+\bibitem{hashimoto_2004}
+Masana Hashimoto, ``Units of Time in Ancient China and Japan,''
+\textit{Publications of the Astronomical Society of Japan},
+vol.~56, no.~5, p.~887, 2004. Documents the evolution of the
+\zh{刻} system from 100~\zh{刻}/day (Han) through 96~\zh{刻}/day
+(Qing).
 
 \end{thebibliography}
 \end{sloppypar}
