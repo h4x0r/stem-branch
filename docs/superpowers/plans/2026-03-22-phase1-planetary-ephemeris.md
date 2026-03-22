@@ -48,6 +48,7 @@ tests/
   moon-position.test.ts             # NEW
   pluto-position.test.ts            # NEW
   planet-validation.test.ts         # NEW — 4-way comparison thresholds
+  moon-validation.test.ts           # NEW — lunar phase timing validation
 
 scripts/
   generate-vsop87d-planets.mjs      # NEW — downloads CDS files, generates TypeScript
@@ -1924,7 +1925,7 @@ Expected: PASS — all planets within accuracy thresholds.
 
 If any planet fails, revisit the DE441 correction fitting (Task 7) with more sample points or a higher-order polynomial.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 git add scripts/4way-planet-comparison.mjs scripts/sweph-reference.mjs tests/fixtures/jpl-planet-positions.json tests/fixtures/sweph-planet-positions.json tests/fixtures/jpl-lunar-phases.json tests/planet-validation.test.ts tests/moon-validation.test.ts docs/accuracy.md
