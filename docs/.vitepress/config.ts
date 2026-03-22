@@ -13,10 +13,16 @@ export default defineConfig({
       { text: 'Reference', link: '/reference/almanac-flags' },
       { text: 'Algorithms', link: '/algorithms/overview' },
       { text: 'Accuracy', link: '/accuracy' },
-      { text: 'npm', link: 'https://www.npmjs.com/package/stembranch' },
+      { text: 'npm', link: 'https://www.npmjs.com/package/@4n6h4x0r/stem-branch' },
       { text: 'GitHub', link: 'https://github.com/h4x0r/stem-branch' },
     ],
     sidebar: [
+      {
+        text: 'Getting Started',
+        items: [
+          { text: 'Install & Quick Start', link: '/getting-started' },
+        ],
+      },
       {
         text: 'Reference 參考',
         items: [

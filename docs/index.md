@@ -6,14 +6,14 @@ hero:
   tagline: The most accurate open-source Chinese calendar engine — solar terms verified to 1.05 seconds against JPL DE441 across 2,300 years.
   actions:
     - theme: brand
+      text: Get Started
+      link: /getting-started
+    - theme: alt
       text: 神煞 Reference
       link: /reference/almanac-flags
     - theme: alt
       text: Algorithms
       link: /algorithms/overview
-    - theme: alt
-      text: GitHub
-      link: https://github.com/h4x0r/stem-branch
 
 features:
   - title: 29 Almanac Flags (神煞)

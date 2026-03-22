@@ -4,13 +4,13 @@ Deterministic Chinese calendar and stem-branch algorithms for TypeScript. Solar 
 
 **Scope:** This library computes factual, deterministic results from astronomical and combinatoric algorithms. It does not provide interpretation, analysis, or advice (e.g. chart reading, 用神 prescription, fortune assessment). Consumers can build interpretive layers on top of the computed data.
 
-[![npm](https://img.shields.io/npm/v/@4n6h4x0r/stem-branch)](https://www.npmjs.com/package/@4n6h4x0r/stem-branch)
+[![npm](https://img.shields.io/npm/v/%404n6h4x0r%2Fstem-branch)](https://www.npmjs.com/package/@4n6h4x0r/stem-branch)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)]()
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7+-blue)](https://www.typescriptlang.org/)
 
 ```typescript
-import { computeFourPillars, computeMajorLuck, dailyAlmanac } from 'stem-branch';
+import { computeFourPillars, computeMajorLuck, dailyAlmanac } from '@4n6h4x0r/stem-branch';
 
 const pillars = computeFourPillars(new Date(2024, 1, 10, 14, 30));
 // → { year: {stem: '甲', branch: '辰'}, month: {stem: '丙', branch: '寅'},
@@ -23,7 +23,7 @@ const luck = computeMajorLuck(new Date(1990, 6, 15), 'male');
 ## Install
 
 ```bash
-npm install stem-branch
+npm install @4n6h4x0r/stem-branch
 ```
 
 Zero production dependencies. The most accurate open-source Chinese calendar engine available — solar terms verified to **1.05 seconds mean** against JPL DE441 across 2,300 years of history (see [Accuracy](#accuracy)).
@@ -33,7 +33,7 @@ Zero production dependencies. The most accurate open-source Chinese calendar eng
 ### Four Pillars (四柱八字)
 
 ```typescript
-import { computeFourPillars } from 'stem-branch';
+import { computeFourPillars } from '@4n6h4x0r/stem-branch';
 
 const pillars = computeFourPillars(new Date(2024, 1, 10, 14, 30));
 // → year: 甲辰, month: 丙寅, day: 壬午, hour: 丁未
@@ -42,7 +42,7 @@ const pillars = computeFourPillars(new Date(2024, 1, 10, 14, 30));
 ### Luck Periods (大運)
 
 ```typescript
-import { computeMajorLuck, computeMinorLuck, getLuckDirection } from 'stem-branch';
+import { computeMajorLuck, computeMinorLuck, getLuckDirection } from '@4n6h4x0r/stem-branch';
 
 // 大運: 10-year periods from month pillar
 const luck = computeMajorLuck(new Date(1990, 6, 15), 'male', 8);
@@ -59,7 +59,7 @@ const minor = computeMinorLuck({stem: '甲', branch: '子'}, 'forward', 1, 10);
 One call, everything at once — four pillars, lunar date, solar terms, zodiac, day fitness, flying stars, almanac flags, Six Ren chart, eclipses, and element analysis:
 
 ```typescript
-import { dailyAlmanac } from 'stem-branch';
+import { dailyAlmanac } from '@4n6h4x0r/stem-branch';
 
 const a = dailyAlmanac(new Date(2024, 5, 15));
 // a.pillars      → year/month/day/hour stem-branch pairs
@@ -73,7 +73,7 @@ const a = dailyAlmanac(new Date(2024, 5, 15));
 ### Divination Systems (三式)
 
 ```typescript
-import { computeSixRenForDate, computeQiMenForDate, computeZiWei } from 'stem-branch';
+import { computeSixRenForDate, computeQiMenForDate, computeZiWei } from '@4n6h4x0r/stem-branch';
 
 // 大六壬
 const sixRen = computeSixRenForDate(new Date(2024, 5, 15, 14));
@@ -549,7 +549,7 @@ Full technical references, source analysis, and known discrepancies: [docs/techn
 | `wallClockToSolarTime(year, month, day, hour, minute, timezoneId, longitude)` | Full pipeline: wall clock → UTC → true solar time |
 
 ```typescript
-import { localToUtc, getUtcOffset, isDst, wallClockToSolarTime } from 'stem-branch';
+import { localToUtc, getUtcOffset, isDst, wallClockToSolarTime } from '@4n6h4x0r/stem-branch';
 
 // Convert 1988-07-15 12:00 Shanghai time (PRC DST active) to UTC
 const utc = localToUtc(1988, 7, 15, 12, 0, 'Asia/Shanghai');
