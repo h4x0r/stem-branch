@@ -57,7 +57,7 @@ Converts tropical ecliptic longitude to sidereal longitude using one of three co
 
 **Modes**:
 
-1. **`modern`** (default) — Compute current positions of the 28 determinative stars (距星) using proper motion + precession. The sidereal reference point is defined by 角宿距星 (Spica, α Virginis). Sidereal longitude = tropical longitude − precession offset, where the offset is calibrated so that Spica's sidereal longitude matches its classical mansion position.
+1. **`modern`** (default) — Compute current positions of the 28 determinative stars (距星) using proper motion + precession. The sidereal reference point is defined by 角宿距星 (Spica, α Virginis). Sidereal longitude = tropical longitude − precession offset, where the offset is calibrated so that Spica's sidereal longitude = 0° (the start of 角宿, the first mansion).
 
 2. **`classical`** — Use a fixed star catalogue from a historical epoch. Supported epochs: `'kaiyuan'` (開元, 724 CE), `'chongzhen'` (崇禎, 1628 CE), or an arbitrary Julian year. Mansion boundaries are frozen at the epoch's precession state.
 
@@ -81,14 +81,18 @@ Four independent functions, each returning `{ longitude: number; latitude: numbe
 - Compute the mean longitude of the Moon's apogee (apsidal line)
 - The lunar perigee/apogee line advances prograde with an 8.85-year period
 - Formula: ϖ = 83.3532465° + 4069.0137287° × T + ... (Meeus Ch. 22)
-- Ketu = apogee = ϖ + 180° (or just ϖ, depending on convention — need to verify against classical tables)
+- ϖ is the mean longitude of perigee (closest approach). The apogee (farthest point) is at ϖ + 180°.
+- **Ketu longitude = (ϖ + 180°) mod 360°** — this is the lunar apogee per Niu Weixing's identification
+- In `'descending-node'` mode (Indian tradition): Ketu = (Rahu + 180°) mod 360°
 - Latitude: 0°
 
 **月孛 (Yuebei) — Mean lunar apogee / Black Moon Lilith**
-- Despite the naming overlap with Ketu, 月孛 in practice corresponds to the *mean* apogee (Black Moon Lilith in Western astrology), while 計都 may correspond to the *osculating* apogee
-- If both use the same astronomical object, differentiate by: 計都 = osculating (true) apogee, 月孛 = mean apogee
-- Alternatively, following some traditions: 計都 = descending node (Rahu + 180°), 月孛 = mean apogee
-- **Resolution**: Implement both interpretations, default to Niu Weixing. Expose a `ketuMode` option: `'apogee'` (default, Niu) or `'descending-node'` (Indian tradition)
+- 月孛 corresponds to the *mean* lunar apogee (equivalent to Black Moon Lilith in Western astrology)
+- Distinguished from 計都 by: **月孛 = mean apogee** (smoothly varying), **計都 = osculating (true) apogee** (includes perturbation oscillations)
+- Mean apogee formula: same ϖ polynomial as above (truncated to low-order terms, no periodic corrections)
+- Osculating apogee (計都): ϖ + periodic correction terms from lunar perturbation theory
+- This mean vs. osculating distinction gives the two bodies different longitudes (typically ~10-30° apart)
+- **Resolution**: Implement both interpretations via `ketuMode` option: `'apogee'` (default, Niu — osculating apogee) or `'descending-node'` (Indian tradition — Rahu + 180°)
 
 **紫氣 (Purple Qi) — Classical formula**
 - No astronomical basis confirmed
@@ -103,7 +107,10 @@ Four independent functions, each returning `{ longitude: number; latitude: numbe
 The main orchestration layer. Takes date + location → complete `SevenGovernorsChart`.
 
 **Step 1: Compute all body positions**
-- Call `getPlanetPosition()` for Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn
+- Sun: use `getSunLongitude(jde)` (existing, returns ecliptic longitude)
+- Moon: use `getMoonPosition(date)` (existing, returns longitude/latitude)
+- Mercury–Saturn: use `getPlanetPosition(planet, date)` (existing)
+- Note: the existing `Planet` type does not include `'sun'`. Sun and Moon use dedicated functions, not `getPlanetPosition()`.
 - Call `getRahuPosition()`, `getKetuPosition()`, `getYuebeiPosition()`, `getPurpleQiPosition()`
 - Convert all tropical longitudes to sidereal via the sidereal engine
 
@@ -113,21 +120,20 @@ The main orchestration layer. Takes date + location → complete `SevenGovernors
 - Record: mansion name, degrees into mansion (mansion degree)
 
 **Step 3: Map to palaces**
-- The 28 mansions map to 12 palaces (十二宮), named by Earthly Branches: 子宮 through 亥宮
-- Standard mapping (approximately 2-3 mansions per palace):
-  - 子宮: 女、虛、危
-  - 丑宮: 斗、牛
-  - 寅宮: 尾、箕
-  - 卯宮: 氐、房、心
-  - 辰宮: 角、亢
-  - 巳宮: 翼、軫
-  - 午宮: 柳、星、張
-  - 未宮: 井、鬼
-  - 申宮: 觜、參
-  - 酉宮: 畢、觜 (note: some mansions span palace boundaries)
-  - 戌宮: 昴、畢
-  - 亥宮: 室、壁、奎 (partial)
-- Exact boundaries from 《果老星宗》 (may differ slightly from the above approximation)
+- The 12 palaces (十二宮) are defined by **sidereal degree boundaries**, not by mansion names alone
+- Palace assignment is determined by the body's sidereal longitude falling within a palace's degree range
+- The `data/palace-mapping.ts` file defines 12 entries, each with:
+  - `startDeg`: sidereal longitude where this palace begins (degrees)
+  - `endDeg`: sidereal longitude where this palace ends (degrees)
+  - `name`: PalaceName (子宮 through 亥宮)
+  - `mansions`: which mansions fall primarily within this palace (for reference/display only)
+- Exact degree boundaries sourced from 《果老星宗》
+- Approximate mansion-to-palace correspondence (for reference, not used for assignment):
+  - 子宮: 女、虛、危 | 丑宮: 斗、牛 | 寅宮: 尾、箕
+  - 卯宮: 氐、房、心 | 辰宮: 角、亢 | 巳宮: 翼、軫
+  - 午宮: 柳、星、張 | 未宮: 井、鬼 | 申宮: 觜、參
+  - 酉宮: 畢 | 戌宮: 昴 | 亥宮: 室、壁、奎
+- Some mansions span palace boundaries — the degree-based assignment resolves this unambiguously
 
 **Step 4: Determine ascendant (命宮)**
 - The ascendant palace depends on birth hour (時辰) and the Sun's mansion position
