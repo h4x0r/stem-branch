@@ -4,6 +4,8 @@
  * Computes apparent geocentric ecliptic coordinates for Mercury–Neptune
  * using VSOP87D heliocentric theory + geocentric conversion + IAU2000B
  * nutation + aberration correction + DE441 even-polynomial correction.
+ *
+ * Pluto uses Meeus Chapter 37 (43 periodic terms, valid 1885-2099).
  */
 
 import { evaluateVsopSeries } from '../vsop87d-earth';
@@ -27,6 +29,7 @@ import { JUPITER_L, JUPITER_B, JUPITER_R } from './vsop87d-jupiter';
 import { SATURN_L, SATURN_B, SATURN_R } from './vsop87d-saturn';
 import { URANUS_L, URANUS_B, URANUS_R } from './vsop87d-uranus';
 import { NEPTUNE_L, NEPTUNE_B, NEPTUNE_R } from './vsop87d-neptune';
+import { getPlutoHelio } from './pluto';
 
 type VsopCoeffs = readonly (readonly (readonly [number, number, number])[])[];
 
@@ -69,18 +72,15 @@ function getEarthHelio(tau: number): HeliocentricPosition {
  * 6. Ecliptic → equatorial for RA/Dec
  */
 export function getPlanetPosition(planet: Planet, date: Date): GeocentricPosition {
-  if (planet === 'pluto') {
-    // Pluto uses TOP2013, handled by separate module
-    throw new Error('Pluto not yet implemented — see Task 6 (TOP2013)');
-  }
-
   const tau = dateToJulianMillennia(date);
   const T = dateToJulianCenturies(date);
   const earth = getEarthHelio(tau);
 
   // Geocentric with light-time correction
   const geo = lightTimeCorrected(
-    (t) => getHelioPosition(planet, t),
+    planet === 'pluto'
+      ? (t) => getPlutoHelio(t)
+      : (t) => getHelioPosition(planet, t),
     earth,
     tau,
   );

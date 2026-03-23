@@ -41,7 +41,10 @@ describe('Ephemeris API exports', () => {
     }
   });
 
-  it('Pluto throws until TOP2013 is implemented', () => {
-    expect(() => getPlanetPosition('pluto', date)).toThrow(/not yet implemented/);
+  it('Pluto (Meeus Ch. 37) is accessible via getPlanetPosition', () => {
+    const pos: GeocentricPosition = getPlanetPosition('pluto', date);
+    expect(pos.longitude).toBeGreaterThanOrEqual(0);
+    expect(pos.longitude).toBeLessThan(360);
+    expect(pos.distance).toBeGreaterThan(28);
   });
 });
