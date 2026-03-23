@@ -25,6 +25,8 @@ export type {
   EclipseKind,
   SolarEclipseType,
   LunarEclipseType,
+  Planet,
+  GeocentricPosition,
 } from './types';
 
 // ── 天干 (Heavenly Stems) ──────────────────────────────────
@@ -258,3 +260,9 @@ export {
   searchCities, getCitiesByRegion, findNearestCity,
 } from './cities';
 export type { CityTimezone, CityRegionKey, CityRegion } from './cities';
+
+// ── 月亮 (Moon Ephemeris) ──────────────────────────────────
+export { getMoonPosition } from './moon/moon';
+
+// ── 行星 (Planet Ephemeris) ────────────────────────────────
+export { getPlanetPosition } from './planets/planets';
