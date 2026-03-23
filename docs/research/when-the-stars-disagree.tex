@@ -34,6 +34,9 @@
 \usepgfplotslibrary{statistics}
 
 \setlength{\columnsep}{18pt}
+% Allow up to 3em extra inter-word stretch before declaring overfull \hbox.
+% Essential for two-column layout with CJK mixed text and technical terms.
+\setlength{\emergencystretch}{3em}
 
 \hypersetup{
     colorlinks=true,
@@ -966,14 +969,14 @@ state into a single calendar date.
 The five systems thus form a \emph{computational robustness spectrum}:
 \begin{center}
 \footnotesize
-\begin{tabular}{lll}
+\begin{tabular}{@{}lp{0.35\columnwidth}l@{}}
 \toprule
 \textbf{System} & \textbf{Runtime input} & \textbf{Robustness} \\
 \midrule
-\zh{七政四餘} & 7 real planetary positions (sidereal) & Fragile \\
-\zh{大六壬} & Solar + lunar conjunction (\zh{合朔}) & Moderate \\
-\zh{八字} / \zh{奇門遁甲} & Solar terms (tropical, single body) & Robust \\
-\zh{紫微斗數} & Lunar calendar date (discrete integer) & Maximal \\
+\zh{七政四餘} & 7 planetary positions (sidereal) & Fragile \\
+\zh{大六壬} & Solar + lunar conjunction & Moderate \\
+\zh{八字} / \zh{奇門遁甲} & Solar terms (tropical) & Robust \\
+\zh{紫微斗數} & Lunar calendar date (integer) & Maximal \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1263,9 +1266,9 @@ PRC             & 1986--1991                              & 6  \\
 Taiwan          & 1946--1961, 1974--1975, 1979             & 19 \\
 Hong Kong       & 1941, 1946--1976, 1979                   & 33 \\
 Japan           & 1948--1951                               & 4  \\
-South Korea     & 1948--1951, 1955--1960, 1987--1988       & 12 \\
-Macau           & 1942--1979 (mirroring Hong Kong)         & 34 \\
-Mongolia        & 1983--1998, 2001--2006, 2015--2016       & 27 \\
+S.\ Korea       & 1948--51, 1955--60, 1987--88              & 12 \\
+Macau           & 1942--1979 (mirroring HK)                & 34 \\
+Mongolia        & 1983--98, 2001--06, 2015--16             & 27 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1567,7 +1570,7 @@ unknown historical Earth rotation \cite{stephenson2016}.
 
 
 % =============================================================================
-\section{The Reference Longitude Problem: A Cross-Civilizational Perspective}
+\section{The Reference Longitude Problem}
 \label{sec:meridians}
 
 The question of \emph{which longitude to use as reference} for time-dependent
@@ -1829,17 +1832,17 @@ national observatories and cartographic traditions (Table~\ref{tab:meridians}).
 \small
 \begin{tabular}{@{}llr@{}}
 \toprule
-\textbf{Meridian} & \textbf{Used by} & \textbf{$\Delta$ from Greenwich} \\
+\textbf{Meridian} & \textbf{Used by} & \textbf{$\Delta$ Greenwich} \\
 \midrule
-Ferro (El Hierro)  & Austria, Germany       & $-17\degree 40'$ \\
-Paris              & France                 & $+2\degree 20'$ \\
-Pulkovo            & Russia                 & $+30\degree 20'$ \\
-Cadiz              & Spain                  & $-6\degree 17'$ \\
-Rome               & Italy                  & $+12\degree 27'$ \\
-Copenhagen         & Denmark                & $+12\degree 34'$ \\
-Stockholm          & Sweden                 & $+18\degree 03'$ \\
-Washington         & United States          & $-77\degree 03'$ \\
-Beijing            & China                  & $+116\degree 23'$ \\
+Ferro (El Hierro)  & Austria, Germany & $-17\degree 40'$ \\
+Paris              & France           & $+2\degree 20'$ \\
+Pulkovo            & Russia           & $+30\degree 20'$ \\
+Cadiz              & Spain            & $-6\degree 17'$ \\
+Rome               & Italy            & $+12\degree 27'$ \\
+Copenhagen         & Denmark          & $+12\degree 34'$ \\
+Stockholm          & Sweden           & $+18\degree 03'$ \\
+Washington         & U.S.             & $-77\degree 03'$ \\
+Beijing            & China            & $+116\degree 23'$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1982,12 +1985,12 @@ physically determined.  Different traditions anchor the sidereal
 zodiac to different reference stars, yielding different ayanamsas:
 \begin{center}
 \footnotesize
-\begin{tabular}{lll}
+\begin{tabular}{@{}llp{0.36\columnwidth}@{}}
 \toprule
 \textbf{System} & \textbf{Zero epoch} & \textbf{Notes} \\
 \midrule
 Lahiri (Citrapaksha) & 285~CE & Official Indian standard since 1955 \\
-Fagan-Bradley & 221~CE & Western siderealist school \\
+Fagan--Bradley & 221~CE & Western siderealist school \\
 Raman & varies & $\sim 2\degree$ from Lahiri \\
 Chinese 28~\zh{宿} & varies & Unequal widths, multiple epochs \\
 \bottomrule
