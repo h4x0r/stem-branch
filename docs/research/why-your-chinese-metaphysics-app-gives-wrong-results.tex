@@ -1,5 +1,5 @@
 % =============================================================================
-% Why Your Chinese Metaphysics App Gives Wrong Results
+% When the Stars Disagree
 % arXiv preprint — pdflatex + CJKutf8, two-column
 % =============================================================================
 \documentclass[10pt,a4paper]{article}
@@ -28,6 +28,7 @@
 \usepackage{tikz}
 \usepackage{gensymb}
 \usepackage{adjustbox}
+\usepackage[framemethod=tikz]{mdframed}
 
 \pgfplotsset{compat=1.18}
 \usepgfplotslibrary{statistics}
@@ -57,10 +58,11 @@
 \definecolor{de405red}{HTML}{B2182B}
 
 % --- Title -------------------------------------------------------------------
+
 \title{%
-  \textbf{Why Your Chinese Metaphysics App Gives Wrong Results:}\\[4pt]
-  \large A Computational Error Analysis of Solar, Lunar, and Planetary Ephemeris\\
-  for \zh{四柱八字}, \zh{奇門遁甲}, \zh{紫微斗數}, \zh{大六壬}, and \zh{七政四餘}%
+  \textbf{When the Stars Disagree:}\\[4pt]
+  \large A Cross-Civilizational Analysis of Computational Errors\\
+  in Astronomical Divination%
 }
 
 \author[1]{Albert Kwun Tai Hui\,\orcidlink{0009-0000-8978-0231}}
@@ -76,656 +78,151 @@
 
 \begin{abstract}
 \noindent
-Five Chinese metaphysical systems---\zh{四柱八字} (Four Pillars of
-Destiny), \zh{奇門遁甲} (Strange Gates), \zh{紫微斗數} (Purple Star Astrology),
-\zh{大六壬} (Great Six Ren), and \zh{七政四餘} (Seven Luminaries and Four
-Remainders)---share a common computational dependency on precise astronomical
-ephemeris, yet rely on different celestial mechanics: \zh{八字} and
-\zh{奇門遁甲} are fundamentally \emph{solar}, deriving pillar assignments and
-formation sequences from the 24 solar terms (\zh{二十四節氣});
-\zh{紫微斗數} is fundamentally \emph{lunar}, constructing its fate chart from
-the lunar calendar date; \zh{大六壬}'s \zh{十二月將} (twelve Monthly Generals)
-bridges both solar and lunar computation; and \zh{七政四餘}, the most astronomically dependent of all,
-requires accurate positions of all seven classical celestial bodies (Sun, Moon,
-and five planets) in the 28 lunar mansions (\zh{二十八宿}).
+Astronomical divination systems---from Chinese \zh{四柱八字}
+and Indian Jyotish to Western horoscopic astrology---depend on
+precise ephemeris computation, yet the software that serves hundreds
+of millions of practitioners routinely produces discordant results.
+This paper does not evaluate whether any divination system yields
+valid predictions; it analyzes whether the underlying astronomical
+computations are \emph{correct}.
 
-This paper identifies and quantifies seven categories of computational error
-present in widely-used software for these systems, including the
-\zh{子時} day boundary controversy and the competing intercalation
-methodologies (\zh{拆補法} vs.\ \zh{置閏法}) in \zh{奇門遁甲}.
-We present a three-way statistical validation of the \texttt{stem-branch}
-library against \zh{壽星萬年曆} (sxwnl) and JPL~DE441 numerical ephemeris
-across 2,284~years (209--2493~CE), demonstrating mean solar term timing
-accuracy of $1.05$~seconds ($N = 1{,}008$, max $= 3.05$~s). We further
-analyze how the intercalary month (\zh{閏月}) problem---critical for both
-\zh{紫微斗數} chart construction and \zh{大六壬} \zh{月將}
-determination---depends on the same solar-lunar computational pipeline, and
-discuss the irreducible $\Delta T$ uncertainty that limits historical chart
-reconstruction. A cross-civilizational analysis of reference meridians---from
-the Chinese \zh{天下之中} (Luoyang/Dengfeng) and Indian \textit{deshantara}
-correction (Ujjain) to Ptolemy's Fortunate Islands and the 1884 Greenwich
-standardization---demonstrates that the reference longitude problem is a
-universal feature of coordinate-dependent astronomical traditions, not a
-uniquely Chinese difficulty.
+We identify and quantify seven categories of computational error
+in widely-used software for five Chinese systems (\zh{八字},
+\zh{奇門遁甲}, \zh{紫微斗數}, \zh{大六壬}, \zh{七政四餘}), ranging
+from daylight saving time mishandling and true solar time neglect
+to ephemeris truncation and historical $\Delta T$ uncertainty.  A
+three-way statistical validation against \zh{壽星萬年曆} (sxwnl)
+and JPL~DE441 across 2,284~years demonstrates mean solar term
+timing accuracy of $1.05$~seconds ($N = 1{,}008$, max $= 3.05$~s).
+
+Three cross-cutting reference-frame problems recur across
+civilizations: the choice of prime meridian (Chinese \zh{天下之中},
+Indian Ujjain, Ptolemy's Fortunate Islands, Greenwich), the
+tropical-sidereal zodiac divergence ($\sim 24\degree$ by 2026),
+and the birth-time recording precision floor.  These are not
+uniquely Chinese difficulties but universal features of
+coordinate-dependent astronomical traditions.  We further analyze
+the methodological challenges of heuristic validation, the
+shared-chart (\zh{共盤問題}) statistical problem, and the
+degrees-of-freedom critique applicable to interpretive
+frameworks.  The five Chinese systems form a computational
+robustness spectrum from astronomically fragile (\zh{七政四餘})
+to maximally robust (\zh{紫微斗數}), reflecting deliberate
+architectural trade-offs between celestial fidelity and
+computational permanence.
 \end{abstract}
 
 \medskip
-\noindent\textbf{Keywords:} Chinese calendar, BaZi, \zh{奇門遁甲},
-\zh{紫微斗數}, \zh{六壬}, \zh{七政四餘}, solar terms, lunar phases,
-planetary ephemeris, Swiss Ephemeris, VSOP87, JPL DE441, $\Delta T$,
-intercalation, true solar time, prime meridian, reference longitude,
-statistical validation
+\noindent\textbf{Keywords:} computational astronomy, astronomical
+divination, Chinese calendar, BaZi, Jyotish, solar terms, lunar
+phases, planetary ephemeris, VSOP87, JPL DE441, $\Delta T$,
+intercalation, true solar time, prime meridian, tropical zodiac,
+sidereal zodiac, ayanamsa, reference frame, statistical validation,
+error analysis
 
 \vspace{1em}
 ]
 
 \footnotetext[0]{Preprint. \texttt{arXiv:2603.xxxxx [astro-ph.IM]}}
 
+
 % =============================================================================
 \section{Introduction}
 \label{sec:intro}
+
+\begin{mdframed}[
+  linecolor=black!40,
+  backgroundcolor=black!3,
+  roundcorner=4pt,
+  linewidth=0.5pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+]
+\small\noindent\textbf{A note on scope and intent.}
+The author holds no position on whether astronomical divination
+systems produce valid predictions about human affairs.  The claim
+that celestial configurations at birth reflect or influence a
+person's life trajectory involves metaphysical commitments that
+lie outside the scope of empirical investigation as normally
+understood.
+
+What drew the author to this investigation was, in fact,
+skepticism.  Upon examining the computational models underlying
+several Chinese metaphysical software applications, it became
+immediately apparent that many implementations contained obvious
+astronomical drift, timezone errors, and calendar miscomputations
+by modern standards---errors that their users accepted on faith.
+The gap between the precision these systems \emph{claim} and the
+precision their software \emph{achieves} was large enough to
+warrant systematic investigation.  That investigation---initially
+motivated by the question ``are these apps even computing the
+astronomy correctly?''---expanded into the cross-civilizational
+error analysis presented here.
+
+This paper analyzes whether the astronomical computations are
+\emph{correct on their own terms}: whether the Sun's ecliptic
+longitude, the lunar phase, or the planetary position is computed
+accurately.  A horoscope derived from a wrong planetary position
+is wrong even by its own logic, regardless of whether horoscopes
+have any merit.  The distinction between computational correctness
+and interpretive validity is fundamental throughout.
+\end{mdframed}
+
+\medskip
+
+Astronomical divination---the practice of deriving meaning from
+celestial configurations at the moment of birth, decision, or
+event---has arisen independently across civilizations.  Chinese
+\zh{四柱八字}, Indian Jyotish, Western horoscopic astrology, and
+Mesoamerican calendar systems all share a common computational
+dependency: the accurate determination of celestial positions at a
+specific moment in time.  The astronomical techniques differ (solar
+terms, lunar mansions, zodiacal signs, Long Count cycles), but the
+underlying requirement is identical: precise ephemeris computation.
+
+This paper examines five Chinese systems that span the full range of
+astronomical dependency---from purely solar (\zh{八字}) through
+solar-lunar (\zh{紫微斗數}, \zh{大六壬}) to fully planetary
+(\zh{七政四餘})---and demonstrates that the computational errors
+affecting them are not uniquely Chinese but recur wherever
+coordinate-dependent astronomy meets traditional practice.  The same
+reference-meridian problem that shifts a Chinese \zh{時辰} boundary
+shifts an Indian \textit{lagna} (Ascendant); the same
+tropical-sidereal divergence that confounds Chinese 28-mansion
+placements confounds Indian \textit{rashi} assignments.
 
 The Chinese calendrical system (\zh{曆法}) is one of humanity's oldest
 continuous astronomical traditions, with systematic records spanning over
 2,700~years \cite{stephenson2016}. At its computational core lies the
 determination of two celestial cycles: the Sun's ecliptic longitude,
 defining the 24 solar terms (\zh{二十四節氣}), and the Moon's phases,
-defining the lunar months. Since 2016, UNESCO has recognized the 24 solar
+defining the lunar months.  Since 2016, UNESCO has recognized the 24 solar
 terms as part of humanity's Intangible Cultural Heritage \cite{unesco2016}.
 
-Five metaphysical systems depend on this astronomical foundation,
-each with distinct computational requirements:
-
-\begin{description}[leftmargin=0pt, labelindent=0pt]
-  \item[\zh{四柱八字} (Four Pillars of Destiny)] derives an eight-character
-    fate chart from the sexagenary-cycle encoding of birth date and time.
-    Year and month pillars are determined by solar term boundaries---the
-    year changes at \zh{立春} ($\lambda_\odot = 315\degree$), and months
-    at the 12 \zh{節} (sectional) terms. \emph{Primary dependency: solar.}
-
-  \item[\zh{奇門遁甲} (Strange Gates, Hidden Stems)] assigns temporal
-    formations (\zh{局}) synchronized to solar term boundaries, with
-    competing intercalation methods (\zh{拆補法} vs.\ \zh{置閏法}) that
-    impose sub-hour precision requirements.
-    \emph{Primary dependency: solar.}
-
-  \item[\zh{紫微斗數} (Purple Star Astrology)] constructs a 12-palace fate
-    chart from the \emph{lunar} calendar date, requiring accurate new moon
-    computation and intercalary month (\zh{閏月}) determination.
-    \emph{Primary dependency: lunar (with solar for \zh{閏月}).}
-
-  \item[\zh{大六壬} (Great Six Ren)] uses \zh{十二月將}
-    (twelve Monthly Generals) to map the Sun's zodiacal
-    position, while its daily mechanics depend on lunar day counting.
-    \emph{Primary dependency: solar and lunar.}
-
-  \item[\zh{七政四餘} (Seven Luminaries and Four Remainders)] charts
-    the actual positions of Sun, Moon, and five planets in the 28 lunar
-    mansions (\zh{二十八宿}), making it the most astronomically dependent
-    of all five systems. \emph{Primary dependency: planetary (all seven
-    classical bodies).}
-\end{description}
-
-Despite these critical dependencies, the majority of software
-applications employ simplified computational methods that introduce errors
-ranging from seconds to tens of minutes, silently propagating into incorrect
-chart assignments.
-
-This paper makes four contributions:
+This paper makes five contributions:
 \begin{enumerate}[label=(\roman*)]
-  \item A taxonomy of seven computational error sources
+  \item An analysis of how five Chinese metaphysical systems depend on
+        the solar-lunar-planetary computational pipeline, forming a
+        robustness spectrum from astronomically fragile to maximally
+        robust (Section~\ref{sec:systems});
+  \item A taxonomy of computational errors---from daylight saving time
+        mishandling to ephemeris truncation---organized by accessibility
+        from practical to technical
         (Section~\ref{sec:errors});
+  \item A cross-civilizational analysis of reference-frame problems
+        (meridians, tropical vs.\ sidereal zodiac, time regimes) showing
+        these are universal, not culture-specific
+        (Section~\ref{sec:meridians});
   \item A three-way statistical validation demonstrating sub-second solar
         term accuracy across 2,284~years (Section~\ref{sec:validation});
-  \item An analysis of how each metaphysical system depends on the
-        solar-lunar-planetary computational pipeline
-        (Section~\ref{sec:systems});
-  \item An error budget decomposition showing the irreducible $\Delta T$
-        uncertainty (Section~\ref{sec:uncertainty}).
+  \item A methodological critique of heuristic validation, the
+        shared-chart statistical problem, and degrees-of-freedom
+        over-fitting in interpretive frameworks.
 \end{enumerate}
 
-% =============================================================================
-\section{Background}
-\label{sec:background}
-
-\subsection{Solar Term Definition}
-
-Under the \zh{定氣} (\textit{d\`{i}ng q\`{i}}) method, adopted by the
-Shixian calendar (\zh{時憲曆}) in 1645, each solar term is the instant when
-the Sun's \emph{apparent} geocentric ecliptic longitude reaches a specific
-multiple of $15\degree$ \cite{aslaksen2010, ytliu_rules}. This replaced the
-\zh{平氣} method, which divided the tropical year into 24 equal time
-intervals \cite{ytliu_solarterms}.
-
-Because Earth's orbit is elliptical ($e \approx 0.0167$), the Sun's ecliptic
-longitude does not advance uniformly: $\sim 1.02\degree$/day near perihelion
-vs.\ $\sim 0.95\degree$/day near aphelion~\cite{meeus1998}.
-
-\subsection{Computational Pipeline}
-\label{subsec:pipeline}
-
-The Sun's apparent ecliptic longitude $\lambda_\odot$ is computed as:
-
-\begin{equation}
-  \lambda_\odot = \lambda_{\text{geo}} + \Delta\psi + \Delta\tau_{\text{ab}}
-  \label{eq:apparent}
-\end{equation}
-
-\noindent where $\lambda_{\text{geo}} = L + 180\degree$ (geocentric from
-heliocentric Earth longitude $L$ via VSOP87D \cite{bretagnon1988}),
-$\Delta\psi$ is nutation in longitude (IAU2000B, 77 terms \cite{iau2000b}),
-and $\Delta\tau_{\text{ab}} = -20.4898'' / R$ is aberration~\cite{ronvondrak1986}.
-
-Three time scales are relevant: TT (Terrestrial Time, uniform), UT (Universal
-Time, based on Earth rotation), and $\Delta T = \text{TT} - \text{UT}$
-($\approx 69.1$~s for mid-2024)~\cite{nasa_deltaT_uncertainty, stephenson2016}.
 
 % =============================================================================
-\section{Taxonomy of Computational Errors}
-\label{sec:errors}
-
-We identify seven categories, ordered by typical magnitude.
-
-\subsection{Error~1: Year Boundary}
-\label{subsec:error_lichun}
-
-\textbf{Magnitude: up to 1 full year pillar (catastrophic).}
-
-The BaZi year pillar changes at \zh{立春} ($\lambda_\odot = 315\degree$),
-typically Feb~3--5. Many applications incorrectly use Lunar New Year
-(\zh{農曆正月初一}), which can differ by weeks. This affects 4--6\% of birth
-dates\footnote{Lunar New Year falls between 21~January and 20~February,
-while \zh{立春} falls on 3--5~February. The gap between the two dates
-ranges from approximately 15 to 22~days in any given year, yielding
-$15/365 \approx 4.1\%$ to $22/365 \approx 6.0\%$ of annual births.}. The 2017 PRC standard GB/T~33661-2017 designated Lunar New Year as the
-official \zh{干支} year start, directly contradicting BaZi tradition
-\cite{gbstandard2017}.
-
-\subsection{Error~2: Apparent vs.\ Geometric Longitude}
-
-\textbf{Magnitude: up to $\sim$15 minutes.}
-
-Solar terms require \emph{apparent} longitude, not geometric. Neglecting
-aberration ($\sim 20.5''$, $\sim 8.2$~min) and nutation (up to $\pm 18''$,
-$\sim 7.2$~min) combined can shift solar term times by up to $\sim 15$~min.
-
-\subsection{Error~3: Ephemeris Truncation}
-\label{subsec:error_truncation}
-
-\textbf{Magnitude: seconds to minutes.}
-
-\begin{table}[H]
-\centering
-\caption{Ephemeris accuracy for solar longitude}
-\label{tab:ephemeris}
-\footnotesize
-\begin{tabular}{llcc}
-\toprule
-\textbf{Method} & \textbf{Basis} & \textbf{Max Err} & \textbf{Range} \\
-\midrule
-Low-precision & Newcomb & $\sim 10$~min & $\pm$50~yr \\
-Meeus trunc. & DE200 & $\sim 1.2$~min & $\pm$200~yr \\
-VSOP87D full & DE200 & $\sim 24$~s & $\pm$2000~yr \\
-VSOP87D+DE441 & DE441 & $\sim 1$~s & $\pm$2300~yr \\
-JPL DE441 & Fitted & truth & $\pm$2500~yr \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The \texttt{stem-branch} library compensates for VSOP87D truncation with a
-DE441-fitted even polynomial:
-
-\begin{equation}
-  \Delta L = c_0 + c_2\tau^2 + c_4\tau^4 + c_6\tau^6 ~ \text{(arcsec)}
-  \label{eq:correction}
-\end{equation}
-
-\noindent where $\tau$ is Julian millennia from J2000.0. The even-only form
-ensures symmetric accuracy for past and future dates, replacing sxwnl's
-DE405-fitted cubic \cite{sxwnl_github}:
-
-\begin{equation}
-  \Delta L_{\text{sx}} \!=\! {-}0.073 {-} 2.770\tau {-} 1.102\tau^2 {-} 0.100\tau^3
-  \label{eq:sxwnl_correction}
-\end{equation}
-
-\noindent whose odd-order terms produce asymmetric error growth (58~s
-deviations for $\sim$200~CE). Figure~\ref{fig:correction} illustrates the
-contrast.
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=\columnwidth,
-    height=5.5cm,
-    xlabel={$\tau$ (Julian millennia from J2000)},
-    ylabel={$\Delta L$ (arcsec)},
-    xmin=-2.7, xmax=2.7,
-    ymin=-16, ymax=4,
-    grid=major,
-    grid style={gray!30},
-    legend pos=south west,
-    legend style={font=\tiny},
-]
-\addplot[de441blue, thick, smooth, domain=-2.5:2.5, samples=80]
-    {-0.1067 - 0.6166*x^2 + 0.3154*x^4 - 0.0503*x^6};
-\addlegendentry{DE441 even (this work)}
-\addplot[de405red, thick, dashed, smooth, domain=-2.5:2.5, samples=80]
-    {-0.0728 - 2.7702*x - 1.1019*x^2 - 0.0996*x^3};
-\addlegendentry{DE405 cubic (sxwnl)}
-\end{axis}
-\end{tikzpicture}
-\caption{Correction polynomial comparison. The DE441 even sextic (solid) is
-symmetric by construction; the DE405 cubic (dashed) diverges to $-15''$ for
-future dates.}
-\label{fig:correction}
-\end{figure}
-
-\subsection{Error~4: True Solar Time Neglect}
-\label{subsec:error4}
-
-\textbf{Magnitude: up to 176+ minutes.}
-
-The hour pillar (\zh{時柱}) corresponds to true solar time (TST):
-
-\begin{equation}
-  \text{TST} = \text{Clock} + (\phi - \phi_0) \times 4~\text{min/}\degree
-  + \text{EoT}
-  \label{eq:tst}
-\end{equation}
-
-China's single timezone (UTC+8, $120\degree$E) spans $73\degree$--$135\degree$E~\cite{china_timezone}.
-For Kashgar ($76\degree$E): $\Delta t = -176$~min $\approx -2.9$~hours. A
-midnight birth in Kashgar has TST $\approx$ 21:04 the previous day---placing
-them in \zh{亥} rather than \zh{子}, a completely different hour pillar.
-
-The EoT adds $\pm 16$~min seasonally. \texttt{stem-branch} computes EoT from
-VSOP87D + IAU2000B, achieving 0.03~s agreement with JPL~DE441
-(Section~\ref{subsec:eot}).
-
-\subsection{Error~5: Historical $\Delta T$ Uncertainty}
-
-\textbf{Magnitude: minutes to hours for ancient dates.}
-
-\begin{table}[H]
-\centering
-\caption{$\Delta T$ uncertainty by epoch}
-\label{tab:deltaT}
-\footnotesize
-\begin{tabular}{lrrl}
-\toprule
-\textbf{Epoch} & $\Delta T$ & \textbf{Unc.} & \textbf{Impact} \\
-\midrule
-1900 CE & $-2.7$~s & $<1$~s & Negl. \\
-1600 CE & $+120$~s & $\sim 25$~s & $\sim 30$~s \\
-1000 CE & $+1570$~s & $\sim 80$~s & $\sim 1.3$~min \\
-500 CE & $+5710$~s & $\sim 200$~s & $\sim 3.3$~min \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-This is \emph{irreducible}: no ephemeris improvement can compensate for
-unknown historical Earth rotation \cite{stephenson2016}.
-
-\subsection{Error~6: The 2033 Intercalary Month Problem}
-\label{subsec:error_2033}
-
-\textbf{Magnitude: affects calendar structure for an entire year.}
-
-In 2033, the standard intercalary rule (``first month without a \zh{中氣}
-is the leap month'') conflicts with the structural constraint that month~11
-must contain \zh{冬至} \cite{aslaksen2010, wikipedia_2033}. Many
-implementations mishandle this, producing \zh{閏七月} instead of the
-correct \zh{閏十一月} \cite{aslaksen_fake}---shifting the Mid-Autumn
-Festival by nearly a month.
-
-This error is particularly consequential for \zh{紫微斗數}, where the
-entire fate chart is constructed from the \emph{lunar} calendar date.
-An incorrect \zh{閏月} assignment changes which lunar month the birth
-falls in, cascading through the palace assignments.
-
-\subsection{Error~7: The Day Boundary Controversy}
-\label{subsec:error_zishi}
-
-\textbf{Magnitude: up to 1 day pillar and 1 hour stem.}
-
-The double-hour \zh{子時} spans 23:00--01:00, straddling midnight. Two
-schools exist:
-
-\begin{description}[leftmargin=0pt]
-  \item[\zh{子初換日}:] Day changes at 23:00 (start of \zh{子時}).
-    A birth at 23:30 on the 15th receives the 16th's day pillar.
-  \item[\zh{子正換日}:] Day changes at midnight. \zh{子時} is split
-    into \zh{早子時} (23:00--00:00, current day) and \zh{正子時}
-    (00:00--01:00, next day).
-\end{description}
-
-Historical evidence is mixed---Ming astronomer Xing Yunlu (\zh{邢雲路})
-advocated midnight~\cite{xing_yunlu}. Modern practice is divided regionally. This is a
-\emph{methodological} question, not a computational one: both conventions
-can be correctly implemented once the underlying astronomy is sound.
-
-% =============================================================================
-\section{Statistical Validation}
-\label{sec:validation}
-
-\subsection{Methodology}
-
-Three-way comparison between: (1)~\textbf{stem-branch} (VSOP87D + DE441
-correction + IAU2000B), (2)~\textbf{sxwnl} (VSOP87D + DE405 cubic +
-ELP/MPP02) \cite{sxwnl_github}, and (3)~\textbf{JPL Horizons} (DE441
-numerical integration) \cite{jpl_horizons}. The computational methodology
-for the Chinese calendar follows Liu~\cite{ytliu_computation}.
-
-42~sample years span 209--2493~CE (1,008 total solar terms). 12 systematic
-years at 20-year intervals (1900--2100); 30 pseudo-random years (seed=42)
-from 200--2800~CE.
-
-\subsection{Equation of Time}
-\label{subsec:eot}
-
-366 daily samples at 12:00~TT across 2024:
-
-\begin{table}[H]
-\centering
-\caption{EoT residuals: stem-branch vs.\ JPL (2024)}
-\label{tab:eot}
-\footnotesize
-\begin{tabular}{lr}
-\toprule
-\textbf{Statistic} & \textbf{Value} \\
-\midrule
-Mean bias & $+0.000$~min \\
-Mean $|\text{res.}|$ & 0.01~s \\
-Std.\ dev. & 0.02~s \\
-Max $|\text{res.}|$ & 0.03~s \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-The 0.03~s maximum is a $\sim$1,000$\times$ improvement over the Spencer
-(1971) Fourier approximation \cite{spencer1971}.
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=\columnwidth,
-    height=4.5cm,
-    xlabel={Month (2024)},
-    ylabel={EoT (min)},
-    xmin=0.5, xmax=12.5,
-    ymin=-17, ymax=16,
-    xtick={1,3,5,7,9,11},
-    xticklabels={J,M,M,J,S,N},
-    grid=major,
-    grid style={gray!30},
-    legend pos=south east,
-    legend style={font=\tiny},
-    mark size=1.8pt,
-]
-\addplot[jplgray, thick, mark=square*, mark options={fill=jplgray, scale=0.8}]
-    coordinates {
-        (1,9.22) (2,14.11) (3,8.75) (4,-0.10)
-        (5,-3.64) (6,0.62) (7,6.06) (8,4.40)
-        (9,-4.98) (10,-14.35) (11,-15.35) (12,-4.66)
-    };
-\addlegendentry{JPL DE441}
-\addplot[sbblue, thick, dashed, mark=o, mark options={sbblue, scale=0.8}]
-    coordinates {
-        (1,9.22) (2,14.11) (3,8.75) (4,-0.10)
-        (5,-3.64) (6,0.62) (7,6.06) (8,4.40)
-        (9,-4.98) (10,-14.35) (11,-15.35) (12,-4.66)
-    };
-\addlegendentry{stem-branch}
-\draw[gray, thin, dashed] (axis cs:0.5,0) -- (axis cs:12.5,0);
-\end{axis}
-\end{tikzpicture}
-\caption{EoT annual profile (2024). The two sources are indistinguishable at
-this resolution; maximum residual is 0.03\,s.}
-\label{fig:eot}
-\end{figure}
-
-\subsection{Solar Term Timing}
-\label{subsec:solarterms}
-
-\begin{table}[H]
-\centering
-\caption{Solar term accuracy (seconds)}
-\label{tab:accuracy}
-\footnotesize
-\begin{tabular}{lccccc}
-\toprule
-& $N$ & Mean & Max & P50 & P95 \\
-\midrule
-\multicolumn{6}{l}{\textit{Modern (1900--2100):}} \\
-SB vs JPL & 336 & 1.56 & 2.79 & 1.68 & 2.29 \\
-SX vs JPL & 335 & 2.38 & 7.18 & 1.85 & 5.71 \\
-\midrule
-\multicolumn{6}{l}{\textit{Full range (209--2493):}} \\
-SB vs JPL & 1008 & 1.05 & 3.05 & 0.97 & 2.22 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure*}[t]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=0.95\textwidth,
-    height=5.5cm,
-    ybar,
-    bar width=4pt,
-    xlabel={Year (CE)},
-    ylabel={Mean $|\Delta|$ vs.\ JPL (s)},
-    xmin=100, xmax=2600,
-    ymin=0, ymax=3.5,
-    grid=major,
-    grid style={gray!30},
-    xtick={200,500,800,1100,1400,1700,2000,2300},
-    legend pos=north east,
-    legend style={font=\small},
-]
-\addplot[fill=sbblue, draw=sbblue!80!black] coordinates {
-    (209,1.2) (270,1.2) (281,1.1) (333,1.1) (360,1.2)
-    (654,0.8) (682,1.1) (712,0.9) (849,1.4) (894,1.0)
-    (910,1.2) (998,1.1)
-    (1365,0.3) (1424,0.3) (1428,0.3) (1501,0.2) (1569,0.2) (1578,0.3)
-    (1740,1.0) (1762,0.9) (1787,0.9) (1824,1.1)
-    (1900,1.6) (1920,1.7) (1940,1.8) (1941,2.0) (1960,2.1)
-    (1980,0.9) (1985,0.7) (2000,0.5) (2020,1.8) (2024,2.0)
-    (2040,1.7) (2060,1.8) (2080,1.6) (2100,1.6)
-    (2138,1.4) (2237,0.9) (2377,0.2) (2416,0.2) (2450,0.3) (2493,0.2)
-};
-\addlegendentry{stem-branch vs.\ JPL}
-\draw[red, thick, dashed] (axis cs:100,1.05) -- (axis cs:2600,1.05)
-    node[pos=0.92, above, font=\scriptsize, red] {$\bar{x} = 1.05$\,s};
-\end{axis}
-\end{tikzpicture}
-\caption{Mean solar term deviation across 42 sample years spanning 209--2493~CE.
-The nearly flat profile confirms the even polynomial correction distributes
-residuals uniformly. Sweet spots near $\sim$1400 and $\sim$2400~CE achieve
-sub-0.3\,s accuracy.}
-\label{fig:year_profile}
-\end{figure*}
-
-\begin{figure*}[t]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=0.95\textwidth,
-    height=5.5cm,
-    ybar,
-    bar width=5pt,
-    xlabel={Year (CE)},
-    ylabel={Mean $|\Delta|$ vs.\ JPL (s)},
-    xmin=1880, xmax=2120,
-    ymin=0, ymax=7,
-    grid=major,
-    grid style={gray!30},
-    xtick={1900,1920,1940,1960,1980,2000,2020,2040,2060,2080,2100},
-    xticklabel style={rotate=45, anchor=east, font=\small},
-    legend pos=north west,
-    legend style={font=\small},
-]
-\addplot[fill=sbblue, draw=sbblue!80!black] coordinates {
-    (1896,1.6) (1916,1.7) (1936,1.8) (1956,2.1)
-    (1976,0.9) (1996,0.5) (2016,1.8) (2036,1.7)
-    (2056,1.8) (2076,1.6) (2096,1.6)
-};
-\addlegendentry{stem-branch}
-\addplot[fill=sxorange, draw=sxorange!80!black] coordinates {
-    (1904,5.9) (1924,4.4) (1944,2.8) (1964,1.2)
-    (1984,1.7) (2004,1.0) (2024,1.1) (2044,0.4)
-    (2064,1.7) (2084,3.2) (2104,4.9)
-};
-\addlegendentry{sxwnl}
-\end{axis}
-\end{tikzpicture}
-\caption{Head-to-head comparison (1900--2100). sxwnl exhibits a U-shaped curve
-minimized near 2040 (close to its DE405 fitting epoch), degrading to 5.9\,s at
-1900 and 4.9\,s at 2100. stem-branch maintains $\leq 2.1$\,s throughout.}
-\label{fig:sb_vs_sx}
-\end{figure*}
-
-\subsection{Percentile Analysis}
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=\columnwidth,
-    height=5cm,
-    ybar,
-    bar width=12pt,
-    ylabel={Deviation (s)},
-    symbolic x coords={P50,P95,P99,Max},
-    xtick=data,
-    ymin=0, ymax=8,
-    grid=major,
-    grid style={gray!30},
-    legend pos=north west,
-    legend style={font=\tiny},
-    nodes near coords,
-    nodes near coords style={font=\tiny, above},
-]
-\addplot[fill=sbblue, draw=sbblue!80!black] coordinates {
-    (P50,1.68) (P95,2.29) (P99,2.50) (Max,2.79)
-};
-\addlegendentry{SB}
-\addplot[fill=sxorange, draw=sxorange!80!black] coordinates {
-    (P50,1.85) (P95,5.71) (P99,6.78) (Max,7.18)
-};
-\addlegendentry{SX}
-\end{axis}
-\end{tikzpicture}
-\caption{Percentile comparison vs.\ JPL (1900--2100). Medians are comparable,
-but tail behavior diverges: stem-branch's P95 is $2.5\times$ lower.}
-\label{fig:percentiles}
-\end{figure}
-
-\subsection{Deviation Distribution}
-
-Cross-validation between stem-branch and sxwnl covers 4,824 solar terms
-(201~years $\times$ 24 terms, 1900--2100). The divergence reflects
-differing correction polynomials, not implementation errors.
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=\columnwidth,
-    height=5cm,
-    ybar interval,
-    xlabel={Deviation (s)},
-    ylabel={Count},
-    xmin=0, xmax=3.75,
-    ymin=0, ymax=1600,
-    xtick={0,0.5,1.0,1.5,2.0,2.5,3.0,3.5},
-    grid=major,
-    grid style={gray!30},
-    fill=sbblue!60,
-    draw=sbblue!80!black,
-]
-\addplot coordinates {
-    (0,1410) (0.25,1209) (0.5,1470) (1.0,540)
-    (1.5,149) (2.0,42) (2.5,3) (3.0,1) (3.5,0)
-};
-\end{axis}
-\end{tikzpicture}
-\caption{Distribution of SB--SX deviations ($N = 4{,}824$).
-54.3\% within 0.5\,s, 84.8\% within 1\,s.}
-\label{fig:distribution}
-\end{figure}
-
-\subsection{Equinox Amplification}
-
-The deviation by solar term shows double peaks at the equinoxes
-($\lambda_\odot = 0\degree$, $180\degree$). This pattern reflects the
-interaction between the differing correction polynomials used by
-stem-branch and sxwnl: the polynomial residuals are not uniformly
-distributed across ecliptic longitude, and the equinox regions---where
-the Sun's ecliptic longitude changes most rapidly in right
-ascension---amplify small longitude differences into larger timing
-differences.
-
-\begin{figure*}[t]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    width=0.95\textwidth,
-    height=5cm,
-    ybar,
-    bar width=7pt,
-    xlabel={Solar term ($\lambda_\odot$)},
-    ylabel={Mean deviation (s)},
-    xmin=-1, xmax=24,
-    ymin=0, ymax=0.9,
-    xtick={0,3,6,9,12,15,18,21},
-    xticklabels={$270\degree$,$315\degree$,$0\degree$,$45\degree$,
-                 $90\degree$,$135\degree$,$180\degree$,$225\degree$},
-    grid=major,
-    grid style={gray!30},
-]
-\addplot[fill=sbblue!70, draw=sbblue!80!black] coordinates {
-    (0,0.404) (1,0.418) (2,0.477) (3,0.559) (4,0.614) (5,0.657)
-    (6,0.719) (7,0.765) (8,0.710) (9,0.646) (10,0.471) (11,0.421)
-    (12,0.436) (13,0.433) (14,0.486) (15,0.524) (16,0.570) (17,0.645)
-    (18,0.661) (19,0.688) (20,0.617) (21,0.545) (22,0.465) (23,0.432)
-};
-\draw[red, thick, ->] (axis cs:7,0.85) -- (axis cs:7,0.78)
-    node[above, pos=0, font=\scriptsize, red] {Vernal eq.};
-\draw[red, thick, ->] (axis cs:19,0.78) -- (axis cs:19,0.71)
-    node[above, pos=0, font=\scriptsize, red] {Autumnal eq.};
-\end{axis}
-\end{tikzpicture}
-\caption{Mean SB--SX deviation by solar term. Peaks near the equinoxes
-and valleys near the solstices reflect the non-uniform distribution of
-correction polynomial residuals across ecliptic longitude.}
-\label{fig:byterm}
-\end{figure*}
-
-\subsection{Four Pillar Agreement}
-
-\begin{table}[H]
-\centering
-\caption{Pillar cross-validation: SB vs.\ sxwnl}
-\label{tab:pillars}
-\footnotesize
-\begin{tabular}{lccc}
-\toprule
-\textbf{Pillar} & \textbf{$N$} & \textbf{Range} & \textbf{Agree} \\
-\midrule
-\zh{日柱} (Day) & 5,683 & 1583--2500 & 100\% \\
-\zh{年柱} (Year) & 2,412 & 1900--2100 & 100\% \\
-\zh{月柱} (Month) & 2,412 & 1900--2100 & 100\% \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% =============================================================================
-\section{Astronomical Dependencies of Chinese Metaphysical Systems}
+\section{The Five Systems and Their Astronomical Dependencies}
 \label{sec:systems}
 
 The five systems form a spectrum from purely solar to fully planetary,
@@ -1716,43 +1213,290 @@ modern \zh{中氣} method is solar-only.}
 \end{table}
 
 % =============================================================================
-\section{Historical Uncertainty}
-\label{sec:uncertainty}
 
-\subsection{$\Delta T$ and Earth Rotation}
-\label{subsec:deltaT}
+% =============================================================================
+\section{Taxonomy of Computational Errors}
+\label{sec:errors}
 
-The long-term $\Delta T$ trend is driven by tidal friction (LOD increase
-$+2.3$~ms/century), partially offset by post-glacial rebound
-($-0.6$~ms/century), yielding an observed $+1.8$~ms/century
-\cite{stephenson2016}; earlier eclipse-based constraints appear in
-\cite{stephenson1986}. Before $\sim$1600~CE, $\Delta T$ uncertainty
-dominates all other error sources by 1--2 orders of magnitude.
+We identify seven categories, ordered by typical magnitude.
 
-\subsection{The Little Ice Age and Maunder Minimum}
+\subsection{Daylight Saving Time: The Fourth Complication}
+\label{subsec:dst}
 
-The Little Ice Age ($\sim$1300--1850~CE)---documented in
-\zh{竺可楨}'s landmark study of Chinese climate over five
-millennia~\cite{zhukz1973}---was contemporaneous with the Sp\"{o}rer
-(1450--1550) and Maunder (1645--1715) Minima of solar activity
-\cite{eddy1976}. While climate does not directly affect astronomical
-computation, the Maunder Minimum disrupted European telescopic observations.
-Chinese naked-eye sunspot records continued---23 independent observations in
-1618 alone \cite{hayakawa2022}---providing the only pre-telescopic solar
-activity constraints. Hayakawa et~al.\ have also catalogued 270 sunspot
-and aurora candidates in Chinese official histories from the late Song
-through Ming dynasties (1261--1644)~\cite{hayakawa2017}.
+The three time regimes above---local apparent solar time, local mean solar
+time, and standard zone time---do not exhaust the complications.  Daylight
+Saving Time (DST) introduces a \emph{fourth} regime: a politically imposed
+offset that shifts wall-clock time by one hour relative to standard time
+during summer months.  Because DST is invisible in the timestamp itself (a
+clock reading ``23:30'' gives no indication whether DST is active), it is
+perhaps the most insidious source of \zh{時辰} misassignment.
 
-\subsection{Eclipse Records}
+East Asian DST history is complex and poorly documented outside
+specialist sources.  Seven regions observed DST at various times during
+the 20th century~\cite{iana_tzdata_asia, dst_east_asia_research}
+(Table~\ref{tab:dst_history}).
 
-Chinese eclipse records serve dual purposes: constraining $\Delta T$ before
-the telescopic era \cite{stephenson2018}, and validating the entire
-computational pipeline. A 2025 re-analysis of the 709~BCE eclipse---humanity's
-earliest datable total solar eclipse recorded in Chinese annals---refined
-measurements of 8th-century~BCE rotational deceleration
-\cite{eclipse709bce_2025}.
+\begin{table}[H]
+\centering
+\caption{Daylight Saving Time in East Asia}
+\label{tab:dst_history}
+\small
+\begin{tabular}{@{}llr@{}}
+\toprule
+\textbf{Region} & \textbf{DST Period(s)} & \textbf{Years} \\
+\midrule
+PRC             & 1986--1991                              & 6  \\
+Taiwan          & 1946--1961, 1974--1975, 1979             & 19 \\
+Hong Kong       & 1941, 1946--1976, 1979                   & 33 \\
+Japan           & 1948--1951                               & 4  \\
+South Korea     & 1948--1951, 1955--1960, 1987--1988       & 12 \\
+Macau           & 1942--1979 (mirroring Hong Kong)         & 34 \\
+Mongolia        & 1983--1998, 2001--2006, 2015--2016       & 27 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\subsection{Error Budget by Epoch}
+\noindent
+The PRC's six years of DST (1986--1991)~\cite{prc_dst_regulation,
+iana_tzdata_asia} alone affect millions
+of birth charts.  A birth recorded at 23:30 during DST is actually 22:30 standard
+time, changing the \zh{時辰} from \zh{子} (23:00--01:00) to \zh{亥}
+(21:00--23:00) and potentially altering the day pillar if the practitioner's
+method treats \zh{子時} as crossing the day boundary.  Hong Kong's 33~years
+of summer time (HKST $=$ UTC$+$9) mean that \emph{any} \zh{八字}
+practitioner computing charts for Hong Kong births between 1946 and 1979
+without DST correction has systematically wrong hour pillars for every
+summer birth.  South Korea's 12~years include the 1988 Seoul Olympics
+period, when many overseas Korean births were recorded.
+
+The practical problem is stark: most Chinese metaphysics practitioners and
+apps ignore DST entirely.  Users enter their birth time as displayed on the
+clock at the time of birth, but if the birth occurred during a DST period,
+that clock time includes a one-hour offset that must be removed before
+computing the \zh{時辰}.
+
+\paragraph{Worked example.}
+Consider a birth in Shanghai on 1~July~1987 at 23:15 wall-clock time.  PRC
+DST was active (UTC$+$9), so the standard time is 22:15 (UTC$+$8).  The
+true \zh{時辰} is \zh{亥} (21:00--23:00), \emph{not} \zh{子}
+(23:00--01:00).  Without DST correction, the app assigns the wrong hour
+pillar.  Moreover, if the app treats \zh{子時} as the start of a new day
+(the \zh{早子時}/\zh{晚子時} convention), it may also assign the wrong
+\emph{day} pillar---a cascading error from a single uncorrected hour.
+
+\paragraph{Three compounding confusions.}
+DST does not occur in isolation.  In East Asia, it compounds with two
+other time-regime shifts that most practitioners are unaware of:
+
+\textbf{(1)~Japanese occupation timezone shifts.}
+During World War~II, Japan imposed JST (UTC$+$9) on all occupied
+territories~\cite{iana_tzdata_asia, china_timezone}.  Taiwan was shifted
+from UTC$+$8 to UTC$+$9 on 1~October~1937 and reverted on
+21~September~1945.  Hong Kong fell to Japanese time on
+25~December~1941 and reverted on 18~November~1945---as documented by
+WeToastHK's analysis of contemporary South China Morning Post
+reports~\cite{wetoasthk_dst}, which clarifies that this was a
+\emph{zone change} to JST, not legislated summer
+time~\cite{hko_summertime}.  Macau was similarly shifted from
+21~December~1941 to 30~September~1945.  Korea, already under colonial
+rule, was moved from its native UTC$+$8:30 to JST in
+1912~\cite{korea_tz_history} and did not revert until 1945.  Any birth
+chart computed for these territories during occupation must account for
+the forced timezone shift---a correction that most apps silently omit.
+
+\textbf{(2)~Base timezone changes.}
+South Korea's base timezone changed \emph{three times} in the 20th
+century~\cite{korea_tz_history, iana_tzdata_asia}:
+UTC$+$8:30 (pre-1912), UTC$+$9 (1912--1954 under Japan), UTC$+$8:30
+(1954--1961 under Syngman Rhee's symbolic de-Japanification), and
+UTC$+$9 (1961 onward under Park Chung-hee).  During the UTC$+$8:30
+period, DST added 1~hour to reach UTC$+$9:30---a half-hour offset
+that confounds naive UTC$+$9 assumptions.  A birth in Seoul on
+5~May~1957 at 14:00 wall-clock time (DST active, UTC$+$9:30) is
+actually 13:30 standard time (UTC$+$8:30), or equivalently 13:00 in
+the UTC$+$9 frame that most modern apps assume---a 1-hour error from
+the wrong base timezone alone.
+
+\textbf{(3)~Energy crisis winter DST.}
+The 1973 oil crisis prompted Hong Kong and Macau to extend summer time
+\emph{through the winter} of 1973--1974~\cite{hko_summertime,
+wetoasthk_dst}: DST began 30~December~1973 and did not end until
+20~October~1974---nearly 10 continuous months of UTC$+$9.  Taiwan
+reinstated DST in 1974--1975 after a 12-year gap for the same
+reason~\cite{iana_tzdata_asia}.  These anomalous periods are poorly
+documented outside the IANA~\texttt{tzdata} database and are missed by
+virtually all Chinese metaphysics software.
+
+\paragraph{Japan's imposed DST (1948--1951).}
+Japan's own DST was imposed by US occupation authorities, shifting JST
+(UTC$+$9) to JDT (UTC$+$10) during summer
+months~\cite{japan_dst_abolition, iana_tzdata_asia}.  It was deeply
+unpopular: a 1951 government poll showed 53\% wanted abolition versus
+30\% retention.  The Diet passed repeal legislation in October~1951,
+shortly after the San Francisco Peace Treaty was signed.  Despite
+lasting only four years, this period affects Japanese birth charts from
+the early postwar era.
+
+\paragraph{The cumulative error.}
+For a birth during any DST period, the true local solar time
+differs from wall-clock time by three independent offsets:
+\begin{enumerate}[nosep]
+  \item DST: 0 or 60~min (requires birth location and date).
+  \item Base timezone vs.\ solar: varies by longitude within the zone.
+  \item Equation of Time: $\pm 16$~min (varies by date of birth).
+\end{enumerate}
+These can sum to over 90~minutes of combined error.  For a birth near
+any \zh{時辰} boundary, this is the difference between two entirely
+different hour pillars---and potentially different day pillars.
+
+\paragraph{Implementation.}
+The \texttt{stem-branch} library handles DST via embedded IANA timezone
+data comprising 11,742 historical transitions across 78~timezones,
+including all the anomalous periods described above.  The full transition
+tables and historical research are documented in the project's
+DST research file,%
+\footnote{\texttt{docs/research/east-asia-dst-history.md} in the
+\texttt{stem-branch} repository.}
+which provides complete IANA rule definitions for all seven East Asian
+regions (PRC, Taiwan, Hong Kong, Macau, Japan, South Korea, and
+Mongolia), including the Japanese occupation shifts and energy crisis
+extensions~\cite{iana_tzdata_asia, hko_summertime, wetoasthk_dst,
+korea_tz_history, japan_dst_abolition}.  The timezone conversion module%
+\footnote{\texttt{src/timezone.ts} in the \texttt{stem-branch}
+repository.}
+ships the complete transition table rather than relying on the host
+platform's \texttt{Intl} API or operating-system timezone database,
+guaranteeing deterministic, platform-independent DST-aware time
+conversion for any historical birth date in East Asia.
+
+% =============================================================================
+\subsection{Error~4: True Solar Time Neglect}
+\label{subsec:error4}
+
+\textbf{Magnitude: up to 176+ minutes.}
+
+The hour pillar (\zh{時柱}) corresponds to true solar time (TST):
+
+\begin{equation}
+  \text{TST} = \text{Clock} + (\phi - \phi_0) \times 4~\text{min/}\degree
+  + \text{EoT}
+  \label{eq:tst}
+\end{equation}
+
+China's single timezone (UTC+8, $120\degree$E) spans $73\degree$--$135\degree$E~\cite{china_timezone}.
+For Kashgar ($76\degree$E): $\Delta t = -176$~min $\approx -2.9$~hours. A
+midnight birth in Kashgar has TST $\approx$ 21:04 the previous day---placing
+them in \zh{亥} rather than \zh{子}, a completely different hour pillar.
+
+The EoT adds $\pm 16$~min seasonally. \texttt{stem-branch} computes EoT from
+VSOP87D + IAU2000B, achieving 0.03~s agreement with JPL~DE441
+(Section~\ref{subsec:eot}).
+
+\subsection{Error~7: The Day Boundary Controversy}
+\label{subsec:error_zishi}
+
+\textbf{Magnitude: up to 1 day pillar and 1 hour stem.}
+
+The double-hour \zh{子時} spans 23:00--01:00, straddling midnight. Two
+schools exist:
+
+\begin{description}[leftmargin=0pt]
+  \item[\zh{子初換日}:] Day changes at 23:00 (start of \zh{子時}).
+    A birth at 23:30 on the 15th receives the 16th's day pillar.
+  \item[\zh{子正換日}:] Day changes at midnight. \zh{子時} is split
+    into \zh{早子時} (23:00--00:00, current day) and \zh{正子時}
+    (00:00--01:00, next day).
+\end{description}
+
+Historical evidence is mixed---Ming astronomer Xing Yunlu (\zh{邢雲路})
+advocated midnight~\cite{xing_yunlu}. Modern practice is divided regionally. This is a
+\emph{methodological} question, not a computational one: both conventions
+can be correctly implemented once the underlying astronomy is sound.
+
+% =============================================================================
+\subsection{Error~1: Year Boundary}
+\label{subsec:error_lichun}
+
+\textbf{Magnitude: up to 1 full year pillar (catastrophic).}
+
+The BaZi year pillar changes at \zh{立春} ($\lambda_\odot = 315\degree$),
+typically Feb~3--5. Many applications incorrectly use Lunar New Year
+(\zh{農曆正月初一}), which can differ by weeks. This affects 4--6\% of birth
+dates\footnote{Lunar New Year falls between 21~January and 20~February,
+while \zh{立春} falls on 3--5~February. The gap between the two dates
+ranges from approximately 15 to 22~days in any given year, yielding
+$15/365 \approx 4.1\%$ to $22/365 \approx 6.0\%$ of annual births.}. The 2017 PRC standard GB/T~33661-2017 designated Lunar New Year as the
+official \zh{干支} year start, directly contradicting BaZi tradition
+\cite{gbstandard2017}.
+
+\subsection{Error~6: The 2033 Intercalary Month Problem}
+\label{subsec:error_2033}
+
+\textbf{Magnitude: affects calendar structure for an entire year.}
+
+In 2033, the standard intercalary rule (``first month without a \zh{中氣}
+is the leap month'') conflicts with the structural constraint that month~11
+must contain \zh{冬至} \cite{aslaksen2010, wikipedia_2033}. Many
+implementations mishandle this, producing \zh{閏七月} instead of the
+correct \zh{閏十一月} \cite{aslaksen_fake}---shifting the Mid-Autumn
+Festival by nearly a month.
+
+This error is particularly consequential for \zh{紫微斗數}, where the
+entire fate chart is constructed from the \emph{lunar} calendar date.
+An incorrect \zh{閏月} assignment changes which lunar month the birth
+falls in, cascading through the palace assignments.
+
+\subsection{Error~2: Apparent vs.\ Geometric Longitude}
+
+\textbf{Magnitude: up to $\sim$15 minutes.}
+
+Solar terms require \emph{apparent} longitude, not geometric. Neglecting
+aberration ($\sim 20.5''$, $\sim 8.2$~min) and nutation (up to $\pm 18''$,
+$\sim 7.2$~min) combined can shift solar term times by up to $\sim 15$~min.
+
+\subsection{Error~3: Ephemeris Truncation}
+\label{subsec:error_truncation}
+
+\textbf{Magnitude: seconds to minutes.}
+
+\begin{table}[H]
+\centering
+\caption{Ephemeris accuracy for solar longitude}
+\label{tab:ephemeris}
+\footnotesize
+\begin{tabular}{llcc}
+\toprule
+\textbf{Method} & \textbf{Basis} & \textbf{Max Err} & \textbf{Range} \\
+\midrule
+Low-precision & Newcomb & $\sim 10$~min & $\pm$50~yr \\
+Meeus trunc. & DE200 & $\sim 1.2$~min & $\pm$200~yr \\
+VSOP87D full & DE200 & $\sim 24$~s & $\pm$2000~yr \\
+VSOP87D+DE441 & DE441 & $\sim 1$~s & $\pm$2300~yr \\
+JPL DE441 & Fitted & truth & $\pm$2500~yr \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The \texttt{stem-branch} library compensates for VSOP87D truncation with a
+DE441-fitted even polynomial:
+
+\begin{equation}
+  \Delta L = c_0 + c_2\tau^2 + c_4\tau^4 + c_6\tau^6 ~ \text{(arcsec)}
+  \label{eq:correction}
+\end{equation}
+
+\noindent where $\tau$ is Julian millennia from J2000.0. The even-only form
+ensures symmetric accuracy for past and future dates, replacing sxwnl's
+DE405-fitted cubic \cite{sxwnl_github}:
+
+\begin{equation}
+  \Delta L_{\text{sx}} \!=\! {-}0.073 {-} 2.770\tau {-} 1.102\tau^2 {-} 0.100\tau^3
+  \label{eq:sxwnl_correction}
+\end{equation}
+
+\noindent whose odd-order terms produce asymmetric error growth (58~s
+deviations for $\sim$200~CE). Figure~\ref{fig:correction} illustrates the
+contrast.
 
 \begin{figure}[H]
 \centering
@@ -1760,39 +1504,53 @@ measurements of 8th-century~BCE rotational deceleration
 \begin{axis}[
     width=\columnwidth,
     height=5.5cm,
-    ybar,
-    bar width=7pt,
-    ylabel={Uncertainty (s, log)},
-    ymode=log,
-    log basis y=10,
-    ymin=0.05, ymax=500,
-    symbolic x coords={209,500,1000,1600,1900,2024},
-    xtick=data,
-    xticklabel style={font=\small},
+    xlabel={$\tau$ (Julian millennia from J2000)},
+    ylabel={$\Delta L$ (arcsec)},
+    xmin=-2.7, xmax=2.7,
+    ymin=-16, ymax=4,
     grid=major,
     grid style={gray!30},
-    legend pos=north east,
+    legend pos=south west,
     legend style={font=\tiny},
 ]
-\addplot[fill=sbblue!70, draw=sbblue!80!black] coordinates {
-    (209,1.2) (500,1.2) (1000,1.1) (1600,0.2) (1900,1.6) (2024,2.0)
-};
-\addlegendentry{Ephemeris}
-\addplot[fill=sxorange!70, draw=sxorange!80!black] coordinates {
-    (209,300) (500,200) (1000,80) (1600,25) (1900,1) (2024,0.1)
-};
-\addlegendentry{$\Delta T$}
+\addplot[de441blue, thick, smooth, domain=-2.5:2.5, samples=80]
+    {-0.1067 - 0.6166*x^2 + 0.3154*x^4 - 0.0503*x^6};
+\addlegendentry{DE441 even (this work)}
+\addplot[de405red, thick, dashed, smooth, domain=-2.5:2.5, samples=80]
+    {-0.0728 - 2.7702*x - 1.1019*x^2 - 0.0996*x^3};
+\addlegendentry{DE405 cubic (sxwnl)}
 \end{axis}
 \end{tikzpicture}
-\caption{Error budget decomposition (log scale). $\Delta T$ exceeds ephemeris
-error by 1--2 orders of magnitude before $\sim$1600~CE.}
-\label{fig:error_budget}
+\caption{Correction polynomial comparison. The DE441 even sextic (solid) is
+symmetric by construction; the DE405 cubic (dashed) diverges to $-15''$ for
+future dates.}
+\label{fig:correction}
 \end{figure}
 
-\textbf{Implication}: For a historical figure born in 500~CE, $\Delta T$
-uncertainty ($\sim 200$~s $\approx 3.3$~min) is $\sim 200\times$ larger than
-ephemeris error ($\sim 1$~s). Sub-minute precision claims for ancient charts
-are physically meaningless.
+\subsection{Error~5: Historical $\Delta T$ Uncertainty}
+
+\textbf{Magnitude: minutes to hours for ancient dates.}
+
+\begin{table}[H]
+\centering
+\caption{$\Delta T$ uncertainty by epoch}
+\label{tab:deltaT}
+\footnotesize
+\begin{tabular}{lrrl}
+\toprule
+\textbf{Epoch} & $\Delta T$ & \textbf{Unc.} & \textbf{Impact} \\
+\midrule
+1900 CE & $-2.7$~s & $<1$~s & Negl. \\
+1600 CE & $+120$~s & $\sim 25$~s & $\sim 30$~s \\
+1000 CE & $+1570$~s & $\sim 80$~s & $\sim 1.3$~min \\
+500 CE & $+5710$~s & $\sim 200$~s & $\sim 3.3$~min \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+This is \emph{irreducible}: no ephemeris improvement can compensate for
+unknown historical Earth rotation \cite{stephenson2016}.
+
 
 % =============================================================================
 \section{The Reference Longitude Problem: A Cross-Civilizational Perspective}
@@ -2331,154 +2089,87 @@ identical civil timestamps. Adding the Equation of Time ($\pm 16$~min
 depending on date of birth) can push borderline cases across yet another
 boundary.
 
-\subsection{Daylight Saving Time: The Fourth Complication}
-\label{subsec:dst}
 
-The three time regimes above---local apparent solar time, local mean solar
-time, and standard zone time---do not exhaust the complications.  Daylight
-Saving Time (DST) introduces a \emph{fourth} regime: a politically imposed
-offset that shifts wall-clock time by one hour relative to standard time
-during summer months.  Because DST is invisible in the timestamp itself (a
-clock reading ``23:30'' gives no indication whether DST is active), it is
-perhaps the most insidious source of \zh{時辰} misassignment.
+% =============================================================================
+\section{Historical Uncertainty}
+\label{sec:uncertainty}
 
-East Asian DST history is complex and poorly documented outside
-specialist sources.  Seven regions observed DST at various times during
-the 20th century~\cite{iana_tzdata_asia, dst_east_asia_research}
-(Table~\ref{tab:dst_history}).
+\subsection{$\Delta T$ and Earth Rotation}
+\label{subsec:deltaT}
 
-\begin{table}[H]
+The long-term $\Delta T$ trend is driven by tidal friction (LOD increase
+$+2.3$~ms/century), partially offset by post-glacial rebound
+($-0.6$~ms/century), yielding an observed $+1.8$~ms/century
+\cite{stephenson2016}; earlier eclipse-based constraints appear in
+\cite{stephenson1986}. Before $\sim$1600~CE, $\Delta T$ uncertainty
+dominates all other error sources by 1--2 orders of magnitude.
+
+\subsection{The Little Ice Age and Maunder Minimum}
+
+The Little Ice Age ($\sim$1300--1850~CE)---documented in
+\zh{竺可楨}'s landmark study of Chinese climate over five
+millennia~\cite{zhukz1973}---was contemporaneous with the Sp\"{o}rer
+(1450--1550) and Maunder (1645--1715) Minima of solar activity
+\cite{eddy1976}. While climate does not directly affect astronomical
+computation, the Maunder Minimum disrupted European telescopic observations.
+Chinese naked-eye sunspot records continued---23 independent observations in
+1618 alone \cite{hayakawa2022}---providing the only pre-telescopic solar
+activity constraints. Hayakawa et~al.\ have also catalogued 270 sunspot
+and aurora candidates in Chinese official histories from the late Song
+through Ming dynasties (1261--1644)~\cite{hayakawa2017}.
+
+\subsection{Eclipse Records}
+
+Chinese eclipse records serve dual purposes: constraining $\Delta T$ before
+the telescopic era \cite{stephenson2018}, and validating the entire
+computational pipeline. A 2025 re-analysis of the 709~BCE eclipse---humanity's
+earliest datable total solar eclipse recorded in Chinese annals---refined
+measurements of 8th-century~BCE rotational deceleration
+\cite{eclipse709bce_2025}.
+
+\subsection{Error Budget by Epoch}
+
+\begin{figure}[H]
 \centering
-\caption{Daylight Saving Time in East Asia}
-\label{tab:dst_history}
-\small
-\begin{tabular}{@{}llr@{}}
-\toprule
-\textbf{Region} & \textbf{DST Period(s)} & \textbf{Years} \\
-\midrule
-PRC             & 1986--1991                              & 6  \\
-Taiwan          & 1946--1961, 1974--1975, 1979             & 19 \\
-Hong Kong       & 1941, 1946--1976, 1979                   & 33 \\
-Japan           & 1948--1951                               & 4  \\
-South Korea     & 1948--1951, 1955--1960, 1987--1988       & 12 \\
-Macau           & 1942--1979 (mirroring Hong Kong)         & 34 \\
-Mongolia        & 1983--1998, 2001--2006, 2015--2016       & 27 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{tikzpicture}
+\begin{axis}[
+    width=\columnwidth,
+    height=5.5cm,
+    ybar,
+    bar width=7pt,
+    ylabel={Uncertainty (s, log)},
+    ymode=log,
+    log basis y=10,
+    ymin=0.05, ymax=500,
+    symbolic x coords={209,500,1000,1600,1900,2024},
+    xtick=data,
+    xticklabel style={font=\small},
+    grid=major,
+    grid style={gray!30},
+    legend pos=north east,
+    legend style={font=\tiny},
+]
+\addplot[fill=sbblue!70, draw=sbblue!80!black] coordinates {
+    (209,1.2) (500,1.2) (1000,1.1) (1600,0.2) (1900,1.6) (2024,2.0)
+};
+\addlegendentry{Ephemeris}
+\addplot[fill=sxorange!70, draw=sxorange!80!black] coordinates {
+    (209,300) (500,200) (1000,80) (1600,25) (1900,1) (2024,0.1)
+};
+\addlegendentry{$\Delta T$}
+\end{axis}
+\end{tikzpicture}
+\caption{Error budget decomposition (log scale). $\Delta T$ exceeds ephemeris
+error by 1--2 orders of magnitude before $\sim$1600~CE.}
+\label{fig:error_budget}
+\end{figure}
 
-\noindent
-The PRC's six years of DST (1986--1991)~\cite{prc_dst_regulation,
-iana_tzdata_asia} alone affect millions
-of birth charts.  A birth recorded at 23:30 during DST is actually 22:30 standard
-time, changing the \zh{時辰} from \zh{子} (23:00--01:00) to \zh{亥}
-(21:00--23:00) and potentially altering the day pillar if the practitioner's
-method treats \zh{子時} as crossing the day boundary.  Hong Kong's 33~years
-of summer time (HKST $=$ UTC$+$9) mean that \emph{any} \zh{八字}
-practitioner computing charts for Hong Kong births between 1946 and 1979
-without DST correction has systematically wrong hour pillars for every
-summer birth.  South Korea's 12~years include the 1988 Seoul Olympics
-period, when many overseas Korean births were recorded.
+\textbf{Implication}: For a historical figure born in 500~CE, $\Delta T$
+uncertainty ($\sim 200$~s $\approx 3.3$~min) is $\sim 200\times$ larger than
+ephemeris error ($\sim 1$~s). Sub-minute precision claims for ancient charts
+are physically meaningless.
 
-The practical problem is stark: most Chinese metaphysics practitioners and
-apps ignore DST entirely.  Users enter their birth time as displayed on the
-clock at the time of birth, but if the birth occurred during a DST period,
-that clock time includes a one-hour offset that must be removed before
-computing the \zh{時辰}.
-
-\paragraph{Worked example.}
-Consider a birth in Shanghai on 1~July~1987 at 23:15 wall-clock time.  PRC
-DST was active (UTC$+$9), so the standard time is 22:15 (UTC$+$8).  The
-true \zh{時辰} is \zh{亥} (21:00--23:00), \emph{not} \zh{子}
-(23:00--01:00).  Without DST correction, the app assigns the wrong hour
-pillar.  Moreover, if the app treats \zh{子時} as the start of a new day
-(the \zh{早子時}/\zh{晚子時} convention), it may also assign the wrong
-\emph{day} pillar---a cascading error from a single uncorrected hour.
-
-\paragraph{Three compounding confusions.}
-DST does not occur in isolation.  In East Asia, it compounds with two
-other time-regime shifts that most practitioners are unaware of:
-
-\textbf{(1)~Japanese occupation timezone shifts.}
-During World War~II, Japan imposed JST (UTC$+$9) on all occupied
-territories~\cite{iana_tzdata_asia, china_timezone}.  Taiwan was shifted
-from UTC$+$8 to UTC$+$9 on 1~October~1937 and reverted on
-21~September~1945.  Hong Kong fell to Japanese time on
-25~December~1941 and reverted on 18~November~1945---as documented by
-WeToastHK's analysis of contemporary South China Morning Post
-reports~\cite{wetoasthk_dst}, which clarifies that this was a
-\emph{zone change} to JST, not legislated summer
-time~\cite{hko_summertime}.  Macau was similarly shifted from
-21~December~1941 to 30~September~1945.  Korea, already under colonial
-rule, was moved from its native UTC$+$8:30 to JST in
-1912~\cite{korea_tz_history} and did not revert until 1945.  Any birth
-chart computed for these territories during occupation must account for
-the forced timezone shift---a correction that most apps silently omit.
-
-\textbf{(2)~Base timezone changes.}
-South Korea's base timezone changed \emph{three times} in the 20th
-century~\cite{korea_tz_history, iana_tzdata_asia}:
-UTC$+$8:30 (pre-1912), UTC$+$9 (1912--1954 under Japan), UTC$+$8:30
-(1954--1961 under Syngman Rhee's symbolic de-Japanification), and
-UTC$+$9 (1961 onward under Park Chung-hee).  During the UTC$+$8:30
-period, DST added 1~hour to reach UTC$+$9:30---a half-hour offset
-that confounds naive UTC$+$9 assumptions.  A birth in Seoul on
-5~May~1957 at 14:00 wall-clock time (DST active, UTC$+$9:30) is
-actually 13:30 standard time (UTC$+$8:30), or equivalently 13:00 in
-the UTC$+$9 frame that most modern apps assume---a 1-hour error from
-the wrong base timezone alone.
-
-\textbf{(3)~Energy crisis winter DST.}
-The 1973 oil crisis prompted Hong Kong and Macau to extend summer time
-\emph{through the winter} of 1973--1974~\cite{hko_summertime,
-wetoasthk_dst}: DST began 30~December~1973 and did not end until
-20~October~1974---nearly 10 continuous months of UTC$+$9.  Taiwan
-reinstated DST in 1974--1975 after a 12-year gap for the same
-reason~\cite{iana_tzdata_asia}.  These anomalous periods are poorly
-documented outside the IANA~\texttt{tzdata} database and are missed by
-virtually all Chinese metaphysics software.
-
-\paragraph{Japan's imposed DST (1948--1951).}
-Japan's own DST was imposed by US occupation authorities, shifting JST
-(UTC$+$9) to JDT (UTC$+$10) during summer
-months~\cite{japan_dst_abolition, iana_tzdata_asia}.  It was deeply
-unpopular: a 1951 government poll showed 53\% wanted abolition versus
-30\% retention.  The Diet passed repeal legislation in October~1951,
-shortly after the San Francisco Peace Treaty was signed.  Despite
-lasting only four years, this period affects Japanese birth charts from
-the early postwar era.
-
-\paragraph{The cumulative error.}
-For a birth during any DST period, the true local solar time
-differs from wall-clock time by three independent offsets:
-\begin{enumerate}[nosep]
-  \item DST: 0 or 60~min (requires birth location and date).
-  \item Base timezone vs.\ solar: varies by longitude within the zone.
-  \item Equation of Time: $\pm 16$~min (varies by date of birth).
-\end{enumerate}
-These can sum to over 90~minutes of combined error.  For a birth near
-any \zh{時辰} boundary, this is the difference between two entirely
-different hour pillars---and potentially different day pillars.
-
-\paragraph{Implementation.}
-The \texttt{stem-branch} library handles DST via embedded IANA timezone
-data comprising 11,742 historical transitions across 78~timezones,
-including all the anomalous periods described above.  The full transition
-tables and historical research are documented in the project's
-DST research file,%
-\footnote{\texttt{docs/research/east-asia-dst-history.md} in the
-\texttt{stem-branch} repository.}
-which provides complete IANA rule definitions for all seven East Asian
-regions (PRC, Taiwan, Hong Kong, Macau, Japan, South Korea, and
-Mongolia), including the Japanese occupation shifts and energy crisis
-extensions~\cite{iana_tzdata_asia, hko_summertime, wetoasthk_dst,
-korea_tz_history, japan_dst_abolition}.  The timezone conversion module%
-\footnote{\texttt{src/timezone.ts} in the \texttt{stem-branch}
-repository.}
-ships the complete transition table rather than relying on the host
-platform's \texttt{Intl} API or operating-system timezone database,
-guaranteeing deterministic, platform-independent DST-aware time
-conversion for any historical birth date in East Asia.
+% =============================================================================
 
 % =============================================================================
 \section{Competing Calendar Authorities}
@@ -2690,6 +2381,366 @@ reversed by the Kangxi Emperor upon assuming personal rule), in
 part because of these discrepancies~\cite{sivin2009, udias1994}.
 
 % =============================================================================
+
+% =============================================================================
+\section{The Computational Pipeline}
+\label{sec:background}
+
+\subsection{Solar Term Definition}
+
+Under the \zh{定氣} (\textit{d\`{i}ng q\`{i}}) method, adopted by the
+Shixian calendar (\zh{時憲曆}) in 1645, each solar term is the instant when
+the Sun's \emph{apparent} geocentric ecliptic longitude reaches a specific
+multiple of $15\degree$ \cite{aslaksen2010, ytliu_rules}. This replaced the
+\zh{平氣} method, which divided the tropical year into 24 equal time
+intervals \cite{ytliu_solarterms}.
+
+Because Earth's orbit is elliptical ($e \approx 0.0167$), the Sun's ecliptic
+longitude does not advance uniformly: $\sim 1.02\degree$/day near perihelion
+vs.\ $\sim 0.95\degree$/day near aphelion~\cite{meeus1998}.
+
+\subsection{Computational Pipeline}
+\label{subsec:pipeline}
+
+The Sun's apparent ecliptic longitude $\lambda_\odot$ is computed as:
+
+\begin{equation}
+  \lambda_\odot = \lambda_{\text{geo}} + \Delta\psi + \Delta\tau_{\text{ab}}
+  \label{eq:apparent}
+\end{equation}
+
+\noindent where $\lambda_{\text{geo}} = L + 180\degree$ (geocentric from
+heliocentric Earth longitude $L$ via VSOP87D \cite{bretagnon1988}),
+$\Delta\psi$ is nutation in longitude (IAU2000B, 77 terms \cite{iau2000b}),
+and $\Delta\tau_{\text{ab}} = -20.4898'' / R$ is aberration~\cite{ronvondrak1986}.
+
+Three time scales are relevant: TT (Terrestrial Time, uniform), UT (Universal
+Time, based on Earth rotation), and $\Delta T = \text{TT} - \text{UT}$
+($\approx 69.1$~s for mid-2024)~\cite{nasa_deltaT_uncertainty, stephenson2016}.
+
+% =============================================================================
+
+% =============================================================================
+\section{Statistical Validation}
+\label{sec:validation}
+
+\subsection{Methodology}
+
+Three-way comparison between: (1)~\textbf{stem-branch} (VSOP87D + DE441
+correction + IAU2000B), (2)~\textbf{sxwnl} (VSOP87D + DE405 cubic +
+ELP/MPP02) \cite{sxwnl_github}, and (3)~\textbf{JPL Horizons} (DE441
+numerical integration) \cite{jpl_horizons}. The computational methodology
+for the Chinese calendar follows Liu~\cite{ytliu_computation}.
+
+42~sample years span 209--2493~CE (1,008 total solar terms). 12 systematic
+years at 20-year intervals (1900--2100); 30 pseudo-random years (seed=42)
+from 200--2800~CE.
+
+\subsection{Equation of Time}
+\label{subsec:eot}
+
+366 daily samples at 12:00~TT across 2024:
+
+\begin{table}[H]
+\centering
+\caption{EoT residuals: stem-branch vs.\ JPL (2024)}
+\label{tab:eot}
+\footnotesize
+\begin{tabular}{lr}
+\toprule
+\textbf{Statistic} & \textbf{Value} \\
+\midrule
+Mean bias & $+0.000$~min \\
+Mean $|\text{res.}|$ & 0.01~s \\
+Std.\ dev. & 0.02~s \\
+Max $|\text{res.}|$ & 0.03~s \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The 0.03~s maximum is a $\sim$1,000$\times$ improvement over the Spencer
+(1971) Fourier approximation \cite{spencer1971}.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=\columnwidth,
+    height=4.5cm,
+    xlabel={Month (2024)},
+    ylabel={EoT (min)},
+    xmin=0.5, xmax=12.5,
+    ymin=-17, ymax=16,
+    xtick={1,3,5,7,9,11},
+    xticklabels={J,M,M,J,S,N},
+    grid=major,
+    grid style={gray!30},
+    legend pos=south east,
+    legend style={font=\tiny},
+    mark size=1.8pt,
+]
+\addplot[jplgray, thick, mark=square*, mark options={fill=jplgray, scale=0.8}]
+    coordinates {
+        (1,9.22) (2,14.11) (3,8.75) (4,-0.10)
+        (5,-3.64) (6,0.62) (7,6.06) (8,4.40)
+        (9,-4.98) (10,-14.35) (11,-15.35) (12,-4.66)
+    };
+\addlegendentry{JPL DE441}
+\addplot[sbblue, thick, dashed, mark=o, mark options={sbblue, scale=0.8}]
+    coordinates {
+        (1,9.22) (2,14.11) (3,8.75) (4,-0.10)
+        (5,-3.64) (6,0.62) (7,6.06) (8,4.40)
+        (9,-4.98) (10,-14.35) (11,-15.35) (12,-4.66)
+    };
+\addlegendentry{stem-branch}
+\draw[gray, thin, dashed] (axis cs:0.5,0) -- (axis cs:12.5,0);
+\end{axis}
+\end{tikzpicture}
+\caption{EoT annual profile (2024). The two sources are indistinguishable at
+this resolution; maximum residual is 0.03\,s.}
+\label{fig:eot}
+\end{figure}
+
+\subsection{Solar Term Timing}
+\label{subsec:solarterms}
+
+\begin{table}[H]
+\centering
+\caption{Solar term accuracy (seconds)}
+\label{tab:accuracy}
+\footnotesize
+\begin{tabular}{lccccc}
+\toprule
+& $N$ & Mean & Max & P50 & P95 \\
+\midrule
+\multicolumn{6}{l}{\textit{Modern (1900--2100):}} \\
+SB vs JPL & 336 & 1.56 & 2.79 & 1.68 & 2.29 \\
+SX vs JPL & 335 & 2.38 & 7.18 & 1.85 & 5.71 \\
+\midrule
+\multicolumn{6}{l}{\textit{Full range (209--2493):}} \\
+SB vs JPL & 1008 & 1.05 & 3.05 & 0.97 & 2.22 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\textwidth,
+    height=5.5cm,
+    ybar,
+    bar width=4pt,
+    xlabel={Year (CE)},
+    ylabel={Mean $|\Delta|$ vs.\ JPL (s)},
+    xmin=100, xmax=2600,
+    ymin=0, ymax=3.5,
+    grid=major,
+    grid style={gray!30},
+    xtick={200,500,800,1100,1400,1700,2000,2300},
+    legend pos=north east,
+    legend style={font=\small},
+]
+\addplot[fill=sbblue, draw=sbblue!80!black] coordinates {
+    (209,1.2) (270,1.2) (281,1.1) (333,1.1) (360,1.2)
+    (654,0.8) (682,1.1) (712,0.9) (849,1.4) (894,1.0)
+    (910,1.2) (998,1.1)
+    (1365,0.3) (1424,0.3) (1428,0.3) (1501,0.2) (1569,0.2) (1578,0.3)
+    (1740,1.0) (1762,0.9) (1787,0.9) (1824,1.1)
+    (1900,1.6) (1920,1.7) (1940,1.8) (1941,2.0) (1960,2.1)
+    (1980,0.9) (1985,0.7) (2000,0.5) (2020,1.8) (2024,2.0)
+    (2040,1.7) (2060,1.8) (2080,1.6) (2100,1.6)
+    (2138,1.4) (2237,0.9) (2377,0.2) (2416,0.2) (2450,0.3) (2493,0.2)
+};
+\addlegendentry{stem-branch vs.\ JPL}
+\draw[red, thick, dashed] (axis cs:100,1.05) -- (axis cs:2600,1.05)
+    node[pos=0.92, above, font=\scriptsize, red] {$\bar{x} = 1.05$\,s};
+\end{axis}
+\end{tikzpicture}
+\caption{Mean solar term deviation across 42 sample years spanning 209--2493~CE.
+The nearly flat profile confirms the even polynomial correction distributes
+residuals uniformly. Sweet spots near $\sim$1400 and $\sim$2400~CE achieve
+sub-0.3\,s accuracy.}
+\label{fig:year_profile}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\textwidth,
+    height=5.5cm,
+    ybar,
+    bar width=5pt,
+    xlabel={Year (CE)},
+    ylabel={Mean $|\Delta|$ vs.\ JPL (s)},
+    xmin=1880, xmax=2120,
+    ymin=0, ymax=7,
+    grid=major,
+    grid style={gray!30},
+    xtick={1900,1920,1940,1960,1980,2000,2020,2040,2060,2080,2100},
+    xticklabel style={rotate=45, anchor=east, font=\small},
+    legend pos=north west,
+    legend style={font=\small},
+]
+\addplot[fill=sbblue, draw=sbblue!80!black] coordinates {
+    (1896,1.6) (1916,1.7) (1936,1.8) (1956,2.1)
+    (1976,0.9) (1996,0.5) (2016,1.8) (2036,1.7)
+    (2056,1.8) (2076,1.6) (2096,1.6)
+};
+\addlegendentry{stem-branch}
+\addplot[fill=sxorange, draw=sxorange!80!black] coordinates {
+    (1904,5.9) (1924,4.4) (1944,2.8) (1964,1.2)
+    (1984,1.7) (2004,1.0) (2024,1.1) (2044,0.4)
+    (2064,1.7) (2084,3.2) (2104,4.9)
+};
+\addlegendentry{sxwnl}
+\end{axis}
+\end{tikzpicture}
+\caption{Head-to-head comparison (1900--2100). sxwnl exhibits a U-shaped curve
+minimized near 2040 (close to its DE405 fitting epoch), degrading to 5.9\,s at
+1900 and 4.9\,s at 2100. stem-branch maintains $\leq 2.1$\,s throughout.}
+\label{fig:sb_vs_sx}
+\end{figure*}
+
+\subsection{Percentile Analysis}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=\columnwidth,
+    height=5cm,
+    ybar,
+    bar width=12pt,
+    ylabel={Deviation (s)},
+    symbolic x coords={P50,P95,P99,Max},
+    xtick=data,
+    ymin=0, ymax=8,
+    grid=major,
+    grid style={gray!30},
+    legend pos=north west,
+    legend style={font=\tiny},
+    nodes near coords,
+    nodes near coords style={font=\tiny, above},
+]
+\addplot[fill=sbblue, draw=sbblue!80!black] coordinates {
+    (P50,1.68) (P95,2.29) (P99,2.50) (Max,2.79)
+};
+\addlegendentry{SB}
+\addplot[fill=sxorange, draw=sxorange!80!black] coordinates {
+    (P50,1.85) (P95,5.71) (P99,6.78) (Max,7.18)
+};
+\addlegendentry{SX}
+\end{axis}
+\end{tikzpicture}
+\caption{Percentile comparison vs.\ JPL (1900--2100). Medians are comparable,
+but tail behavior diverges: stem-branch's P95 is $2.5\times$ lower.}
+\label{fig:percentiles}
+\end{figure}
+
+\subsection{Deviation Distribution}
+
+Cross-validation between stem-branch and sxwnl covers 4,824 solar terms
+(201~years $\times$ 24 terms, 1900--2100). The divergence reflects
+differing correction polynomials, not implementation errors.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=\columnwidth,
+    height=5cm,
+    ybar interval,
+    xlabel={Deviation (s)},
+    ylabel={Count},
+    xmin=0, xmax=3.75,
+    ymin=0, ymax=1600,
+    xtick={0,0.5,1.0,1.5,2.0,2.5,3.0,3.5},
+    grid=major,
+    grid style={gray!30},
+    fill=sbblue!60,
+    draw=sbblue!80!black,
+]
+\addplot coordinates {
+    (0,1410) (0.25,1209) (0.5,1470) (1.0,540)
+    (1.5,149) (2.0,42) (2.5,3) (3.0,1) (3.5,0)
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Distribution of SB--SX deviations ($N = 4{,}824$).
+54.3\% within 0.5\,s, 84.8\% within 1\,s.}
+\label{fig:distribution}
+\end{figure}
+
+\subsection{Equinox Amplification}
+
+The deviation by solar term shows double peaks at the equinoxes
+($\lambda_\odot = 0\degree$, $180\degree$). This pattern reflects the
+interaction between the differing correction polynomials used by
+stem-branch and sxwnl: the polynomial residuals are not uniformly
+distributed across ecliptic longitude, and the equinox regions---where
+the Sun's ecliptic longitude changes most rapidly in right
+ascension---amplify small longitude differences into larger timing
+differences.
+
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\textwidth,
+    height=5cm,
+    ybar,
+    bar width=7pt,
+    xlabel={Solar term ($\lambda_\odot$)},
+    ylabel={Mean deviation (s)},
+    xmin=-1, xmax=24,
+    ymin=0, ymax=0.9,
+    xtick={0,3,6,9,12,15,18,21},
+    xticklabels={$270\degree$,$315\degree$,$0\degree$,$45\degree$,
+                 $90\degree$,$135\degree$,$180\degree$,$225\degree$},
+    grid=major,
+    grid style={gray!30},
+]
+\addplot[fill=sbblue!70, draw=sbblue!80!black] coordinates {
+    (0,0.404) (1,0.418) (2,0.477) (3,0.559) (4,0.614) (5,0.657)
+    (6,0.719) (7,0.765) (8,0.710) (9,0.646) (10,0.471) (11,0.421)
+    (12,0.436) (13,0.433) (14,0.486) (15,0.524) (16,0.570) (17,0.645)
+    (18,0.661) (19,0.688) (20,0.617) (21,0.545) (22,0.465) (23,0.432)
+};
+\draw[red, thick, ->] (axis cs:7,0.85) -- (axis cs:7,0.78)
+    node[above, pos=0, font=\scriptsize, red] {Vernal eq.};
+\draw[red, thick, ->] (axis cs:19,0.78) -- (axis cs:19,0.71)
+    node[above, pos=0, font=\scriptsize, red] {Autumnal eq.};
+\end{axis}
+\end{tikzpicture}
+\caption{Mean SB--SX deviation by solar term. Peaks near the equinoxes
+and valleys near the solstices reflect the non-uniform distribution of
+correction polynomial residuals across ecliptic longitude.}
+\label{fig:byterm}
+\end{figure*}
+
+\subsection{Four Pillar Agreement}
+
+\begin{table}[H]
+\centering
+\caption{Pillar cross-validation: SB vs.\ sxwnl}
+\label{tab:pillars}
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+\textbf{Pillar} & \textbf{$N$} & \textbf{Range} & \textbf{Agree} \\
+\midrule
+\zh{日柱} (Day) & 5,683 & 1583--2500 & 100\% \\
+\zh{年柱} (Year) & 2,412 & 1900--2100 & 100\% \\
+\zh{月柱} (Month) & 2,412 & 1900--2100 & 100\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+
+% =============================================================================
 \section{Discussion}
 \label{sec:discussion}
 
@@ -2718,6 +2769,8 @@ widths for $\sim 0.2$--$0.3$\% of birth times, making the correct pillar
 systems: \zh{八字} pillars, \zh{奇門遁甲} formations, \zh{紫微斗數}
 palace assignments, \zh{大六壬} \zh{月將} determinations, and
 \zh{七政四餘} mansion placements.
+
+% =============================================================================
 
 % =============================================================================
 \section{Conclusion}
@@ -2788,6 +2841,8 @@ The author acknowledges \zh{許劍偉} (Xu Jianwei) and sxwnl for the
 cross-validation reference, JPL Horizons for ground truth data, and the
 foundational work of Stephenson, Morrison, Hohenkerk ($\Delta T$) and
 Yuk Tung Liu (\zh{廖育棟}, Chinese calendar methodology).
+
+% =============================================================================
 
 % =============================================================================
 \begin{sloppypar}
