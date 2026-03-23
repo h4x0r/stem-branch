@@ -35,7 +35,7 @@ describe('getSevenGovernorsChart', () => {
       expect(pos.mansion, `${name} mansion`).toBeTruthy();
       expect(pos.palace, `${name} palace`).toBeTruthy();
       expect(pos.mansionDegree, `${name} mansionDegree`).toBeGreaterThanOrEqual(0);
-      expect(pos.mansionDegree, `${name} mansionDegree`).toBeLessThan(30);
+      expect(pos.mansionDegree, `${name} mansionDegree`).toBeLessThan(34); // 井 spans 33°
     }
   });
 

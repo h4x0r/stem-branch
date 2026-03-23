@@ -23,13 +23,35 @@ export interface AscendantResult {
   palace: PalaceName;
 }
 
+/** Mean obliquity of the ecliptic (Meeus Ch. 22), degrees. */
+function meanObliquity(T: number): number {
+  return 23.4392911 - 0.0130042 * T - 1.64e-7 * T * T + 5.04e-7 * T * T * T;
+}
+
+function degToRad(d: number): number { return d * Math.PI / 180; }
+function radToDeg(r: number): number { return r * 180 / Math.PI; }
+function normDeg(d: number): number { return ((d % 360) + 360) % 360; }
+
 export function getAscendant(
   date: Date,
   location: { lat: number; lon: number },
 ): AscendantResult {
+  const T = dateToJulianCenturies(date);
   const gmst = greenwichMeanSiderealTime(date);
-  const lst = ((gmst + location.lon) % 360 + 360) % 360;
-  const ascDeg = (lst + 90) % 360;
+  const lst = normDeg(gmst + location.lon);
+
+  const eps = degToRad(meanObliquity(T));
+  const lat = degToRad(location.lat);
+  const lstRad = degToRad(lst);
+
+  // Standard ascending degree formula (Meeus / standard astro)
+  // ASC = atan2(-cos(LST), sin(LST)*cos(ε) + tan(φ)*sin(ε))
+  const ascRad = Math.atan2(
+    -Math.cos(lstRad),
+    Math.sin(lstRad) * Math.cos(eps) + Math.tan(lat) * Math.sin(eps),
+  );
+  const ascDeg = normDeg(radToDeg(ascRad));
+
   const mansion = getMansionForLongitude(ascDeg);
   const palace = getPalaceForLongitude(ascDeg);
   return {
