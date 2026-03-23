@@ -354,26 +354,38 @@ side of a boundary.
 ## 4. Planetary Positions
 
 Geocentric apparent ecliptic longitudes and latitudes for all 8 planets, validated
-against JPL Horizons DE441 reference data (101 epochs per planet, 730-day step,
-1900–2100 CE).
+in a 4-way comparison against JPL Horizons DE441 and Swiss Ephemeris (Moshier)
+reference data (101 epochs per planet, 730-day step, 1900–2100 CE).
+
+| Source | Method | Ephemeris |
+|--------|--------|-----------|
+| **stem-branch** | VSOP87D (2,425-term) + DE441 even-polynomial correction | Analytical theory |
+| **Swiss Ephemeris** | Moshier analytical ephemeris (built-in, no external files) | Analytical theory |
+| **JPL Horizons** | DE441 numerical integration | Numerical (ground truth) |
 
 **Method**: stem-branch uses VSOP87D heliocentric series (2,425 terms per planet)
 with geocentric conversion (light-time iteration + aberration), plus DE441-fitted
 even-polynomial corrections (c₀ + c₂τ² + c₄τ⁴ + c₆τ⁶) for each planet. Pluto
 uses the Meeus Ch. 37 algorithm (43 periodic terms, valid 1885–2099).
 
-### 4.1 Ecliptic longitude residuals (arcseconds)
+### 4.1 4-way ecliptic longitude comparison (arcseconds)
 
-| Planet | N | Mean \|ΔL\| | Max \|ΔL\| | Mean \|Δβ\| | Max \|Δβ\| |
-|---------|-----|------------|------------|------------|------------|
-| Mercury | 101 | 1.16" | 6.38" | 5.40" | 9.59" |
-| Venus | 101 | 2.29" | 6.35" | 4.71" | 9.64" |
-| Mars | 101 | 11.09" | 29.18" | 3.75" | 9.35" |
-| Jupiter | 101 | 13.03" | 23.28" | 3.77" | 9.71" |
-| Saturn | 101 | 13.22" | 22.51" | 3.75" | 9.89" |
-| Uranus | 101 | 13.55" | 22.82" | 3.73" | 9.88" |
-| Neptune | 101 | 12.76" | 22.58" | 3.87" | 9.94" |
-| Pluto | 101 | 2569" | 5178" | 17.10" | 53.81" |
+| Planet | SB vs JPL mean | SB vs JPL max | SwE vs JPL mean | SwE vs JPL max | SB vs SwE mean |
+|---------|---------------|---------------|-----------------|----------------|----------------|
+| Mercury | 1.16" | 6.38" | 0.25" | 1.27" | 1.06" |
+| Venus | 2.29" | 6.35" | 0.25" | 1.11" | 2.25" |
+| Mars | 11.09" | 29.18" | 0.17" | 0.62" | 11.03" |
+| Jupiter | 13.03" | 23.28" | 0.15" | 0.45" | 13.02" |
+| Saturn | 13.22" | 22.51" | 0.22" | 0.82" | 13.18" |
+| Uranus | 13.55" | 22.82" | 0.12" | 0.39" | 13.49" |
+| Neptune | 12.76" | 22.58" | 0.63" | 2.15" | 12.52" |
+| Pluto | 2569" | 5178" | 0.95" | 3.55" | 2569" |
+
+Swiss Ephemeris (Moshier) agrees with JPL to 0.12–0.95" mean across all planets,
+confirming JPL as a reliable ground truth and ruling out systematic errors in
+the coordinate conversion pipeline. The SB-vs-SwE residuals closely track
+SB-vs-JPL residuals (within ±1"), as expected when both references agree to
+sub-arcsecond.
 
 ### 4.2 Accuracy tiers
 
@@ -505,12 +517,15 @@ JPL comparison scripts and raw data:
 scripts/jpl-comparison.mjs              # EoT comparison (stem-branch vs JPL, 2024)
 scripts/jpl-3way-solar-terms.mjs        # 3-way solar term comparison (209–2493 CE)
 scripts/fit-de441-planet-corrections.mjs # DE441 correction polynomial fitting
-scripts/generate-planet-fixtures.mjs     # Planet position fixture generation
+scripts/generate-planet-fixtures.mjs     # Planet position fixture generation (JPL)
+scripts/generate-sweph-fixtures.mjs      # Planet position fixture generation (Swiss Ephemeris)
 scripts/generate-lunar-fixtures.mjs      # Lunar phase fixture generation
+scripts/4way-planet-comparison.mjs       # 4-way comparison report
 scripts/jpl-ra-2024.txt                 # JPL apparent RA (366 daily samples)
 scripts/jpl-eclon-*-hourly.txt          # JPL ecliptic longitude (hourly, 12 years)
 scripts/jpl-eclon-*-3h.txt             # JPL ecliptic longitude (3-hour, 30 years)
-tests/fixtures/jpl-planet-positions.json # 808 planet reference positions (8 planets)
+tests/fixtures/jpl-planet-positions.json  # 808 planet reference positions (8 planets)
+tests/fixtures/sweph-planet-positions.json # 808 Swiss Ephemeris reference positions
 tests/fixtures/jpl-lunar-phases.json     # 594 lunar phase reference times (2000–2024)
 ```
 
