@@ -234,13 +234,17 @@ making it the culmination of the accuracy argument.
 
 \subsection{\zh{八字}: Solar Foundation}
 
-\zh{八字}~\cite{wikipedia_fourpillars} is fundamentally grounded in
-\zh{氣} (qi)---the seasonal energy cycle manifested through the
-\zh{二十四節氣} and driven by the Sun's annual motion. The correspondence between the five elements (\zh{五行}) and the
+\zh{八字}~\cite{wikipedia_fourpillars} is computationally grounded in
+the 24 solar terms (\zh{二十四節氣}), which the tradition interprets
+through the theoretical framework of \zh{氣} (qi)---a concept of
+seasonal cyclicity driven by the Sun's annual motion.  The
+correspondence between the five elements (\zh{五行}) and the
 seasons---\zh{寒} (cold/winter), \zh{濕} (damp/late summer), \zh{暑}
-(heat/summer), \zh{熱} (warmth/early summer)---is an astronomical
-phenomenon mapped onto human destiny. The entire BaZi computational pipeline
-is therefore \emph{solar}: VSOP87D $\to$ apparent longitude $\to$ solar
+(heat/summer), \zh{熱} (warmth/early summer)---reflects the
+observable astronomical cycle of solar declination, which the system
+maps onto a framework for analyzing human affairs.  Regardless of
+whether this mapping has any validity, the computational pipeline is
+entirely \emph{solar}: VSOP87D $\to$ apparent longitude $\to$ solar
 term crossing $\to$ pillar assignment.
 
 \subsection{\zh{奇門遁甲}: The 360-Day Problem}
@@ -345,7 +349,7 @@ reconcile incommensurate cycles.
 \label{subsec:ziwei}
 
 \zh{紫微斗數} (\textit{Z\v{i} W\={e}i D\`{o}u Sh\`{u}}, ``Purple Star
-Calculation'') is a Chinese astrological system attributed to the Daoist
+Calculation'') is a Chinese divination system attributed to the Daoist
 sage Chen Tuan (\zh{陳摶}, also known as \zh{陳希夷}, c.~871--989~CE) and
 later codified in two Ming-dynasty texts: the \zh{紫微斗數全書}
 (\textit{Complete Book}, attributed to Luo Hongxian \zh{羅洪先}) \cite{zwds_quanshu} and the
@@ -362,7 +366,7 @@ observations.
 
 \subsubsection{The Computational Chain}
 
-The fate chart depends on four lunar-calendar inputs: year, month, day, and
+The chart construction depends on four lunar-calendar inputs: year, month, day, and
 hour. The lunar month is the most consequential: changing it by even one
 shifts the \zh{命宮} (Life Palace), the \zh{五行局} (Five-Element
 Configuration), and consequently the positions of all 14 major stars. The
@@ -550,8 +554,9 @@ only solar ephemeris computation and is immune to precession drift.
 
 This method is a post-Song simplification that resolves the precession
 problem by abandoning the sidereal reference entirely. Most modern
-software implements this method, but practitioners should be aware that
-it differs from both historical alternatives.
+software implements this method, but it differs from both historical
+alternatives---a distinction that matters for users seeking historical
+fidelity.
 
 \subsubsection{Computational Implications}
 
@@ -689,9 +694,9 @@ on NASA JPL~DE431 and agrees with JPL to $0.001''$ (one
 milli-arcsecond)---roughly ten million times more accurate than the
 traditional ``several lodge'' errors documented by Huang Yi-long.
 
-For the first time in the system's history, \zh{七政四餘} practitioners
-receive astronomically correct planetary positions in the 28 mansions.
-The astrological framework designed to interpret real celestial geometry
+For the first time in the system's history, \zh{七政四餘} software
+provides astronomically correct planetary positions in the 28 mansions.
+The interpretive framework that was designed around real celestial geometry
 now actually receives real celestial geometry. The parallel with Indian
 Jyotish is instructive: both are sidereal systems that have adopted the
 Swiss Ephemeris for modern computation, and both face the same question
@@ -699,9 +704,9 @@ of which ayanamsa (precession offset) to apply.
 
 \textbf{Caveat}: No controlled scholarly study comparing prediction
 accuracy ``before vs.\ after'' the adoption of precise ephemerides
-exists. The narrative that accurate positions improve astrological
-outcomes is structurally sound---the system was designed for real
-positions---but remains formally unconfirmed.
+exists.  The claim that accurate positions improve interpretive
+outcomes is structurally plausible---the system was designed for real
+positions---but remains formally untested.
 
 \subsubsection{The Narrative Arc}
 
@@ -716,7 +721,7 @@ Babylonian-Greek-Indian-Iranian-Chinese synthesis now achieves its best
 performance using planetary positions computed by NASA's Jet Propulsion
 Laboratory in Pasadena, California. Knowledge has traveled full circle:
 ancient Babylon $\to$ Hellenistic Alexandria $\to$ Gupta India $\to$
-Tang Chang'an $\to$ NASA JPL $\to$ modern Chinese astrological software.
+Tang Chang'an $\to$ NASA JPL $\to$ modern Chinese divination software.
 The Jesuit precedent---Western computation serving Chinese
 interpretation---has been fulfilled at a scale and precision that Schall
 von Bell could not have imagined.
@@ -901,8 +906,7 @@ solar term boundaries). For the lunar calendar, it manifests as the rare
 three methods agree whenever the Sun is far from a \zh{中氣} boundary.
 This creates a pernicious situation: competing methods appear equivalent
 during routine use, with their incompatibilities surfacing only in
-boundary cases---precisely where practitioners most need computational
-certainty.
+boundary cases---precisely where computational certainty matters most.
 
 \textbf{Precision threshold.} In all five cases, the choice of algorithm
 becomes computationally irrelevant once ephemeris precision exceeds a
@@ -1031,8 +1035,12 @@ Ascendant) produce effectively continuous unique charts---the shared
 chart problem is nearly absent.  Their resolution comes from
 \emph{internal} astronomical data rather than \emph{external}
 interpretive calibration.  \zh{八字}'s lossy compression of the celestial
-state means it \emph{structurally requires} the practitioner to use the
-client's life history, environment, and choices to tune the reading.
+state means it \emph{structurally requires} the interpreter to
+supplement the chart with the subject's life history, environment, and
+choices---a process that, from a methodological standpoint, introduces
+confirmation bias and post-hoc rationalization as features rather than
+bugs.  Whether one views this as interpretive flexibility or
+unfalsifiability depends on one's epistemological commitments.
 
 \textbf{Sampling bias and heuristic validation.}
 The \zh{共盤問題} is one instance of a broader methodological challenge:
@@ -1261,16 +1269,16 @@ The PRC's six years of DST (1986--1991)~\cite{prc_dst_regulation,
 iana_tzdata_asia} alone affect millions
 of birth charts.  A birth recorded at 23:30 during DST is actually 22:30 standard
 time, changing the \zh{時辰} from \zh{子} (23:00--01:00) to \zh{亥}
-(21:00--23:00) and potentially altering the day pillar if the practitioner's
+(21:00--23:00) and potentially altering the day pillar if the software's
 method treats \zh{子時} as crossing the day boundary.  Hong Kong's 33~years
 of summer time (HKST $=$ UTC$+$9) mean that \emph{any} \zh{八字}
-practitioner computing charts for Hong Kong births between 1946 and 1979
-without DST correction has systematically wrong hour pillars for every
+software computing charts for Hong Kong births between 1946 and 1979
+without DST correction produces systematically wrong hour pillars for every
 summer birth.  South Korea's 12~years include the 1988 Seoul Olympics
 period, when many overseas Korean births were recorded.
 
-The practical problem is stark: most Chinese metaphysics practitioners and
-apps ignore DST entirely.  Users enter their birth time as displayed on the
+The practical problem is stark: most Chinese metaphysics software
+implementations ignore DST entirely.  Users enter their birth time as displayed on the
 clock at the time of birth, but if the birth occurred during a DST period,
 that clock time includes a one-hour offset that must be removed before
 computing the \zh{時辰}.
@@ -1286,7 +1294,7 @@ pillar.  Moreover, if the app treats \zh{子時} as the start of a new day
 
 \paragraph{Three compounding confusions.}
 DST does not occur in isolation.  In East Asia, it compounds with two
-other time-regime shifts that most practitioners are unaware of:
+other time-regime shifts that most software implementations fail to account for:
 
 \textbf{(1)~Japanese occupation timezone shifts.}
 During World War~II, Japan imposed JST (UTC$+$9) on all occupied
@@ -1442,7 +1450,7 @@ correct \zh{閏十一月} \cite{aslaksen_fake}---shifting the Mid-Autumn
 Festival by nearly a month.
 
 This error is particularly consequential for \zh{紫微斗數}, where the
-entire fate chart is constructed from the \emph{lunar} calendar date.
+entire chart (\zh{命盤}) is constructed from the \emph{lunar} calendar date.
 An incorrect \zh{閏月} assignment changes which lunar month the birth
 falls in, cascading through the palace assignments.
 
@@ -1905,8 +1913,8 @@ at the center of its maps~\cite{harley1987}.
 
 For Chinese metaphysical computation, this analysis yields a concrete
 conclusion: there is no ``correct'' reference longitude, only
-\emph{historically appropriate} ones. A practitioner computing a chart for
-the Tang dynasty should arguably use the Dengfeng meridian
+\emph{historically appropriate} ones. Software computing a chart for
+a Tang-dynasty birth should arguably use the Dengfeng meridian
 ($113.07\degree$E); for the Ming and Qing, Beijing ($116.4\degree$E);
 for modern births, the UTC+8 standard ($120\degree$E). The $\sim 30$-minute
 maximum difference between these references
@@ -1983,9 +1991,9 @@ Chinese 28~\zh{宿} & varies & Unequal widths, multiple epochs \\
 The controversy is fundamentally irresolvable: no physically privileged
 zero point exists for the sidereal
 zodiac~\cite{chandra_hari_1998}.  The practical consequence is that
-two practitioners using the same birth data, the same ephemeris, and the
-same sidereal framework can still disagree on mansion placements if
-they adopt different ayanamsas.
+two software implementations using the same birth data, the same
+ephemeris, and the same sidereal framework can still disagree on
+mansion placements if they adopt different ayanamsas.
 
 \textbf{The parallel with Indian Jyotish.}
 The structural parallel between Chinese \zh{七政四餘} and Indian
@@ -2011,8 +2019,8 @@ Western astrology immune to precession drift but severed it from the
 stellar constellations whose names it retained.  By 2026, the Sun
 enters the tropical sign of Aries at the vernal equinox while
 physically located in the constellation
-Pisces---a $\sim 24\degree$ discrepancy that sidereal practitioners
-consider a fundamental error and tropical practitioners consider
+Pisces---a $\sim 24\degree$ discrepancy that the sidereal tradition
+considers a fundamental error and the tropical tradition considers
 irrelevant.
 
 \textbf{Computational implications.}
@@ -2033,11 +2041,11 @@ boundaries---an error far larger than any ephemeris imprecision.
 
 The historical transition from local apparent solar time to standardized
 zone time introduced three distinct regimes, each with different error
-characteristics for Chinese metaphysical computation:
+characteristics for Chinese calendrical computation:
 
 \begin{enumerate}
   \item \textbf{Local Apparent Solar Time} (pre-17th century):
-    Historical practitioners used sundials, so their ``time'' was
+    Historical users relied on sundials, so their ``time'' was
     automatically local and apparent. No longitude correction was
     needed, but the Equation of Time ($\pm 16$~min) was implicitly
     absorbed. Reconstructing such charts requires computing true local
@@ -2180,7 +2188,7 @@ The errors catalogued above---ephemeris precision, true solar time, DST---are
 different class of error arises from the fact that there is no single,
 universally accepted authority for the Chinese calendar and its derived
 metaphysical computations.  Multiple institutions and lineages publish
-calendars that disagree on specific dates, and practitioners downstream
+calendars that disagree on specific dates, and users downstream
 inherit whichever source their software or almanac chose.
 
 \subsection{The Official Authority: \zh{紫金山天文台}}
@@ -2744,7 +2752,7 @@ correction polynomial residuals across ecliptic longitude.}
 \section{Discussion}
 \label{sec:discussion}
 
-\subsection{The Practitioner's Error Budget}
+\subsection{The Computational Error Budget}
 
 For modern-epoch charts (post-1900), the dominant errors are:
 
@@ -2812,14 +2820,22 @@ the choice among Luoyang ($112.45\degree$E), Beijing ($116.4\degree$E),
 and the UTC+8 standard ($120\degree$E) produces differences of up to
 30~minutes---sufficient to affect 4.2\% of birth charts.
 
-Practitioners should prioritize: (1)~correct \zh{立春} boundaries,
+Software developers implementing these systems should prioritize:
+(1)~correct \zh{立春} boundaries,
 (2)~true solar time with explicit longitude and Equation of Time corrections,
-(3)~DST handling, (4)~explicit day boundary convention,
+(3)~DST handling via embedded IANA transition data,
+(4)~explicit day boundary convention,
 (5)~full planetary theory with nutation and aberration, and
 (6)~documentation of the reference longitude assumed.
 For \zh{紫微斗數} and \zh{大六壬}, accurate lunar ephemeris is equally
 critical; for \zh{七政四餘}, accurate planetary ephemeris for all seven
 classical bodies is the sine qua non of the entire system.
+
+Whether any of these systems produces valid predictions about human
+affairs is a question this paper does not address.  What it
+demonstrates is that the astronomical computations underlying them
+can be made correct---and that most current implementations fail to
+do so.
 
 % =============================================================================
 \section*{Data Availability}
