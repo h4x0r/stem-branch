@@ -1,0 +1,5658 @@
+[
+  {
+    "planet": "mercury",
+    "dateISO": "1900-01-01T00:00:00.000Z",
+    "timestamp": -2208988800000,
+    "eclLon": 258.997703,
+    "eclLat": 1.127045
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1902-01-01T00:00:00.000Z",
+    "timestamp": -2145916800000,
+    "eclLon": 278.913282,
+    "eclLat": -1.710845
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1904-01-01T00:00:00.000Z",
+    "timestamp": -2082844800000,
+    "eclLon": 298.626097,
+    "eclLat": -1.204367
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1905-12-31T00:00:00.000Z",
+    "timestamp": -2019772800000,
+    "eclLon": 256.655996,
+    "eclLat": 2.502207
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1907-12-31T00:00:00.000Z",
+    "timestamp": -1956700800000,
+    "eclLon": 269.743857,
+    "eclLat": -0.960101
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1909-12-30T00:00:00.000Z",
+    "timestamp": -1893628800000,
+    "eclLon": 292.624131,
+    "eclLat": -2.09533
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1911-12-30T00:00:00.000Z",
+    "timestamp": -1830556800000,
+    "eclLon": 267.300861,
+    "eclLat": 3.069064
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1913-12-29T00:00:00.000Z",
+    "timestamp": -1767484800000,
+    "eclLon": 261.286713,
+    "eclLat": 0.057256
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1915-12-29T00:00:00.000Z",
+    "timestamp": -1704412800000,
+    "eclLon": 283.671867,
+    "eclLat": -2.09969
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1917-12-28T00:00:00.000Z",
+    "timestamp": -1641340800000,
+    "eclLon": 288.952951,
+    "eclLat": 0.740693
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1919-12-28T00:00:00.000Z",
+    "timestamp": -1578268800000,
+    "eclLon": 254.412305,
+    "eclLat": 1.303547
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1921-12-27T00:00:00.000Z",
+    "timestamp": -1515196800000,
+    "eclLon": 274.319507,
+    "eclLat": -1.611376
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1923-12-27T00:00:00.000Z",
+    "timestamp": -1452124800000,
+    "eclLon": 293.895192,
+    "eclLat": -1.468511
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1925-12-26T00:00:00.000Z",
+    "timestamp": -1389052800000,
+    "eclLon": 252.264556,
+    "eclLat": 2.600774
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1927-12-26T00:00:00.000Z",
+    "timestamp": -1325980800000,
+    "eclLon": 265.201346,
+    "eclLat": -0.81198
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1929-12-25T00:00:00.000Z",
+    "timestamp": -1262908800000,
+    "eclLon": 287.803961,
+    "eclLat": -2.177321
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1931-12-25T00:00:00.000Z",
+    "timestamp": -1199836800000,
+    "eclLon": 263.881962,
+    "eclLat": 2.859091
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1933-12-24T00:00:00.000Z",
+    "timestamp": -1136764800000,
+    "eclLon": 256.721948,
+    "eclLat": 0.233361
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1935-12-24T00:00:00.000Z",
+    "timestamp": -1073692800000,
+    "eclLon": 278.99662,
+    "eclLat": -2.064752
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1937-12-23T00:00:00.000Z",
+    "timestamp": -1010620800000,
+    "eclLon": 285.170574,
+    "eclLat": 0.291896
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1939-12-23T00:00:00.000Z",
+    "timestamp": -947548800000,
+    "eclLon": 249.805732,
+    "eclLat": 1.470763
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1941-12-22T00:00:00.000Z",
+    "timestamp": -884476800000,
+    "eclLon": 269.742662,
+    "eclLat": -1.504175
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1943-12-22T00:00:00.000Z",
+    "timestamp": -821404800000,
+    "eclLon": 289.170825,
+    "eclLat": -1.705131
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1945-12-21T00:00:00.000Z",
+    "timestamp": -758332800000,
+    "eclLon": 247.909056,
+    "eclLat": 2.671997
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1947-12-21T00:00:00.000Z",
+    "timestamp": -695260800000,
+    "eclLon": 260.663073,
+    "eclLat": -0.659852
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1949-12-20T00:00:00.000Z",
+    "timestamp": -632188800000,
+    "eclLon": 283.026211,
+    "eclLat": -2.238731
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1951-12-20T00:00:00.000Z",
+    "timestamp": -569116800000,
+    "eclLon": 260.558358,
+    "eclLat": 2.590202
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1953-12-19T00:00:00.000Z",
+    "timestamp": -506044800000,
+    "eclLon": 252.144144,
+    "eclLat": 0.40831
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1955-12-19T00:00:00.000Z",
+    "timestamp": -442972800000,
+    "eclLon": 274.345703,
+    "eclLat": -2.016043
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1957-12-18T00:00:00.000Z",
+    "timestamp": -379900800000,
+    "eclLon": 281.311313,
+    "eclLat": -0.146219
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1959-12-18T00:00:00.000Z",
+    "timestamp": -316828800000,
+    "eclLon": 245.191142,
+    "eclLat": 1.626968
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1961-12-17T00:00:00.000Z",
+    "timestamp": -253756800000,
+    "eclLon": 265.183705,
+    "eclLat": -1.389215
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1963-12-17T00:00:00.000Z",
+    "timestamp": -190684800000,
+    "eclLon": 284.461189,
+    "eclLat": -1.914439
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1965-12-16T00:00:00.000Z",
+    "timestamp": -127612800000,
+    "eclLon": 243.573022,
+    "eclLat": 2.710827
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1967-12-16T00:00:00.000Z",
+    "timestamp": -64540800000,
+    "eclLon": 256.12212,
+    "eclLat": -0.503469
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1969-12-15T00:00:00.000Z",
+    "timestamp": -1468800000,
+    "eclLon": 278.296338,
+    "eclLat": -2.279412
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1971-12-15T00:00:00.000Z",
+    "timestamp": 61603200000,
+    "eclLon": 257.313256,
+    "eclLat": 2.263976
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1973-12-14T00:00:00.000Z",
+    "timestamp": 124675200000,
+    "eclLon": 247.547081,
+    "eclLat": 0.580645
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1975-12-14T00:00:00.000Z",
+    "timestamp": 187747200000,
+    "eclLon": 269.727769,
+    "eclLat": -1.954896
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1977-12-13T00:00:00.000Z",
+    "timestamp": 250819200000,
+    "eclLon": 277.376117,
+    "eclLat": -0.566794
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1979-12-13T00:00:00.000Z",
+    "timestamp": 313891200000,
+    "eclLon": 240.552561,
+    "eclLat": 1.770308
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1981-12-12T00:00:00.000Z",
+    "timestamp": 376963200000,
+    "eclLon": 260.640284,
+    "eclLat": -1.267088
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1983-12-12T00:00:00.000Z",
+    "timestamp": 440035200000,
+    "eclLon": 279.778298,
+    "eclLat": -2.096842
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1985-12-11T00:00:00.000Z",
+    "timestamp": 503107200000,
+    "eclLon": 239.282659,
+    "eclLat": 2.71424
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1987-12-11T00:00:00.000Z",
+    "timestamp": 566179200000,
+    "eclLon": 251.576336,
+    "eclLat": -0.344207
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1989-12-10T00:00:00.000Z",
+    "timestamp": 629251200000,
+    "eclLon": 273.594557,
+    "eclLat": -2.30132
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1991-12-10T00:00:00.000Z",
+    "timestamp": 692323200000,
+    "eclLon": 254.131091,
+    "eclLat": 1.886066
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1993-12-09T00:00:00.000Z",
+    "timestamp": 755395200000,
+    "eclLon": 242.940653,
+    "eclLat": 0.74994
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1995-12-09T00:00:00.000Z",
+    "timestamp": 818467200000,
+    "eclLon": 265.131872,
+    "eclLat": -1.882384
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1997-12-08T00:00:00.000Z",
+    "timestamp": 881539200000,
+    "eclLon": 273.362155,
+    "eclLat": -0.963996
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "1999-12-08T00:00:00.000Z",
+    "timestamp": 944611200000,
+    "eclLon": 235.899324,
+    "eclLat": 1.899011
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2001-12-07T00:00:00.000Z",
+    "timestamp": 1007683200000,
+    "eclLon": 256.103235,
+    "eclLat": -1.137942
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2003-12-07T00:00:00.000Z",
+    "timestamp": 1070755200000,
+    "eclLon": 275.108617,
+    "eclLat": -2.251744
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2005-12-06T00:00:00.000Z",
+    "timestamp": 1133827200000,
+    "eclLon": 235.041024,
+    "eclLat": 2.678477
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2007-12-06T00:00:00.000Z",
+    "timestamp": 1196899200000,
+    "eclLon": 247.029024,
+    "eclLat": -0.182594
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2009-12-05T00:00:00.000Z",
+    "timestamp": 1259971200000,
+    "eclLon": 268.931524,
+    "eclLat": -2.305248
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2011-12-05T00:00:00.000Z",
+    "timestamp": 1323043200000,
+    "eclLon": 250.976232,
+    "eclLat": 1.462958
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2013-12-04T00:00:00.000Z",
+    "timestamp": 1386115200000,
+    "eclLon": 238.302694,
+    "eclLat": 0.914433
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2015-12-04T00:00:00.000Z",
+    "timestamp": 1449187200000,
+    "eclLon": 260.561402,
+    "eclLat": -1.798932
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2017-12-03T00:00:00.000Z",
+    "timestamp": 1512259200000,
+    "eclLon": 269.294368,
+    "eclLat": -1.332705
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2019-12-03T00:00:00.000Z",
+    "timestamp": 1575331200000,
+    "eclLon": 231.223769,
+    "eclLat": 2.010307
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2021-12-02T00:00:00.000Z",
+    "timestamp": 1638403200000,
+    "eclLon": 251.576155,
+    "eclLat": -1.003032
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2023-12-02T00:00:00.000Z",
+    "timestamp": 1701475200000,
+    "eclLon": 270.464163,
+    "eclLat": -2.380622
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2025-12-01T00:00:00.000Z",
+    "timestamp": 1764547200000,
+    "eclLon": 230.845872,
+    "eclLat": 2.599163
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2027-12-01T00:00:00.000Z",
+    "timestamp": 1827619200000,
+    "eclLon": 242.46926,
+    "eclLat": -0.019046
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2029-11-30T00:00:00.000Z",
+    "timestamp": 1890691200000,
+    "eclLon": 264.301309,
+    "eclLat": -2.292559
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2031-11-30T00:00:00.000Z",
+    "timestamp": 1953763200000,
+    "eclLon": 247.832539,
+    "eclLat": 1.004075
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2033-11-29T00:00:00.000Z",
+    "timestamp": 2016835200000,
+    "eclLon": 233.641167,
+    "eclLat": 1.072689
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2035-11-29T00:00:00.000Z",
+    "timestamp": 2079907200000,
+    "eclLon": 256.007587,
+    "eclLat": -1.705405
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2037-11-28T00:00:00.000Z",
+    "timestamp": 2142979200000,
+    "eclLon": 265.157247,
+    "eclLat": -1.670141
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2039-11-28T00:00:00.000Z",
+    "timestamp": 2206051200000,
+    "eclLon": 226.532933,
+    "eclLat": 2.102801
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2041-11-27T00:00:00.000Z",
+    "timestamp": 2269123200000,
+    "eclLon": 247.057642,
+    "eclLat": -0.861851
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2043-11-27T00:00:00.000Z",
+    "timestamp": 2332195200000,
+    "eclLon": 265.842783,
+    "eclLat": -2.484927
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2045-11-26T00:00:00.000Z",
+    "timestamp": 2395267200000,
+    "eclLon": 226.706657,
+    "eclLat": 2.472346
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2047-11-26T00:00:00.000Z",
+    "timestamp": 2458339200000,
+    "eclLon": 237.891857,
+    "eclLat": 0.145281
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2049-11-25T00:00:00.000Z",
+    "timestamp": 2521411200000,
+    "eclLon": 259.699002,
+    "eclLat": -2.26382
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2051-11-25T00:00:00.000Z",
+    "timestamp": 2584483200000,
+    "eclLon": 244.684024,
+    "eclLat": 0.521386
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2053-11-24T00:00:00.000Z",
+    "timestamp": 2647555200000,
+    "eclLon": 228.951292,
+    "eclLat": 1.223199
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2055-11-24T00:00:00.000Z",
+    "timestamp": 2710627200000,
+    "eclLon": 251.47519,
+    "eclLat": -1.603196
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2057-11-23T00:00:00.000Z",
+    "timestamp": 2773699200000,
+    "eclLon": 260.980907,
+    "eclLat": -1.974566
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2059-11-23T00:00:00.000Z",
+    "timestamp": 2836771200000,
+    "eclLon": 221.816506,
+    "eclLat": 2.1734
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2061-11-22T00:00:00.000Z",
+    "timestamp": 2899843200000,
+    "eclLon": 242.532307,
+    "eclLat": -0.715616
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2063-11-22T00:00:00.000Z",
+    "timestamp": 2962915200000,
+    "eclLon": 261.251716,
+    "eclLat": -2.564845
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2065-11-21T00:00:00.000Z",
+    "timestamp": 3025987200000,
+    "eclLon": 222.643663,
+    "eclLat": 2.295029
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2067-11-21T00:00:00.000Z",
+    "timestamp": 3089059200000,
+    "eclLon": 233.292324,
+    "eclLat": 0.308934
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2069-11-20T00:00:00.000Z",
+    "timestamp": 3152131200000,
+    "eclLon": 255.122736,
+    "eclLat": -2.220756
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2071-11-20T00:00:00.000Z",
+    "timestamp": 3215203200000,
+    "eclLon": 241.497861,
+    "eclLat": 0.028287
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2073-11-19T00:00:00.000Z",
+    "timestamp": 3278275200000,
+    "eclLon": 224.227171,
+    "eclLat": 1.364823
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2075-11-19T00:00:00.000Z",
+    "timestamp": 3341347200000,
+    "eclLon": 246.953494,
+    "eclLat": -1.491888
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2077-11-18T00:00:00.000Z",
+    "timestamp": 3404419200000,
+    "eclLon": 256.768655,
+    "eclLat": -2.246146
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2079-11-18T00:00:00.000Z",
+    "timestamp": 3467491200000,
+    "eclLon": 217.087082,
+    "eclLat": 2.218555
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2081-11-17T00:00:00.000Z",
+    "timestamp": 3530563200000,
+    "eclLon": 238.00154,
+    "eclLat": -0.563995
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2083-11-17T00:00:00.000Z",
+    "timestamp": 3593635200000,
+    "eclLon": 256.677683,
+    "eclLat": -2.622111
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2085-11-16T00:00:00.000Z",
+    "timestamp": 3656707200000,
+    "eclLon": 218.656896,
+    "eclLat": 2.065098
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2087-11-16T00:00:00.000Z",
+    "timestamp": 3719779200000,
+    "eclLon": 228.67539,
+    "eclLat": 0.471061
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2089-11-15T00:00:00.000Z",
+    "timestamp": 3782851200000,
+    "eclLon": 250.570818,
+    "eclLat": -2.164594
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2091-11-15T00:00:00.000Z",
+    "timestamp": 3845923200000,
+    "eclLon": 238.261212,
+    "eclLat": -0.465602
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2093-11-14T00:00:00.000Z",
+    "timestamp": 3908995200000,
+    "eclLon": 219.46808,
+    "eclLat": 1.495897
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2095-11-14T00:00:00.000Z",
+    "timestamp": 3972067200000,
+    "eclLon": 242.437608,
+    "eclLat": -1.371884
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2097-11-13T00:00:00.000Z",
+    "timestamp": 4035139200000,
+    "eclLon": 252.524039,
+    "eclLat": -2.484114
+  },
+  {
+    "planet": "mercury",
+    "dateISO": "2099-11-13T00:00:00.000Z",
+    "timestamp": 4098211200000,
+    "eclLon": 212.351076,
+    "eclLat": 2.235822
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1900-01-01T00:00:00.000Z",
+    "timestamp": -2208988800000,
+    "eclLon": 306.374365,
+    "eclLat": -1.682589
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1902-01-01T00:00:00.000Z",
+    "timestamp": -2145916800000,
+    "eclLon": 323.541555,
+    "eclLat": -0.29686
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1904-01-01T00:00:00.000Z",
+    "timestamp": -2082844800000,
+    "eclLon": 235.166988,
+    "eclLat": 2.623337
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1905-12-31T00:00:00.000Z",
+    "timestamp": -2019772800000,
+    "eclLon": 267.779017,
+    "eclLat": 0.076079
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1907-12-31T00:00:00.000Z",
+    "timestamp": -1956700800000,
+    "eclLon": 304.514567,
+    "eclLat": -1.682367
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1909-12-30T00:00:00.000Z",
+    "timestamp": -1893628800000,
+    "eclLon": 321.415876,
+    "eclLat": -0.458325
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1911-12-30T00:00:00.000Z",
+    "timestamp": -1830556800000,
+    "eclLon": 233.264936,
+    "eclLat": 2.604998
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1913-12-29T00:00:00.000Z",
+    "timestamp": -1767484800000,
+    "eclLon": 265.942552,
+    "eclLat": 0.115834
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1915-12-29T00:00:00.000Z",
+    "timestamp": -1704412800000,
+    "eclLon": 302.675481,
+    "eclLat": -1.682839
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1917-12-28T00:00:00.000Z",
+    "timestamp": -1641340800000,
+    "eclLon": 319.300171,
+    "eclLat": -0.620706
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1919-12-28T00:00:00.000Z",
+    "timestamp": -1578268800000,
+    "eclLon": 231.36551,
+    "eclLat": 2.590708
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1921-12-27T00:00:00.000Z",
+    "timestamp": -1515196800000,
+    "eclLon": 264.102499,
+    "eclLat": 0.165119
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1923-12-27T00:00:00.000Z",
+    "timestamp": -1452124800000,
+    "eclLon": 300.826042,
+    "eclLat": -1.67622
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1925-12-26T00:00:00.000Z",
+    "timestamp": -1389052800000,
+    "eclLon": 317.160616,
+    "eclLat": -0.785147
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1927-12-26T00:00:00.000Z",
+    "timestamp": -1325980800000,
+    "eclLon": 229.454265,
+    "eclLat": 2.569278
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1929-12-25T00:00:00.000Z",
+    "timestamp": -1262908800000,
+    "eclLon": 262.256384,
+    "eclLat": 0.204627
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1931-12-25T00:00:00.000Z",
+    "timestamp": -1199836800000,
+    "eclLon": 298.979054,
+    "eclLat": -1.675558
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1933-12-24T00:00:00.000Z",
+    "timestamp": -1136764800000,
+    "eclLon": 315.030532,
+    "eclLat": -0.952641
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1935-12-24T00:00:00.000Z",
+    "timestamp": -1073692800000,
+    "eclLon": 227.562683,
+    "eclLat": 2.547659
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1937-12-23T00:00:00.000Z",
+    "timestamp": -1010620800000,
+    "eclLon": 260.422928,
+    "eclLat": 0.251163
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1939-12-23T00:00:00.000Z",
+    "timestamp": -947548800000,
+    "eclLon": 297.132697,
+    "eclLat": -1.665215
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1941-12-22T00:00:00.000Z",
+    "timestamp": -884476800000,
+    "eclLon": 312.874702,
+    "eclLat": -1.117445
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1943-12-22T00:00:00.000Z",
+    "timestamp": -821404800000,
+    "eclLon": 225.652595,
+    "eclLat": 2.525244
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1945-12-21T00:00:00.000Z",
+    "timestamp": -758332800000,
+    "eclLon": 258.576768,
+    "eclLat": 0.293765
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1947-12-21T00:00:00.000Z",
+    "timestamp": -695260800000,
+    "eclLon": 295.282317,
+    "eclLat": -1.661011
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1949-12-20T00:00:00.000Z",
+    "timestamp": -632188800000,
+    "eclLon": 310.719543,
+    "eclLat": -1.291409
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1951-12-20T00:00:00.000Z",
+    "timestamp": -569116800000,
+    "eclLon": 223.757834,
+    "eclLat": 2.496209
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1953-12-19T00:00:00.000Z",
+    "timestamp": -506044800000,
+    "eclLon": 256.744295,
+    "eclLat": 0.335934
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1955-12-19T00:00:00.000Z",
+    "timestamp": -442972800000,
+    "eclLon": 293.439905,
+    "eclLat": -1.649488
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1957-12-18T00:00:00.000Z",
+    "timestamp": -379900800000,
+    "eclLon": 308.568725,
+    "eclLat": -1.45792
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1959-12-18T00:00:00.000Z",
+    "timestamp": -316828800000,
+    "eclLon": 221.859385,
+    "eclLat": 2.47125
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1961-12-17T00:00:00.000Z",
+    "timestamp": -253756800000,
+    "eclLon": 254.898121,
+    "eclLat": 0.381419
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1963-12-17T00:00:00.000Z",
+    "timestamp": -190684800000,
+    "eclLon": 291.581405,
+    "eclLat": -1.638725
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1965-12-16T00:00:00.000Z",
+    "timestamp": -127612800000,
+    "eclLon": 306.394207,
+    "eclLat": -1.632496
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1967-12-16T00:00:00.000Z",
+    "timestamp": -64540800000,
+    "eclLon": 219.962213,
+    "eclLat": 2.437698
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1969-12-15T00:00:00.000Z",
+    "timestamp": -1468800000,
+    "eclLon": 253.065197,
+    "eclLat": 0.419646
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1971-12-15T00:00:00.000Z",
+    "timestamp": 61603200000,
+    "eclLon": 289.742577,
+    "eclLat": -1.62852
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1973-12-14T00:00:00.000Z",
+    "timestamp": 124675200000,
+    "eclLon": 304.23137,
+    "eclLat": -1.805361
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1975-12-14T00:00:00.000Z",
+    "timestamp": 187747200000,
+    "eclLon": 218.075065,
+    "eclLat": 2.407653
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1977-12-13T00:00:00.000Z",
+    "timestamp": 250819200000,
+    "eclLon": 251.224156,
+    "eclLat": 0.466505
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1979-12-13T00:00:00.000Z",
+    "timestamp": 313891200000,
+    "eclLon": 287.887904,
+    "eclLat": -1.610805
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1981-12-12T00:00:00.000Z",
+    "timestamp": 376963200000,
+    "eclLon": 302.054728,
+    "eclLat": -1.977536
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1983-12-12T00:00:00.000Z",
+    "timestamp": 440035200000,
+    "eclLon": 216.174704,
+    "eclLat": 2.371477
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1985-12-11T00:00:00.000Z",
+    "timestamp": 503107200000,
+    "eclLon": 249.379974,
+    "eclLat": 0.503484
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1987-12-11T00:00:00.000Z",
+    "timestamp": 566179200000,
+    "eclLon": 286.042546,
+    "eclLat": -1.600022
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1989-12-10T00:00:00.000Z",
+    "timestamp": 629251200000,
+    "eclLon": 299.875217,
+    "eclLat": -2.154411
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1991-12-10T00:00:00.000Z",
+    "timestamp": 692323200000,
+    "eclLon": 214.294771,
+    "eclLat": 2.335103
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1993-12-09T00:00:00.000Z",
+    "timestamp": 755395200000,
+    "eclLon": 247.550846,
+    "eclLat": 0.547443
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1995-12-09T00:00:00.000Z",
+    "timestamp": 818467200000,
+    "eclLon": 284.199145,
+    "eclLat": -1.578613
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1997-12-08T00:00:00.000Z",
+    "timestamp": 881539200000,
+    "eclLon": 297.679326,
+    "eclLat": -2.326032
+  },
+  {
+    "planet": "venus",
+    "dateISO": "1999-12-08T00:00:00.000Z",
+    "timestamp": 944611200000,
+    "eclLon": 212.39432,
+    "eclLat": 2.297882
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2001-12-07T00:00:00.000Z",
+    "timestamp": 1007683200000,
+    "eclLon": 245.700826,
+    "eclLat": 0.586862
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2003-12-07T00:00:00.000Z",
+    "timestamp": 1070755200000,
+    "eclLon": 282.345774,
+    "eclLat": -1.56393
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2005-12-06T00:00:00.000Z",
+    "timestamp": 1133827200000,
+    "eclLon": 295.489108,
+    "eclLat": -2.505257
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2007-12-06T00:00:00.000Z",
+    "timestamp": 1196899200000,
+    "eclLon": 210.511918,
+    "eclLat": 2.255226
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2009-12-05T00:00:00.000Z",
+    "timestamp": 1259971200000,
+    "eclLon": 243.873534,
+    "eclLat": 0.625764
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2011-12-05T00:00:00.000Z",
+    "timestamp": 1323043200000,
+    "eclLon": 280.50762,
+    "eclLat": -1.541675
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2013-12-04T00:00:00.000Z",
+    "timestamp": 1386115200000,
+    "eclLon": 293.282022,
+    "eclLat": -2.676316
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2015-12-04T00:00:00.000Z",
+    "timestamp": 1449187200000,
+    "eclLon": 208.622739,
+    "eclLat": 2.21553
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2017-12-03T00:00:00.000Z",
+    "timestamp": 1512259200000,
+    "eclLon": 242.030762,
+    "eclLat": 0.667584
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2019-12-03T00:00:00.000Z",
+    "timestamp": 1575331200000,
+    "eclLon": 278.650833,
+    "eclLat": -1.520792
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2021-12-02T00:00:00.000Z",
+    "timestamp": 1638403200000,
+    "eclLon": 291.062487,
+    "eclLat": -2.854992
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2023-12-02T00:00:00.000Z",
+    "timestamp": 1701475200000,
+    "eclLon": 206.735823,
+    "eclLat": 2.169675
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2025-12-01T00:00:00.000Z",
+    "timestamp": 1764547200000,
+    "eclLon": 240.197659,
+    "eclLat": 0.702462
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2027-12-01T00:00:00.000Z",
+    "timestamp": 1827619200000,
+    "eclLon": 276.812639,
+    "eclLat": -1.499639
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2029-11-30T00:00:00.000Z",
+    "timestamp": 1890691200000,
+    "eclLon": 288.867871,
+    "eclLat": -3.029011
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2031-11-30T00:00:00.000Z",
+    "timestamp": 1953763200000,
+    "eclLon": 204.856849,
+    "eclLat": 2.125459
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2033-11-29T00:00:00.000Z",
+    "timestamp": 2016835200000,
+    "eclLon": 238.360779,
+    "eclLat": 0.744551
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2035-11-29T00:00:00.000Z",
+    "timestamp": 2079907200000,
+    "eclLon": 274.958403,
+    "eclLat": -1.471604
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2037-11-28T00:00:00.000Z",
+    "timestamp": 2142979200000,
+    "eclLon": 286.63602,
+    "eclLat": -3.202598
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2039-11-28T00:00:00.000Z",
+    "timestamp": 2206051200000,
+    "eclLon": 202.973012,
+    "eclLat": 2.077189
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2041-11-27T00:00:00.000Z",
+    "timestamp": 2269123200000,
+    "eclLon": 236.524215,
+    "eclLat": 0.777756
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2043-11-27T00:00:00.000Z",
+    "timestamp": 2332195200000,
+    "eclLon": 273.114835,
+    "eclLat": -1.450923
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2045-11-26T00:00:00.000Z",
+    "timestamp": 2395267200000,
+    "eclLon": 284.418591,
+    "eclLat": -3.378929
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2047-11-26T00:00:00.000Z",
+    "timestamp": 2458339200000,
+    "eclLon": 201.101721,
+    "eclLat": 2.028713
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2049-11-25T00:00:00.000Z",
+    "timestamp": 2521411200000,
+    "eclLon": 234.692595,
+    "eclLat": 0.817003
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2051-11-25T00:00:00.000Z",
+    "timestamp": 2584483200000,
+    "eclLon": 271.271718,
+    "eclLat": -1.418875
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2053-11-24T00:00:00.000Z",
+    "timestamp": 2647555200000,
+    "eclLon": 282.194396,
+    "eclLat": -3.547793
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2055-11-24T00:00:00.000Z",
+    "timestamp": 2710627200000,
+    "eclLon": 199.216969,
+    "eclLat": 1.978494
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2057-11-23T00:00:00.000Z",
+    "timestamp": 2773699200000,
+    "eclLon": 232.849397,
+    "eclLat": 0.851408
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2059-11-23T00:00:00.000Z",
+    "timestamp": 2836771200000,
+    "eclLon": 269.422118,
+    "eclLat": -1.394369
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2061-11-22T00:00:00.000Z",
+    "timestamp": 2899843200000,
+    "eclLon": 279.955748,
+    "eclLat": -3.724358
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2063-11-22T00:00:00.000Z",
+    "timestamp": 2962915200000,
+    "eclLon": 197.349595,
+    "eclLat": 1.925332
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2065-11-21T00:00:00.000Z",
+    "timestamp": 3025987200000,
+    "eclLon": 231.024389,
+    "eclLat": 0.885608
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2067-11-21T00:00:00.000Z",
+    "timestamp": 3089059200000,
+    "eclLon": 267.585456,
+    "eclLat": -1.362125
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2069-11-20T00:00:00.000Z",
+    "timestamp": 3152131200000,
+    "eclLon": 277.715306,
+    "eclLat": -3.888981
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2071-11-20T00:00:00.000Z",
+    "timestamp": 3215203200000,
+    "eclLon": 195.472131,
+    "eclLat": 1.873523
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2073-11-19T00:00:00.000Z",
+    "timestamp": 3278275200000,
+    "eclLon": 229.183574,
+    "eclLat": 0.921679
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2075-11-19T00:00:00.000Z",
+    "timestamp": 3341347200000,
+    "eclLon": 265.734877,
+    "eclLat": -1.331475
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2077-11-18T00:00:00.000Z",
+    "timestamp": 3404419200000,
+    "eclLon": 275.465112,
+    "eclLat": -4.062017
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2079-11-18T00:00:00.000Z",
+    "timestamp": 3467491200000,
+    "eclLon": 193.597019,
+    "eclLat": 1.817232
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2081-11-17T00:00:00.000Z",
+    "timestamp": 3530563200000,
+    "eclLon": 227.356332,
+    "eclLat": 0.951665
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2083-11-17T00:00:00.000Z",
+    "timestamp": 3593635200000,
+    "eclLon": 263.898883,
+    "eclLat": -1.300517
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2085-11-16T00:00:00.000Z",
+    "timestamp": 3656707200000,
+    "eclLon": 273.217869,
+    "eclLat": -4.227386
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2087-11-16T00:00:00.000Z",
+    "timestamp": 3719779200000,
+    "eclLon": 191.735444,
+    "eclLat": 1.762096
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2089-11-15T00:00:00.000Z",
+    "timestamp": 3782851200000,
+    "eclLon": 225.524984,
+    "eclLat": 0.987368
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2091-11-15T00:00:00.000Z",
+    "timestamp": 3845923200000,
+    "eclLon": 262.04813,
+    "eclLat": -1.26314
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2093-11-14T00:00:00.000Z",
+    "timestamp": 3908995200000,
+    "eclLon": 270.951045,
+    "eclLat": -4.3913
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2095-11-14T00:00:00.000Z",
+    "timestamp": 3972067200000,
+    "eclLon": 189.85702,
+    "eclLat": 1.704336
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2097-11-13T00:00:00.000Z",
+    "timestamp": 4035139200000,
+    "eclLon": 223.690308,
+    "eclLat": 1.01512
+  },
+  {
+    "planet": "venus",
+    "dateISO": "2099-11-13T00:00:00.000Z",
+    "timestamp": 4098211200000,
+    "eclLon": 260.210387,
+    "eclLat": -1.232773
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1900-01-01T00:00:00.000Z",
+    "timestamp": -2208988800000,
+    "eclLon": 283.867675,
+    "eclLat": -0.924789
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1902-01-01T00:00:00.000Z",
+    "timestamp": -2145916800000,
+    "eclLon": 299.218885,
+    "eclLat": -1.121852
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1904-01-01T00:00:00.000Z",
+    "timestamp": -2082844800000,
+    "eclLon": 315.334914,
+    "eclLat": -1.161213
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1905-12-31T00:00:00.000Z",
+    "timestamp": -2019772800000,
+    "eclLon": 332.621498,
+    "eclLat": -0.993351
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1907-12-31T00:00:00.000Z",
+    "timestamp": -1956700800000,
+    "eclLon": 352.13353,
+    "eclLat": -0.531306
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1909-12-30T00:00:00.000Z",
+    "timestamp": -1893628800000,
+    "eclLon": 16.821881,
+    "eclLat": 0.418857
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1911-12-30T00:00:00.000Z",
+    "timestamp": -1830556800000,
+    "eclLon": 54.304199,
+    "eclLat": 2.185909
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1913-12-29T00:00:00.000Z",
+    "timestamp": -1767484800000,
+    "eclLon": 107.68951,
+    "eclLat": 3.746021
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1915-12-29T00:00:00.000Z",
+    "timestamp": -1704412800000,
+    "eclLon": 149.768112,
+    "eclLat": 3.3891
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1917-12-28T00:00:00.000Z",
+    "timestamp": -1641340800000,
+    "eclLon": 175.729128,
+    "eclLat": 2.60621
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1919-12-28T00:00:00.000Z",
+    "timestamp": -1578268800000,
+    "eclLon": 194.532298,
+    "eclLat": 1.915244
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1921-12-27T00:00:00.000Z",
+    "timestamp": -1515196800000,
+    "eclLon": 210.297905,
+    "eclLat": 1.310429
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1923-12-27T00:00:00.000Z",
+    "timestamp": -1452124800000,
+    "eclLon": 224.710272,
+    "eclLat": 0.761146
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1925-12-26T00:00:00.000Z",
+    "timestamp": -1389052800000,
+    "eclLon": 238.613229,
+    "eclLat": 0.253654
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1927-12-26T00:00:00.000Z",
+    "timestamp": -1325980800000,
+    "eclLon": 252.495841,
+    "eclLat": -0.210321
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1929-12-25T00:00:00.000Z",
+    "timestamp": -1262908800000,
+    "eclLon": 266.670152,
+    "eclLat": -0.617458
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1931-12-25T00:00:00.000Z",
+    "timestamp": -1199836800000,
+    "eclLon": 281.350338,
+    "eclLat": -0.943878
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1933-12-24T00:00:00.000Z",
+    "timestamp": -1136764800000,
+    "eclLon": 296.746086,
+    "eclLat": -1.156961
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1935-12-24T00:00:00.000Z",
+    "timestamp": -1073692800000,
+    "eclLon": 313.097465,
+    "eclLat": -1.213699
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1937-12-23T00:00:00.000Z",
+    "timestamp": -1010620800000,
+    "eclLon": 330.9535,
+    "eclLat": -1.054215
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1939-12-23T00:00:00.000Z",
+    "timestamp": -947548800000,
+    "eclLon": 351.884826,
+    "eclLat": -0.562939
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1941-12-22T00:00:00.000Z",
+    "timestamp": -884476800000,
+    "eclLon": 20.572001,
+    "eclLat": 0.545294
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1943-12-22T00:00:00.000Z",
+    "timestamp": -821404800000,
+    "eclLon": 67.343649,
+    "eclLat": 2.552823
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1945-12-21T00:00:00.000Z",
+    "timestamp": -758332800000,
+    "eclLon": 121.448345,
+    "eclLat": 3.464309
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1947-12-21T00:00:00.000Z",
+    "timestamp": -695260800000,
+    "eclLon": 155.592863,
+    "eclLat": 2.940503
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1949-12-20T00:00:00.000Z",
+    "timestamp": -632188800000,
+    "eclLon": 177.436393,
+    "eclLat": 2.304945
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1951-12-20T00:00:00.000Z",
+    "timestamp": -569116800000,
+    "eclLon": 194.3422,
+    "eclLat": 1.732388
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1953-12-19T00:00:00.000Z",
+    "timestamp": -506044800000,
+    "eclLon": 209.109677,
+    "eclLat": 1.204179
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1955-12-19T00:00:00.000Z",
+    "timestamp": -442972800000,
+    "eclLon": 222.951645,
+    "eclLat": 0.703952
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1957-12-18T00:00:00.000Z",
+    "timestamp": -379900800000,
+    "eclLon": 236.509448,
+    "eclLat": 0.227252
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1959-12-18T00:00:00.000Z",
+    "timestamp": -316828800000,
+    "eclLon": 250.165795,
+    "eclLat": -0.220754
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1961-12-17T00:00:00.000Z",
+    "timestamp": -253756800000,
+    "eclLon": 264.203672,
+    "eclLat": -0.625969
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1963-12-17T00:00:00.000Z",
+    "timestamp": -190684800000,
+    "eclLon": 278.858878,
+    "eclLat": -0.963288
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1965-12-16T00:00:00.000Z",
+    "timestamp": -127612800000,
+    "eclLon": 294.347665,
+    "eclLat": -1.196918
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1967-12-16T00:00:00.000Z",
+    "timestamp": -64540800000,
+    "eclLon": 310.970293,
+    "eclLat": -1.277868
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1969-12-15T00:00:00.000Z",
+    "timestamp": -1468800000,
+    "eclLon": 329.553631,
+    "eclLat": -1.133557
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1971-12-15T00:00:00.000Z",
+    "timestamp": 61603200000,
+    "eclLon": 352.533265,
+    "eclLat": -0.606003
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1973-12-14T00:00:00.000Z",
+    "timestamp": 124675200000,
+    "eclLon": 27.317343,
+    "eclLat": 0.718772
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1975-12-14T00:00:00.000Z",
+    "timestamp": 187747200000,
+    "eclLon": 83.587723,
+    "eclLat": 2.737691
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1977-12-13T00:00:00.000Z",
+    "timestamp": 250819200000,
+    "eclLon": 131.560686,
+    "eclLat": 3.041025
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1979-12-13T00:00:00.000Z",
+    "timestamp": 313891200000,
+    "eclLon": 159.114816,
+    "eclLat": 2.567532
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1981-12-12T00:00:00.000Z",
+    "timestamp": 376963200000,
+    "eclLon": 178.088323,
+    "eclLat": 2.065594
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1983-12-12T00:00:00.000Z",
+    "timestamp": 440035200000,
+    "eclLon": 193.62895,
+    "eclLat": 1.585467
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1985-12-11T00:00:00.000Z",
+    "timestamp": 503107200000,
+    "eclLon": 207.656822,
+    "eclLat": 1.116713
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1987-12-11T00:00:00.000Z",
+    "timestamp": 566179200000,
+    "eclLon": 221.052853,
+    "eclLat": 0.65425
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1989-12-10T00:00:00.000Z",
+    "timestamp": 629251200000,
+    "eclLon": 234.315966,
+    "eclLat": 0.199893
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1991-12-10T00:00:00.000Z",
+    "timestamp": 692323200000,
+    "eclLon": 247.791425,
+    "eclLat": -0.237667
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1993-12-09T00:00:00.000Z",
+    "timestamp": 755395200000,
+    "eclLon": 261.748354,
+    "eclLat": -0.642589
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1995-12-09T00:00:00.000Z",
+    "timestamp": 818467200000,
+    "eclLon": 276.402985,
+    "eclLat": -0.990003
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1997-12-08T00:00:00.000Z",
+    "timestamp": 881539200000,
+    "eclLon": 291.997627,
+    "eclLat": -1.244273
+  },
+  {
+    "planet": "mars",
+    "dateISO": "1999-12-08T00:00:00.000Z",
+    "timestamp": 944611200000,
+    "eclLon": 308.993814,
+    "eclLat": -1.354248
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2001-12-07T00:00:00.000Z",
+    "timestamp": 1007683200000,
+    "eclLon": 328.6092,
+    "eclLat": -1.232413
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2003-12-07T00:00:00.000Z",
+    "timestamp": 1070755200000,
+    "eclLon": 354.58153,
+    "eclLat": -0.66069
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2005-12-06T00:00:00.000Z",
+    "timestamp": 1133827200000,
+    "eclLon": 38.353238,
+    "eclLat": 0.932646
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2007-12-06T00:00:00.000Z",
+    "timestamp": 1196899200000,
+    "eclLon": 99.431342,
+    "eclLat": 2.630502
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2009-12-05T00:00:00.000Z",
+    "timestamp": 1259971200000,
+    "eclLon": 138.207835,
+    "eclLat": 2.637163
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2011-12-05T00:00:00.000Z",
+    "timestamp": 1323043200000,
+    "eclLon": 161.027585,
+    "eclLat": 2.272381
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2013-12-04T00:00:00.000Z",
+    "timestamp": 1386115200000,
+    "eclLon": 177.994183,
+    "eclLat": 1.874057
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2015-12-04T00:00:00.000Z",
+    "timestamp": 1449187200000,
+    "eclLon": 192.536516,
+    "eclLat": 1.466196
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2017-12-03T00:00:00.000Z",
+    "timestamp": 1512259200000,
+    "eclLon": 205.993927,
+    "eclLat": 1.046729
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2019-12-03T00:00:00.000Z",
+    "timestamp": 1575331200000,
+    "eclLon": 219.029756,
+    "eclLat": 0.615599
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2021-12-02T00:00:00.000Z",
+    "timestamp": 1638403200000,
+    "eclLon": 232.067782,
+    "eclLat": 0.178053
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2023-12-02T00:00:00.000Z",
+    "timestamp": 1701475200000,
+    "eclLon": 245.411653,
+    "eclLat": -0.254903
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2025-12-01T00:00:00.000Z",
+    "timestamp": 1764547200000,
+    "eclLon": 259.294616,
+    "eclLat": -0.665785
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2027-12-01T00:00:00.000Z",
+    "timestamp": 1827619200000,
+    "eclLon": 273.963239,
+    "eclLat": -1.029108
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2029-11-30T00:00:00.000Z",
+    "timestamp": 1890691200000,
+    "eclLon": 289.742818,
+    "eclLat": -1.309295
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2031-11-30T00:00:00.000Z",
+    "timestamp": 1953763200000,
+    "eclLon": 307.249067,
+    "eclLat": -1.453473
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2033-11-29T00:00:00.000Z",
+    "timestamp": 2016835200000,
+    "eclLon": 328.23846,
+    "eclLat": -1.362234
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2035-11-29T00:00:00.000Z",
+    "timestamp": 2079907200000,
+    "eclLon": 358.762007,
+    "eclLat": -0.73547
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2037-11-28T00:00:00.000Z",
+    "timestamp": 2142979200000,
+    "eclLon": 54.382386,
+    "eclLat": 1.127698
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2039-11-28T00:00:00.000Z",
+    "timestamp": 2206051200000,
+    "eclLon": 111.635989,
+    "eclLat": 2.339377
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2041-11-27T00:00:00.000Z",
+    "timestamp": 2269123200000,
+    "eclLon": 142.229696,
+    "eclLat": 2.299976
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2043-11-27T00:00:00.000Z",
+    "timestamp": 2332195200000,
+    "eclLon": 161.815504,
+    "eclLat": 2.038221
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2045-11-26T00:00:00.000Z",
+    "timestamp": 2395267200000,
+    "eclLon": 177.366288,
+    "eclLat": 1.719891
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2047-11-26T00:00:00.000Z",
+    "timestamp": 2458339200000,
+    "eclLon": 191.161709,
+    "eclLat": 1.367313
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2049-11-25T00:00:00.000Z",
+    "timestamp": 2521411200000,
+    "eclLon": 204.170255,
+    "eclLat": 0.986422
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2051-11-25T00:00:00.000Z",
+    "timestamp": 2584483200000,
+    "eclLon": 216.928585,
+    "eclLat": 0.582155
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2053-11-24T00:00:00.000Z",
+    "timestamp": 2647555200000,
+    "eclLon": 229.786316,
+    "eclLat": 0.160679
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2055-11-24T00:00:00.000Z",
+    "timestamp": 2710627200000,
+    "eclLon": 243.008662,
+    "eclLat": -0.267997
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2057-11-23T00:00:00.000Z",
+    "timestamp": 2773699200000,
+    "eclLon": 256.854061,
+    "eclLat": -0.68767
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2059-11-23T00:00:00.000Z",
+    "timestamp": 2836771200000,
+    "eclLon": 271.60002,
+    "eclLat": -1.073443
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2061-11-22T00:00:00.000Z",
+    "timestamp": 2899843200000,
+    "eclLon": 287.609286,
+    "eclLat": -1.389222
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2063-11-22T00:00:00.000Z",
+    "timestamp": 2962915200000,
+    "eclLon": 305.750839,
+    "eclLat": -1.582214
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2065-11-21T00:00:00.000Z",
+    "timestamp": 3025987200000,
+    "eclLon": 328.749832,
+    "eclLat": -1.5399
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2067-11-21T00:00:00.000Z",
+    "timestamp": 3089059200000,
+    "eclLon": 6.511728,
+    "eclLat": -0.826272
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2069-11-20T00:00:00.000Z",
+    "timestamp": 3152131200000,
+    "eclLon": 72.679601,
+    "eclLat": 1.204193
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2071-11-20T00:00:00.000Z",
+    "timestamp": 3215203200000,
+    "eclLon": 119.65157,
+    "eclLat": 2.025575
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2073-11-19T00:00:00.000Z",
+    "timestamp": 3278275200000,
+    "eclLon": 144.416016,
+    "eclLat": 2.029284
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2075-11-19T00:00:00.000Z",
+    "timestamp": 3341347200000,
+    "eclLon": 161.808359,
+    "eclLat": 1.85103
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2077-11-18T00:00:00.000Z",
+    "timestamp": 3404419200000,
+    "eclLon": 176.334947,
+    "eclLat": 1.594463
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2079-11-18T00:00:00.000Z",
+    "timestamp": 3467491200000,
+    "eclLon": 189.56337,
+    "eclLat": 1.285167
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2081-11-17T00:00:00.000Z",
+    "timestamp": 3530563200000,
+    "eclLon": 202.233527,
+    "eclLat": 0.934603
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2083-11-17T00:00:00.000Z",
+    "timestamp": 3593635200000,
+    "eclLon": 214.765686,
+    "eclLat": 0.55041
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2085-11-16T00:00:00.000Z",
+    "timestamp": 3656707200000,
+    "eclLon": 227.468273,
+    "eclLat": 0.140348
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2087-11-16T00:00:00.000Z",
+    "timestamp": 3719779200000,
+    "eclLon": 240.616912,
+    "eclLat": -0.285723
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2089-11-15T00:00:00.000Z",
+    "timestamp": 3782851200000,
+    "eclLon": 254.462602,
+    "eclLat": -0.713761
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2091-11-15T00:00:00.000Z",
+    "timestamp": 3845923200000,
+    "eclLon": 269.289132,
+    "eclLat": -1.12257
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2093-11-14T00:00:00.000Z",
+    "timestamp": 3908995200000,
+    "eclLon": 285.603125,
+    "eclLat": -1.481567
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2095-11-14T00:00:00.000Z",
+    "timestamp": 3972067200000,
+    "eclLon": 304.673163,
+    "eclLat": -1.742822
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2097-11-13T00:00:00.000Z",
+    "timestamp": 4035139200000,
+    "eclLon": 330.689193,
+    "eclLat": -1.778978
+  },
+  {
+    "planet": "mars",
+    "dateISO": "2099-11-13T00:00:00.000Z",
+    "timestamp": 4098211200000,
+    "eclLon": 19.545954,
+    "eclLat": -0.908559
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1900-01-01T00:00:00.000Z",
+    "timestamp": -2208988800000,
+    "eclLon": 241.135883,
+    "eclLat": 0.814839
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1902-01-01T00:00:00.000Z",
+    "timestamp": -2145916800000,
+    "eclLon": 291.391216,
+    "eclLat": -0.268374
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1904-01-01T00:00:00.000Z",
+    "timestamp": -2082844800000,
+    "eclLon": 347.760195,
+    "eclLat": -1.217256
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1905-12-31T00:00:00.000Z",
+    "timestamp": -2019772800000,
+    "eclLon": 57.253242,
+    "eclLat": -0.886112
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1907-12-31T00:00:00.000Z",
+    "timestamp": -1956700800000,
+    "eclLon": 132.173442,
+    "eclLat": 0.699517
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1909-12-30T00:00:00.000Z",
+    "timestamp": -1893628800000,
+    "eclLon": 193.097312,
+    "eclLat": 1.298591
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1911-12-30T00:00:00.000Z",
+    "timestamp": -1830556800000,
+    "eclLon": 244.127178,
+    "eclLat": 0.747915
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1913-12-29T00:00:00.000Z",
+    "timestamp": -1767484800000,
+    "eclLon": 294.471519,
+    "eclLat": -0.34978
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1915-12-29T00:00:00.000Z",
+    "timestamp": -1704412800000,
+    "eclLon": 351.781352,
+    "eclLat": -1.261358
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1917-12-28T00:00:00.000Z",
+    "timestamp": -1641340800000,
+    "eclLon": 62.925806,
+    "eclLat": -0.802581
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1919-12-28T00:00:00.000Z",
+    "timestamp": -1578268800000,
+    "eclLon": 137.31358,
+    "eclLat": 0.777422
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1921-12-27T00:00:00.000Z",
+    "timestamp": -1515196800000,
+    "eclLon": 196.712982,
+    "eclLat": 1.279759
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1923-12-27T00:00:00.000Z",
+    "timestamp": -1452124800000,
+    "eclLon": 247.056365,
+    "eclLat": 0.688282
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1925-12-26T00:00:00.000Z",
+    "timestamp": -1389052800000,
+    "eclLon": 297.470338,
+    "eclLat": -0.420589
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1927-12-26T00:00:00.000Z",
+    "timestamp": -1325980800000,
+    "eclLon": 355.787569,
+    "eclLat": -1.299295
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1929-12-25T00:00:00.000Z",
+    "timestamp": -1262908800000,
+    "eclLon": 68.620193,
+    "eclLat": -0.712728
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1931-12-25T00:00:00.000Z",
+    "timestamp": -1199836800000,
+    "eclLon": 142.255231,
+    "eclLat": 0.848561
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1933-12-24T00:00:00.000Z",
+    "timestamp": -1136764800000,
+    "eclLon": 200.15982,
+    "eclLat": 1.254332
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1935-12-24T00:00:00.000Z",
+    "timestamp": -1073692800000,
+    "eclLon": 249.941403,
+    "eclLat": 0.620344
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1937-12-23T00:00:00.000Z",
+    "timestamp": -1010620800000,
+    "eclLon": 300.619917,
+    "eclLat": -0.497761
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1939-12-23T00:00:00.000Z",
+    "timestamp": -947548800000,
+    "eclLon": 0.203999,
+    "eclLat": -1.333853
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1941-12-22T00:00:00.000Z",
+    "timestamp": -884476800000,
+    "eclLon": 74.612361,
+    "eclLat": -0.616083
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1943-12-22T00:00:00.000Z",
+    "timestamp": -821404800000,
+    "eclLon": 146.956313,
+    "eclLat": 0.905626
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1945-12-21T00:00:00.000Z",
+    "timestamp": -758332800000,
+    "eclLon": 203.378275,
+    "eclLat": 1.22817
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1947-12-21T00:00:00.000Z",
+    "timestamp": -695260800000,
+    "eclLon": 252.73911,
+    "eclLat": 0.554596
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1949-12-20T00:00:00.000Z",
+    "timestamp": -632188800000,
+    "eclLon": 303.866713,
+    "eclLat": -0.578138
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1951-12-20T00:00:00.000Z",
+    "timestamp": -569116800000,
+    "eclLon": 4.920278,
+    "eclLat": -1.361512
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1953-12-19T00:00:00.000Z",
+    "timestamp": -506044800000,
+    "eclLon": 80.680043,
+    "eclLat": -0.503017
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1955-12-19T00:00:00.000Z",
+    "timestamp": -442972800000,
+    "eclLon": 151.505627,
+    "eclLat": 0.959246
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1957-12-18T00:00:00.000Z",
+    "timestamp": -379900800000,
+    "eclLon": 206.599026,
+    "eclLat": 1.199589
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1959-12-18T00:00:00.000Z",
+    "timestamp": -316828800000,
+    "eclLon": 255.632709,
+    "eclLat": 0.490745
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1961-12-17T00:00:00.000Z",
+    "timestamp": -253756800000,
+    "eclLon": 307.248625,
+    "eclLat": -0.653969
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1963-12-17T00:00:00.000Z",
+    "timestamp": -190684800000,
+    "eclLon": 9.769382,
+    "eclLat": -1.382193
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1965-12-16T00:00:00.000Z",
+    "timestamp": -127612800000,
+    "eclLon": 86.565868,
+    "eclLat": -0.392042
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1967-12-16T00:00:00.000Z",
+    "timestamp": -64540800000,
+    "eclLon": 155.774408,
+    "eclLat": 1.004581
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1969-12-15T00:00:00.000Z",
+    "timestamp": -1468800000,
+    "eclLon": 209.722887,
+    "eclLat": 1.165336
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1971-12-15T00:00:00.000Z",
+    "timestamp": 61603200000,
+    "eclLon": 258.530108,
+    "eclLat": 0.417496
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1973-12-14T00:00:00.000Z",
+    "timestamp": 124675200000,
+    "eclLon": 310.681957,
+    "eclLat": -0.734299
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1975-12-14T00:00:00.000Z",
+    "timestamp": 187747200000,
+    "eclLon": 14.767715,
+    "eclLat": -1.394512
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1977-12-13T00:00:00.000Z",
+    "timestamp": 250819200000,
+    "eclLon": 92.419321,
+    "eclLat": -0.282193
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1979-12-13T00:00:00.000Z",
+    "timestamp": 313891200000,
+    "eclLon": 159.945519,
+    "eclLat": 1.040989
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1981-12-12T00:00:00.000Z",
+    "timestamp": 376963200000,
+    "eclLon": 212.807647,
+    "eclLat": 1.132868
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1983-12-12T00:00:00.000Z",
+    "timestamp": 440035200000,
+    "eclLon": 261.381155,
+    "eclLat": 0.349998
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1985-12-11T00:00:00.000Z",
+    "timestamp": 503107200000,
+    "eclLon": 314.071568,
+    "eclLat": -0.811134
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1987-12-11T00:00:00.000Z",
+    "timestamp": 566179200000,
+    "eclLon": 19.799423,
+    "eclLat": -1.396653
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1989-12-10T00:00:00.000Z",
+    "timestamp": 629251200000,
+    "eclLon": 98.111646,
+    "eclLat": -0.166925
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1991-12-10T00:00:00.000Z",
+    "timestamp": 692323200000,
+    "eclLon": 163.937523,
+    "eclLat": 1.072314
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1993-12-09T00:00:00.000Z",
+    "timestamp": 755395200000,
+    "eclLon": 215.79343,
+    "eclLat": 1.096389
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1995-12-09T00:00:00.000Z",
+    "timestamp": 818467200000,
+    "eclLon": 264.241215,
+    "eclLat": 0.282713
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1997-12-08T00:00:00.000Z",
+    "timestamp": 881539200000,
+    "eclLon": 317.68649,
+    "eclLat": -0.886396
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "1999-12-08T00:00:00.000Z",
+    "timestamp": 944611200000,
+    "eclLon": 25.287224,
+    "eclLat": -1.389477
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2001-12-07T00:00:00.000Z",
+    "timestamp": 1007683200000,
+    "eclLon": 103.792565,
+    "eclLat": -0.055415
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2003-12-07T00:00:00.000Z",
+    "timestamp": 1070755200000,
+    "eclLon": 167.679338,
+    "eclLat": 1.096205
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2005-12-06T00:00:00.000Z",
+    "timestamp": 1133827200000,
+    "eclLon": 218.606147,
+    "eclLat": 1.056417
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2007-12-06T00:00:00.000Z",
+    "timestamp": 1196899200000,
+    "eclLon": 267.077507,
+    "eclLat": 0.207847
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2009-12-05T00:00:00.000Z",
+    "timestamp": 1259971200000,
+    "eclLon": 321.505874,
+    "eclLat": -0.966968
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2011-12-05T00:00:00.000Z",
+    "timestamp": 1323043200000,
+    "eclLon": 31.117495,
+    "eclLat": -1.366011
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2013-12-04T00:00:00.000Z",
+    "timestamp": 1386115200000,
+    "eclLon": 109.33836,
+    "eclLat": 0.053931
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2015-12-04T00:00:00.000Z",
+    "timestamp": 1449187200000,
+    "eclLon": 171.337257,
+    "eclLat": 1.11543
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2017-12-03T00:00:00.000Z",
+    "timestamp": 1512259200000,
+    "eclLon": 221.477321,
+    "eclLat": 1.019093
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2019-12-03T00:00:00.000Z",
+    "timestamp": 1575331200000,
+    "eclLon": 270.052535,
+    "eclLat": 0.135847
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2021-12-02T00:00:00.000Z",
+    "timestamp": 1638403200000,
+    "eclLon": 325.517372,
+    "eclLat": -1.046352
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2023-12-02T00:00:00.000Z",
+    "timestamp": 1701475200000,
+    "eclLon": 37.009415,
+    "eclLat": -1.328179
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2025-12-01T00:00:00.000Z",
+    "timestamp": 1764547200000,
+    "eclLon": 114.534446,
+    "eclLat": 0.161489
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2027-12-01T00:00:00.000Z",
+    "timestamp": 1827619200000,
+    "eclLon": 174.810528,
+    "eclLat": 1.130516
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2029-11-30T00:00:00.000Z",
+    "timestamp": 1890691200000,
+    "eclLon": 224.330724,
+    "eclLat": 0.975692
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2031-11-30T00:00:00.000Z",
+    "timestamp": 1953763200000,
+    "eclLon": 273.091831,
+    "eclLat": 0.060858
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2033-11-29T00:00:00.000Z",
+    "timestamp": 2016835200000,
+    "eclLon": 329.649981,
+    "eclLat": -1.121387
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2035-11-29T00:00:00.000Z",
+    "timestamp": 2079907200000,
+    "eclLon": 42.97497,
+    "eclLat": -1.28195
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2037-11-28T00:00:00.000Z",
+    "timestamp": 2142979200000,
+    "eclLon": 119.549913,
+    "eclLat": 0.256418
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2039-11-28T00:00:00.000Z",
+    "timestamp": 2206051200000,
+    "eclLon": 178.209619,
+    "eclLat": 1.141053
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2041-11-27T00:00:00.000Z",
+    "timestamp": 2269123200000,
+    "eclLon": 227.169273,
+    "eclLat": 0.930394
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2043-11-27T00:00:00.000Z",
+    "timestamp": 2332195200000,
+    "eclLon": 276.116675,
+    "eclLat": -0.018988
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2045-11-26T00:00:00.000Z",
+    "timestamp": 2395267200000,
+    "eclLon": 333.809911,
+    "eclLat": -1.195691
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2047-11-26T00:00:00.000Z",
+    "timestamp": 2458339200000,
+    "eclLon": 48.891967,
+    "eclLat": -1.220303
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2049-11-25T00:00:00.000Z",
+    "timestamp": 2521411200000,
+    "eclLon": 124.334208,
+    "eclLat": 0.345464
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2051-11-25T00:00:00.000Z",
+    "timestamp": 2584483200000,
+    "eclLon": 181.493434,
+    "eclLat": 1.146766
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2053-11-24T00:00:00.000Z",
+    "timestamp": 2647555200000,
+    "eclLon": 229.943803,
+    "eclLat": 0.888204
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2055-11-24T00:00:00.000Z",
+    "timestamp": 2710627200000,
+    "eclLon": 279.191965,
+    "eclLat": -0.093431
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2057-11-23T00:00:00.000Z",
+    "timestamp": 2773699200000,
+    "eclLon": 338.276972,
+    "eclLat": -1.267263
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2059-11-23T00:00:00.000Z",
+    "timestamp": 2836771200000,
+    "eclLon": 55.103657,
+    "eclLat": -1.14217
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2061-11-22T00:00:00.000Z",
+    "timestamp": 2899843200000,
+    "eclLon": 128.96393,
+    "eclLat": 0.433444
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2063-11-22T00:00:00.000Z",
+    "timestamp": 2962915200000,
+    "eclLon": 184.589714,
+    "eclLat": 1.148187
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2065-11-21T00:00:00.000Z",
+    "timestamp": 3025987200000,
+    "eclLon": 232.611579,
+    "eclLat": 0.839547
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2067-11-21T00:00:00.000Z",
+    "timestamp": 3089059200000,
+    "eclLon": 282.321391,
+    "eclLat": -0.173087
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2069-11-20T00:00:00.000Z",
+    "timestamp": 3152131200000,
+    "eclLon": 343.070857,
+    "eclLat": -1.33521
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2071-11-20T00:00:00.000Z",
+    "timestamp": 3215203200000,
+    "eclLon": 61.43915,
+    "eclLat": -1.0538
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2073-11-19T00:00:00.000Z",
+    "timestamp": 3278275200000,
+    "eclLon": 133.415773,
+    "eclLat": 0.509912
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2075-11-19T00:00:00.000Z",
+    "timestamp": 3341347200000,
+    "eclLon": 187.662376,
+    "eclLat": 1.147958
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2077-11-18T00:00:00.000Z",
+    "timestamp": 3404419200000,
+    "eclLon": 235.385595,
+    "eclLat": 0.789827
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2079-11-18T00:00:00.000Z",
+    "timestamp": 3467491200000,
+    "eclLon": 285.657243,
+    "eclLat": -0.260871
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2081-11-17T00:00:00.000Z",
+    "timestamp": 3530563200000,
+    "eclLon": 348.133081,
+    "eclLat": -1.400688
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2083-11-17T00:00:00.000Z",
+    "timestamp": 3593635200000,
+    "eclLon": 67.580701,
+    "eclLat": -0.950509
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2085-11-16T00:00:00.000Z",
+    "timestamp": 3656707200000,
+    "eclLon": 137.568431,
+    "eclLat": 0.581847
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2087-11-16T00:00:00.000Z",
+    "timestamp": 3719779200000,
+    "eclLon": 190.643862,
+    "eclLat": 1.144582
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2089-11-15T00:00:00.000Z",
+    "timestamp": 3782851200000,
+    "eclLon": 238.196864,
+    "eclLat": 0.74139
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2091-11-15T00:00:00.000Z",
+    "timestamp": 3845923200000,
+    "eclLon": 289.103883,
+    "eclLat": -0.3432
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2093-11-14T00:00:00.000Z",
+    "timestamp": 3908995200000,
+    "eclLon": 353.342583,
+    "eclLat": -1.456553
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2095-11-14T00:00:00.000Z",
+    "timestamp": 3972067200000,
+    "eclLon": 73.54057,
+    "eclLat": -0.845117
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2097-11-13T00:00:00.000Z",
+    "timestamp": 4035139200000,
+    "eclLon": 141.557198,
+    "eclLat": 0.648384
+  },
+  {
+    "planet": "jupiter",
+    "dateISO": "2099-11-13T00:00:00.000Z",
+    "timestamp": 4098211200000,
+    "eclLon": 193.601033,
+    "eclLat": 1.137219
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1900-01-01T00:00:00.000Z",
+    "timestamp": -2208988800000,
+    "eclLon": 267.716734,
+    "eclLat": 1.008316
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1902-01-01T00:00:00.000Z",
+    "timestamp": -2145916800000,
+    "eclLon": 287.699085,
+    "eclLat": 0.174034
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1904-01-01T00:00:00.000Z",
+    "timestamp": -2082844800000,
+    "eclLon": 308.003985,
+    "eclLat": -0.702894
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1905-12-31T00:00:00.000Z",
+    "timestamp": -2019772800000,
+    "eclLon": 329.182163,
+    "eclLat": -1.532298
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1907-12-31T00:00:00.000Z",
+    "timestamp": -1956700800000,
+    "eclLon": 351.809177,
+    "eclLat": -2.197408
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1909-12-30T00:00:00.000Z",
+    "timestamp": -1893628800000,
+    "eclLon": 16.467929,
+    "eclLat": -2.546174
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1911-12-30T00:00:00.000Z",
+    "timestamp": -1830556800000,
+    "eclLon": 43.568587,
+    "eclLat": -2.408555
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1913-12-29T00:00:00.000Z",
+    "timestamp": -1767484800000,
+    "eclLon": 72.96954,
+    "eclLat": -1.683835
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1915-12-29T00:00:00.000Z",
+    "timestamp": -1704412800000,
+    "eclLon": 103.581358,
+    "eclLat": -0.493267
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1917-12-28T00:00:00.000Z",
+    "timestamp": -1641340800000,
+    "eclLon": 133.627571,
+    "eclLat": 0.790217
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1919-12-28T00:00:00.000Z",
+    "timestamp": -1578268800000,
+    "eclLon": 161.660333,
+    "eclLat": 1.783999
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1921-12-27T00:00:00.000Z",
+    "timestamp": -1515196800000,
+    "eclLon": 187.20036,
+    "eclLat": 2.31391
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1923-12-27T00:00:00.000Z",
+    "timestamp": -1452124800000,
+    "eclLon": 210.538467,
+    "eclLat": 2.390046
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1925-12-26T00:00:00.000Z",
+    "timestamp": -1389052800000,
+    "eclLon": 232.224338,
+    "eclLat": 2.097162
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1927-12-26T00:00:00.000Z",
+    "timestamp": -1325980800000,
+    "eclLon": 252.823388,
+    "eclLat": 1.531303
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1929-12-25T00:00:00.000Z",
+    "timestamp": -1262908800000,
+    "eclLon": 272.884857,
+    "eclLat": 0.780153
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1931-12-25T00:00:00.000Z",
+    "timestamp": -1199836800000,
+    "eclLon": 292.949369,
+    "eclLat": -0.076459
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1933-12-24T00:00:00.000Z",
+    "timestamp": -1136764800000,
+    "eclLon": 313.563822,
+    "eclLat": -0.956472
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1935-12-24T00:00:00.000Z",
+    "timestamp": -1073692800000,
+    "eclLon": 335.298662,
+    "eclLat": -1.762266
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1937-12-23T00:00:00.000Z",
+    "timestamp": -1010620800000,
+    "eclLon": 358.748651,
+    "eclLat": -2.364634
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1939-12-23T00:00:00.000Z",
+    "timestamp": -947548800000,
+    "eclLon": 24.439062,
+    "eclLat": -2.595669
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1941-12-22T00:00:00.000Z",
+    "timestamp": -884476800000,
+    "eclLon": 52.575983,
+    "eclLat": -2.285977
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1943-12-22T00:00:00.000Z",
+    "timestamp": -821404800000,
+    "eclLon": 82.650553,
+    "eclLat": -1.388644
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1945-12-21T00:00:00.000Z",
+    "timestamp": -758332800000,
+    "eclLon": 113.18358,
+    "eclLat": -0.124611
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1947-12-21T00:00:00.000Z",
+    "timestamp": -695260800000,
+    "eclLon": 142.422503,
+    "eclLat": 1.095235
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1949-12-20T00:00:00.000Z",
+    "timestamp": -632188800000,
+    "eclLon": 169.345151,
+    "eclLat": 1.95192
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1951-12-20T00:00:00.000Z",
+    "timestamp": -569116800000,
+    "eclLon": 193.858102,
+    "eclLat": 2.345668
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1953-12-19T00:00:00.000Z",
+    "timestamp": -506044800000,
+    "eclLon": 216.391761,
+    "eclLat": 2.31781
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1955-12-19T00:00:00.000Z",
+    "timestamp": -442972800000,
+    "eclLon": 237.523334,
+    "eclLat": 1.954691
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1957-12-18T00:00:00.000Z",
+    "timestamp": -379900800000,
+    "eclLon": 257.819086,
+    "eclLat": 1.34365
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1959-12-18T00:00:00.000Z",
+    "timestamp": -316828800000,
+    "eclLon": 277.81053,
+    "eclLat": 0.563473
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1961-12-17T00:00:00.000Z",
+    "timestamp": -253756800000,
+    "eclLon": 298.021307,
+    "eclLat": -0.309888
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1963-12-17T00:00:00.000Z",
+    "timestamp": -190684800000,
+    "eclLon": 319.012231,
+    "eclLat": -1.191615
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1965-12-16T00:00:00.000Z",
+    "timestamp": -127612800000,
+    "eclLon": 341.369892,
+    "eclLat": -1.972582
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1967-12-16T00:00:00.000Z",
+    "timestamp": -64540800000,
+    "eclLon": 5.685771,
+    "eclLat": -2.50425
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1969-12-15T00:00:00.000Z",
+    "timestamp": -1468800000,
+    "eclLon": 32.416927,
+    "eclLat": -2.602629
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1971-12-15T00:00:00.000Z",
+    "timestamp": 61603200000,
+    "eclLon": 61.518769,
+    "eclLat": -2.114013
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1973-12-14T00:00:00.000Z",
+    "timestamp": 124675200000,
+    "eclLon": 92.020529,
+    "eclLat": -1.070226
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1975-12-14T00:00:00.000Z",
+    "timestamp": 187747200000,
+    "eclLon": 122.200127,
+    "eclLat": 0.218795
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1977-12-13T00:00:00.000Z",
+    "timestamp": 250819200000,
+    "eclLon": 150.546558,
+    "eclLat": 1.347925
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1979-12-13T00:00:00.000Z",
+    "timestamp": 313891200000,
+    "eclLon": 176.456206,
+    "eclLat": 2.073035
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1981-12-12T00:00:00.000Z",
+    "timestamp": 376963200000,
+    "eclLon": 200.109381,
+    "eclLat": 2.347519
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1983-12-12T00:00:00.000Z",
+    "timestamp": 440035200000,
+    "eclLon": 222.044794,
+    "eclLat": 2.226852
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1985-12-11T00:00:00.000Z",
+    "timestamp": 503107200000,
+    "eclLon": 242.828523,
+    "eclLat": 1.79498
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1987-12-11T00:00:00.000Z",
+    "timestamp": 566179200000,
+    "eclLon": 262.992285,
+    "eclLat": 1.134338
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1989-12-10T00:00:00.000Z",
+    "timestamp": 629251200000,
+    "eclLon": 283.060084,
+    "eclLat": 0.321036
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1991-12-10T00:00:00.000Z",
+    "timestamp": 692323200000,
+    "eclLon": 303.572239,
+    "eclLat": -0.568524
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1993-12-09T00:00:00.000Z",
+    "timestamp": 755395200000,
+    "eclLon": 325.102556,
+    "eclLat": -1.444183
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1995-12-09T00:00:00.000Z",
+    "timestamp": 818467200000,
+    "eclLon": 348.258106,
+    "eclLat": -2.183415
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1997-12-08T00:00:00.000Z",
+    "timestamp": 881539200000,
+    "eclLon": 13.598965,
+    "eclLat": -2.616953
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "1999-12-08T00:00:00.000Z",
+    "timestamp": 944611200000,
+    "eclLon": 41.390695,
+    "eclLat": -2.549462
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2001-12-07T00:00:00.000Z",
+    "timestamp": 1007683200000,
+    "eclLon": 71.200518,
+    "eclLat": -1.867605
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2003-12-07T00:00:00.000Z",
+    "timestamp": 1070755200000,
+    "eclLon": 101.695577,
+    "eclLat": -0.704696
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2005-12-06T00:00:00.000Z",
+    "timestamp": 1133827200000,
+    "eclLon": 131.137259,
+    "eclLat": 0.563752
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2007-12-06T00:00:00.000Z",
+    "timestamp": 1196899200000,
+    "eclLon": 158.395923,
+    "eclLat": 1.575977
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2009-12-05T00:00:00.000Z",
+    "timestamp": 1259971200000,
+    "eclLon": 183.266235,
+    "eclLat": 2.165984
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2011-12-05T00:00:00.000Z",
+    "timestamp": 1323043200000,
+    "eclLon": 206.108249,
+    "eclLat": 2.328677
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2013-12-04T00:00:00.000Z",
+    "timestamp": 1386115200000,
+    "eclLon": 227.473917,
+    "eclLat": 2.126642
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2015-12-04T00:00:00.000Z",
+    "timestamp": 1449187200000,
+    "eclLon": 247.924556,
+    "eclLat": 1.636601
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2017-12-03T00:00:00.000Z",
+    "timestamp": 1512259200000,
+    "eclLon": 267.990306,
+    "eclLat": 0.932938
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2019-12-03T00:00:00.000Z",
+    "timestamp": 1575331200000,
+    "eclLon": 288.184715,
+    "eclLat": 0.088591
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2021-12-02T00:00:00.000Z",
+    "timestamp": 1638403200000,
+    "eclLon": 309.047351,
+    "eclLat": -0.81658
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2023-12-02T00:00:00.000Z",
+    "timestamp": 1701475200000,
+    "eclLon": 331.17507,
+    "eclLat": -1.682153
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2025-12-01T00:00:00.000Z",
+    "timestamp": 1764547200000,
+    "eclLon": 355.164873,
+    "eclLat": -2.368122
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2027-12-01T00:00:00.000Z",
+    "timestamp": 1827619200000,
+    "eclLon": 21.501982,
+    "eclLat": -2.686281
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2029-11-30T00:00:00.000Z",
+    "timestamp": 1890691200000,
+    "eclLon": 50.222292,
+    "eclLat": -2.445016
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2031-11-30T00:00:00.000Z",
+    "timestamp": 1953763200000,
+    "eclLon": 80.488937,
+    "eclLat": -1.593821
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2033-11-29T00:00:00.000Z",
+    "timestamp": 2016835200000,
+    "eclLon": 110.675501,
+    "eclLat": -0.361398
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2035-11-29T00:00:00.000Z",
+    "timestamp": 2079907200000,
+    "eclLon": 139.247679,
+    "eclLat": 0.854457
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2037-11-28T00:00:00.000Z",
+    "timestamp": 2142979200000,
+    "eclLon": 165.506811,
+    "eclLat": 1.751926
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2039-11-28T00:00:00.000Z",
+    "timestamp": 2206051200000,
+    "eclLon": 189.524397,
+    "eclLat": 2.222735
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2041-11-27T00:00:00.000Z",
+    "timestamp": 2269123200000,
+    "eclLon": 211.756188,
+    "eclLat": 2.28511
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2043-11-27T00:00:00.000Z",
+    "timestamp": 2332195200000,
+    "eclLon": 232.768928,
+    "eclLat": 2.004817
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2045-11-26T00:00:00.000Z",
+    "timestamp": 2395267200000,
+    "eclLon": 253.092244,
+    "eclLat": 1.456213
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2047-11-26T00:00:00.000Z",
+    "timestamp": 2458339200000,
+    "eclLon": 273.229507,
+    "eclLat": 0.709946
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2049-11-25T00:00:00.000Z",
+    "timestamp": 2521411200000,
+    "eclLon": 293.705503,
+    "eclLat": -0.16292
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2051-11-25T00:00:00.000Z",
+    "timestamp": 2584483200000,
+    "eclLon": 315.09029,
+    "eclLat": -1.079417
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2053-11-24T00:00:00.000Z",
+    "timestamp": 2647555200000,
+    "eclLon": 337.990516,
+    "eclLat": -1.925187
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2055-11-24T00:00:00.000Z",
+    "timestamp": 2710627200000,
+    "eclLon": 2.984843,
+    "eclLat": -2.535572
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2057-11-23T00:00:00.000Z",
+    "timestamp": 2773699200000,
+    "eclLon": 30.394803,
+    "eclLat": -2.701618
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2059-11-23T00:00:00.000Z",
+    "timestamp": 2836771200000,
+    "eclLon": 59.871989,
+    "eclLat": -2.257707
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2061-11-22T00:00:00.000Z",
+    "timestamp": 2899843200000,
+    "eclLon": 90.186855,
+    "eclLat": -1.250187
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2063-11-22T00:00:00.000Z",
+    "timestamp": 2962915200000,
+    "eclLon": 119.704038,
+    "eclLat": 0.006635
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2065-11-21T00:00:00.000Z",
+    "timestamp": 3025987200000,
+    "eclLon": 147.233893,
+    "eclLat": 1.134057
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2067-11-21T00:00:00.000Z",
+    "timestamp": 3089059200000,
+    "eclLon": 172.457095,
+    "eclLat": 1.904752
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2069-11-20T00:00:00.000Z",
+    "timestamp": 3152131200000,
+    "eclLon": 195.64715,
+    "eclLat": 2.260116
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2071-11-20T00:00:00.000Z",
+    "timestamp": 3215203200000,
+    "eclLon": 217.304158,
+    "eclLat": 2.23141
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2073-11-19T00:00:00.000Z",
+    "timestamp": 3278275200000,
+    "eclLon": 237.973816,
+    "eclLat": 1.880648
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2075-11-19T00:00:00.000Z",
+    "timestamp": 3341347200000,
+    "eclLon": 258.179139,
+    "eclLat": 1.275433
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2077-11-18T00:00:00.000Z",
+    "timestamp": 3404419200000,
+    "eclLon": 278.428108,
+    "eclLat": 0.484833
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2079-11-18T00:00:00.000Z",
+    "timestamp": 3467491200000,
+    "eclLon": 299.242204,
+    "eclLat": -0.416781
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2081-11-17T00:00:00.000Z",
+    "timestamp": 3530563200000,
+    "eclLon": 321.191838,
+    "eclLat": -1.336912
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2083-11-17T00:00:00.000Z",
+    "timestamp": 3593635200000,
+    "eclLon": 344.884033,
+    "eclLat": -2.146289
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2085-11-16T00:00:00.000Z",
+    "timestamp": 3656707200000,
+    "eclLon": 10.813758,
+    "eclLat": -2.660307
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2087-11-16T00:00:00.000Z",
+    "timestamp": 3719779200000,
+    "eclLon": 39.08145,
+    "eclLat": -2.66453
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2089-11-15T00:00:00.000Z",
+    "timestamp": 3782851200000,
+    "eclLon": 68.985623,
+    "eclLat": -2.039331
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2091-11-15T00:00:00.000Z",
+    "timestamp": 3845923200000,
+    "eclLon": 99.040185,
+    "eclLat": -0.923678
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2093-11-14T00:00:00.000Z",
+    "timestamp": 3908995200000,
+    "eclLon": 127.734244,
+    "eclLat": 0.321841
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2095-11-14T00:00:00.000Z",
+    "timestamp": 3972067200000,
+    "eclLon": 154.293315,
+    "eclLat": 1.358164
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2097-11-13T00:00:00.000Z",
+    "timestamp": 4035139200000,
+    "eclLon": 178.691361,
+    "eclLat": 2.015958
+  },
+  {
+    "planet": "saturn",
+    "dateISO": "2099-11-13T00:00:00.000Z",
+    "timestamp": 4098211200000,
+    "eclLon": 201.289071,
+    "eclLat": 2.267802
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1900-01-01T00:00:00.000Z",
+    "timestamp": -2208988800000,
+    "eclLon": 250.139162,
+    "eclLat": 0.063993
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1902-01-01T00:00:00.000Z",
+    "timestamp": -2145916800000,
+    "eclLon": 258.440231,
+    "eclLat": -0.046947
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1904-01-01T00:00:00.000Z",
+    "timestamp": -2082844800000,
+    "eclLon": 266.599731,
+    "eclLat": -0.155402
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1905-12-31T00:00:00.000Z",
+    "timestamp": -2019772800000,
+    "eclLon": 274.626867,
+    "eclLat": -0.259785
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1907-12-31T00:00:00.000Z",
+    "timestamp": -1956700800000,
+    "eclLon": 282.542482,
+    "eclLat": -0.358086
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1909-12-30T00:00:00.000Z",
+    "timestamp": -1893628800000,
+    "eclLon": 290.374276,
+    "eclLat": -0.448452
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1911-12-30T00:00:00.000Z",
+    "timestamp": -1830556800000,
+    "eclLon": 298.142138,
+    "eclLat": -0.529075
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1913-12-29T00:00:00.000Z",
+    "timestamp": -1767484800000,
+    "eclLon": 305.860758,
+    "eclLat": -0.598429
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1915-12-29T00:00:00.000Z",
+    "timestamp": -1704412800000,
+    "eclLon": 313.53834,
+    "eclLat": -0.655685
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1917-12-28T00:00:00.000Z",
+    "timestamp": -1641340800000,
+    "eclLon": 321.181786,
+    "eclLat": -0.70023
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1919-12-28T00:00:00.000Z",
+    "timestamp": -1578268800000,
+    "eclLon": 328.804885,
+    "eclLat": -0.732239
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1921-12-27T00:00:00.000Z",
+    "timestamp": -1515196800000,
+    "eclLon": 336.433373,
+    "eclLat": -0.751725
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1923-12-27T00:00:00.000Z",
+    "timestamp": -1452124800000,
+    "eclLon": 344.095198,
+    "eclLat": -0.758424
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1925-12-26T00:00:00.000Z",
+    "timestamp": -1389052800000,
+    "eclLon": 351.813854,
+    "eclLat": -0.751553
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1927-12-26T00:00:00.000Z",
+    "timestamp": -1325980800000,
+    "eclLon": 359.606178,
+    "eclLat": -0.73029
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1929-12-25T00:00:00.000Z",
+    "timestamp": -1262908800000,
+    "eclLon": 7.47906,
+    "eclLat": -0.694356
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1931-12-25T00:00:00.000Z",
+    "timestamp": -1199836800000,
+    "eclLon": 15.438873,
+    "eclLat": -0.644252
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1933-12-24T00:00:00.000Z",
+    "timestamp": -1136764800000,
+    "eclLon": 23.499739,
+    "eclLat": -0.580927
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1935-12-24T00:00:00.000Z",
+    "timestamp": -1073692800000,
+    "eclLon": 31.682035,
+    "eclLat": -0.505456
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1937-12-23T00:00:00.000Z",
+    "timestamp": -1010620800000,
+    "eclLon": 40.006063,
+    "eclLat": -0.418491
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1939-12-23T00:00:00.000Z",
+    "timestamp": -947548800000,
+    "eclLon": 48.487068,
+    "eclLat": -0.320592
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1941-12-22T00:00:00.000Z",
+    "timestamp": -884476800000,
+    "eclLon": 57.129191,
+    "eclLat": -0.212499
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1943-12-22T00:00:00.000Z",
+    "timestamp": -821404800000,
+    "eclLon": 65.926369,
+    "eclLat": -0.096088
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1945-12-21T00:00:00.000Z",
+    "timestamp": -758332800000,
+    "eclLon": 74.8728,
+    "eclLat": 0.025547
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1947-12-21T00:00:00.000Z",
+    "timestamp": -695260800000,
+    "eclLon": 83.964731,
+    "eclLat": 0.148742
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1949-12-20T00:00:00.000Z",
+    "timestamp": -632188800000,
+    "eclLon": 93.198165,
+    "eclLat": 0.269305
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1951-12-20T00:00:00.000Z",
+    "timestamp": -569116800000,
+    "eclLon": 102.566357,
+    "eclLat": 0.383825
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1953-12-19T00:00:00.000Z",
+    "timestamp": -506044800000,
+    "eclLon": 112.052816,
+    "eclLat": 0.48879
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1955-12-19T00:00:00.000Z",
+    "timestamp": -442972800000,
+    "eclLon": 121.62582,
+    "eclLat": 0.581341
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1957-12-18T00:00:00.000Z",
+    "timestamp": -379900800000,
+    "eclLon": 131.246245,
+    "eclLat": 0.658675
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1959-12-18T00:00:00.000Z",
+    "timestamp": -316828800000,
+    "eclLon": 140.878835,
+    "eclLat": 0.718506
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1961-12-17T00:00:00.000Z",
+    "timestamp": -253756800000,
+    "eclLon": 150.493946,
+    "eclLat": 0.758853
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1963-12-17T00:00:00.000Z",
+    "timestamp": -190684800000,
+    "eclLon": 160.070605,
+    "eclLat": 0.778194
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1965-12-16T00:00:00.000Z",
+    "timestamp": -127612800000,
+    "eclLon": 169.593538,
+    "eclLat": 0.775987
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1967-12-16T00:00:00.000Z",
+    "timestamp": -64540800000,
+    "eclLon": 179.042215,
+    "eclLat": 0.752496
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1969-12-15T00:00:00.000Z",
+    "timestamp": -1468800000,
+    "eclLon": 188.390359,
+    "eclLat": 0.709162
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1971-12-15T00:00:00.000Z",
+    "timestamp": 61603200000,
+    "eclLon": 197.612309,
+    "eclLat": 0.648304
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1973-12-14T00:00:00.000Z",
+    "timestamp": 124675200000,
+    "eclLon": 206.690285,
+    "eclLat": 0.572681
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1975-12-14T00:00:00.000Z",
+    "timestamp": 187747200000,
+    "eclLon": 215.615621,
+    "eclLat": 0.485032
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1977-12-13T00:00:00.000Z",
+    "timestamp": 250819200000,
+    "eclLon": 224.395535,
+    "eclLat": 0.387569
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1979-12-13T00:00:00.000Z",
+    "timestamp": 313891200000,
+    "eclLon": 233.041993,
+    "eclLat": 0.282142
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1981-12-12T00:00:00.000Z",
+    "timestamp": 376963200000,
+    "eclLon": 241.563539,
+    "eclLat": 0.171106
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1983-12-12T00:00:00.000Z",
+    "timestamp": 440035200000,
+    "eclLon": 249.962267,
+    "eclLat": 0.057221
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1985-12-11T00:00:00.000Z",
+    "timestamp": 503107200000,
+    "eclLon": 258.238455,
+    "eclLat": -0.056073
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1987-12-11T00:00:00.000Z",
+    "timestamp": 566179200000,
+    "eclLon": 266.394909,
+    "eclLat": -0.165704
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1989-12-10T00:00:00.000Z",
+    "timestamp": 629251200000,
+    "eclLon": 274.442417,
+    "eclLat": -0.269297
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1991-12-10T00:00:00.000Z",
+    "timestamp": 692323200000,
+    "eclLon": 282.403401,
+    "eclLat": -0.365608
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1993-12-09T00:00:00.000Z",
+    "timestamp": 755395200000,
+    "eclLon": 290.298883,
+    "eclLat": -0.454115
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1995-12-09T00:00:00.000Z",
+    "timestamp": 818467200000,
+    "eclLon": 298.14542,
+    "eclLat": -0.534223
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1997-12-08T00:00:00.000Z",
+    "timestamp": 881539200000,
+    "eclLon": 305.95397,
+    "eclLat": -0.605148
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "1999-12-08T00:00:00.000Z",
+    "timestamp": 944611200000,
+    "eclLon": 313.731199,
+    "eclLat": -0.665281
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2001-12-07T00:00:00.000Z",
+    "timestamp": 1007683200000,
+    "eclLon": 321.486405,
+    "eclLat": -0.713111
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2003-12-07T00:00:00.000Z",
+    "timestamp": 1070755200000,
+    "eclLon": 329.23891,
+    "eclLat": -0.747363
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2005-12-06T00:00:00.000Z",
+    "timestamp": 1133827200000,
+    "eclLon": 337.013214,
+    "eclLat": -0.767413
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2007-12-06T00:00:00.000Z",
+    "timestamp": 1196899200000,
+    "eclLon": 344.830897,
+    "eclLat": -0.773079
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2009-12-05T00:00:00.000Z",
+    "timestamp": 1259971200000,
+    "eclLon": 352.708691,
+    "eclLat": -0.764363
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2011-12-05T00:00:00.000Z",
+    "timestamp": 1323043200000,
+    "eclLon": 0.654025,
+    "eclLat": -0.741311
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2013-12-04T00:00:00.000Z",
+    "timestamp": 1386115200000,
+    "eclLon": 8.669745,
+    "eclLat": -0.703992
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2015-12-04T00:00:00.000Z",
+    "timestamp": 1449187200000,
+    "eclLon": 16.766104,
+    "eclLat": -0.652437
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2017-12-03T00:00:00.000Z",
+    "timestamp": 1512259200000,
+    "eclLon": 24.961092,
+    "eclLat": -0.586845
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2019-12-03T00:00:00.000Z",
+    "timestamp": 1575331200000,
+    "eclLon": 33.275913,
+    "eclLat": -0.507675
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2021-12-02T00:00:00.000Z",
+    "timestamp": 1638403200000,
+    "eclLon": 41.726804,
+    "eclLat": -0.416026
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2023-12-02T00:00:00.000Z",
+    "timestamp": 1701475200000,
+    "eclLon": 50.321369,
+    "eclLat": -0.31365
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2025-12-01T00:00:00.000Z",
+    "timestamp": 1764547200000,
+    "eclLon": 59.051132,
+    "eclLat": -0.202959
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2027-12-01T00:00:00.000Z",
+    "timestamp": 1827619200000,
+    "eclLon": 67.905191,
+    "eclLat": -0.086924
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2029-11-30T00:00:00.000Z",
+    "timestamp": 1890691200000,
+    "eclLon": 76.874776,
+    "eclLat": 0.031982
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2031-11-30T00:00:00.000Z",
+    "timestamp": 1953763200000,
+    "eclLon": 85.955735,
+    "eclLat": 0.151163
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2033-11-29T00:00:00.000Z",
+    "timestamp": 2016835200000,
+    "eclLon": 95.145723,
+    "eclLat": 0.268589
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2035-11-29T00:00:00.000Z",
+    "timestamp": 2079907200000,
+    "eclLon": 104.439923,
+    "eclLat": 0.38141
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2037-11-28T00:00:00.000Z",
+    "timestamp": 2142979200000,
+    "eclLon": 113.819583,
+    "eclLat": 0.486054
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2039-11-28T00:00:00.000Z",
+    "timestamp": 2206051200000,
+    "eclLon": 123.25378,
+    "eclLat": 0.578292
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2041-11-27T00:00:00.000Z",
+    "timestamp": 2269123200000,
+    "eclLon": 132.711491,
+    "eclLat": 0.654152
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2043-11-27T00:00:00.000Z",
+    "timestamp": 2332195200000,
+    "eclLon": 142.163766,
+    "eclLat": 0.711059
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2045-11-26T00:00:00.000Z",
+    "timestamp": 2395267200000,
+    "eclLon": 151.589133,
+    "eclLat": 0.747643
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2047-11-26T00:00:00.000Z",
+    "timestamp": 2458339200000,
+    "eclLon": 160.97521,
+    "eclLat": 0.763955
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2049-11-25T00:00:00.000Z",
+    "timestamp": 2521411200000,
+    "eclLon": 170.309867,
+    "eclLat": 0.760269
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2051-11-25T00:00:00.000Z",
+    "timestamp": 2584483200000,
+    "eclLon": 179.573035,
+    "eclLat": 0.737135
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2053-11-24T00:00:00.000Z",
+    "timestamp": 2647555200000,
+    "eclLon": 188.743981,
+    "eclLat": 0.695201
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2055-11-24T00:00:00.000Z",
+    "timestamp": 2710627200000,
+    "eclLon": 197.806054,
+    "eclLat": 0.635674
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2057-11-23T00:00:00.000Z",
+    "timestamp": 2773699200000,
+    "eclLon": 206.747859,
+    "eclLat": 0.560555
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2059-11-23T00:00:00.000Z",
+    "timestamp": 2836771200000,
+    "eclLon": 215.569813,
+    "eclLat": 0.472734
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2061-11-22T00:00:00.000Z",
+    "timestamp": 2899843200000,
+    "eclLon": 224.282247,
+    "eclLat": 0.375118
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2063-11-22T00:00:00.000Z",
+    "timestamp": 2962915200000,
+    "eclLon": 232.891354,
+    "eclLat": 0.270807
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2065-11-21T00:00:00.000Z",
+    "timestamp": 3025987200000,
+    "eclLon": 241.397558,
+    "eclLat": 0.162217
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2067-11-21T00:00:00.000Z",
+    "timestamp": 3089059200000,
+    "eclLon": 249.798565,
+    "eclLat": 0.051684
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2069-11-20T00:00:00.000Z",
+    "timestamp": 3152131200000,
+    "eclLon": 258.093537,
+    "eclLat": -0.059049
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2071-11-20T00:00:00.000Z",
+    "timestamp": 3215203200000,
+    "eclLon": 266.286344,
+    "eclLat": -0.168246
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2073-11-19T00:00:00.000Z",
+    "timestamp": 3278275200000,
+    "eclLon": 274.395745,
+    "eclLat": -0.274161
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2075-11-19T00:00:00.000Z",
+    "timestamp": 3341347200000,
+    "eclLon": 282.444061,
+    "eclLat": -0.374942
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2077-11-18T00:00:00.000Z",
+    "timestamp": 3404419200000,
+    "eclLon": 290.448178,
+    "eclLat": -0.468128
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2079-11-18T00:00:00.000Z",
+    "timestamp": 3467491200000,
+    "eclLon": 298.419029,
+    "eclLat": -0.551708
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2081-11-17T00:00:00.000Z",
+    "timestamp": 3530563200000,
+    "eclLon": 306.361039,
+    "eclLat": -0.623644
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2083-11-17T00:00:00.000Z",
+    "timestamp": 3593635200000,
+    "eclLon": 314.276372,
+    "eclLat": -0.682935
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2085-11-16T00:00:00.000Z",
+    "timestamp": 3656707200000,
+    "eclLon": 322.174853,
+    "eclLat": -0.729046
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2087-11-16T00:00:00.000Z",
+    "timestamp": 3719779200000,
+    "eclLon": 330.078384,
+    "eclLat": -0.761968
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2089-11-15T00:00:00.000Z",
+    "timestamp": 3782851200000,
+    "eclLon": 338.00811,
+    "eclLat": -0.781513
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2091-11-15T00:00:00.000Z",
+    "timestamp": 3845923200000,
+    "eclLon": 345.983726,
+    "eclLat": -0.78698
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2093-11-14T00:00:00.000Z",
+    "timestamp": 3908995200000,
+    "eclLon": 354.016692,
+    "eclLat": -0.77744
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2095-11-14T00:00:00.000Z",
+    "timestamp": 3972067200000,
+    "eclLon": 2.109875,
+    "eclLat": -0.75219
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2097-11-13T00:00:00.000Z",
+    "timestamp": 4035139200000,
+    "eclLon": 10.264463,
+    "eclLat": -0.711382
+  },
+  {
+    "planet": "uranus",
+    "dateISO": "2099-11-13T00:00:00.000Z",
+    "timestamp": 4098211200000,
+    "eclLon": 18.491599,
+    "eclLat": -0.655955
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1900-01-01T00:00:00.000Z",
+    "timestamp": -2208988800000,
+    "eclLon": 85.218646,
+    "eclLat": -1.30028
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1902-01-01T00:00:00.000Z",
+    "timestamp": -2145916800000,
+    "eclLon": 89.818818,
+    "eclLat": -1.198456
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1904-01-01T00:00:00.000Z",
+    "timestamp": -2082844800000,
+    "eclLon": 94.418984,
+    "eclLat": -1.088203
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1905-12-31T00:00:00.000Z",
+    "timestamp": -2019772800000,
+    "eclLon": 99.024962,
+    "eclLat": -0.969821
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1907-12-31T00:00:00.000Z",
+    "timestamp": -1956700800000,
+    "eclLon": 103.632625,
+    "eclLat": -0.844753
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1909-12-30T00:00:00.000Z",
+    "timestamp": -1893628800000,
+    "eclLon": 108.232632,
+    "eclLat": -0.7147
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1911-12-30T00:00:00.000Z",
+    "timestamp": -1830556800000,
+    "eclLon": 112.818436,
+    "eclLat": -0.581235
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1913-12-29T00:00:00.000Z",
+    "timestamp": -1767484800000,
+    "eclLon": 117.389744,
+    "eclLat": -0.445661
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1915-12-29T00:00:00.000Z",
+    "timestamp": -1704412800000,
+    "eclLon": 121.949799,
+    "eclLat": -0.308507
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1917-12-28T00:00:00.000Z",
+    "timestamp": -1641340800000,
+    "eclLon": 126.503921,
+    "eclLat": -0.170419
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1919-12-28T00:00:00.000Z",
+    "timestamp": -1578268800000,
+    "eclLon": 131.049956,
+    "eclLat": -0.031659
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1921-12-27T00:00:00.000Z",
+    "timestamp": -1515196800000,
+    "eclLon": 135.579508,
+    "eclLat": 0.107024
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1923-12-27T00:00:00.000Z",
+    "timestamp": -1452124800000,
+    "eclLon": 140.086328,
+    "eclLat": 0.245003
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1925-12-26T00:00:00.000Z",
+    "timestamp": -1389052800000,
+    "eclLon": 144.569255,
+    "eclLat": 0.381186
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1927-12-26T00:00:00.000Z",
+    "timestamp": -1325980800000,
+    "eclLon": 149.033725,
+    "eclLat": 0.514434
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1929-12-25T00:00:00.000Z",
+    "timestamp": -1262908800000,
+    "eclLon": 153.487829,
+    "eclLat": 0.643654
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1931-12-25T00:00:00.000Z",
+    "timestamp": -1199836800000,
+    "eclLon": 157.933821,
+    "eclLat": 0.767807
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1933-12-24T00:00:00.000Z",
+    "timestamp": -1136764800000,
+    "eclLon": 162.365044,
+    "eclLat": 0.886277
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1935-12-24T00:00:00.000Z",
+    "timestamp": -1073692800000,
+    "eclLon": 166.773138,
+    "eclLat": 0.998601
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1937-12-23T00:00:00.000Z",
+    "timestamp": -1010620800000,
+    "eclLon": 171.153547,
+    "eclLat": 1.104555
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1939-12-23T00:00:00.000Z",
+    "timestamp": -947548800000,
+    "eclLon": 175.50826,
+    "eclLat": 1.203797
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1941-12-22T00:00:00.000Z",
+    "timestamp": -884476800000,
+    "eclLon": 179.847984,
+    "eclLat": 1.295784
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1943-12-22T00:00:00.000Z",
+    "timestamp": -821404800000,
+    "eclLon": 184.180033,
+    "eclLat": 1.379817
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1945-12-21T00:00:00.000Z",
+    "timestamp": -758332800000,
+    "eclLon": 188.504168,
+    "eclLat": 1.455292
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1947-12-21T00:00:00.000Z",
+    "timestamp": -695260800000,
+    "eclLon": 192.814256,
+    "eclLat": 1.52187
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1949-12-20T00:00:00.000Z",
+    "timestamp": -632188800000,
+    "eclLon": 197.104676,
+    "eclLat": 1.579558
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1951-12-20T00:00:00.000Z",
+    "timestamp": -569116800000,
+    "eclLon": 201.37345,
+    "eclLat": 1.628383
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1953-12-19T00:00:00.000Z",
+    "timestamp": -506044800000,
+    "eclLon": 205.627196,
+    "eclLat": 1.668365
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1955-12-19T00:00:00.000Z",
+    "timestamp": -442972800000,
+    "eclLon": 209.873539,
+    "eclLat": 1.699191
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1957-12-18T00:00:00.000Z",
+    "timestamp": -379900800000,
+    "eclLon": 214.113089,
+    "eclLat": 1.720576
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1959-12-18T00:00:00.000Z",
+    "timestamp": -316828800000,
+    "eclLon": 218.342394,
+    "eclLat": 1.732074
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1961-12-17T00:00:00.000Z",
+    "timestamp": -253756800000,
+    "eclLon": 222.557062,
+    "eclLat": 1.733401
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1963-12-17T00:00:00.000Z",
+    "timestamp": -190684800000,
+    "eclLon": 226.755514,
+    "eclLat": 1.724741
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1965-12-16T00:00:00.000Z",
+    "timestamp": -127612800000,
+    "eclLon": 230.944265,
+    "eclLat": 1.706336
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1967-12-16T00:00:00.000Z",
+    "timestamp": -64540800000,
+    "eclLon": 235.132828,
+    "eclLat": 1.678941
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1969-12-15T00:00:00.000Z",
+    "timestamp": -1468800000,
+    "eclLon": 239.324879,
+    "eclLat": 1.643046
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1971-12-15T00:00:00.000Z",
+    "timestamp": 61603200000,
+    "eclLon": 243.516432,
+    "eclLat": 1.599309
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1973-12-14T00:00:00.000Z",
+    "timestamp": 124675200000,
+    "eclLon": 247.702356,
+    "eclLat": 1.547763
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1975-12-14T00:00:00.000Z",
+    "timestamp": 187747200000,
+    "eclLon": 251.877084,
+    "eclLat": 1.48819
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1977-12-13T00:00:00.000Z",
+    "timestamp": 250819200000,
+    "eclLon": 256.044411,
+    "eclLat": 1.42001
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1979-12-13T00:00:00.000Z",
+    "timestamp": 313891200000,
+    "eclLon": 260.21487,
+    "eclLat": 1.342858
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1981-12-12T00:00:00.000Z",
+    "timestamp": 376963200000,
+    "eclLon": 264.397282,
+    "eclLat": 1.257023
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1983-12-12T00:00:00.000Z",
+    "timestamp": 440035200000,
+    "eclLon": 268.592458,
+    "eclLat": 1.163668
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1985-12-11T00:00:00.000Z",
+    "timestamp": 503107200000,
+    "eclLon": 272.795781,
+    "eclLat": 1.064288
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1987-12-11T00:00:00.000Z",
+    "timestamp": 566179200000,
+    "eclLon": 277.000658,
+    "eclLat": 0.959938
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1989-12-10T00:00:00.000Z",
+    "timestamp": 629251200000,
+    "eclLon": 281.205086,
+    "eclLat": 0.851249
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1991-12-10T00:00:00.000Z",
+    "timestamp": 692323200000,
+    "eclLon": 285.416165,
+    "eclLat": 0.738251
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1993-12-09T00:00:00.000Z",
+    "timestamp": 755395200000,
+    "eclLon": 289.640687,
+    "eclLat": 0.620723
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1995-12-09T00:00:00.000Z",
+    "timestamp": 818467200000,
+    "eclLon": 293.88191,
+    "eclLat": 0.498683
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1997-12-08T00:00:00.000Z",
+    "timestamp": 881539200000,
+    "eclLon": 298.137812,
+    "eclLat": 0.372307
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "1999-12-08T00:00:00.000Z",
+    "timestamp": 944611200000,
+    "eclLon": 302.402847,
+    "eclLat": 0.242618
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2001-12-07T00:00:00.000Z",
+    "timestamp": 1007683200000,
+    "eclLon": 306.674832,
+    "eclLat": 0.110595
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2003-12-07T00:00:00.000Z",
+    "timestamp": 1070755200000,
+    "eclLon": 310.959529,
+    "eclLat": -0.02252
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2005-12-06T00:00:00.000Z",
+    "timestamp": 1133827200000,
+    "eclLon": 315.265226,
+    "eclLat": -0.155731
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2007-12-06T00:00:00.000Z",
+    "timestamp": 1196899200000,
+    "eclLon": 319.59548,
+    "eclLat": -0.288229
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2009-12-05T00:00:00.000Z",
+    "timestamp": 1259971200000,
+    "eclLon": 323.949224,
+    "eclLat": -0.419368
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2011-12-05T00:00:00.000Z",
+    "timestamp": 1323043200000,
+    "eclLon": 328.318396,
+    "eclLat": -0.54878
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2013-12-04T00:00:00.000Z",
+    "timestamp": 1386115200000,
+    "eclLon": 332.696338,
+    "eclLat": -0.676025
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2015-12-04T00:00:00.000Z",
+    "timestamp": 1449187200000,
+    "eclLon": 337.08625,
+    "eclLat": -0.800746
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2017-12-03T00:00:00.000Z",
+    "timestamp": 1512259200000,
+    "eclLon": 341.496499,
+    "eclLat": -0.922064
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2019-12-03T00:00:00.000Z",
+    "timestamp": 1575331200000,
+    "eclLon": 345.934779,
+    "eclLat": -1.038933
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2021-12-02T00:00:00.000Z",
+    "timestamp": 1638403200000,
+    "eclLon": 350.402528,
+    "eclLat": -1.150202
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2023-12-02T00:00:00.000Z",
+    "timestamp": 1701475200000,
+    "eclLon": 354.894141,
+    "eclLat": -1.25493
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2025-12-01T00:00:00.000Z",
+    "timestamp": 1764547200000,
+    "eclLon": 359.398195,
+    "eclLat": -1.352526
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2027-12-01T00:00:00.000Z",
+    "timestamp": 1827619200000,
+    "eclLon": 3.912004,
+    "eclLat": -1.442546
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2029-11-30T00:00:00.000Z",
+    "timestamp": 1890691200000,
+    "eclLon": 8.438705,
+    "eclLat": -1.524509
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2031-11-30T00:00:00.000Z",
+    "timestamp": 1953763200000,
+    "eclLon": 12.983856,
+    "eclLat": -1.597801
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2033-11-29T00:00:00.000Z",
+    "timestamp": 2016835200000,
+    "eclLon": 17.55066,
+    "eclLat": -1.661598
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2035-11-29T00:00:00.000Z",
+    "timestamp": 2079907200000,
+    "eclLon": 22.136531,
+    "eclLat": -1.715124
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2037-11-28T00:00:00.000Z",
+    "timestamp": 2142979200000,
+    "eclLon": 26.732358,
+    "eclLat": -1.757823
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2039-11-28T00:00:00.000Z",
+    "timestamp": 2206051200000,
+    "eclLon": 31.332636,
+    "eclLat": -1.789423
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2041-11-27T00:00:00.000Z",
+    "timestamp": 2269123200000,
+    "eclLon": 35.939333,
+    "eclLat": -1.810006
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2043-11-27T00:00:00.000Z",
+    "timestamp": 2332195200000,
+    "eclLon": 40.5571,
+    "eclLat": -1.819608
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2045-11-26T00:00:00.000Z",
+    "timestamp": 2395267200000,
+    "eclLon": 45.188952,
+    "eclLat": -1.818479
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2047-11-26T00:00:00.000Z",
+    "timestamp": 2458339200000,
+    "eclLon": 49.832744,
+    "eclLat": -1.806488
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2049-11-25T00:00:00.000Z",
+    "timestamp": 2521411200000,
+    "eclLon": 54.477724,
+    "eclLat": -1.783636
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2051-11-25T00:00:00.000Z",
+    "timestamp": 2584483200000,
+    "eclLon": 59.115397,
+    "eclLat": -1.74936
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2053-11-24T00:00:00.000Z",
+    "timestamp": 2647555200000,
+    "eclLon": 63.744071,
+    "eclLat": -1.70333
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2055-11-24T00:00:00.000Z",
+    "timestamp": 2710627200000,
+    "eclLon": 68.369657,
+    "eclLat": -1.645536
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2057-11-23T00:00:00.000Z",
+    "timestamp": 2773699200000,
+    "eclLon": 72.998155,
+    "eclLat": -1.57659
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2059-11-23T00:00:00.000Z",
+    "timestamp": 2836771200000,
+    "eclLon": 77.632103,
+    "eclLat": -1.497854
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2061-11-22T00:00:00.000Z",
+    "timestamp": 2899843200000,
+    "eclLon": 82.262594,
+    "eclLat": -1.410645
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2063-11-22T00:00:00.000Z",
+    "timestamp": 2962915200000,
+    "eclLon": 86.878556,
+    "eclLat": -1.316335
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2065-11-21T00:00:00.000Z",
+    "timestamp": 3025987200000,
+    "eclLon": 91.473667,
+    "eclLat": -1.21524
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2067-11-21T00:00:00.000Z",
+    "timestamp": 3089059200000,
+    "eclLon": 96.048127,
+    "eclLat": -1.107641
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2069-11-20T00:00:00.000Z",
+    "timestamp": 3152131200000,
+    "eclLon": 100.607941,
+    "eclLat": -0.993208
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2071-11-20T00:00:00.000Z",
+    "timestamp": 3215203200000,
+    "eclLon": 105.159274,
+    "eclLat": -0.872156
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2073-11-19T00:00:00.000Z",
+    "timestamp": 3278275200000,
+    "eclLon": 109.700141,
+    "eclLat": -0.745426
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2075-11-19T00:00:00.000Z",
+    "timestamp": 3341347200000,
+    "eclLon": 114.222756,
+    "eclLat": -0.614356
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2077-11-18T00:00:00.000Z",
+    "timestamp": 3404419200000,
+    "eclLon": 118.721883,
+    "eclLat": -0.480736
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2079-11-18T00:00:00.000Z",
+    "timestamp": 3467491200000,
+    "eclLon": 123.196786,
+    "eclLat": -0.345701
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2081-11-17T00:00:00.000Z",
+    "timestamp": 3530563200000,
+    "eclLon": 127.651733,
+    "eclLat": -0.210403
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2083-11-17T00:00:00.000Z",
+    "timestamp": 3593635200000,
+    "eclLon": 132.094357,
+    "eclLat": -0.075262
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2085-11-16T00:00:00.000Z",
+    "timestamp": 3656707200000,
+    "eclLon": 136.524208,
+    "eclLat": 0.059114
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2087-11-16T00:00:00.000Z",
+    "timestamp": 3719779200000,
+    "eclLon": 140.934515,
+    "eclLat": 0.192378
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2089-11-15T00:00:00.000Z",
+    "timestamp": 3782851200000,
+    "eclLon": 145.31914,
+    "eclLat": 0.324112
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2091-11-15T00:00:00.000Z",
+    "timestamp": 3845923200000,
+    "eclLon": 149.67744,
+    "eclLat": 0.453594
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2093-11-14T00:00:00.000Z",
+    "timestamp": 3908995200000,
+    "eclLon": 154.014393,
+    "eclLat": 0.580034
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2095-11-14T00:00:00.000Z",
+    "timestamp": 3972067200000,
+    "eclLon": 158.3399,
+    "eclLat": 0.702347
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2097-11-13T00:00:00.000Z",
+    "timestamp": 4035139200000,
+    "eclLon": 162.659032,
+    "eclLat": 0.819621
+  },
+  {
+    "planet": "neptune",
+    "dateISO": "2099-11-13T00:00:00.000Z",
+    "timestamp": 4098211200000,
+    "eclLon": 166.966184,
+    "eclLat": 0.931068
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1900-01-01T00:00:00.000Z",
+    "timestamp": -2208988800000,
+    "eclLon": 75.251367,
+    "eclLat": -9.77758
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1902-01-01T00:00:00.000Z",
+    "timestamp": -2145916800000,
+    "eclLon": 77.278623,
+    "eclLat": -9.27521
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1904-01-01T00:00:00.000Z",
+    "timestamp": -2082844800000,
+    "eclLon": 79.328402,
+    "eclLat": -8.753489
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1905-12-31T00:00:00.000Z",
+    "timestamp": -2019772800000,
+    "eclLon": 81.407046,
+    "eclLat": -8.212585
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1907-12-31T00:00:00.000Z",
+    "timestamp": -1956700800000,
+    "eclLon": 83.513379,
+    "eclLat": -7.653324
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1909-12-30T00:00:00.000Z",
+    "timestamp": -1893628800000,
+    "eclLon": 85.644265,
+    "eclLat": -7.075972
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1911-12-30T00:00:00.000Z",
+    "timestamp": -1830556800000,
+    "eclLon": 87.799405,
+    "eclLat": -6.480441
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1913-12-29T00:00:00.000Z",
+    "timestamp": -1767484800000,
+    "eclLon": 89.983632,
+    "eclLat": -5.866648
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1915-12-29T00:00:00.000Z",
+    "timestamp": -1704412800000,
+    "eclLon": 92.203041,
+    "eclLat": -5.234342
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1917-12-28T00:00:00.000Z",
+    "timestamp": -1641340800000,
+    "eclLon": 94.462512,
+    "eclLat": -4.583873
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1919-12-28T00:00:00.000Z",
+    "timestamp": -1578268800000,
+    "eclLon": 96.760334,
+    "eclLat": -3.914659
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1921-12-27T00:00:00.000Z",
+    "timestamp": -1515196800000,
+    "eclLon": 99.09317,
+    "eclLat": -3.226066
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1923-12-27T00:00:00.000Z",
+    "timestamp": -1452124800000,
+    "eclLon": 101.462542,
+    "eclLat": -2.517279
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1925-12-26T00:00:00.000Z",
+    "timestamp": -1389052800000,
+    "eclLon": 103.874832,
+    "eclLat": -1.788316
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1927-12-26T00:00:00.000Z",
+    "timestamp": -1325980800000,
+    "eclLon": 106.340841,
+    "eclLat": -1.039965
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1929-12-25T00:00:00.000Z",
+    "timestamp": -1262908800000,
+    "eclLon": 108.868772,
+    "eclLat": -0.27343
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1931-12-25T00:00:00.000Z",
+    "timestamp": -1199836800000,
+    "eclLon": 111.459333,
+    "eclLat": 0.509899
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1933-12-24T00:00:00.000Z",
+    "timestamp": -1136764800000,
+    "eclLon": 114.108677,
+    "eclLat": 1.309534
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1935-12-24T00:00:00.000Z",
+    "timestamp": -1073692800000,
+    "eclLon": 116.816205,
+    "eclLat": 2.124597
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1937-12-23T00:00:00.000Z",
+    "timestamp": -1010620800000,
+    "eclLon": 119.586796,
+    "eclLat": 2.954455
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1939-12-23T00:00:00.000Z",
+    "timestamp": -947548800000,
+    "eclLon": 122.430691,
+    "eclLat": 3.798037
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1941-12-22T00:00:00.000Z",
+    "timestamp": -884476800000,
+    "eclLon": 125.360378,
+    "eclLat": 4.654287
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1943-12-22T00:00:00.000Z",
+    "timestamp": -821404800000,
+    "eclLon": 128.380498,
+    "eclLat": 5.521429
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1945-12-21T00:00:00.000Z",
+    "timestamp": -758332800000,
+    "eclLon": 131.491129,
+    "eclLat": 6.396641
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1947-12-21T00:00:00.000Z",
+    "timestamp": -695260800000,
+    "eclLon": 134.692383,
+    "eclLat": 7.276186
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1949-12-20T00:00:00.000Z",
+    "timestamp": -632188800000,
+    "eclLon": 137.988222,
+    "eclLat": 8.155161
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1951-12-20T00:00:00.000Z",
+    "timestamp": -569116800000,
+    "eclLon": 141.387299,
+    "eclLat": 9.028561
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1953-12-19T00:00:00.000Z",
+    "timestamp": -506044800000,
+    "eclLon": 144.900731,
+    "eclLat": 9.891772
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1955-12-19T00:00:00.000Z",
+    "timestamp": -442972800000,
+    "eclLon": 148.533059,
+    "eclLat": 10.740775
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1957-12-18T00:00:00.000Z",
+    "timestamp": -379900800000,
+    "eclLon": 152.281679,
+    "eclLat": 11.570168
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1959-12-18T00:00:00.000Z",
+    "timestamp": -316828800000,
+    "eclLon": 156.145181,
+    "eclLat": 12.37279
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1961-12-17T00:00:00.000Z",
+    "timestamp": -253756800000,
+    "eclLon": 160.125156,
+    "eclLat": 13.139657
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1963-12-17T00:00:00.000Z",
+    "timestamp": -190684800000,
+    "eclLon": 164.228272,
+    "eclLat": 13.860279
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1965-12-16T00:00:00.000Z",
+    "timestamp": -127612800000,
+    "eclLon": 168.463658,
+    "eclLat": 14.525038
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1967-12-16T00:00:00.000Z",
+    "timestamp": -64540800000,
+    "eclLon": 172.832613,
+    "eclLat": 15.125737
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1969-12-15T00:00:00.000Z",
+    "timestamp": -1468800000,
+    "eclLon": 177.32642,
+    "eclLat": 15.654004
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1971-12-15T00:00:00.000Z",
+    "timestamp": 61603200000,
+    "eclLon": 181.930517,
+    "eclLat": 16.100132
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1973-12-14T00:00:00.000Z",
+    "timestamp": 124675200000,
+    "eclLon": 186.631836,
+    "eclLat": 16.453862
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1975-12-14T00:00:00.000Z",
+    "timestamp": 187747200000,
+    "eclLon": 191.420211,
+    "eclLat": 16.704594
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1977-12-13T00:00:00.000Z",
+    "timestamp": 250819200000,
+    "eclLon": 196.292219,
+    "eclLat": 16.843438
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1979-12-13T00:00:00.000Z",
+    "timestamp": 313891200000,
+    "eclLon": 201.239532,
+    "eclLat": 16.86535
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1981-12-12T00:00:00.000Z",
+    "timestamp": 376963200000,
+    "eclLon": 206.245159,
+    "eclLat": 16.767872
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1983-12-12T00:00:00.000Z",
+    "timestamp": 440035200000,
+    "eclLon": 211.285062,
+    "eclLat": 16.549342
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1985-12-11T00:00:00.000Z",
+    "timestamp": 503107200000,
+    "eclLon": 216.333232,
+    "eclLat": 16.209388
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1987-12-11T00:00:00.000Z",
+    "timestamp": 566179200000,
+    "eclLon": 221.367776,
+    "eclLat": 15.748927
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1989-12-10T00:00:00.000Z",
+    "timestamp": 629251200000,
+    "eclLon": 226.375466,
+    "eclLat": 15.17153
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1991-12-10T00:00:00.000Z",
+    "timestamp": 692323200000,
+    "eclLon": 231.346374,
+    "eclLat": 14.484696
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1993-12-09T00:00:00.000Z",
+    "timestamp": 755395200000,
+    "eclLon": 236.26501,
+    "eclLat": 13.698437
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1995-12-09T00:00:00.000Z",
+    "timestamp": 818467200000,
+    "eclLon": 241.113741,
+    "eclLat": 12.823532
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1997-12-08T00:00:00.000Z",
+    "timestamp": 881539200000,
+    "eclLon": 245.875414,
+    "eclLat": 11.87033
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "1999-12-08T00:00:00.000Z",
+    "timestamp": 944611200000,
+    "eclLon": 250.536998,
+    "eclLat": 10.849345
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2001-12-07T00:00:00.000Z",
+    "timestamp": 1007683200000,
+    "eclLon": 255.09644,
+    "eclLat": 9.771611
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2003-12-07T00:00:00.000Z",
+    "timestamp": 1070755200000,
+    "eclLon": 259.557669,
+    "eclLat": 8.650167
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2005-12-06T00:00:00.000Z",
+    "timestamp": 1133827200000,
+    "eclLon": 263.922043,
+    "eclLat": 7.498238
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2007-12-06T00:00:00.000Z",
+    "timestamp": 1196899200000,
+    "eclLon": 268.184592,
+    "eclLat": 6.327973
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2009-12-05T00:00:00.000Z",
+    "timestamp": 1259971200000,
+    "eclLon": 272.33895,
+    "eclLat": 5.149683
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2011-12-05T00:00:00.000Z",
+    "timestamp": 1323043200000,
+    "eclLon": 276.378094,
+    "eclLat": 3.971297
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2013-12-04T00:00:00.000Z",
+    "timestamp": 1386115200000,
+    "eclLon": 280.304157,
+    "eclLat": 2.7996
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2015-12-04T00:00:00.000Z",
+    "timestamp": 1449187200000,
+    "eclLon": 284.127859,
+    "eclLat": 1.640922
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2017-12-03T00:00:00.000Z",
+    "timestamp": 1512259200000,
+    "eclLon": 287.859399,
+    "eclLat": 0.50162
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2019-12-03T00:00:00.000Z",
+    "timestamp": 1575331200000,
+    "eclLon": 291.504062,
+    "eclLat": -0.612943
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2021-12-02T00:00:00.000Z",
+    "timestamp": 1638403200000,
+    "eclLon": 295.061127,
+    "eclLat": -1.697969
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2023-12-02T00:00:00.000Z",
+    "timestamp": 1701475200000,
+    "eclLon": 298.527379,
+    "eclLat": -2.749508
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2025-12-01T00:00:00.000Z",
+    "timestamp": 1764547200000,
+    "eclLon": 301.902482,
+    "eclLat": -3.76453
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2027-12-01T00:00:00.000Z",
+    "timestamp": 1827619200000,
+    "eclLon": 305.194926,
+    "eclLat": -4.740674
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2029-11-30T00:00:00.000Z",
+    "timestamp": 1890691200000,
+    "eclLon": 308.413336,
+    "eclLat": -5.676941
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2031-11-30T00:00:00.000Z",
+    "timestamp": 1953763200000,
+    "eclLon": 311.563382,
+    "eclLat": -6.573142
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2033-11-29T00:00:00.000Z",
+    "timestamp": 2016835200000,
+    "eclLon": 314.64604,
+    "eclLat": -7.430034
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2035-11-29T00:00:00.000Z",
+    "timestamp": 2079907200000,
+    "eclLon": 317.659055,
+    "eclLat": -8.247667
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2037-11-28T00:00:00.000Z",
+    "timestamp": 2142979200000,
+    "eclLon": 320.603771,
+    "eclLat": -9.025082
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2039-11-28T00:00:00.000Z",
+    "timestamp": 2206051200000,
+    "eclLon": 323.48801,
+    "eclLat": -9.761322
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2041-11-27T00:00:00.000Z",
+    "timestamp": 2269123200000,
+    "eclLon": 326.321002,
+    "eclLat": -10.456354
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2043-11-27T00:00:00.000Z",
+    "timestamp": 2332195200000,
+    "eclLon": 329.108148,
+    "eclLat": -11.111333
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2045-11-26T00:00:00.000Z",
+    "timestamp": 2395267200000,
+    "eclLon": 331.849344,
+    "eclLat": -11.727909
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2047-11-26T00:00:00.000Z",
+    "timestamp": 2458339200000,
+    "eclLon": 334.539237,
+    "eclLat": -12.307868
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2049-11-25T00:00:00.000Z",
+    "timestamp": 2521411200000,
+    "eclLon": 337.173911,
+    "eclLat": -12.851451
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2051-11-25T00:00:00.000Z",
+    "timestamp": 2584483200000,
+    "eclLon": 339.759035,
+    "eclLat": -13.358661
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2053-11-24T00:00:00.000Z",
+    "timestamp": 2647555200000,
+    "eclLon": 342.302901,
+    "eclLat": -13.83028
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2055-11-24T00:00:00.000Z",
+    "timestamp": 2710627200000,
+    "eclLon": 344.813564,
+    "eclLat": -14.268005
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2057-11-23T00:00:00.000Z",
+    "timestamp": 2773699200000,
+    "eclLon": 347.293132,
+    "eclLat": -14.673781
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2059-11-23T00:00:00.000Z",
+    "timestamp": 2836771200000,
+    "eclLon": 349.738066,
+    "eclLat": -15.049135
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2061-11-22T00:00:00.000Z",
+    "timestamp": 2899843200000,
+    "eclLon": 352.14251,
+    "eclLat": -15.394097
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2063-11-22T00:00:00.000Z",
+    "timestamp": 2962915200000,
+    "eclLon": 354.508295,
+    "eclLat": -15.70808
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2065-11-21T00:00:00.000Z",
+    "timestamp": 3025987200000,
+    "eclLon": 356.841198,
+    "eclLat": -15.991523
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2067-11-21T00:00:00.000Z",
+    "timestamp": 3089059200000,
+    "eclLon": 359.146663,
+    "eclLat": -16.246046
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2069-11-20T00:00:00.000Z",
+    "timestamp": 3152131200000,
+    "eclLon": 1.427309,
+    "eclLat": -16.473938
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2071-11-20T00:00:00.000Z",
+    "timestamp": 3215203200000,
+    "eclLon": 3.680744,
+    "eclLat": -16.677033
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2073-11-19T00:00:00.000Z",
+    "timestamp": 3278275200000,
+    "eclLon": 5.903716,
+    "eclLat": -16.855246
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2075-11-19T00:00:00.000Z",
+    "timestamp": 3341347200000,
+    "eclLon": 8.098788,
+    "eclLat": -17.007733
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2077-11-18T00:00:00.000Z",
+    "timestamp": 3404419200000,
+    "eclLon": 10.272105,
+    "eclLat": -17.13451
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2079-11-18T00:00:00.000Z",
+    "timestamp": 3467491200000,
+    "eclLon": 12.429784,
+    "eclLat": -17.236801
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2081-11-17T00:00:00.000Z",
+    "timestamp": 3530563200000,
+    "eclLon": 14.572813,
+    "eclLat": -17.316934
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2083-11-17T00:00:00.000Z",
+    "timestamp": 3593635200000,
+    "eclLon": 16.69741,
+    "eclLat": -17.377005
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2085-11-16T00:00:00.000Z",
+    "timestamp": 3656707200000,
+    "eclLon": 18.796379,
+    "eclLat": -17.417074
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2087-11-16T00:00:00.000Z",
+    "timestamp": 3719779200000,
+    "eclLon": 20.87028,
+    "eclLat": -17.435875
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2089-11-15T00:00:00.000Z",
+    "timestamp": 3782851200000,
+    "eclLon": 22.923827,
+    "eclLat": -17.432763
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2091-11-15T00:00:00.000Z",
+    "timestamp": 3845923200000,
+    "eclLon": 24.965066,
+    "eclLat": -17.408185
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2093-11-14T00:00:00.000Z",
+    "timestamp": 3908995200000,
+    "eclLon": 26.998412,
+    "eclLat": -17.363685
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2095-11-14T00:00:00.000Z",
+    "timestamp": 3972067200000,
+    "eclLon": 29.022134,
+    "eclLat": -17.301425
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2097-11-13T00:00:00.000Z",
+    "timestamp": 4035139200000,
+    "eclLon": 31.030275,
+    "eclLat": -17.221806
+  },
+  {
+    "planet": "pluto",
+    "dateISO": "2099-11-13T00:00:00.000Z",
+    "timestamp": 4098211200000,
+    "eclLon": 33.021361,
+    "eclLat": -17.12395
+  }
+]

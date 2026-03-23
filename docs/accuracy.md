@@ -351,7 +351,88 @@ side of a boundary.
 
 ---
 
-## 4. Methodology
+## 4. Planetary Positions
+
+Geocentric apparent ecliptic longitudes and latitudes for all 8 planets, validated
+against JPL Horizons DE441 reference data (101 epochs per planet, 730-day step,
+1900–2100 CE).
+
+**Method**: stem-branch uses VSOP87D heliocentric series (2,425 terms per planet)
+with geocentric conversion (light-time iteration + aberration), plus DE441-fitted
+even-polynomial corrections (c₀ + c₂τ² + c₄τ⁴ + c₆τ⁶) for each planet. Pluto
+uses the Meeus Ch. 37 algorithm (43 periodic terms, valid 1885–2099).
+
+### 4.1 Ecliptic longitude residuals (arcseconds)
+
+| Planet | N | Mean \|ΔL\| | Max \|ΔL\| | Mean \|Δβ\| | Max \|Δβ\| |
+|---------|-----|------------|------------|------------|------------|
+| Mercury | 101 | 1.16" | 6.38" | 5.40" | 9.59" |
+| Venus | 101 | 2.29" | 6.35" | 4.71" | 9.64" |
+| Mars | 101 | 11.09" | 29.18" | 3.75" | 9.35" |
+| Jupiter | 101 | 13.03" | 23.28" | 3.77" | 9.71" |
+| Saturn | 101 | 13.22" | 22.51" | 3.75" | 9.89" |
+| Uranus | 101 | 13.55" | 22.82" | 3.73" | 9.88" |
+| Neptune | 101 | 12.76" | 22.58" | 3.87" | 9.94" |
+| Pluto | 101 | 2569" | 5178" | 17.10" | 53.81" |
+
+### 4.2 Accuracy tiers
+
+| Tier | Planets | Mean \|ΔL\| | Max \|ΔL\| | Source |
+|------|---------|-------------|------------|--------|
+| High | Mercury, Venus | 1–2" | < 7" | VSOP87D (well-converged inner planets) |
+| Moderate | Mars–Neptune | 11–14" | 23–29" | VSOP87D (truncation at outer-planet distances) |
+| Low | Pluto | ~2569" (~0.71°) | ~5178" (~1.44°) | Meeus Ch. 37 (43 periodic terms, 1885–2099) |
+
+**Interpretation**: Inner planets (Mercury, Venus) achieve sub-10" accuracy,
+comparable to early naked-eye precision. Outer planets (Mars–Neptune) are limited
+by VSOP87D series truncation — the DE441 polynomial correction captures the
+smooth secular trend but not the short-period oscillations (~10–15").
+Pluto's accuracy reflects the inherent limitations of Meeus's simplified periodic
+series (designed for visual identification, not precision ephemerides). Latitude
+accuracy is uniformly ~4–10" for all VSOP87D planets, better than longitude
+because latitude terms converge faster in the VSOP87 series.
+
+### 4.3 Test thresholds
+
+```typescript
+// Planet validation thresholds (arcseconds, ~50% margin over observed)
+mercury: { meanMax: 3,    absMax: 10 }
+venus:   { meanMax: 5,    absMax: 10 }
+mars:    { meanMax: 16,   absMax: 40 }
+jupiter: { meanMax: 18,   absMax: 30 }
+saturn:  { meanMax: 18,   absMax: 30 }
+uranus:  { meanMax: 18,   absMax: 30 }
+neptune: { meanMax: 18,   absMax: 30 }
+pluto:   { meanMax: 3500, absMax: 7000 }
+```
+
+---
+
+## 5. Lunar Phase Timing
+
+Validates Moon ephemeris (ELP/MPP02) accuracy by checking Sun-Moon elongation
+at JPL-derived new and full moon times (2000–2024, 594 phases total).
+
+**Method**: JPL Horizons Moon and Sun apparent RA/Dec queried at 6-hour intervals,
+converted to ecliptic longitude, phase crossing times interpolated from elongation
+curve. At each JPL-derived new moon, stem-branch's Sun-Moon elongation should be
+≈ 0°; at each full moon, ≈ 180°.
+
+### 5.1 Results
+
+| Phase | N | Mean \|Δ\| | Max \|Δ\| | Threshold |
+|-------|-----|-----------|----------|-----------|
+| New moon (elongation from 0°) | 297 | < 0.3° | < 1° | < 1° |
+| Full moon (elongation from 180°) | 297 | < 0.3° | < 1° | < 1° |
+
+All 594 lunar phases verified within 1° of the expected elongation. The
+ELP/MPP02 lunar longitude combined with VSOP87D solar longitude produces
+lunar phase timing accurate to well within the ~2-hour window of a single
+Chinese 時辰 (shichen).
+
+---
+
+## 6. Methodology
 
 ### Timescales
 
@@ -421,11 +502,16 @@ stem-branch (which uses the proleptic Gregorian calendar throughout).
 JPL comparison scripts and raw data:
 
 ```
-scripts/jpl-comparison.mjs          # EoT comparison (stem-branch vs JPL, 2024)
-scripts/jpl-3way-solar-terms.mjs    # 3-way solar term comparison (209–2493 CE)
-scripts/jpl-ra-2024.txt             # JPL apparent RA (366 daily samples)
-scripts/jpl-eclon-*-hourly.txt      # JPL ecliptic longitude (hourly, 12 years)
-scripts/jpl-eclon-*-3h.txt          # JPL ecliptic longitude (3-hour, 30 years)
+scripts/jpl-comparison.mjs              # EoT comparison (stem-branch vs JPL, 2024)
+scripts/jpl-3way-solar-terms.mjs        # 3-way solar term comparison (209–2493 CE)
+scripts/fit-de441-planet-corrections.mjs # DE441 correction polynomial fitting
+scripts/generate-planet-fixtures.mjs     # Planet position fixture generation
+scripts/generate-lunar-fixtures.mjs      # Lunar phase fixture generation
+scripts/jpl-ra-2024.txt                 # JPL apparent RA (366 daily samples)
+scripts/jpl-eclon-*-hourly.txt          # JPL ecliptic longitude (hourly, 12 years)
+scripts/jpl-eclon-*-3h.txt             # JPL ecliptic longitude (3-hour, 30 years)
+tests/fixtures/jpl-planet-positions.json # 808 planet reference positions (8 planets)
+tests/fixtures/jpl-lunar-phases.json     # 594 lunar phase reference times (2000–2024)
 ```
 
 Hourly and 3-hour data files are gitignored (total ~7 MB). Re-fetch via:
@@ -440,9 +526,11 @@ Run with:
 node scripts/jpl-comparison.mjs           # EoT analysis (2024)
 node scripts/jpl-3way-solar-terms.mjs     # 3-way solar terms (42 years)
 npx vitest run tests/cross-validation.test.ts  # Full SB vs sxwnl suite
+npx vitest run tests/planet-validation.test.ts # Planet vs JPL (8 planets)
+npx vitest run tests/moon-validation.test.ts   # Lunar phase timing vs JPL
 ```
 
-## 5. Test Thresholds
+## 7. Test Thresholds
 
 The cross-validation test suite compares stem-branch vs sxwnl (1900–2100).
 Because the two use different correction polynomials (DE441 vs DE405), the
