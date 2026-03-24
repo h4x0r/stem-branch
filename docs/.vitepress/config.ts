@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress';
+import { withMermaid } from 'vitepress-plugin-mermaid';
 
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: 'stem-branch',
   description: 'Chinese calendar and stem-branch algorithms — reference documentation',
   base: '/stem-branch/',
@@ -56,4 +57,4 @@ export default defineConfig({
       level: [2, 3],
     },
   },
-});
+}));
