@@ -1,12 +1,13 @@
 # Accuracy Validation
 
-Independent verification of stem-branch's astronomical computations against two
+Independent verification of stem-branch's astronomical computations against three
 authoritative references:
 
 | Source | Method | Ephemeris |
 |--------|--------|-----------|
 | **stem-branch** | VSOP87D (2,425-term) + DE441 correction + IAU2000B nutation | Analytical theory |
 | **sxwnl (寿星万年历)** | VSOP87D (custom truncation) + Chapront ELP/MPP02 | Analytical theory |
+| **Swiss Ephemeris** | Moshier analytical ephemeris (built-in, no external files) | Analytical theory |
 | **JPL Horizons** | DE441 numerical integration | Numerical (ground truth) |
 
 All comparisons use geocentric apparent coordinates. JPL Horizons data queried

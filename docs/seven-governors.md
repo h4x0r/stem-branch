@@ -503,48 +503,75 @@ sourcing from classical texts (primarily 《果老星宗》):
 
 ### Primary sources
 
-- 《果老星宗》 — Standard reference for 七政四餘, attributed to Li Chunfeng
-  (李淳風, Tang dynasty) but likely compiled in the Song–Ming period.
-  Primary source for dignity tables, star spirit rules, and chart
-  interpretation.
+- [《果老星宗》](https://archive.org/details/guolaoxingzong) — Standard
+  reference for 七政四餘, attributed to Li Chunfeng (李淳風, Tang dynasty) but
+  likely compiled in the Song–Ming period. Primary source for dignity tables,
+  star spirit rules, and chart interpretation. Full scanned volumes available
+  on Internet Archive.
 
-- 《革象新書》 (Ge Xiang Xin Shu) by Zhao Youqin (趙友欽, Yuan dynasty,
-  c. 1290s) — Contains the key passage on Purple Qi: "夫紫氣者，起於閏法，
-  約二十八年而周天"
+- [《革象新書》](https://ctext.org/wiki.pl?if=gb&res=1474554) (Ge Xiang Xin
+  Shu) by Zhao Youqin (趙友欽, Yuan dynasty, c. 1290s) — Contains the key
+  passage on Purple Qi: "夫紫氣者，起於閏法，約二十八年而周天". Full text on
+  Chinese Text Project.
 
-- 《九執曆》 (Jiuzhi li) — Indian astronomical text translated by Gautama
-  Siddha (瞿曇悉達) in 718 CE, included in the 《開元占經》. Primary vector
-  for Indian astronomical concepts entering China.
+- [《開元占經》](https://ctext.org/datawiki.pl?if=en&res=252606) (Kaiyuan
+  Zhanjing) — Tang dynasty compilation by Gautama Siddha (瞿曇悉達), containing
+  the 《九執曆》 (Jiuzhi li) in vol. 104 — the primary vector for Indian
+  astronomical concepts entering China. Full text on Chinese Text Project.
 
 ### Scholarly literature
 
-- Niu Weixing 牛衛星 (1995) — Research identifying 計都 with the osculating
-  lunar apogee, tracing the evolution of the concept through Chinese
-  astronomical texts.
+- Niu Weixing 钮卫星, ["罗睺、计都天文学含义考源"](https://faculty.ustc.edu.cn/niuweixing/zh_CN/lwcg/64044/content/20729.htm)
+  (An Inquiry into the Astronomical Meaning of Rahu and Ketu), *Acta
+  Astronomica Sinica* 天文学报, Vol. 35 No. 3, 1994, pp. 326–332. English
+  version in *Chinese Astronomy and Astrophysics*, 1995, 19(2). Research
+  identifying 計都 with the osculating lunar apogee, tracing the evolution of
+  the concept through Chinese astronomical texts.
 
-- Yabuuchi Kiyoshi 薮内清, *Zōtei Zui-Tō rekihō-shi no kenkyū* (増訂
-  隋唐暦法史の研究) — Research on Sui–Tang calendrical history, including
-  analysis of the Indian–Chinese astronomical transmission.
+- Yabuuchi Kiyoshi 薮内清, [*Zōtei Zui-Tō rekihō-shi no kenkyū*](https://ci.nii.ac.jp/ncid/BB26841838)
+  (増訂 隋唐暦法史の研究, Rinsen Shoten, 1989) — Research on Sui–Tang
+  calendrical history, including analysis of the Indian–Chinese astronomical
+  transmission. See also the [biographical article](https://www.academia.edu/9268531/Yabuuchi_Kiyoshi_His_life_Works_and_Significant_Contributions_to_the_Chinese_History_of_Science_and_Technology)
+  on his contributions.
 
-- Ho Peng Yoke, *Chinese Mathematical Astrology* (Routledge, 2003) —
-  Comprehensive treatment of Chinese astrology's mathematical foundations,
-  including the Seven Governors system and Indian transmission.
+- Ho Peng Yoke, [*Chinese Mathematical Astrology: Reaching Out to the Stars*](https://www.routledge.com/Chinese-Mathematical-Astrology-Reaching-Out-to-the-Stars/Yoke/p/book/9780415863100)
+  (RoutledgeCurzon, 2003; Needham Research Institute Series) — Comprehensive
+  treatment of Chinese astrology's mathematical foundations, including the
+  Seven Governors system and Indian transmission. [Review in *East Asian
+  Science, Technology, and Medicine*](https://brill.com/view/journals/east/23/1/article-p134_8.xml?language=en).
 
-- Pan Nai 潘鼐, *Zhongguo Hengxing Guance Shi* (中國恆星觀測史, History of
-  Fixed Star Observation in China) — Reference for determinative star
+- Pan Nai 潘鼐, [*Zhongguo Hengxing Guance Shi*](https://books.google.com/books/about/%E4%B8%AD%E5%9B%BD%E6%81%92%E6%98%9F%E8%A7%82%E6%B5%8B%E5%8F%B2.html?id=RQDr888FHoEC)
+  (中國恆星觀測史, History of Fixed Star Observation in China; Xuelin Press,
+  2009 revised ed., ISBN 9787807306948) — Reference for determinative star
   identifications and the 28-mansion system.
 
-- Sun Xiaochun & Jacob Kistemaker, *The Chinese Sky During the Han* (Brill,
-  1997) — Determinative star positions and mansion boundary reconstruction.
+- Sun Xiaochun & Jacob Kistemaker, [*The Chinese Sky During the Han:
+  Constellating Stars and Society*](https://www.worldcat.org/title/chinese-sky-during-the-han-constellating-stars-and-society/oclc/185938073)
+  (Brill, 1997; Sinica Leidensia vol. 38, ISBN 9789004107373) —
+  Determinative star positions and mansion boundary reconstruction.
+  [Academia.edu review](https://www.academia.edu/38558071/).
 
 ### Astronomical references
 
-- Jean Meeus, *Astronomical Algorithms* (2nd ed., 1998) — Source for the
-  mean ascending node polynomial (Ch. 22), mean obliquity (Ch. 22), GMST
-  (Ch. 12), and Delaunay arguments.
+- Jean Meeus, [*Astronomical Algorithms*](https://worldcat.org/oclc/40521322)
+  (2nd ed., Willmann-Bell, 1998; ISBN 978-0943396613) — Source for the mean
+  ascending node polynomial (Ch. 22), mean obliquity (Ch. 22), GMST (Ch. 12),
+  and Delaunay arguments. [Online algorithm implementations](http://www.micmap.org/astronomical-algorithms/).
 
-- VSOP87D — Bretagnon & Francou (1988), full planetary theory used for
-  the seven governors' tropical positions.
+- Bretagnon, P. & Francou, G., ["Planetary Theories in Rectangular and
+  Spherical Variables: VSOP87 Solution"](https://ui.adsabs.harvard.edu/abs/1988A&A...202..309B/abstract),
+  *Astronomy and Astrophysics*, 202, 309–315, 1988. Full planetary theory
+  used for the seven governors' tropical positions.
+  [Full text (ADS)](https://adsabs.harvard.edu/full/1988A&A...202..309B).
 
-- JPL DE441 — Numerical integration ephemeris used as ground truth for
-  planetary position validation.
+- Park, R. S. et al., ["The JPL Planetary and Lunar Ephemerides DE440 and
+  DE441"](https://doi.org/10.3847/1538-3881/abd414), *The Astronomical
+  Journal*, 161:105, 2021. Numerical integration ephemeris used as ground
+  truth for planetary position validation.
+  [PDF (JPL)](https://ssd.jpl.nasa.gov/doc/Park.2021.AJ.DE440.pdf).
+
+- ESA, [*The Hipparcos and Tycho Catalogues*](https://www.cosmos.esa.int/web/hipparcos/catalogues)
+  (ESA SP-1200, 1997) — Source for determinative star positions used in
+  mansion boundary data. Searchable online via
+  [NASA HEASARC](https://heasarc.gsfc.nasa.gov/w3browse/all/hipparcos.html)
+  and [VizieR](https://ui.adsabs.harvard.edu/abs/1997yCat.1239....0E/abstract).
