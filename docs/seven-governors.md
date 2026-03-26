@@ -396,7 +396,7 @@ One of the most studied questions in the history of Sino-Indian astronomical
 transmission: did the astronomical identities of Rahu and Ketu get swapped
 when translated into Chinese?
 
-**The Indian originals.** In Jyotish (Indian astrology), Rahu and Ketu are
+**The Indian originals.** In Jyotish (ज्योतिष, Indian astrology), Rahu and Ketu are
 both **lunar nodes**:
 
 | Sanskrit | Identity | Metaphor |
@@ -404,7 +404,7 @@ both **lunar nodes**:
 | **Rahu** (राहु) | Ascending node | Dragon's head |
 | **Ketu** (केतु) | Descending node | Dragon's tail |
 
-They are shadow planets (chāyā graha) that cause eclipses. They are always
+They are shadow planets (chāyā graha, छाया ग्रह) that cause eclipses. They are always
 180° apart — knowing one gives the other trivially.
 
 **The Chinese reception.** The transmission came primarily through the
@@ -524,7 +524,7 @@ or delete all four; selective removal is inconsistent.
 Schall was sentenced to death. The sentence was commuted after the
 [Beijing earthquake of 1665](https://en.wikipedia.org/wiki/1665_Tong_County_earthquake),
 interpreted as a sign of Heaven's disapproval. The 時憲曆 was temporarily
-abolished (1665–1669) and the 大統曆 restored. After the Kangxi Emperor
+abolished (1665–1669) and the 大統曆 restored. After the Kangxi Emperor (康熙帝)
 took personal power, [Ferdinand Verbiest](https://en.wikipedia.org/wiki/Ferdinand_Verbiest)
 (南懷仁) defeated Yang in public astronomical prediction contests, the
 時憲曆 was reinstated, and Schall was posthumously rehabilitated
@@ -645,7 +645,7 @@ had deliberately abandoned.
 
 | Period | 計都 identification | Authority |
 |--------|---------------------|-----------|
-| Pre-718 CE | Descending lunar node | Indian *Siddhānta* tradition |
+| Pre-718 CE | Descending lunar node | Indian *Siddhānta* (सिद्धान्त) tradition |
 | 718 CE | Initially descending node | 九執曆 (Gautama Siddha) |
 | 806 CE | **Lunar apogee** (shift documented) | 七曜攘災訣; proven by Niu (1994)[^niu1994] |
 | Song dynasty | Apogee (canonical) | 《果老星宗》[^guolao]; Shen Kuo treated as node (minority view) |
@@ -683,9 +683,9 @@ primarily in 《果老星宗》[^guolao]:
 |----------|--------------|--------------|
 | Mansion boundaries | Derived from Hipparcos[^hipparcos] J2000.0 star positions | Historical boundaries may differ by 1–2° from modern stellar positions |
 | Palace starting point (辰宮 at 0°) | Assumed convention | Could shift all palace assignments if a different starting point is attested |
-| Purple Qi epoch longitude | Unknown — provisionally set to 0° | Would produce a constant offset on all 紫氣 positions |
-| Dignity assignments for 9 bodies | Only Sun and Moon attested so far | The remaining bodies (Mercury through 紫氣) lack sourced dignity tables |
-| Star spirit rules (~50–80 total) | Only 3 rules identified so far | The full traditional repertoire requires systematic extraction from classical texts |
+| Purple Qi (紫氣) epoch longitude | Unknown — provisionally set to 0° | Would produce a constant offset on all Purple Qi (紫氣) positions |
+| Dignity assignments for 9 bodies | Only Sun and Moon attested so far | The remaining bodies (Mercury through Purple Qi / 紫氣) lack sourced dignity tables |
+| Star spirit (神煞) rules (~50–80 total) | Only 3 rules identified so far | The full traditional repertoire requires systematic extraction from classical texts |
 
 ---
 
