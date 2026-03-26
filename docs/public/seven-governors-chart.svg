@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" font-family="'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', sans-serif" font-size="13">
+  <defs>
+    <style>
+      .palace-border { fill: none; stroke: #374151; stroke-width: 1.5; }
+      .palace-name { font-size: 14px; font-weight: 600; fill: #1f2937; }
+      .palace-role { font-size: 11px; fill: #6b7280; }
+      .mansion-label { font-size: 10px; fill: #9ca3af; }
+      .body-gov { font-size: 13px; font-weight: 600; fill: #b91c1c; }
+      .body-rem { font-size: 13px; font-weight: 600; fill: #7c3aed; }
+      .body-deg { font-size: 9px; fill: #6b7280; }
+      .dignity-miao { font-size: 10px; fill: #047857; font-weight: 600; }
+      .dignity-wang { font-size: 10px; fill: #0369a1; font-weight: 600; }
+      .dignity-ping { font-size: 10px; fill: #6b7280; }
+      .dignity-xian { font-size: 10px; fill: #b91c1c; }
+      .asc-marker { font-size: 12px; font-weight: 700; fill: #b91c1c; }
+      .title-text { font-size: 15px; font-weight: 700; fill: #1f2937; }
+      .subtitle-text { font-size: 11px; fill: #6b7280; }
+      .legend-label { font-size: 10px; fill: #374151; }
+      .degree-range { font-size: 9px; fill: #9ca3af; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="720" height="720" fill="#fafaf9" rx="4"/>
+
+  <!-- Title block -->
+  <text x="360" y="28" text-anchor="middle" class="title-text">七政四餘 Birth Chart (Sample)</text>
+  <text x="360" y="44" text-anchor="middle" class="subtitle-text">1990-01-15 00:30 UTC  ·  Taipei 25.0°N 121.6°E</text>
+
+  <!-- The 12-palace grid: 4×4 outer ring, center empty
+       Layout (traditional Chinese chart grid):
+
+         巳       午       未       申
+       330-360  300-330  270-300  240-270
+
+         辰                         酉
+        0-30                      210-240
+
+         卯                         戌
+        30-60                     180-210
+
+         寅       丑       子       亥
+        60-90    90-120  120-150  150-180
+  -->
+
+  <!-- Grid offset: start at y=56, each cell 160×160, 4 columns -->
+  <!-- Outer rectangle -->
+  <rect x="40" y="56" width="640" height="640" class="palace-border"/>
+
+  <!-- Top row: 4 cells -->
+  <rect x="40"  y="56"  width="160" height="160" class="palace-border"/>
+  <rect x="200" y="56"  width="160" height="160" class="palace-border"/>
+  <rect x="360" y="56"  width="160" height="160" class="palace-border"/>
+  <rect x="520" y="56"  width="160" height="160" class="palace-border"/>
+
+  <!-- Bottom row: 4 cells -->
+  <rect x="40"  y="536" width="160" height="160" class="palace-border"/>
+  <rect x="200" y="536" width="160" height="160" class="palace-border"/>
+  <rect x="360" y="536" width="160" height="160" class="palace-border"/>
+  <rect x="520" y="536" width="160" height="160" class="palace-border"/>
+
+  <!-- Left column middle: 2 cells -->
+  <rect x="40"  y="216" width="160" height="160" class="palace-border"/>
+  <rect x="40"  y="376" width="160" height="160" class="palace-border"/>
+
+  <!-- Right column middle: 2 cells -->
+  <rect x="520" y="216" width="160" height="160" class="palace-border"/>
+  <rect x="520" y="376" width="160" height="160" class="palace-border"/>
+
+  <!-- Center area (not a palace — chart info) -->
+  <rect x="200" y="216" width="320" height="320" fill="none" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- ============================================ -->
+  <!-- PALACE CONTENTS                              -->
+  <!-- ============================================ -->
+
+  <!-- 巳宮 (330°-360°) — Top-left -->
+  <text x="52" y="76" class="palace-name">巳宮</text>
+  <text x="52" y="92" class="degree-range">330°–360°</text>
+  <text x="52" y="108" class="palace-role">相貌宮</text>
+  <text x="52" y="124" class="mansion-label">翼 · 軫</text>
+  <!-- Bodies -->
+  <text x="52" y="152" class="body-gov">土 Saturn</text>
+  <text x="145" y="152" class="body-deg">337.2°</text>
+  <text x="145" y="164" class="dignity-ping">平</text>
+  <text x="52" y="174" class="body-rem">紫氣</text>
+  <text x="145" y="174" class="body-deg">342.8°</text>
+  <text x="145" y="186" class="dignity-ping">平</text>
+
+  <!-- 午宮 (300°-330°) — Top-center-left -->
+  <text x="212" y="76" class="palace-name">午宮</text>
+  <text x="212" y="92" class="degree-range">300°–330°</text>
+  <text x="212" y="108" class="palace-role">福德宮</text>
+  <text x="212" y="124" class="mansion-label">柳 · 星 · 張</text>
+
+  <!-- 未宮 (270°-300°) — Top-center-right -->
+  <text x="372" y="76" class="palace-name">未宮</text>
+  <text x="372" y="92" class="degree-range">270°–300°</text>
+  <text x="372" y="108" class="palace-role">田宅宮</text>
+  <text x="372" y="124" class="mansion-label">井 · 鬼</text>
+  <!-- Bodies -->
+  <text x="372" y="152" class="body-gov">月 Moon</text>
+  <text x="465" y="152" class="body-deg">284.1°</text>
+  <text x="465" y="164" class="dignity-wang">旺</text>
+
+  <!-- 申宮 (240°-270°) — Top-right -->
+  <text x="532" y="76" class="palace-name">申宮</text>
+  <text x="532" y="92" class="degree-range">240°–270°</text>
+  <text x="532" y="108" class="palace-role">官祿宮</text>
+  <text x="532" y="124" class="mansion-label">觜 · 參</text>
+
+  <!-- 辰宮 (0°-30°) — Left-upper -->
+  <text x="52" y="236" class="palace-name">辰宮</text>
+  <text x="52" y="252" class="degree-range">0°–30°</text>
+  <text x="52" y="268" class="palace-role">命宮</text>
+  <text x="142" y="268" class="asc-marker">★ ASC</text>
+  <text x="52" y="284" class="mansion-label">角 · 亢</text>
+  <!-- Bodies -->
+  <text x="52" y="312" class="body-rem">羅睺 Rahu</text>
+  <text x="150" y="312" class="body-deg">20.4°</text>
+  <text x="150" y="324" class="dignity-ping">平</text>
+
+  <!-- 卯宮 (30°-60°) — Left-lower -->
+  <text x="52" y="396" class="palace-name">卯宮</text>
+  <text x="52" y="412" class="degree-range">30°–60°</text>
+  <text x="52" y="428" class="palace-role">兄弟宮</text>
+  <text x="52" y="444" class="mansion-label">氐 · 房 · 心</text>
+
+  <!-- 酉宮 (210°-240°) — Right-upper -->
+  <text x="532" y="236" class="palace-name">酉宮</text>
+  <text x="532" y="252" class="degree-range">210°–240°</text>
+  <text x="532" y="268" class="palace-role">奴僕宮</text>
+  <text x="532" y="284" class="mansion-label">昴 · 畢</text>
+  <!-- Bodies -->
+  <text x="532" y="312" class="body-gov">火 Mars</text>
+  <text x="625" y="312" class="body-deg">218.6°</text>
+  <text x="625" y="324" class="dignity-xian">陷</text>
+  <text x="532" y="336" class="body-rem">月孛</text>
+  <text x="625" y="336" class="body-deg">229.3°</text>
+  <text x="625" y="348" class="dignity-ping">平</text>
+
+  <!-- 戌宮 (180°-210°) — Right-lower -->
+  <text x="532" y="396" class="palace-name">戌宮</text>
+  <text x="532" y="412" class="degree-range">180°–210°</text>
+  <text x="532" y="428" class="palace-role">遷移宮</text>
+  <text x="532" y="444" class="mansion-label">奎 · 婁 · 胃</text>
+  <!-- Bodies -->
+  <text x="532" y="472" class="body-rem">計都 Ketu</text>
+  <text x="635" y="472" class="body-deg">195.7°</text>
+  <text x="635" y="484" class="dignity-ping">平</text>
+
+  <!-- 寅宮 (60°-90°) — Bottom-left -->
+  <text x="52" y="556" class="palace-name">寅宮</text>
+  <text x="52" y="572" class="degree-range">60°–90°</text>
+  <text x="52" y="588" class="palace-role">妻妾宮</text>
+  <text x="52" y="604" class="mansion-label">尾 · 箕</text>
+
+  <!-- 丑宮 (90°-120°) — Bottom-center-left -->
+  <text x="212" y="556" class="palace-name">丑宮</text>
+  <text x="212" y="572" class="degree-range">90°–120°</text>
+  <text x="212" y="588" class="palace-role">男女宮</text>
+  <text x="212" y="604" class="mansion-label">斗 · 牛</text>
+  <!-- Bodies -->
+  <text x="212" y="632" class="body-gov">木 Jupiter</text>
+  <text x="305" y="632" class="body-deg">95.4°</text>
+  <text x="305" y="644" class="dignity-wang">旺</text>
+
+  <!-- 子宮 (120°-150°) — Bottom-center-right -->
+  <text x="372" y="556" class="palace-name">子宮</text>
+  <text x="372" y="572" class="degree-range">120°–150°</text>
+  <text x="372" y="588" class="palace-role">財帛宮</text>
+  <text x="372" y="604" class="mansion-label">女 · 虛 · 危</text>
+  <!-- Bodies -->
+  <text x="372" y="632" class="body-gov">水 Mercury</text>
+  <text x="465" y="632" class="body-deg">127.9°</text>
+  <text x="465" y="644" class="dignity-ping">平</text>
+  <text x="372" y="656" class="body-gov">金 Venus</text>
+  <text x="465" y="656" class="body-deg">138.2°</text>
+  <text x="465" y="668" class="dignity-miao">廟</text>
+  <text x="372" y="680" class="body-gov">日 Sun</text>
+  <text x="465" y="680" class="body-deg">123.5°</text>
+  <text x="465" y="692" class="dignity-miao">廟</text>
+
+  <!-- 亥宮 (150°-180°) — Bottom-right -->
+  <text x="532" y="556" class="palace-name">亥宮</text>
+  <text x="532" y="572" class="degree-range">150°–180°</text>
+  <text x="532" y="588" class="palace-role">疾厄宮</text>
+  <text x="532" y="604" class="mansion-label">室 · 壁</text>
+
+  <!-- ============================================ -->
+  <!-- CENTER INFO BOX                              -->
+  <!-- ============================================ -->
+
+  <text x="360" y="280" text-anchor="middle" class="title-text">七政四餘</text>
+  <text x="360" y="300" text-anchor="middle" class="subtitle-text">Seven Governors · Four Remainders</text>
+
+  <line x1="280" y1="315" x2="440" y2="315" stroke="#d1d5db" stroke-width="0.5"/>
+
+  <!-- Legend -->
+  <text x="240" y="340" class="legend-label" font-weight="600">Legend</text>
+
+  <rect x="240" y="350" width="10" height="10" fill="#b91c1c" rx="2"/>
+  <text x="256" y="360" class="legend-label">Seven Governors (七政)</text>
+
+  <rect x="240" y="368" width="10" height="10" fill="#7c3aed" rx="2"/>
+  <text x="256" y="378" class="legend-label">Four Remainders (四餘)</text>
+
+  <text x="240" y="405" class="legend-label" font-weight="600">Dignity (廟旺平陷)</text>
+  <text x="240" y="420" class="dignity-miao">廟 Temple</text>
+  <text x="330" y="420" class="dignity-wang">旺 Exalted</text>
+  <text x="240" y="436" class="dignity-ping">平 Neutral</text>
+  <text x="330" y="436" class="dignity-xian">陷 Fallen</text>
+
+  <line x1="280" y1="455" x2="440" y2="455" stroke="#d1d5db" stroke-width="0.5"/>
+
+  <text x="240" y="475" class="legend-label" font-weight="600">Chart data</text>
+  <text x="240" y="492" class="legend-label">Sidereal mode: modern (Spica anchor)</text>
+  <text x="240" y="506" class="legend-label">Ketu mode: apogee (果老星宗)</text>
+  <text x="240" y="520" class="legend-label">Ascendant: 辰宮 (角宿 8.3°)</text>
+
+</svg>

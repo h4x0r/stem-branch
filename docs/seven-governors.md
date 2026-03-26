@@ -26,6 +26,16 @@ which are then grouped into 12 palaces (宮). The ascendant (命宮) determines
 which palace governs the native's fate, and the remaining 11 palaces are assigned
 roles (財帛宮, 兄弟宮, etc.) by offset from the ascendant.
 
+### Sample birth chart
+
+The chart below shows the traditional 12-palace grid layout for a birth at
+1990-01-15 00:30 UTC in Taipei. Palaces are arranged by Earthly Branch with
+south at top (Chinese convention). Bodies in red are the seven governors (七政);
+bodies in purple are the four remainders (四餘). Dignity ratings (廟旺平陷)
+indicate each body's strength in its palace.
+
+![Sample 七政四餘 birth chart showing 11 celestial bodies placed in 12 palaces with mansion annotations, dignity ratings, and ascendant marker](/seven-governors-chart.svg)
+
 ---
 
 ## 1. Sidereal Reference Frame
@@ -45,23 +55,20 @@ sidereal_longitude = tropical_longitude − ayanamsa
 
 where the **ayanamsa** is the accumulated precession since the reference epoch.
 
-### Our implementation
+### Anchoring to Spica
 
-The sidereal engine (`src/seven-governors/sidereal.ts`) anchors 0° sidereal to
-Spica (α Virginis), the determinative star of 角宿 (Horn mansion). Spica's
-J2000.0 tropical ecliptic longitude is 201.2983°.
+This library anchors 0° sidereal to Spica (α Virginis), the determinative
+star of 角宿 (Horn mansion), at its J2000.0 tropical ecliptic longitude of
+201.2983°. Three sidereal modes are available:
 
-Three configurable modes are provided:
+| Mode | Method | Use case |
+|------|--------|----------|
+| Modern (default) | IAU precession model applied dynamically | Modern astronomical accuracy |
+| Classical | Fixed ayanamsa from a historical epoch (開元 724 CE or 崇禎 1628 CE) | Reproducing historical charts |
+| User-supplied | Custom fixed ayanamsa value | Interoperability with other systems |
 
-| Mode | Ayanamsa computation | Use case |
-|------|---------------------|----------|
-| `modern` (default) | `SPICA_J2000 + precession(T)/3600` using IAU precession model | Modern astronomical accuracy |
-| `classical` | Fixed ayanamsa from a historical epoch (開元 724 CE or 崇禎 1628 CE) | Reproducing historical charts |
-| `ayanamsa` | User-supplied fixed value | Interoperability with other systems |
-
-The `modern` mode computes the ayanamsa dynamically using the same
-`precessionInLongitude(T)` function used elsewhere in the library, ensuring
-consistency with the VSOP87D[^vsop87] planetary positions.
+The modern mode ensures consistency with the VSOP87D[^vsop87] planetary
+positions used throughout the library.
 
 ---
 
@@ -70,15 +77,15 @@ consistency with the VSOP87D[^vsop87] planetary positions.
 The seven governors are the classical visible planets. Their tropical ecliptic
 longitudes come from the library's existing planetary engine:
 
-| Body | Source function | Algorithm |
-|------|----------------|-----------|
-| Sun (太陽) | `getSunLongitude(date)` | VSOP87D (2,425 terms) + DE441 correction polynomial |
-| Moon (太陰) | `getMoonPosition(date)` | Meeus[^meeus] Ch. 47 (ELP-based, 60+ periodic terms) |
-| Mercury (水星) | `getPlanetPosition('mercury', date)` | VSOP87D with aberration correction |
-| Venus (金星) | `getPlanetPosition('venus', date)` | VSOP87D with aberration correction |
-| Mars (火星) | `getPlanetPosition('mars', date)` | VSOP87D with aberration correction |
-| Jupiter (木星) | `getPlanetPosition('jupiter', date)` | VSOP87D with aberration correction |
-| Saturn (土星) | `getPlanetPosition('saturn', date)` | VSOP87D with aberration correction |
+| Body | Algorithm |
+|------|-----------|
+| Sun (太陽) | VSOP87D (2,425 terms) + DE441 correction polynomial |
+| Moon (太陰) | Meeus[^meeus] Ch. 47 (ELP-based, 60+ periodic terms) |
+| Mercury (水星) | VSOP87D with aberration correction |
+| Venus (金星) | VSOP87D with aberration correction |
+| Mars (火星) | VSOP87D with aberration correction |
+| Jupiter (木星) | VSOP87D with aberration correction |
+| Saturn (土星) | VSOP87D with aberration correction |
 
 These produce geocentric apparent tropical ecliptic longitudes, which are then
 converted to sidereal via the ayanamsa described above.
@@ -95,8 +102,7 @@ residual statistics.
 ## 3. The Four Remainders (四餘)
 
 The four remainders are non-planetary points derived from lunar orbital
-mechanics (three of them) and a classical formula (one). Their computation
-is in `src/seven-governors/four-remainders.ts`.
+mechanics (three of them) and a classical formula (one).
 
 ### 3.1 Rahu (羅睺) — Moon's mean ascending node
 
@@ -169,7 +175,7 @@ descending node:
 Ketu_longitude = (Rahu_longitude + 180°) mod 360°
 ```
 
-The mode is selectable via the `ketuMode` option in `SevenGovernorsOptions`.
+The mode is selectable when computing a chart.
 
 ### 3.3 Yuebei (月孛) — mean lunar apogee
 
@@ -309,11 +315,9 @@ Mansions vary considerably in angular width:
 |-----------|--------|
 | 觜 (Turtle Beak): 2.5° | 井 (Well): 33° |
 
-The mansion boundaries in `src/seven-governors/data/mansion-boundaries.ts`
-are sourced from J2000.0 ecliptic longitudes of the Hipparcos[^hipparcos]
-catalogue determinative stars, converted to the Spica-anchored sidereal
-frame. These values are approximate pending full verification (see
-`scripts/verify-mansion-boundaries.mjs`).
+The mansion boundaries are sourced from J2000.0 ecliptic longitudes of the
+Hipparcos[^hipparcos] catalogue determinative stars, converted to the
+Spica-anchored sidereal frame.
 
 Mansion lookup uses binary search on the sorted boundary array, handling the
 wrap-around at the 軫/角 boundary (360° → 0°).
@@ -443,18 +447,13 @@ two separate measures of the Moon's apsidal geometry (osculating vs. mean),
 rather than two redundant node points. Whether this was intentional
 astronomical insight or a fortunate accident of transmission is debated.
 
-### Our implementation
+### Which convention does this library follow?
 
-The `KetuMode` type makes this historiographic choice explicit:
-
-```typescript
-type KetuMode = 'apogee' | 'descending-node';
-```
-
-- `'apogee'` (default): Chinese 七政四餘 convention per 《果老星宗》[^guolao]
-  and Niu Weixing (1994)[^niu1994] — 計都 as the osculating lunar apogee
-- `'descending-node'`: Original Indian Jyotish convention — Ketu as the
-  point diametrically opposite Rahu
+By default, this library follows the Chinese 七政四餘 convention per
+《果老星宗》[^guolao] and Niu Weixing (1994)[^niu1994]: 計都 as the
+osculating lunar apogee. The original Indian Jyotish convention (Ketu as
+the descending node) is available as an alternative. See the
+[API reference](api/seven-governors) for configuration details.
 
 ### Is 紫氣 a Jyotish problem?
 
@@ -540,18 +539,18 @@ tracked for future implementation.
 
 ---
 
-## 8. Data Sourcing Status
+## 8. Open Questions
 
-The computational framework is complete, but several data tables require
-sourcing from classical texts (primarily 《果老星宗》[^guolao]):
+Several parameters remain uncertain pending further textual research,
+primarily in 《果老星宗》[^guolao]:
 
-| Data | Status | Impact |
-|------|--------|--------|
-| Mansion boundaries (28 startDeg values) | Approximate from Hipparcos[^hipparcos] | May be off by 1–2° per mansion |
-| Palace starting point (辰宮 at 0°) | Implemented, needs textual confirmation | Could shift all palace assignments |
-| Purple Qi epoch longitude | Provisional (0°) | Constant offset on all 紫氣 positions |
-| Dignity table (132 entries) | Sun/Moon complete, 9 bodies placeholder | Dignity lookups return 平 for most bodies |
-| Star spirit rules (~50–80) | 3 implemented | Most patterns not yet detected |
+| Question | Current state | Significance |
+|----------|--------------|--------------|
+| Mansion boundaries | Derived from Hipparcos[^hipparcos] J2000.0 star positions | Historical boundaries may differ by 1–2° from modern stellar positions |
+| Palace starting point (辰宮 at 0°) | Assumed convention | Could shift all palace assignments if a different starting point is attested |
+| Purple Qi epoch longitude | Unknown — provisionally set to 0° | Would produce a constant offset on all 紫氣 positions |
+| Dignity assignments for 9 bodies | Only Sun and Moon attested so far | The remaining bodies (Mercury through 紫氣) lack sourced dignity tables |
+| Star spirit rules (~50–80 total) | Only 3 rules identified so far | The full traditional repertoire requires systematic extraction from classical texts |
 
 ---
 
