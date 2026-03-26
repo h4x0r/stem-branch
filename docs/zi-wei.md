@@ -9,6 +9,8 @@ head:
 
 # Purple Star Astrology (紫微斗數)
 
+**See also:** [Da Liu Ren (大六壬)](da-liu-ren) · [Mystery Gates (奇門遁甲)](mystery-gates) · [Seven Governors (七政四餘)](seven-governors)
+
 Chinese natal astrology system placing 14 major stars and numerous auxiliary
 stars into 12 life-domain palaces, based on lunar calendar birth data. Unlike
 七政四餘 (which computes real planetary positions), 紫微斗數 uses purely

@@ -9,6 +9,8 @@ head:
 
 # Seven Governors Four Remainders (七政四餘)
 
+**See also:** [Da Liu Ren (大六壬)](da-liu-ren) · [Mystery Gates (奇門遁甲)](mystery-gates) · [Purple Star Astrology (紫微斗數)](zi-wei)
+
 Chinese sidereal astrology system computing positions for 11 celestial bodies
 across 28 lunar mansions and 12 palaces. This document covers the astronomical
 models, computational methods, and historical context behind the implementation.
@@ -131,8 +133,7 @@ the standard choice.
 This is the most historically contentious of the four remainders. In the
 mature Chinese 七政四餘 system (as codified in 《果老星宗》[^guolao]), 計都 is
 identified with the **osculating lunar apogee** — not the descending node
-as in the original Indian system. See [§5: The Ketu–Rahu Translation
-Problem](#5-the-keturahu-translation-problem-計都羅睺) for the full
+as in the original Indian system. See [§7: Historical Controversies](#7-historical-controversies) for the full
 historical analysis.
 
 **Default mode (`apogee`):**
@@ -207,7 +208,7 @@ as separate entities.
 紫氣 is the only remainder with **no known astronomical counterpart**. It does
 not correspond to any planet, node, apsidal point, or other identifiable
 celestial phenomenon. Its status has been contested since at least the
-17th century (see [§3.5](#35-the-schall-controversy)).
+17th century (see [§7.2: The Schall reforms](#72-the-schall-reforms-紫氣-deletion-and-計都-reversion)).
 
 **Formula:**
 
@@ -247,55 +248,6 @@ analyzed by Kotyk (2018)[^kotyk2018].
 
 The current implementation uses the classical linear formula with a
 provisional epoch longitude of 0°, pending sourcing from 《果老星宗》[^guolao].
-
-### 3.5 The Schall Controversy (湯若望與紫氣之爭)
-
-The status of 紫氣 became the subject of a lethal political crisis in
-17th-century Beijing.
-
-When the Jesuit astronomer [Johann Adam Schall von Bell](https://en.wikipedia.org/wiki/Johann_Adam_Schall_von_Bell)
-(湯若望, 1592–1666) reformed the Chinese calendar as the 時憲曆 (Shixian
-Calendar, 1645), he **eliminated 紫氣 from the Four Remainders** on the
-grounds that it had no observable astronomical counterpart. He retained
-羅睺, 計都, and 月孛, which correspond to real lunar orbital points, but
-also transposed the definitions of 羅睺/計都 to match Indian/Western
-conventions. Liu (2020, pp. 118–121)[^liu2020] provides a detailed account
-of these changes.
-
-In 1664, [Yang Guangxian](https://en.wikipedia.org/wiki/Yang_Guangxian)
-(楊光先) filed formal charges against Schall, making the deletion of 紫氣
-one of the central accusations. The deliberating council's verdict held:
-
-> 四餘刪去紫炁……事犯重大
-
-"The deletion of Purple Qi from the Four Surplus constitutes a grave
-offense."
-
-Yang's argument, preserved in his 《不得已》[^budeyi] (Bu De Yi), was
-philosophically acute: if 紫氣 is rejected for lacking physical substance
-(無體), then the other three 四餘 — also "shadow" bodies invisible to the
-naked eye — should be rejected on the same principle. Either keep all four
-or delete all four; selective removal is inconsistent.
-
-Schall was sentenced to death. The sentence was commuted after the
-[Beijing earthquake of 1665](https://en.wikipedia.org/wiki/1665_Tong_County_earthquake),
-interpreted as a sign of Heaven's disapproval. The 時憲曆 was temporarily
-abolished (1665–1669) and the 大統曆 restored. After the Kangxi Emperor
-took personal power, [Ferdinand Verbiest](https://en.wikipedia.org/wiki/Ferdinand_Verbiest)
-(南懷仁) defeated Yang in public astronomical prediction contests, the
-時憲曆 was reinstated, and Schall was posthumously rehabilitated
-(Jami 2015[^jami2015]; Chu 1997[^chu1997]).
-
-Verbiest initially attempted to substitute Western "natural astrology" for
-Chinese mantic techniques, but was eventually forced to fully restore
-Chinese astrological annotations — including 紫氣 — in the calendar
-(Chu 2018, ch. 15[^chu2018]).
-
-This episode demonstrates that 紫氣's lack of an astronomical referent was
-recognized and contested *within* the Chinese astronomical tradition, not
-only by modern scholars. The point survived not because its astronomical
-basis was vindicated, but because the 四餘 system was understood as a
-coherent cosmological unit that could not be selectively dismembered.
 
 ---
 
@@ -356,256 +308,7 @@ remaining palaces:
 
 ---
 
-## 5. The Ketu–Rahu Translation Problem (計都/羅睺)
-
-One of the most studied questions in the history of Sino-Indian astronomical
-transmission: did the astronomical identities of Rahu and Ketu get swapped
-when translated into Chinese?
-
-### The Indian originals
-
-In Jyotish (Indian astrology), Rahu and Ketu are both **lunar nodes**:
-
-| Sanskrit | Identity | Metaphor |
-|----------|----------|----------|
-| **Rahu** (राहु) | Ascending node | Dragon's head |
-| **Ketu** (केतु) | Descending node | Dragon's tail |
-
-They are shadow planets (chāyā graha) that cause eclipses. They are always
-180° apart — knowing one gives the other trivially.
-
-### The Chinese reception
-
-The transmission came primarily through the *Jiuzhi li* (九執曆), translated
-by [Gautama Siddha](https://en.wikipedia.org/wiki/Gautama_Siddha)
-(瞿曇悉達) in 718 CE from Indian astronomical sources and preserved as
-fascicle 104 of the 《開元占經》[^kaiyuan] (compiled 714–724 CE). On the
-Jiuzhi li as the primary vector for Indian astronomical concepts entering
-China, see Yabuuchi (1979)[^yabuuchi1979] and Niu (2023)[^brill2023].
-
-In the received Chinese system:
-
-- **羅睺** retained the identity of the ascending node — no scholarly
-  controversy on this point
-- **計都** diverged from the descending node
-
-By the time the mature 七政四餘 system was codified in 《果老星宗》[^guolao]
-(attributed to Zhang Guolao 張果老; earliest known edition Ming dynasty, 1593),
-計都 was identified with the **lunar apogee**, not the descending node. This is astronomically a completely different point — the
-apogee lies on the Moon's apsidal line, not its nodal line.
-
-### Why did this happen?
-
-Several hypotheses appear in the literature:
-
-**1. Redundancy elimination (pragmatic)**
-
-The descending node is just the ascending node + 180° — it carries zero
-independent astronomical information. Chinese astronomers may have found it
-more useful to repurpose the "slot" for the apsidal point, which provides
-genuinely new positional data. Yabuuchi (1989)[^yabuuchi1989] noted this
-pragmatic motivation in his research on Sui–Tang calendrical history.
-
-**2. Source text ambiguity**
-
-Some Indian texts describe Ketu not purely as a node but with apogee-like
-characteristics. The Sanskrit term *ketu* itself means "bright appearance" or
-"comet" — its astronomical identity was not always fixed even within Indian
-traditions. Mak (2014)[^mak2014] traces how the pseudo-planet identities
-evolved across Chinese sources from the 2nd to 11th century CE, documenting
-the gradual divergence from Indian originals.
-
-**3. Gradual transmission drift**
-
-The 九執曆 passed through multiple layers of translation (Sanskrit → possibly
-Sogdian or Persian intermediaries → Chinese). Niu Weixing (钮卫星,
-1994)[^niu1994] traced how the identification shifted across successive
-Chinese astronomical texts and argued the conflation was gradual rather than
-a single mistranslation event.
-
-**4. Active adaptation**
-
-Kotyk (2018, pp. 45–60)[^kotyk2018] argues Chinese astronomers were not
-passively receiving Indian astronomy — they actively adapted it to fit their
-own cosmological framework. The Four Remainders needed to be four *distinct*
-points providing independent information, and having two that are always 180°
-apart was cosmologically unsatisfying. This view aligns with Niu Weixing's
-analysis of how the identification evolved purposefully rather than through
-error.
-
-### The 月孛 complication
-
-If 計都 took over the apogee role, what is 月孛? Niu Weixing's[^niu1994]
-resolution, which this implementation follows:
-
-- **計都** = osculating (true) apogee — perturbed, oscillates ±10–30°
-- **月孛** = mean apogee — smooth, averaged apsidal line
-
-The Chinese system ended up with a *finer* distinction than the Indian one:
-two separate measures of the Moon's apsidal geometry (osculating vs. mean),
-rather than two redundant node points. Whether this was intentional
-astronomical insight or a fortunate accident of transmission is debated.
-
-### Which convention does this library follow?
-
-By default, this library follows the Chinese 七政四餘 convention per
-《果老星宗》[^guolao] and Niu Weixing (1994)[^niu1994]: 計都 as the
-osculating lunar apogee. The original Indian Jyotish convention (Ketu as
-the descending node) is available as an alternative. See the
-[API reference](api/seven-governors) for configuration details.
-
-### The pivotal evidence: the 七曜攘災訣 ephemeris (806 CE)
-
-How do we know 計都 became the apogee and not just a swapped node? The
-earliest Chinese text containing actual positional tables for 計都 is the
-*Qiyao rangzai jue* 七曜攘災訣 ("Formulae for Averting Disasters [Caused by]
-the Seven Luminaries"), a Buddhist astrological work compiled after 806 CE
-and preserved in the Japanese *Sukuyōdō* 宿曜道 tradition. The text gives
-ephemerides for 羅睺 spanning 93 years and for 計都 spanning 62 years, with
-epoch year 元和 1 (806 CE).[^mak2024]
-
-Niu Weixing's landmark analysis[^niu1994] showed that the 62-year 計都
-ephemeris matches the **lunar apsidal precession cycle** (~8.85 years per
-revolution, with 62 years ≈ 7 complete apsidal cycles). The descending node,
-by contrast, has the same ~18.6-year period as the ascending node — a
-62-year ephemeris spanning ~3.3 nodal cycles would produce completely
-different positional data from what the text gives. The periods are
-irreconcilable: **this is not a naming swap but a different astronomical
-body entirely.**
-
-Niu further traced the evolution in a follow-up study[^niu2010], showing
-how 計都's identity shifted from node to apogee between 718 and 806 CE,
-likely through the mediation of Persian astronomical intermediaries. By
-the Song dynasty the apogee identification was standard, and the mature
-四餘 system crystallized:
-
-| Body | Identity | Period | Astronomical independence |
-|------|----------|--------|--------------------------|
-| 羅睺 | Ascending node | ~18.6 years | Unique orbital point |
-| 計都 | Osculating apogee | ~8.85 years | Unique orbital point |
-| 月孛 | Mean apogee | ~8.85 years | Smoothed version of 計都 |
-| 紫氣 | Intercalary-tracking point | ~28 years | Fictitious |
-
-In this system, **計都 is not 180° from 羅睺**. They have entirely different
-orbital periods and are astronomically independent.
-
-### The Qing reversion: Schall reassigns 計都 to a node
-
-The 計都 identity question resurfaced during the Qing calendar reform.
-When Schall von Bell reformed the calendar as the 時憲曆 (1645; see
-[§3.5](#35-the-schall-controversy)), he not only deleted 紫氣 but also
-**reassigned 計都 back to a lunar node**, aligning the Chinese names with
-the Indian/European convention: 羅睺 = ascending node, 計都 = descending
-node.[^liu2020]
-
-Schall, trained in European astronomy where the Rahu/Ketu node identification
-was standard (via Arabic/Persian transmission from India), apparently treated
-the Chinese apogee identification as an error to be corrected. But his
-"correction" had two problems:
-
-1. **It reverted to a superseded identification.** By the Ming dynasty,
-   計都 = apogee had been standard for over 800 years. Schall restored a
-   Tang-era or Indian interpretation that Chinese astronomers had deliberately
-   moved beyond.
-
-2. **It broke the five-element correspondences.** In the Chinese 七政四餘
-   system, 羅睺 is classified as 火餘 (fire surplus) and 計都 as 土餘
-   (earth surplus). In Indian Jyotish, Rahu's nature aligns with Saturn/earth
-   and Ketu's with Mars/fire. Schall's reassignment aligned the *names* with
-   India but **reversed the elemental attributions**, creating an internally
-   inconsistent system.
-
-After the Calendar Case and Schall's posthumous rehabilitation, Ferdinand
-Verbiest retained the Schall convention in the restored 時憲曆. The Qing
-convention subsequently became the standard for official almanacs, most
-influentially the 《七政經緯曆書》 compiled by the Zhenbutang 真步堂
-tradition (first published 1891) and continued by the Hong Kong feng shui
-master Cai Boli 蔡伯勵 (1922–2018). Because Cai Boli's almanac is the most
-widely used 七政四餘 reference in Hong Kong and Southeast Asia, the Qing
-convention dominates modern practice in those regions.
-
-### The 計北羅南 vs. 計南羅北 debate
-
-Practitioners sometimes debate whether 計都 is the "north node" (ascending)
-or "south node" (descending): 計北羅南 vs. 計南羅北.
-
-**This debate is itself evidence of confusion.** It only makes sense if
-計都 is understood as a lunar node. In the 《果老星宗》 system, 計都 is
-the lunar apogee — it lies on the Moon's apsidal line, not its nodal line,
-and has a completely different orbital period from 羅睺. The question
-"is 計都 the north node or the south node?" is as nonsensical as asking
-"is the Moon's apogee the ascending node or the descending node?" They are
-different geometric features of the lunar orbit.
-
-The pre-Qing convention (計北羅南, documented by Shen Kuo 沈括 in the
-《夢溪筆談》, 1088) and the Qing convention (計南羅北, from Schall) both
-treat 計都 as a node — they disagree only about *which* node. Both
-diverge from the 《果老星宗》 apogee identification. The scholarly
-consensus (Niu 1994[^niu1994]; Mak 2014[^mak2014]; Kotyk 2018[^kotyk2018])
-is that the apogee identification is correct for the mature Chinese system,
-and the node-based framing is a regression.
-
-### Why modern software gets this wrong
-
-Most 七政四餘 charting software — including the widely-used
-[MOIRA](https://github.com/BahnAstro/MOIRA_chinese_astrology)
-(At Home Projects, 2004–2015) — follows the Qing convention, treating both
-計都 and 羅睺 as lunar nodes always 180° apart. This propagation occurs
-because:
-
-1. **The Cai Boli 蔡伯勵 almanac is the most accessible reference.** The
-   《七政經緯曆書》 follows Qing conventions and is what most Hong Kong
-   and Southeast Asian practitioners consult. Developers build from this.
-
-2. **Node-based computation is simpler.** Two nodes 180° apart require
-   only one ephemeris call plus an offset. Separate node and apogee
-   computations require two independent calculations with different
-   orbital models.
-
-3. **The scholarly literature is inaccessible to developers.** Niu
-   Weixing's 1994 paper was published in Chinese in *Acta Astronomica
-   Sinica* with an English translation in *Chinese Astronomy and
-   Astrophysics* — neither is on a software developer's reading list.
-
-4. **The 計北羅南/計南羅北 toggle creates a false sense of completeness.**
-   By offering a toggle between two node-based conventions, software
-   appears to address the historical controversy while missing the
-   deeper issue: that 計都 should not be a node at all in the
-   《果老星宗》 system.
-
-In MOIRA specifically, the code maps 計都 to the Swiss Ephemeris
-`SE_TRUE_NODE` (the true lunar ascending node) and 月孛 to `SE_MEAN_APOG`
-(the mean lunar apogee). This means MOIRA's 月孛 is actually computing
-the position that *should be* 計都 in the 《果老星宗》 system, while its
-計都 computes a descending-node position that the mature Chinese tradition
-had deliberately abandoned.
-
-### Chronological summary
-
-| Period | 計都 identification | Authority |
-|--------|---------------------|-----------|
-| Pre-718 CE | Descending lunar node | Indian *Siddhānta* tradition |
-| 718 CE | Initially descending node | 九執曆 (Gautama Siddha) |
-| 806 CE | **Lunar apogee** (shift documented) | 七曜攘災訣; proven by Niu (1994)[^niu1994] |
-| Song dynasty | Apogee (canonical) | 《果老星宗》[^guolao]; Shen Kuo treated as node (minority view) |
-| Ming dynasty | **Apogee** (standard) | 《星學大成》; 《果老星宗》[^guolao] |
-| 1645 | **Descending node** (Qing reversion) | 時憲曆 (Schall von Bell); Liu (2020)[^liu2020] |
-| Modern software | Descending node (following Qing) | Cai Boli 蔡伯勵 《七政經緯曆書》 tradition |
-| Scholarly consensus | **Apogee** | Niu (1994)[^niu1994]; Mak (2014)[^mak2014]; Kotyk (2018)[^kotyk2018] |
-
-### Is 紫氣 a Jyotish problem?
-
-No. 紫氣 (Purple Qi) is unique to the Chinese 七政四餘 system and has no
-counterpart in Indian Jyotish. The Indian system has exactly two shadow
-planets (Rahu and Ketu); the Chinese system expanded this to four by adding
-月孛 and 紫氣. Kotyk (2018)[^kotyk2018] argues both 月孛 and 紫氣 originated
-from foreign (Indo-Iranian) sources rather than being indigenous Chinese
-innovations, though the ~28-year period derives from the Chinese lunisolar
-intercalary method rather than any Indian astronomical concept.
-
----
-
-## 6. Ascendant (命宮)
+## 5. Ascendant (命宮)
 
 The ascendant is the ecliptic degree rising above the eastern horizon at
 the moment of birth. It determines which palace is designated 命宮 (Fate
@@ -626,7 +329,7 @@ GMST is computed from the Meeus Ch. 12 polynomial in Julian centuries.
 
 ---
 
-## 7. Interpretive Layers
+## 6. Interpretive Layers
 
 ### Dignity (廟旺平陷)
 
@@ -674,6 +377,300 @@ specific configurations appear in the chart. Examples:
 The current implementation includes 3 rules from 《果老星宗》[^guolao]. The
 traditional system includes approximately 40–80 additional rules which are
 tracked for future implementation.
+
+---
+
+## 7. Historical Controversies
+
+These are not merely academic questions — they directly affect which
+celestial positions your software computes and whether those positions match
+the system's classical foundations. Most modern charting software, including
+MOIRA and tools based on the Cai Boli 蔡伯勵 almanac tradition, follows
+Qing-era conventions that diverge from the mature Chinese system as codified
+in 《果老星宗》[^guolao]. Understanding these divergences is essential for
+any implementation that aims to be historically informed.
+
+### 7.1 The Indian originals and the Chinese transformation
+
+One of the most studied questions in the history of Sino-Indian astronomical
+transmission: did the astronomical identities of Rahu and Ketu get swapped
+when translated into Chinese?
+
+**The Indian originals.** In Jyotish (Indian astrology), Rahu and Ketu are
+both **lunar nodes**:
+
+| Sanskrit | Identity | Metaphor |
+|----------|----------|----------|
+| **Rahu** (राहु) | Ascending node | Dragon's head |
+| **Ketu** (केतु) | Descending node | Dragon's tail |
+
+They are shadow planets (chāyā graha) that cause eclipses. They are always
+180° apart — knowing one gives the other trivially.
+
+**The Chinese reception.** The transmission came primarily through the
+*Jiuzhi li* (九執曆), translated by [Gautama Siddha](https://en.wikipedia.org/wiki/Gautama_Siddha)
+(瞿曇悉達) in 718 CE from Indian astronomical sources and preserved as
+fascicle 104 of the 《開元占經》[^kaiyuan] (compiled 714–724 CE). On the
+Jiuzhi li as the primary vector for Indian astronomical concepts entering
+China, see Yabuuchi (1979)[^yabuuchi1979] and Niu (2023)[^brill2023].
+
+In the received Chinese system:
+
+- **羅睺** retained the identity of the ascending node — no scholarly
+  controversy on this point
+- **計都** diverged from the descending node
+
+By the time the mature 七政四餘 system was codified in 《果老星宗》[^guolao]
+(attributed to Zhang Guolao 張果老; earliest known edition Ming dynasty, 1593),
+計都 was identified with the **lunar apogee**, not the descending node. This
+is astronomically a completely different point — the apogee lies on the
+Moon's apsidal line, not its nodal line.
+
+**Why did this happen?** Several hypotheses appear in the literature:
+
+**1. Redundancy elimination (pragmatic)**
+
+The descending node is just the ascending node + 180° — it carries zero
+independent astronomical information. Chinese astronomers may have found it
+more useful to repurpose the "slot" for the apsidal point, which provides
+genuinely new positional data. Yabuuchi (1989)[^yabuuchi1989] noted this
+pragmatic motivation in his research on Sui–Tang calendrical history.
+
+**2. Source text ambiguity**
+
+Some Indian texts describe Ketu not purely as a node but with apogee-like
+characteristics. The Sanskrit term *ketu* itself means "bright appearance" or
+"comet" — its astronomical identity was not always fixed even within Indian
+traditions. Mak (2014)[^mak2014] traces how the pseudo-planet identities
+evolved across Chinese sources from the 2nd to 11th century CE, documenting
+the gradual divergence from Indian originals.
+
+**3. Gradual transmission drift**
+
+The 九執曆 passed through multiple layers of translation (Sanskrit → possibly
+Sogdian or Persian intermediaries → Chinese). Niu Weixing (钮卫星,
+1994)[^niu1994] traced how the identification shifted across successive
+Chinese astronomical texts and argued the conflation was gradual rather than
+a single mistranslation event.
+
+**4. Active adaptation**
+
+Kotyk (2018, pp. 45–60)[^kotyk2018] argues Chinese astronomers were not
+passively receiving Indian astronomy — they actively adapted it to fit their
+own cosmological framework. The Four Remainders needed to be four *distinct*
+points providing independent information, and having two that are always 180°
+apart was cosmologically unsatisfying. This view aligns with Niu Weixing's
+analysis of how the identification evolved purposefully rather than through
+error.
+
+**The 月孛 complication.** If 計都 took over the apogee role, what is 月孛?
+Niu Weixing's[^niu1994] resolution, which this implementation follows:
+
+- **計都** = osculating (true) apogee — perturbed, oscillates ±10–30°
+- **月孛** = mean apogee — smooth, averaged apsidal line
+
+The Chinese system ended up with a *finer* distinction than the Indian one:
+two separate measures of the Moon's apsidal geometry (osculating vs. mean),
+rather than two redundant node points. Whether this was intentional
+astronomical insight or a fortunate accident of transmission is debated.
+
+### 7.2 The Schall reforms: 紫氣 deletion and 計都 reversion
+
+When the Jesuit astronomer [Johann Adam Schall von Bell](https://en.wikipedia.org/wiki/Johann_Adam_Schall_von_Bell)
+(湯若望, 1592–1666) reformed the Chinese calendar as the 時憲曆 (Shixian
+Calendar, 1645), he made two consequential changes to the Four Remainders.
+Liu (2020, pp. 118–121)[^liu2020] provides a detailed account of these
+reforms.
+
+**The deletion of 紫氣.** Schall eliminated 紫氣 from the Four Remainders
+on the grounds that it had no observable astronomical counterpart. He retained
+羅睺, 計都, and 月孛, which correspond to real lunar orbital points.
+
+**The reassignment of 計都.** Schall also **reassigned 計都 back to a lunar
+node**, aligning the Chinese names with the Indian/European convention:
+羅睺 = ascending node, 計都 = descending node.[^liu2020] Schall, trained in
+European astronomy where the Rahu/Ketu node identification was standard
+(via Arabic/Persian transmission from India), apparently treated the Chinese
+apogee identification as an error to be corrected. But his "correction" had
+two problems:
+
+1. **It reverted to a superseded identification.** By the Ming dynasty,
+   計都 = apogee had been standard for over 800 years. Schall restored a
+   Tang-era or Indian interpretation that Chinese astronomers had deliberately
+   moved beyond.
+
+2. **It broke the five-element correspondences.** In the Chinese 七政四餘
+   system, 羅睺 is classified as 火餘 (fire surplus) and 計都 as 土餘
+   (earth surplus). In Indian Jyotish, Rahu's nature aligns with Saturn/earth
+   and Ketu's with Mars/fire. Schall's reassignment aligned the *names* with
+   India but **reversed the elemental attributions**, creating an internally
+   inconsistent system.
+
+**The Calendar Case.** In 1664, [Yang Guangxian](https://en.wikipedia.org/wiki/Yang_Guangxian)
+(楊光先) filed formal charges against Schall, making the deletion of 紫氣
+one of the central accusations. The deliberating council's verdict held:
+
+> 四餘刪去紫炁……事犯重大
+
+"The deletion of Purple Qi from the Four Surplus constitutes a grave
+offense."
+
+Yang's argument, preserved in his 《不得已》[^budeyi] (Bu De Yi), was
+philosophically acute: if 紫氣 is rejected for lacking physical substance
+(無體), then the other three 四餘 — also "shadow" bodies invisible to the
+naked eye — should be rejected on the same principle. Either keep all four
+or delete all four; selective removal is inconsistent.
+
+Schall was sentenced to death. The sentence was commuted after the
+[Beijing earthquake of 1665](https://en.wikipedia.org/wiki/1665_Tong_County_earthquake),
+interpreted as a sign of Heaven's disapproval. The 時憲曆 was temporarily
+abolished (1665–1669) and the 大統曆 restored. After the Kangxi Emperor
+took personal power, [Ferdinand Verbiest](https://en.wikipedia.org/wiki/Ferdinand_Verbiest)
+(南懷仁) defeated Yang in public astronomical prediction contests, the
+時憲曆 was reinstated, and Schall was posthumously rehabilitated
+(Jami 2015[^jami2015]; Chu 1997[^chu1997]).
+
+Verbiest initially attempted to substitute Western "natural astrology" for
+Chinese mantic techniques, but was eventually forced to fully restore
+Chinese astrological annotations — including 紫氣 — in the calendar
+(Chu 2018, ch. 15[^chu2018]).
+
+This episode demonstrates that 紫氣's lack of an astronomical referent was
+recognized and contested *within* the Chinese astronomical tradition, not
+only by modern scholars. The point survived not because its astronomical
+basis was vindicated, but because the 四餘 system was understood as a
+coherent cosmological unit that could not be selectively dismembered.
+
+**Legacy: the Qing convention.** After the Calendar Case and Schall's
+posthumous rehabilitation, Verbiest retained the Schall convention for 計都
+in the restored 時憲曆. The Qing convention subsequently became the standard
+for official almanacs, most influentially the 《七政經緯曆書》 compiled by
+the Zhenbutang 真步堂 tradition (first published 1891) and continued by the
+Hong Kong feng shui master Cai Boli 蔡伯勵 (1922–2018). Because Cai Boli's
+almanac is the most widely used 七政四餘 reference in Hong Kong and
+Southeast Asia, the Qing convention dominates modern practice in those
+regions.
+
+**The 計北羅南 vs. 計南羅北 debate.** Practitioners sometimes debate whether
+計都 is the "north node" (ascending) or "south node" (descending): 計北羅南
+vs. 計南羅北.
+
+This debate is itself evidence of confusion. It only makes sense if 計都 is
+understood as a lunar node. In the 《果老星宗》 system, 計都 is the lunar
+apogee — it lies on the Moon's apsidal line, not its nodal line, and has a
+completely different orbital period from 羅睺. The question "is 計都 the
+north node or the south node?" is as nonsensical as asking "is the Moon's
+apogee the ascending node or the descending node?" They are different
+geometric features of the lunar orbit.
+
+The pre-Qing convention (計北羅南, documented by Shen Kuo 沈括 in the
+《夢溪筆談》, 1088) and the Qing convention (計南羅北, from Schall) both
+treat 計都 as a node — they disagree only about *which* node. Both
+diverge from the 《果老星宗》 apogee identification. The scholarly
+consensus (Niu 1994[^niu1994]; Mak 2014[^mak2014]; Kotyk 2018[^kotyk2018])
+is that the apogee identification is correct for the mature Chinese system,
+and the node-based framing is a regression.
+
+### 7.3 The evidence: 七曜攘災訣 ephemeris (806 CE)
+
+How do we know 計都 became the apogee and not just a swapped node? The
+earliest Chinese text containing actual positional tables for 計都 is the
+*Qiyao rangzai jue* 七曜攘災訣 ("Formulae for Averting Disasters [Caused by]
+the Seven Luminaries"), a Buddhist astrological work compiled after 806 CE
+and preserved in the Japanese *Sukuyōdō* 宿曜道 tradition. The text gives
+ephemerides for 羅睺 spanning 93 years and for 計都 spanning 62 years, with
+epoch year 元和 1 (806 CE).[^mak2024]
+
+Niu Weixing's landmark analysis[^niu1994] showed that the 62-year 計都
+ephemeris matches the **lunar apsidal precession cycle** (~8.85 years per
+revolution, with 62 years ≈ 7 complete apsidal cycles). The descending node,
+by contrast, has the same ~18.6-year period as the ascending node — a
+62-year ephemeris spanning ~3.3 nodal cycles would produce completely
+different positional data from what the text gives. The periods are
+irreconcilable: **this is not a naming swap but a different astronomical
+body entirely.**
+
+Niu further traced the evolution in a follow-up study[^niu2010], showing
+how 計都's identity shifted from node to apogee between 718 and 806 CE,
+likely through the mediation of Persian astronomical intermediaries. By
+the Song dynasty the apogee identification was standard, and the mature
+四餘 system crystallized:
+
+| Body | Identity | Period | Astronomical independence |
+|------|----------|--------|--------------------------|
+| 羅睺 | Ascending node | ~18.6 years | Unique orbital point |
+| 計都 | Osculating apogee | ~8.85 years | Unique orbital point |
+| 月孛 | Mean apogee | ~8.85 years | Smoothed version of 計都 |
+| 紫氣 | Intercalary-tracking point | ~28 years | Fictitious |
+
+In this system, **計都 is not 180° from 羅睺**. They have entirely different
+orbital periods and are astronomically independent.
+
+### 7.4 Impact on modern software
+
+Most 七政四餘 charting software — including the widely-used
+[MOIRA](https://github.com/BahnAstro/MOIRA_chinese_astrology)
+(At Home Projects, 2004–2015) — follows the Qing convention, treating both
+計都 and 羅睺 as lunar nodes always 180° apart. This propagation occurs
+because:
+
+1. **The Cai Boli 蔡伯勵 almanac is the most accessible reference.** The
+   《七政經緯曆書》 follows Qing conventions and is what most Hong Kong
+   and Southeast Asian practitioners consult. Developers build from this.
+
+2. **Node-based computation is simpler.** Two nodes 180° apart require
+   only one ephemeris call plus an offset. Separate node and apogee
+   computations require two independent calculations with different
+   orbital models.
+
+3. **The scholarly literature is inaccessible to developers.** Niu
+   Weixing's 1994 paper was published in Chinese in *Acta Astronomica
+   Sinica* with an English translation in *Chinese Astronomy and
+   Astrophysics* — neither is on a software developer's reading list.
+
+4. **The 計北羅南/計南羅北 toggle creates a false sense of completeness.**
+   By offering a toggle between two node-based conventions, software
+   appears to address the historical controversy while missing the
+   deeper issue: that 計都 should not be a node at all in the
+   《果老星宗》 system.
+
+In MOIRA specifically, the code maps 計都 to the Swiss Ephemeris
+`SE_TRUE_NODE` (the true lunar ascending node) and 月孛 to `SE_MEAN_APOG`
+(the mean lunar apogee). This means MOIRA's 月孛 is actually computing
+the position that *should be* 計都 in the 《果老星宗》 system, while its
+計都 computes a descending-node position that the mature Chinese tradition
+had deliberately abandoned.
+
+### 7.5 Chronological summary
+
+| Period | 計都 identification | Authority |
+|--------|---------------------|-----------|
+| Pre-718 CE | Descending lunar node | Indian *Siddhānta* tradition |
+| 718 CE | Initially descending node | 九執曆 (Gautama Siddha) |
+| 806 CE | **Lunar apogee** (shift documented) | 七曜攘災訣; proven by Niu (1994)[^niu1994] |
+| Song dynasty | Apogee (canonical) | 《果老星宗》[^guolao]; Shen Kuo treated as node (minority view) |
+| Ming dynasty | **Apogee** (standard) | 《星學大成》; 《果老星宗》[^guolao] |
+| 1645 | **Descending node** (Qing reversion) | 時憲曆 (Schall von Bell); Liu (2020)[^liu2020] |
+| Modern software | Descending node (following Qing) | Cai Boli 蔡伯勵 《七政經緯曆書》 tradition |
+| Scholarly consensus | **Apogee** | Niu (1994)[^niu1994]; Mak (2014)[^mak2014]; Kotyk (2018)[^kotyk2018] |
+
+### 7.6 Which convention does this library follow?
+
+By default, this library follows the Chinese 七政四餘 convention per
+《果老星宗》[^guolao] and Niu Weixing (1994)[^niu1994]: 計都 as the
+osculating lunar apogee. The original Indian Jyotish convention (Ketu as
+the descending node) is available as an alternative. See the
+[API reference](api/seven-governors) for configuration details.
+
+### 7.7 Is 紫氣 a Jyotish problem?
+
+No. 紫氣 (Purple Qi) is unique to the Chinese 七政四餘 system and has no
+counterpart in Indian Jyotish. The Indian system has exactly two shadow
+planets (Rahu and Ketu); the Chinese system expanded this to four by adding
+月孛 and 紫氣. Kotyk (2018)[^kotyk2018] argues both 月孛 and 紫氣 originated
+from foreign (Indo-Iranian) sources rather than being indigenous Chinese
+innovations, though the ~28-year period derives from the Chinese lunisolar
+intercalary method rather than any Indian astronomical concept.
 
 ---
 

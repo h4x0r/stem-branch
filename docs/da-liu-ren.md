@@ -9,6 +9,8 @@ head:
 
 # Da Liu Ren (大六壬)
 
+**See also:** [Mystery Gates (奇門遁甲)](mystery-gates) · [Seven Governors (七政四餘)](seven-governors) · [Purple Star Astrology (紫微斗數)](zi-wei)
+
 The oldest and most complex of the three cosmic-board divination systems
 (三式 *sanshi*), 大六壬 constructs a miniature celestial model from
 the astronomical moment of inquiry and reads its symbolic layers to
@@ -30,16 +32,15 @@ computational structure is entirely deterministic: given a date, hour,
 and the current monthly general (月將), the chart follows without
 interpretive discretion until the reading stage.
 
-### Archaeological evidence
+---
 
-The earliest physical evidence for the cosmic-board tradition from which
-Liu Ren descends comes from the Shuanggudui tomb (阜陽雙墩堆) in Anhui
-province, sealed in 165 BCE (Marquis of Ruyin 汝陰侯). This tomb
-yielded a lacquered *shi* board (式盤) — a two-plate cosmographic
-instrument with heaven and earth discs — that predates all other known
-specimens[^harper1978]. Additional *shi* boards have been recovered from
-other Han-dynasty tombs, confirming the instrument's widespread use by
-the second century BCE[^cullen1980].
+## 1. Historical Origins
+
+Liu Ren descends from the cosmic-board (*shi* 式) tradition, one of
+the three related mantic systems that share the *shi* board as their
+ancestral instrument. All three employ the Heavenly Stems, Earthly
+Branches, and Five Phases as foundational elements, but their
+computational architectures diverge significantly[^kalinowski2022].
 
 ### The three cosmic-board systems (三式)
 
@@ -49,16 +50,13 @@ the second century BCE[^cullen1980].
 | **Qi Men Dun Jia** | 奇門遁甲 | Military strategy, spatial advantage | Tactical |
 | **Tai Yi** | 太乙神數 | Dynastic fate, large-scale cycles | Cosmic |
 
-All three share the *shi* board as their ancestral instrument and employ
-the Heavenly Stems, Earthly Branches, and Five Phases as foundational
-elements, but their computational architectures diverge
-significantly[^kalinowski2022].
-
----
-
-## 1. Historical Origins
-
 ### The *shi* board (式盤)
+
+The earliest physical evidence for the cosmic-board tradition comes from
+the Shuanggudui tomb (阜陽雙墩堆) in Anhui province, sealed in 165 BCE
+(Marquis of Ruyin 汝陰侯). This tomb yielded a lacquered *shi* board
+(式盤) — a two-plate cosmographic instrument with heaven and earth
+discs — that predates all other known specimens[^harper1978].
 
 Donald Harper's 1978 study of the Shuanggudui artefact established the
 *shi* as a physical cosmographic instrument — a rotatable two-plate
@@ -72,6 +70,20 @@ society[^harper1981].
 
 This exchange in *Early China* remains the foundational English-language
 scholarly dialogue on the *shi* board.
+
+**The heaven plate** (天盤) is circular, representing heaven. It rotates
+freely on a central pivot. Its face is inscribed with the twelve Earthly
+Branches and, in many specimens, with the 28 lunar mansions and other
+cosmological markers.
+
+**The earth plate** (地盤) is square, representing earth. It remains
+fixed. Its surface carries the twelve Earthly Branches in their
+directional positions, together with the eight trigrams, the 28 mansions
+(in their terrestrial aspect), and calendrical markers.
+
+The round-over-square design physically manifests the cosmological
+principle 天圓地方 — "heaven is round, earth is square" — that
+pervades Han cosmological thought[^needham].
 
 ### Linking the *shi* to Liu Ren
 
@@ -89,13 +101,15 @@ astrology traced the semantic evolution of the term itself — from
 physical instrument to abstract cosmological model — across the
 formative centuries of Chinese mantic practice[^kalinowski2012].
 
-### Dunhuang and medieval evidence
+### Archaeological specimens
 
-Kalinowski's 2003 edited volume on divination and society in medieval
-China drew on Dunhuang manuscript evidence to document Liu Ren practice
-during the Tang and Five Dynasties periods, filling a gap between the
-Han archaeological record and the mature Song-Ming textual
-tradition[^kalinowski2003].
+Additional *shi* boards have been recovered from other Han-dynasty
+tombs, confirming the instrument type's widespread use by the second
+century BCE[^cullen1980]. No two specimens are identical in their
+inscriptions or decorative programmes. The archaeological record
+demonstrates that *shi* boards were elite burial goods, interred with
+their owners as instruments of ongoing cosmological
+significance[^harper1978].
 
 ### TLV mirrors
 
@@ -104,8 +118,20 @@ dynasty — characterised by T-shaped, L-shaped, and V-shaped motifs
 surrounding a central boss — may be cosmographic replicas related to the
 *shi* board tradition[^loewe1979]. The spatial organisation of these
 mirrors mirrors (in simplified form) the heaven-earth cosmology
-embodied in the *shi* instrument, though the precise nature of the
-relationship remains debated.
+embodied in the *shi* instrument. The distinctive T-, L-, and V-shaped
+motifs share spatial organisation with the *shi* board's cosmographic
+layout, possibly serving as portable or decorative analogues of the
+functional instrument. The debate over whether TLV mirrors are directly
+derived from *shi* boards or share a common cosmological ancestor
+remains unresolved in the literature.
+
+### Dunhuang and medieval evidence
+
+Kalinowski's 2003 edited volume on divination and society in medieval
+China drew on Dunhuang manuscript evidence to document Liu Ren practice
+during the Tang and Five Dynasties periods, filling a gap between the
+Han archaeological record and the mature Song-Ming textual
+tradition[^kalinowski2003].
 
 ### Chinese-language scholarship
 
@@ -189,7 +215,7 @@ current cosmic configuration.
 
 The three transmissions (初傳, 中傳, 末傳 — initial, middle, final) form
 the algorithmic heart of Liu Ren. Selecting the initial transmission
-involves a priority cascade of nine classical methods, applied in strict
+involves a priority cascade of nine classical methods, tried in strict
 order until one yields a result:
 
 **1. 賊剋 (Conquest)** — Examine the four lessons for Five Phase
@@ -233,15 +259,15 @@ maps to its clash partner. The system uses 驛馬 (travelling horse) — a
 classical branch associated with movement and transition — to break the
 symmetry and generate the chain.
 
-**Deriving middle and final transmissions:** Once the initial
-transmission is determined, the remaining two follow mechanically. The
-middle transmission is found by looking up the initial transmission's
-branch on the earth plate and reading the heaven branch above it. The
-final transmission repeats this operation on the middle transmission's
-branch. This "plate-chasing" procedure — middle = plate[initial],
-final = plate[middle] — completes the three-step temporal narrative that
-Liu Ren practitioners interpret as the unfolding of the situation from
-beginning through development to conclusion.
+Once the initial transmission is found, the second and third
+transmissions follow mechanically. The middle transmission is found by
+looking up the initial transmission's branch on the earth plate and
+reading the heaven branch above it. The final transmission repeats this
+operation on the middle transmission's branch. This "plate-chasing"
+procedure — middle = plate[initial], final = plate[middle] — completes
+the three-step temporal narrative that Liu Ren practitioners interpret
+as the unfolding of the situation from beginning through development to
+conclusion.
 
 ### Step 4 — Twelve Heavenly Generals (十二天將)
 
@@ -366,50 +392,7 @@ accessible to readers without classical Chinese.
 
 ---
 
-## 5. The *Shi Pan* (式盤) — The Physical Instrument
-
-The *shi* board is a two-plate rotating cosmograph that physically
-embodies the heaven-earth model underlying Liu Ren computation.
-
-**The heaven plate** (天盤) is circular, representing heaven. It rotates
-freely on a central pivot. Its face is inscribed with the twelve Earthly
-Branches and, in many specimens, with the 28 lunar mansions and other
-cosmological markers.
-
-**The earth plate** (地盤) is square, representing earth. It remains
-fixed. Its surface carries the twelve Earthly Branches in their
-directional positions, together with the eight trigrams, the 28 mansions
-(in their terrestrial aspect), and calendrical markers.
-
-The round-over-square design physically manifests the cosmological
-principle 天圓地方 — "heaven is round, earth is square" — that
-pervades Han cosmological thought[^needham].
-
-### Archaeological specimens
-
-The Shuanggudui tomb (165 BCE) produced the earliest known *shi* board:
-a lacquered wooden instrument with identifiable heaven and earth
-plates[^harper1978]. Subsequent finds from other Han tombs have
-confirmed the instrument type, though no two specimens are identical in
-their inscriptions or decorative programmes. The archaeological record
-demonstrates that *shi* boards were elite burial goods, interred with
-their owners as instruments of ongoing cosmological
-significance[^cullen1980].
-
-### Relationship to TLV mirrors
-
-The distinctive T-, L-, and V-shaped motifs on Han bronze mirrors share
-spatial organisation with the *shi* board's cosmographic layout. Loewe
-argued that these mirrors are stylised representations of the
-cosmic-board cosmology, possibly serving as portable or decorative
-analogues of the functional *shi* instrument[^loewe1979]. The debate
-over whether TLV mirrors are directly derived from *shi* boards or
-share a common cosmological ancestor remains unresolved in the
-literature.
-
----
-
-## 6. Open Questions
+## 5. Open Questions
 
 Several areas of Liu Ren scholarship remain uncertain or contested,
 and would benefit from further textual and archaeological research:

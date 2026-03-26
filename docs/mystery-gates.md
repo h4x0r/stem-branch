@@ -9,6 +9,8 @@ head:
 
 # 奇門遁甲 Mystery Gates Escaping Armor (Qí Mén Dùn Jiǎ)
 
+**See also:** [Da Liu Ren (大六壬)](da-liu-ren) · [Seven Governors (七政四餘)](seven-governors) · [Purple Star Astrology (紫微斗數)](zi-wei)
+
 ## Overview
 
 奇門遁甲 is one of the three cosmic board divination systems (三式, *sānshì*)
