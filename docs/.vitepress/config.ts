@@ -77,9 +77,12 @@ export default withMermaid(defineConfig({
         ],
       },
       {
-        text: 'Seven Governors 七政四餘',
+        text: 'Divination & Astrology 術數',
         items: [
-          { text: 'Computation Methods', link: '/seven-governors' },
+          { text: '七政四餘 Seven Governors', link: '/seven-governors' },
+          { text: '大六壬 Six Ren', link: '/da-liu-ren' },
+          { text: '奇門遁甲 Mystery Gates', link: '/mystery-gates' },
+          { text: '紫微斗數 Purple Star', link: '/zi-wei' },
         ],
       },
     ],
