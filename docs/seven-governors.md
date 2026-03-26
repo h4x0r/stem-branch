@@ -61,7 +61,7 @@ Three configurable modes are provided:
 
 The `modern` mode computes the ayanamsa dynamically using the same
 `precessionInLongitude(T)` function used elsewhere in the library, ensuring
-consistency with the VSOP87D planetary positions.
+consistency with the VSOP87D[^vsop87] planetary positions.
 
 ---
 
@@ -73,7 +73,7 @@ longitudes come from the library's existing planetary engine:
 | Body | Source function | Algorithm |
 |------|----------------|-----------|
 | Sun (太陽) | `getSunLongitude(date)` | VSOP87D (2,425 terms) + DE441 correction polynomial |
-| Moon (太陰) | `getMoonPosition(date)` | Meeus Ch. 47 (ELP-based, 60+ periodic terms) |
+| Moon (太陰) | `getMoonPosition(date)` | Meeus[^meeus] Ch. 47 (ELP-based, 60+ periodic terms) |
 | Mercury (水星) | `getPlanetPosition('mercury', date)` | VSOP87D with aberration correction |
 | Venus (金星) | `getPlanetPosition('venus', date)` | VSOP87D with aberration correction |
 | Mars (火星) | `getPlanetPosition('mars', date)` | VSOP87D with aberration correction |
@@ -83,7 +83,7 @@ longitudes come from the library's existing planetary engine:
 These produce geocentric apparent tropical ecliptic longitudes, which are then
 converted to sidereal via the ayanamsa described above.
 
-Accuracy against JPL DE441 (primary reference):
+Accuracy against JPL DE441[^de441] (primary reference):
 - Inner planets (Mercury, Venus): mean ~1–2", max ~6"
 - Outer planets (Mars–Saturn): mean ~11–14", max ~23–29"
 
@@ -104,7 +104,7 @@ The Moon's orbit is tilted ~5.15° to the ecliptic. The **ascending node** is
 where the Moon crosses the ecliptic going northward. This point regresses
 (moves retrograde) through the ecliptic with a period of ~18.61 years.
 
-**Formula** (Meeus Ch. 22, mean ascending node):
+**Formula** (Meeus[^meeus] Ch. 22, mean ascending node):
 
 ```
 Ω = 125.0445479°
@@ -124,7 +124,7 @@ the standard choice.
 ### 3.2 Ketu (計都) — osculating lunar apogee or descending node
 
 This is the most historically contentious of the four remainders. In the
-mature Chinese 七政四餘 system (as codified in 《果老星宗》), 計都 is
+mature Chinese 七政四餘 system (as codified in 《果老星宗》[^guolao]), 計都 is
 identified with the **osculating lunar apogee** — not the descending node
 as in the original Indian system. See [§5: The Ketu–Rahu Translation
 Problem](#5-the-keturahu-translation-problem-計都羅睺) for the full
@@ -201,7 +201,8 @@ as separate entities.
 
 紫氣 is the only remainder with **no known astronomical counterpart**. It does
 not correspond to any planet, node, apsidal point, or other identifiable
-celestial phenomenon.
+celestial phenomenon. Its status has been contested since at least the
+17th century (see [§3.5](#35-the-schall-controversy)).
 
 **Formula:**
 
@@ -214,34 +215,82 @@ one full circuit in approximately 28 years.
 
 **Historical source:**
 
-The Yuan dynasty text 《革象新書》 (Ge Xiang Xin Shu, by Zhao Youqin 趙友欽,
-c. 1290s) states:
+The Yuan dynasty text 《革象新書》[^gexiang] (Ge Xiang Xin Shu) by Zhao Youqin
+(趙友欽, 1271–c. 1335) states:
 
 > 夫紫氣者，起於閏法，約二十八年而周天
 
 "Purple Qi arises from the intercalary method, completing one circuit of
 heaven in approximately 28 years."
 
-This suggests 紫氣 may derive from the lunisolar calendar's intercalary cycle.
-The Chinese calendar inserts 7 leap months every 19 years (the Metonic cycle),
-and the accumulated error from this approximation takes roughly 28 years to
-complete a full cycle through the ecliptic — though the exact derivation
-remains a subject of scholarly investigation.
+The phrase 起於閏法 ("arises from the intercalary method") directly links 紫氣
+to the lunisolar calendar's leap-month system. Kotyk (2018, pp. 52–55)[^kotyk2018]
+demonstrates that the ~28-year period tracks intercalary months: the Chinese
+calendar inserts 7 leap months every 19 years (the Metonic cycle), and 紫氣
+effectively indexes the accumulated intercalary drift along the ecliptic.
+Kotyk further argues that 紫氣 and 月孛 both originated from foreign (likely
+Indo-Iranian) sources rather than being indigenous Chinese innovations.
 
 **Candidate astronomical associations (unconfirmed):**
 
-Several scholars have proposed astronomical identifications:
+The numerical proximity of the ~28-year period to Saturn's sidereal period
+(~29.46 years) has been noted informally, but no published study has
+established this as the origin. No specific scholarly attribution exists for
+a Jupiter–Saturn synodic resonance hypothesis either. The only published
+derivation is the intercalary-month connection described by Zhao Youqin and
+analyzed by Kotyk (2018)[^kotyk2018].
 
-1. **Saturn's sidereal period** (~29.46 years) — close but not matching the
-   ~28-year value
-2. **Jupiter–Saturn intercalary resonance** — the interaction between their
-   synodic periods and the calendar
-3. **Lunisolar accumulation cycle** — the error accumulation in the 19-year
-   Metonic cycle
+The current implementation uses the classical linear formula with a
+provisional epoch longitude of 0°, pending sourcing from 《果老星宗》[^guolao].
 
-None of these have been definitively established. The current implementation
-uses the classical linear formula with a provisional epoch longitude of 0°,
-pending sourcing from 《果老星宗》.
+### 3.5 The Schall Controversy (湯若望與紫氣之爭)
+
+The status of 紫氣 became the subject of a lethal political crisis in
+17th-century Beijing.
+
+When the Jesuit astronomer [Johann Adam Schall von Bell](https://en.wikipedia.org/wiki/Johann_Adam_Schall_von_Bell)
+(湯若望, 1592–1666) reformed the Chinese calendar as the 時憲曆 (Shixian
+Calendar, 1645), he **eliminated 紫氣 from the Four Remainders** on the
+grounds that it had no observable astronomical counterpart. He retained
+羅睺, 計都, and 月孛, which correspond to real lunar orbital points, but
+also transposed the definitions of 羅睺/計都 to match Indian/Western
+conventions. Liu (2020, pp. 118–121)[^liu2020] provides a detailed account
+of these changes.
+
+In 1664, [Yang Guangxian](https://en.wikipedia.org/wiki/Yang_Guangxian)
+(楊光先) filed formal charges against Schall, making the deletion of 紫氣
+one of the central accusations. The deliberating council's verdict held:
+
+> 四餘刪去紫炁……事犯重大
+
+"The deletion of Purple Qi from the Four Surplus constitutes a grave
+offense."
+
+Yang's argument, preserved in his 《不得已》[^budeyi] (Bu De Yi), was
+philosophically acute: if 紫氣 is rejected for lacking physical substance
+(無體), then the other three 四餘 — also "shadow" bodies invisible to the
+naked eye — should be rejected on the same principle. Either keep all four
+or delete all four; selective removal is inconsistent.
+
+Schall was sentenced to death. The sentence was commuted after the
+[Beijing earthquake of 1665](https://en.wikipedia.org/wiki/1665_Tong_County_earthquake),
+interpreted as a sign of Heaven's disapproval. The 時憲曆 was temporarily
+abolished (1665–1669) and the 大統曆 restored. After the Kangxi Emperor
+took personal power, [Ferdinand Verbiest](https://en.wikipedia.org/wiki/Ferdinand_Verbiest)
+(南懷仁) defeated Yang in public astronomical prediction contests, the
+時憲曆 was reinstated, and Schall was posthumously rehabilitated
+(Jami 2015[^jami2015]; Chu 1997[^chu1997]).
+
+Verbiest initially attempted to substitute Western "natural astrology" for
+Chinese mantic techniques, but was eventually forced to fully restore
+Chinese astrological annotations — including 紫氣 — in the calendar
+(Chu 2018, ch. 15[^chu2018]).
+
+This episode demonstrates that 紫氣's lack of an astronomical referent was
+recognized and contested *within* the Chinese astronomical tradition, not
+only by modern scholars. The point survived not because its astronomical
+basis was vindicated, but because the 四餘 system was understood as a
+coherent cosmological unit that could not be selectively dismembered.
 
 ---
 
@@ -261,9 +310,9 @@ Mansions vary considerably in angular width:
 | 觜 (Turtle Beak): 2.5° | 井 (Well): 33° |
 
 The mansion boundaries in `src/seven-governors/data/mansion-boundaries.ts`
-are sourced from J2000.0 ecliptic longitudes of the Hipparcos catalogue
-determinative stars, converted to the Spica-anchored sidereal frame. These
-values are approximate pending full verification (see
+are sourced from J2000.0 ecliptic longitudes of the Hipparcos[^hipparcos]
+catalogue determinative stars, converted to the Spica-anchored sidereal
+frame. These values are approximate pending full verification (see
 `scripts/verify-mansion-boundaries.mjs`).
 
 Mansion lookup uses binary search on the sorted boundary array, handling the
@@ -325,8 +374,11 @@ They are shadow planets (chāyā graha) that cause eclipses. They are always
 ### The Chinese reception
 
 The transmission came primarily through the *Jiuzhi li* (九執曆), translated
-by Gautama Siddha (瞿曇悉達) in 718 CE from Indian astronomical sources and
-included in the *Kaiyuan zhanjing* (開元占經).
+by [Gautama Siddha](https://en.wikipedia.org/wiki/Gautama_Siddha)
+(瞿曇悉達) in 718 CE from Indian astronomical sources and preserved as
+fascicle 104 of the 《開元占經》[^kaiyuan] (compiled 714–724 CE). On the
+Jiuzhi li as the primary vector for Indian astronomical concepts entering
+China, see Yabuuchi (1979)[^yabuuchi1979] and Niu (2023)[^brill2023].
 
 In the received Chinese system:
 
@@ -334,9 +386,9 @@ In the received Chinese system:
   controversy on this point
 - **計都** diverged from the descending node
 
-By the time the mature 七政四餘 system was codified in 《果老星宗》
-(Song–Ming dynasty), 計都 was identified with the **lunar apogee**, not the
-descending node. This is astronomically a completely different point — the
+By the time the mature 七政四餘 system was codified in 《果老星宗》[^guolao]
+(attributed to Zhang Guolao 張果老; earliest known edition Ming dynasty, 1593),
+計都 was identified with the **lunar apogee**, not the descending node. This is astronomically a completely different point — the
 apogee lies on the Moon's apsidal line, not its nodal line.
 
 ### Why did this happen?
@@ -348,37 +400,40 @@ Several hypotheses appear in the literature:
 The descending node is just the ascending node + 180° — it carries zero
 independent astronomical information. Chinese astronomers may have found it
 more useful to repurpose the "slot" for the apsidal point, which provides
-genuinely new positional data. Yabuuchi Kiyoshi (薮内清) noted this pragmatic
-motivation in his research on Sui–Tang calendrical history.
+genuinely new positional data. Yabuuchi (1989)[^yabuuchi1989] noted this
+pragmatic motivation in his research on Sui–Tang calendrical history.
 
 **2. Source text ambiguity**
 
 Some Indian texts describe Ketu not purely as a node but with apogee-like
 characteristics. The Sanskrit term *ketu* itself means "bright appearance" or
 "comet" — its astronomical identity was not always fixed even within Indian
-traditions. Early Indian sources sometimes conflated Ketu with other
-phenomena.
+traditions. Mak (2014)[^mak2014] traces how the pseudo-planet identities
+evolved across Chinese sources from the 2nd to 11th century CE, documenting
+the gradual divergence from Indian originals.
 
 **3. Gradual transmission drift**
 
 The 九執曆 passed through multiple layers of translation (Sanskrit → possibly
-Sogdian or Persian intermediaries → Chinese). Niu Weixing (牛衛星, 1995)
-traced how the identification shifted across successive Chinese astronomical
-texts and argued the conflation was gradual rather than a single
-mistranslation event.
+Sogdian or Persian intermediaries → Chinese). Niu Weixing (钮卫星,
+1994)[^niu1994] traced how the identification shifted across successive
+Chinese astronomical texts and argued the conflation was gradual rather than
+a single mistranslation event.
 
-**4. Deliberate reinterpretation**
+**4. Active adaptation**
 
-Ho Peng Yoke suggested Chinese astronomers were not passively receiving Indian
-astronomy — they actively adapted it to fit their own cosmological framework.
-The Four Remainders needed to be four *distinct* points providing independent
-information, and having two that are always 180° apart was cosmologically
-unsatisfying.
+Kotyk (2018, pp. 45–60)[^kotyk2018] argues Chinese astronomers were not
+passively receiving Indian astronomy — they actively adapted it to fit their
+own cosmological framework. The Four Remainders needed to be four *distinct*
+points providing independent information, and having two that are always 180°
+apart was cosmologically unsatisfying. This view aligns with Niu Weixing's
+analysis of how the identification evolved purposefully rather than through
+error.
 
 ### The 月孛 complication
 
-If 計都 took over the apogee role, what is 月孛? Niu Weixing's resolution,
-which this implementation follows:
+If 計都 took over the apogee role, what is 月孛? Niu Weixing's[^niu1994]
+resolution, which this implementation follows:
 
 - **計都** = osculating (true) apogee — perturbed, oscillates ±10–30°
 - **月孛** = mean apogee — smooth, averaged apsidal line
@@ -396,8 +451,8 @@ The `KetuMode` type makes this historiographic choice explicit:
 type KetuMode = 'apogee' | 'descending-node';
 ```
 
-- `'apogee'` (default): Chinese 七政四餘 convention per 《果老星宗》 and
-  Niu Weixing — 計都 as the osculating lunar apogee
+- `'apogee'` (default): Chinese 七政四餘 convention per 《果老星宗》[^guolao]
+  and Niu Weixing (1994)[^niu1994] — 計都 as the osculating lunar apogee
 - `'descending-node'`: Original Indian Jyotish convention — Ketu as the
   point diametrically opposite Rahu
 
@@ -406,9 +461,10 @@ type KetuMode = 'apogee' | 'descending-node';
 No. 紫氣 (Purple Qi) is unique to the Chinese 七政四餘 system and has no
 counterpart in Indian Jyotish. The Indian system has exactly two shadow
 planets (Rahu and Ketu); the Chinese system expanded this to four by adding
-月孛 and 紫氣. The latter appears to be an indigenous Chinese contribution,
-possibly derived from calendar mathematics rather than astronomical
-observation.
+月孛 and 紫氣. Kotyk (2018)[^kotyk2018] argues both 月孛 and 紫氣 originated
+from foreign (Indo-Iranian) sources rather than being indigenous Chinese
+innovations, though the ~28-year period derives from the Chinese lunisolar
+intercalary method rather than any Indian astronomical concept.
 
 ---
 
@@ -426,7 +482,7 @@ ASC = atan2(−cos(LST), sin(LST) × cos(ε) + tan(φ) × sin(ε))
 
 where:
 - LST = local sidereal time in degrees (GMST + observer longitude)
-- ε = mean obliquity of the ecliptic (~23.44°, computed from Meeus Ch. 22)
+- ε = mean obliquity of the ecliptic (~23.44°, computed from Meeus[^meeus] Ch. 22)
 - φ = observer geographic latitude
 
 GMST is computed from the Meeus Ch. 12 polynomial in Julian centuries.
@@ -447,9 +503,9 @@ well-placed or poorly-placed:
 | 平 (Neutral) | Neither strong nor weak |
 | 陷 (Fallen) | Weakest — body is debilitated |
 
-The dignity table is sourced from 《果老星宗》. Currently only Sun and Moon
-have non-placeholder values; the remaining 9 bodies default to 平 pending
-full data sourcing from classical texts.
+The dignity table is sourced from 《果老星宗》[^guolao]. Currently only Sun
+and Moon have non-placeholder values; the remaining 9 bodies default to 平
+pending full data sourcing from classical texts.
 
 ### Aspects (合沖刑三合)
 
@@ -478,20 +534,20 @@ specific configurations appear in the chart. Examples:
 | 祿存 | Jupiter in 命宮 | Auspicious |
 | 火鈴夾命 | Mars and Ketu adjacent to 命宮 | Malefic |
 
-The current implementation includes 3 rules from 《果老星宗》. The traditional
-system includes approximately 40–80 additional rules which are tracked for
-future implementation.
+The current implementation includes 3 rules from 《果老星宗》[^guolao]. The
+traditional system includes approximately 40–80 additional rules which are
+tracked for future implementation.
 
 ---
 
 ## 8. Data Sourcing Status
 
 The computational framework is complete, but several data tables require
-sourcing from classical texts (primarily 《果老星宗》):
+sourcing from classical texts (primarily 《果老星宗》[^guolao]):
 
 | Data | Status | Impact |
 |------|--------|--------|
-| Mansion boundaries (28 startDeg values) | Approximate from Hipparcos | May be off by 1–2° per mansion |
+| Mansion boundaries (28 startDeg values) | Approximate from Hipparcos[^hipparcos] | May be off by 1–2° per mansion |
 | Palace starting point (辰宮 at 0°) | Implemented, needs textual confirmation | Could shift all palace assignments |
 | Purple Qi epoch longitude | Provisional (0°) | Constant offset on all 紫氣 positions |
 | Dignity table (132 entries) | Sun/Moon complete, 9 bodies placeholder | Dignity lookups return 平 for most bodies |
@@ -499,79 +555,44 @@ sourcing from classical texts (primarily 《果老星宗》):
 
 ---
 
-## 9. References
+[^guolao]: **《果老星宗》** — Standard reference for 七政四餘, attributed to Zhang Guolao (張果老), one of the Eight Daoist Immortals. The *Siku Quanshu Zongmu Tiyao* expressed skepticism about this Tang-dynasty attribution; Yabuuchi Kiyoshi argued some astronomical content may preserve Tang-era material based on star chart analysis, but the known published edition dates to 1593 (Ming dynasty, Lu Wei's 陸位 recension). Primary source for dignity tables, star spirit rules, and chart interpretation. [Full scanned volumes on Internet Archive](https://archive.org/details/guolaoxingzong).
 
-### Primary sources
+[^gexiang]: **《革象新書》** (Ge Xiang Xin Shu) by Zhao Youqin (趙友欽, 1271–c. 1335, Yuan dynasty) — Contains the key passage on Purple Qi: "夫紫氣者，起於閏法，約二十八年而周天". [Full text on Chinese Text Project](https://ctext.org/wiki.pl?if=gb&res=1474554). See also: [Zhao Youqin biography (Wikipedia)](https://en.wikipedia.org/wiki/Zhao_Youqin); [MacTutor biography](https://mathshistory.st-andrews.ac.uk/Biographies/Zhao_Youqin/).
 
-- [《果老星宗》](https://archive.org/details/guolaoxingzong) — Standard
-  reference for 七政四餘, attributed to Li Chunfeng (李淳風, Tang dynasty) but
-  likely compiled in the Song–Ming period. Primary source for dignity tables,
-  star spirit rules, and chart interpretation. Full scanned volumes available
-  on Internet Archive.
+[^kaiyuan]: **《開元占經》** (Kaiyuan Zhanjing) — Tang dynasty compilation (714–724 CE) by [Gautama Siddha](https://en.wikipedia.org/wiki/Gautama_Siddha) (瞿曇悉達), containing the 《九執曆》 (Jiuzhi li) in vol. 104 — the primary vector for Indian astronomical concepts entering China. [Full text on Chinese Text Project](https://ctext.org/datawiki.pl?if=en&res=252606).
 
-- [《革象新書》](https://ctext.org/wiki.pl?if=gb&res=1474554) (Ge Xiang Xin
-  Shu) by Zhao Youqin (趙友欽, Yuan dynasty, c. 1290s) — Contains the key
-  passage on Purple Qi: "夫紫氣者，起於閏法，約二十八年而周天". Full text on
-  Chinese Text Project.
+[^budeyi]: **Yang Guangxian 楊光先, 《不得已》** (Bu De Yi, c. 1664) — Primary source for the charges against Schall von Bell, including the argument that 紫氣 cannot be selectively deleted from the 四餘. [Full text on Chinese Text Project](https://ctext.org/datawiki.pl?if=en&res=416720); also at [Wikisource](https://zh.wikisource.org/wiki/%E4%B8%8D%E5%BE%97%E5%B7%B2/%E4%B8%8A%E5%8D%B7).
 
-- [《開元占經》](https://ctext.org/datawiki.pl?if=en&res=252606) (Kaiyuan
-  Zhanjing) — Tang dynasty compilation by Gautama Siddha (瞿曇悉達), containing
-  the 《九執曆》 (Jiuzhi li) in vol. 104 — the primary vector for Indian
-  astronomical concepts entering China. Full text on Chinese Text Project.
+[^niu1994]: **Niu Weixing 钮卫星**, "罗睺、计都天文学含义考源" (An Inquiry into the Astronomical Meaning of Rahu and Ketu), *Acta Astronomica Sinica* 天文学报, Vol. 35 No. 3, 1994, pp. 326–332. English version: "An investigation into the astronomical meaning of Luohou and Jidu", *Chinese Astronomy and Astrophysics* 19(2), 1995. Research identifying 計都 with the osculating lunar apogee, tracing the evolution of the concept through Chinese astronomical texts. [DOI: 10.1016/0275-1062(95)00033-O](https://doi.org/10.1016/0275-1062(95)00033-O); [ADS](https://ui.adsabs.harvard.edu/abs/1995ChA&A..19..259N/abstract); [USTC faculty page](https://faculty.ustc.edu.cn/niuweixing/zh_CN/lwcg/64044/content/20729.htm).
 
-### Scholarly literature
+[^yabuuchi1989]: **Yabuuchi Kiyoshi 薮内清**, *Zōtei Zui-Tō rekihō-shi no kenkyū* (増訂 隋唐暦法史の研究, Rinsen Shoten, 1989) — Research on Sui–Tang calendrical history, including analysis of the Indian–Chinese astronomical transmission and the pragmatic motivations for the Ketu identity shift. [CiNii](https://ci.nii.ac.jp/ncid/BB26841838); [biographical article](https://www.academia.edu/9268531/Yabuuchi_Kiyoshi_His_life_Works_and_Significant_Contributions_to_the_Chinese_History_of_Science_and_Technology).
 
-- Niu Weixing 钮卫星, ["罗睺、计都天文学含义考源"](https://faculty.ustc.edu.cn/niuweixing/zh_CN/lwcg/64044/content/20729.htm)
-  (An Inquiry into the Astronomical Meaning of Rahu and Ketu), *Acta
-  Astronomica Sinica* 天文学报, Vol. 35 No. 3, 1994, pp. 326–332. English
-  version in *Chinese Astronomy and Astrophysics*, 1995, 19(2). Research
-  identifying 計都 with the osculating lunar apogee, tracing the evolution of
-  the concept through Chinese astronomical texts.
+[^yabuuchi1979]: **Yabuuchi Kiyoshi 薮内清**, "Researches on the Chiu-chih li," *Acta Asiatica* 36, 1979, pp. 7–48 — On the 九執曆 as the primary vector for Indian astronomical transmission into China. [CiNii](https://ci.nii.ac.jp/naid/40001001194/).
 
-- Yabuuchi Kiyoshi 薮内清, [*Zōtei Zui-Tō rekihō-shi no kenkyū*](https://ci.nii.ac.jp/ncid/BB26841838)
-  (増訂 隋唐暦法史の研究, Rinsen Shoten, 1989) — Research on Sui–Tang
-  calendrical history, including analysis of the Indian–Chinese astronomical
-  transmission. See also the [biographical article](https://www.academia.edu/9268531/Yabuuchi_Kiyoshi_His_life_Works_and_Significant_Contributions_to_the_Chinese_History_of_Science_and_Technology)
-  on his contributions.
+[^kotyk2018]: **Jeffrey Kotyk**, "The Sinicization of Indo-Iranian Astrology in Medieval China," *Sino-Platonic Papers* 282, 2018, pp. 1–95. Argues 紫氣 and 月孛 originated from foreign (Indo-Iranian) sources; provides the most detailed published analysis of 紫氣's intercalary-month derivation and its ecliptic computation (pp. 52–55). [Free PDF](https://sino-platonic.org/complete/spp282_Indo-Iranian_Astrology_China.pdf).
 
-- Ho Peng Yoke, [*Chinese Mathematical Astrology: Reaching Out to the Stars*](https://www.routledge.com/Chinese-Mathematical-Astrology-Reaching-Out-to-the-Stars/Yoke/p/book/9780415863100)
-  (RoutledgeCurzon, 2003; Needham Research Institute Series) — Comprehensive
-  treatment of Chinese astrology's mathematical foundations, including the
-  Seven Governors system and Indian transmission. [Review in *East Asian
-  Science, Technology, and Medicine*](https://brill.com/view/journals/east/23/1/article-p134_8.xml?language=en).
+[^mak2014]: **Bill Mak**, "The History of Pseudo-planets in China (I): from 2nd to 11th century CE," 2014. Also in: *Foreign Astral Sciences in China* (Routledge, 2019; ISBN 978-1138477599). Traces the evolution of pseudo-planet identities (including 四餘) across Chinese sources, documenting the gradual divergence from Indian originals. [Academia.edu](https://www.academia.edu/2763447/); [Routledge](https://www.routledge.com/Foreign-Astral-Sciences-in-China/Mak/p/book/9781138477599).
 
-- Pan Nai 潘鼐, [*Zhongguo Hengxing Guance Shi*](https://books.google.com/books/about/%E4%B8%AD%E5%9B%BD%E6%81%92%E6%98%9F%E8%A7%82%E6%B5%8B%E5%8F%B2.html?id=RQDr888FHoEC)
-  (中國恆星觀測史, History of Fixed Star Observation in China; Xuelin Press,
-  2009 revised ed., ISBN 9787807306948) — Reference for determinative star
-  identifications and the 28-mansion system.
+[^liu2020]: **Liyuan Liu**, "When Missionary Astronomy Encountered Chinese Astrology: Johann Adam Schall von Bell and Chinese Calendar Reform in the Seventeenth Century," *Physics in Perspective* 22(2), 2020, pp. 110–126. Detailed account of Schall's deletion of 紫氣 from the 時憲曆 and the resulting Calendar Case. [Springer](https://link.springer.com/article/10.1007/s00016-020-00255-z).
 
-- Sun Xiaochun & Jacob Kistemaker, [*The Chinese Sky During the Han:
-  Constellating Stars and Society*](https://www.worldcat.org/title/chinese-sky-during-the-han-constellating-stars-and-society/oclc/185938073)
-  (Brill, 1997; Sinica Leidensia vol. 38, ISBN 9789004107373) —
-  Determinative star positions and mansion boundary reconstruction.
-  [Academia.edu review](https://www.academia.edu/38558071/).
+[^jami2015]: **Catherine Jami**, "Revisiting the Calendar Case (1664–1669): Science, Religion, and Politics in Early Qing Beijing," *Korean Journal of History of Science* 27(2), 2015, pp. 459–477. [Open access PDF](https://shs.hal.science/halshs-01222267/document).
 
-### Astronomical references
+[^chu1997]: **Chu Pingyi 祝平一**, "Scientific Dispute in the Imperial Court: The 1664 Calendar Case," *Chinese Science* 14, 1997, pp. 7–34. Primary study of the 曆獄 proceedings.
 
-- Jean Meeus, [*Astronomical Algorithms*](https://worldcat.org/oclc/40521322)
-  (2nd ed., Willmann-Bell, 1998; ISBN 978-0943396613) — Source for the mean
-  ascending node polynomial (Ch. 22), mean obliquity (Ch. 22), GMST (Ch. 12),
-  and Delaunay arguments. [Online algorithm implementations](http://www.micmap.org/astronomical-algorithms/).
+[^chu2018]: **Chu Pingyi 祝平一**, "Against Prognostication: Ferdinand Verbiest's Criticisms of Chinese Mantic Arts," ch. 15 in Michael Lackner (ed.), *Coping with the Future: Theories and Practices of Divination in East Asia* (Brill, 2018; Sinica Leidensia 138; ISBN 978-90-04-34653-6). On Verbiest's failed attempt to replace Chinese astrological annotations with Western natural astrology. [Brill](https://brill.com/view/title/34845).
 
-- Bretagnon, P. & Francou, G., ["Planetary Theories in Rectangular and
-  Spherical Variables: VSOP87 Solution"](https://ui.adsabs.harvard.edu/abs/1988A&A...202..309B/abstract),
-  *Astronomy and Astrophysics*, 202, 309–315, 1988. Full planetary theory
-  used for the seven governors' tropical positions.
-  [Full text (ADS)](https://adsabs.harvard.edu/full/1988A&A...202..309B).
+[^brill2023]: "An 8th-Century CE Indian Astronomical Treatise in Chinese," in *Plurilingualism in Traditional Eurasian Scholarship* (Brill, 2023). On the Jiuzhi li as the primary vector for Indian astronomical concepts entering China. [Brill](https://brill.com/display/book/9789004527256/BP000030.xml).
 
-- Park, R. S. et al., ["The JPL Planetary and Lunar Ephemerides DE440 and
-  DE441"](https://doi.org/10.3847/1538-3881/abd414), *The Astronomical
-  Journal*, 161:105, 2021. Numerical integration ephemeris used as ground
-  truth for planetary position validation.
-  [PDF (JPL)](https://ssd.jpl.nasa.gov/doc/Park.2021.AJ.DE440.pdf).
+[^hopeng]: **Ho Peng Yoke**, *Chinese Mathematical Astrology: Reaching Out to the Stars* (RoutledgeCurzon, 2003; Needham Research Institute Series) — Covers the three cosmic-board divination systems (三式: 太乙, 奇門遁甲, 六壬) and their mathematical structures. General background on Chinese astrology and Indian transmission. [Routledge](https://www.routledge.com/Chinese-Mathematical-Astrology-Reaching-Out-to-the-Stars/Yoke/p/book/9780415863100); [Review in *EASTM*](https://brill.com/view/journals/east/23/1/article-p134_8.xml?language=en).
 
-- ESA, [*The Hipparcos and Tycho Catalogues*](https://www.cosmos.esa.int/web/hipparcos/catalogues)
-  (ESA SP-1200, 1997) — Source for determinative star positions used in
-  mansion boundary data. Searchable online via
-  [NASA HEASARC](https://heasarc.gsfc.nasa.gov/w3browse/all/hipparcos.html)
-  and [VizieR](https://ui.adsabs.harvard.edu/abs/1997yCat.1239....0E/abstract).
+[^pannai]: **Pan Nai 潘鼐**, *Zhongguo Hengxing Guance Shi* (中國恆星觀測史, History of Fixed Star Observation in China; Xuelin Press, 2009 revised ed., ISBN 9787807306948) — Reference for determinative star identifications and the 28-mansion system. [Google Books](https://books.google.com/books/about/%E4%B8%AD%E5%9B%BD%E6%81%92%E6%98%9F%E8%A7%82%E6%B5%8B%E5%8F%B2.html?id=RQDr888FHoEC).
+
+[^sunkim]: **Sun Xiaochun & Jacob Kistemaker**, *The Chinese Sky During the Han: Constellating Stars and Society* (Brill, 1997; Sinica Leidensia vol. 38, ISBN 9789004107373) — Determinative star positions and mansion boundary reconstruction. [WorldCat](https://www.worldcat.org/title/chinese-sky-during-the-han-constellating-stars-and-society/oclc/185938073); [Academia.edu review](https://www.academia.edu/38558071/).
+
+[^meeus]: **Jean Meeus**, *Astronomical Algorithms* (2nd ed., Willmann-Bell, 1998; ISBN 978-0943396613) — Source for the mean ascending node polynomial (Ch. 22), mean obliquity (Ch. 22), GMST (Ch. 12), and Delaunay arguments. [WorldCat](https://worldcat.org/oclc/40521322); [algorithm implementations](http://www.micmap.org/astronomical-algorithms/).
+
+[^vsop87]: **Bretagnon, P. & Francou, G.**, "Planetary Theories in Rectangular and Spherical Variables: VSOP87 Solution," *Astronomy and Astrophysics*, 202, 309–315, 1988. Full planetary theory used for the seven governors' tropical positions. [ADS abstract](https://ui.adsabs.harvard.edu/abs/1988A&A...202..309B/abstract); [full text](https://adsabs.harvard.edu/full/1988A&A...202..309B).
+
+[^de441]: **Park, R. S. et al.**, "The JPL Planetary and Lunar Ephemerides DE440 and DE441," *The Astronomical Journal*, 161:105, 2021. Numerical integration ephemeris used as primary reference for planetary position validation. [DOI: 10.3847/1538-3881/abd414](https://doi.org/10.3847/1538-3881/abd414); [PDF (JPL)](https://ssd.jpl.nasa.gov/doc/Park.2021.AJ.DE440.pdf).
+
+[^hipparcos]: **ESA**, *The Hipparcos and Tycho Catalogues* (ESA SP-1200, 1997) — Source for determinative star positions used in mansion boundary data. [ESA catalogue page](https://www.cosmos.esa.int/web/hipparcos/catalogues); [NASA HEASARC](https://heasarc.gsfc.nasa.gov/w3browse/all/hipparcos.html); [VizieR](https://ui.adsabs.harvard.edu/abs/1997yCat.1239....0E/abstract).

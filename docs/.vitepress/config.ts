@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress';
 import { withMermaid } from 'vitepress-plugin-mermaid';
+import footnote from 'markdown-it-footnote';
 
 export default withMermaid(defineConfig({
   title: 'stem-branch',
@@ -8,6 +9,11 @@ export default withMermaid(defineConfig({
   lang: 'en',
   cleanUrls: true,
   lastUpdated: true,
+  markdown: {
+    config: (md) => {
+      md.use(footnote);
+    },
+  },
   sitemap: {
     hostname: 'https://h4x0r.github.io/stem-branch',
   },
