@@ -74,8 +74,29 @@
 \maketitle
 
 \begin{abstract}
-% ~200 words — Task 6
-\noindent\textit{Abstract placeholder.}
+When astronomical concepts travel across civilizational boundaries, they do not
+arrive unchanged. This paper argues that such transformations are systematic
+rather than random, and proposes a six-mode theoretical framework---transliteration,
+reidentification, indigenous restructuring, hybridization, foreign correction, and
+algorithmic fossilization---derived from an extended case study spanning thirteen
+centuries.
+
+The case study follows the Indian shadow planet Ketu (\zh{計都}) and its coordinate
+reference frame as both were absorbed into Chinese \zh{七政四餘} (Seven Governors,
+Four Remainders) astrology.  On the coordinate axis the paper traces four
+successive regime changes: ecliptic sidereal coordinates in the Song dynasty
+(\zh{三辰通載}); equatorial sidereal in the Yuan (\zh{鄭氏星案}); a novel
+quasi-ecliptic sidereal hybrid in the Ming (\zh{果老星宗}); and ecliptic tropical
+under the Jesuit reform of 1645.  In parallel, Ketu's astronomical identity was
+quietly reidentified---from the descending lunar node to the osculating lunar
+apogee---a shift demonstrated by Niu Weixing's 1994 recomputation of Tang-dynasty
+ephemeris data \cite{niu1995ketu}, before being reverted by Schall von Bell in the
+\textit{Shixian} calendar.
+
+The paper contributes: (1)~computational verification of the apsidal identification
+using modern JPL ephemeris algorithms; (2)~the first rigorous definition of the
+\zh{似黃道} (quasi-ecliptic) coordinate system; and (3)~the six-mode framework as
+a reusable instrument for the comparative history of transmitted astronomy.
 \end{abstract}
 \vspace{12pt}
 ]
@@ -84,7 +105,207 @@
 \section{Introduction}\label{sec:intro}
 % ~1,500 words — Task 6
 
-\textit{Section placeholder.}
+\subsection*{The Silk Road as a Channel for Astronomical Ideas}
+
+Astronomical knowledge traveled the Silk Road alongside silk, spices, and
+religious texts.  Between the second and ninth centuries~CE, Greek planetary
+models, Indian \textit{siddh\=anta} tables, Persian \textit{z\={\i}j} manuals,
+and Babylonian omen compendia all made their way into Central Asia and China via
+a network of court astronomers, Buddhist missionaries, Sogdian merchants, and
+imperial tribute missions.  Unlike a bolt of silk, however, an astronomical concept
+does not arrive at its destination intact.  It is translated into a new language,
+fitted into an existing institutional structure, combined with native techniques,
+challenged by fresh observations, and eventually enshrined in software whose users
+have forgotten what it ever meant.  These transformations leave detectable traces
+in historical texts---and in the computed positions of celestial bodies.
+
+This paper argues that the transformations are systematic rather than random.
+Using a single case study that spans thirteen centuries and four Chinese dynasties,
+we identify six recurring patterns---six \emph{modes} of transformation---that
+structured the reception of Indian astronomy in China.  The case study concerns
+two related objects: the Indian shadow planet Ketu (\zh{計都}) and the coordinate
+reference frame used to specify its position.  Both entered Chinese astronomy in
+718~CE through the translation of the \textit{Jiuzhi li} (\zh{九執曆},
+\textit{Nine Luminaries Calendar}) by Gautama Siddh\=artha (\zh{瞿曇悉達}), a
+scholar of Indian descent serving at the Tang court.  Both underwent a remarkable
+sequence of transformations over the following millennium, and both continue to
+influence popular Chinese-language astrology software today.
+
+\subsection*{Two Parallel Threads}
+
+The paper traces two intertwined threads that run from 718~CE to the present.
+
+\textit{Thread~1: The coordinate reference frame.}  Every astronomical position
+requires a reference frame---a choice of origin, fundamental plane, and direction
+of increasing longitude.  The original Indian system used ecliptic coordinates
+measured from a sidereal zero point (a fixed star rather than the moving
+vernal equinox).  Chinese astronomy in the Tang and Song dynasties preferred
+equatorial coordinates referenced to the twenty-eight lunar lodges (\zh{二十八宿},
+\textit{xiu}).  When Ketu entered the Chinese tradition, a tension arose between
+the imported ecliptic frame and the native equatorial one.  That tension was
+resolved---and re-resolved---four times:
+\begin{enumerate}[leftmargin=*, label=(\arabic*)]
+  \item \textbf{Song ecliptic sidereal.}  The \zh{三辰通載} (c.~11th century~CE)
+    presents Ketu positions in a coordinate frame that is recognisably ecliptic
+    and sidereal, close to the Indian original.
+  \item \textbf{Yuan equatorial sidereal.}  The \zh{鄭氏星案} (late Yuan, c.~14th
+    century) converts all positions into equatorial coordinates aligned with the
+    native lodge system---a thoroughgoing indigenization of the imported framework.
+  \item \textbf{Ming quasi-ecliptic sidereal.}  The \zh{果老星宗} (Ming dynasty,
+    c.~15th--16th century) introduces what we term the \zh{似黃道} (quasi-ecliptic)
+    frame: a hybrid that applies ecliptic-style longitude increments along a plane
+    that is neither the true ecliptic nor the equator.  This is the least-studied
+    coordinate system in Chinese historical astronomy, and the paper offers the
+    first formal definition.
+  \item \textbf{Qing ecliptic tropical.}  The Jesuit-led calendar reform of 1645
+    (\textit{Shixian li}, \zh{時憲曆}) reimposed European tropical ecliptic
+    coordinates, resetting the accumulated drift and discarding the Ming hybrid.
+\end{enumerate}
+The trajectory is not a smooth evolution but a sequence of reversals---``there
+and back again, but not quite'': the Qing frame resembles the Song one in being
+ecliptic, but has shifted from sidereal to tropical reckoning.
+
+\textit{Thread~2: The identity of Ketu.}  In Indian astronomy Ketu (\textit{ketu},
+literally ``comet'' or ``banner'') designates the descending lunar node---one of
+the two points where the Moon's orbit crosses the ecliptic.  When the Moon crosses
+the descending node moving southward, conditions favour a lunar eclipse; when
+it crosses the ascending node Rahu (\zh{羅睺}), conditions favour a solar eclipse.
+The two nodes are therefore deeply embedded in eclipse prediction.
+
+Niu Weixing's landmark 1994 analysis of the \zh{七曜攘災訣} (806~CE), a Tang
+ephemeris attributed to the monk Amoghavajra's circle, demonstrated that the
+Ketu positions recorded therein do \emph{not} track the descending node
+\cite{niu1995ketu}.  They track the osculating lunar apogee---the point in the
+Moon's elliptical orbit farthest from Earth.  The apogee was known to Indian
+astronomers as \textit{mand\=occa} (``slow apex'') and in Persian-influenced
+sources as \textit{K\=etus}; its conflation with the node appears to have
+occurred during or shortly after the Tang transmission.  By the Ming period,
+Ketu as apogee was thoroughly assimilated into \zh{七政四餘} practice, where it
+joined Rahu (\zh{羅睺}), the Purple Star (\zh{紫氣}), and the Monthly Comet
+(\zh{月孛}) as the four ``remainders''---invisible bodies that governed fate
+alongside the seven visible planets.  The Jesuit reform then reverted Ketu to
+the descending node, erasing five centuries of accumulated reidentification.
+
+\subsection*{Six Modes of Transformation}
+
+The six modes proposed here are not a priori categories imposed on the data.
+They emerge from the case study as the recurring patterns by which astronomical
+concepts were altered during transmission.  We state them here in condensed form;
+each receives fuller treatment in the sections that follow.
+
+\textbf{Mode~1: Transliteration.}  Foreign technical terms are adopted into the
+receiving tradition with minimal semantic change, using phonetic approximation.
+\textit{R\=ahu} becomes \zh{羅睺} (\textit{lu\'ohou}); \textit{Ketu} becomes
+\zh{計都} (\textit{j\`{\i}d\=u}).  The sounds are borrowed; the astronomical
+meanings---initially---travel with them.  Transliteration is the entry mechanism:
+it creates a named slot in the receiving system before that slot has been filled
+with indigenous content.
+
+\textbf{Mode~2: Reidentification.}  The name persists while the astronomical
+referent shifts.  The transformation is invisible at the lexical level but
+detectable by comparing computed positions against historical ephemeris records.
+Ketu's drift from descending node to osculating apogee is the central instance;
+we suspect the shift happened in stages between 718 and 806~CE as Tang
+practitioners noticed that the imported node-based algorithms gave increasingly
+poor results and sought a better-fitting celestial body.
+
+\textbf{Mode~3: Indigenous restructuring.}  The native tradition actively
+overwrites the imported framework by substituting its own coordinate system,
+calendar reckoning, or theoretical structure.  The Yuan equatorial conversion
+is the clearest example: Yuan astronomers did not argue with the Indian ecliptic
+frame; they simply replaced it with the equatorial lodge-coordinate system that
+their \textit{Shoushi li} (\zh{授時曆}) reform had just made canonical.
+
+\textbf{Mode~4: Hybridization.}  Elements of the imported and native systems are
+combined into a novel structure that belongs fully to neither parent tradition.
+The Ming \zh{似黃道} system is the prime instance.  It preserves ecliptic-style
+longitude from the Indian source while anchoring the zero-point and plane to a
+native star-count system; the result is not Indian ecliptic astronomy and not
+Chinese lodge astronomy, but a tertium quid that persists in Chinese-language
+software to this day.
+
+\textbf{Mode~5: Foreign correction.}  An external authority---a new wave of
+transmission, a conquering dynasty, or an imported expertise---imposes a reset
+that overrides accumulated indigenous development.  Schall von Bell's 1645
+\textit{Shixian li} reform is the paradigm case.  Backed by Qing imperial
+authority, it discarded the Ming quasi-ecliptic frame, reverted Ketu to the
+descending node, and replaced sidereal with tropical reckoning---all in a single
+edict.
+
+\textbf{Mode~6: Algorithmic fossilization.}  A living astronomical practice,
+once encoded in tables or (later) software, becomes separated from its theoretical
+foundation.  Users apply the algorithm without access to---or interest in---the
+historical reasoning behind it.  Errors accumulate unnoticed because the algorithm
+is self-consistent even if its foundations have shifted.  This mode is not
+historically confined to the past: modern Chinese-language astrology software
+routinely inherits the Ming \zh{似黃道} frame without labelling it as such,
+producing systematic positional errors of several degrees when compared against
+modern ephemerides.
+
+\subsection*{Method}
+
+The paper combines close reading of primary astronomical texts with computational
+verification using modern ephemeris algorithms.  For the computational component
+we use the Swiss Ephemeris library (version~2.10), which implements the JPL
+DE441 planetary and lunar solution.  This allows us to ask a precise empirical
+question: does a given historical Ketu ephemeris track the lunar apogee, the
+descending node, or something else?  We convert historical sexagesimal positions
+to modern decimal degrees, apply the appropriate calendar and epoch corrections,
+and compare against Swiss Ephemeris output for the descending node and for the
+osculating apogee at the same Universal Time.  The method follows and extends
+the approach used by Niu Weixing \cite{niu1995ketu} for the \zh{七曜攘災訣} and
+applied to Ming texts by Niu in his later synthesis \cite{niu2010fourremains}.
+Computational details and residual tables are presented in \S\ref{sec:computation}.
+
+\subsection*{Relationship to Existing Scholarship}
+
+This paper builds on four converging research programmes.
+
+Niu Weixing's identification of Ketu as the lunar apogee
+\cite{niu1995ketu,niu2010fourremains} is the single most important prior result
+for our argument.  Without Niu's recomputation, the reidentification mode would
+remain invisible.  Our contribution is to situate Niu's finding within a broader
+transformative sequence and to provide independent computational confirmation
+using a modern ephemeris unavailable to Niu in 1994.
+
+Bill Mak's work on pseudo-planets traces the historical trajectory of Rahu and
+Ketu from Hellenistic and Indian origins into China and Japan, with particular
+attention to Persian-mediated transmission \cite{mak2014pseudoplanets,mak2024persian}.
+Mak documents the textual genealogy that brought shadow-planet concepts to East
+Asia; the present paper takes up where Mak's textual history ends, asking what
+happened to those concepts inside China over the long Ming--Qing transition.
+
+Jeffrey Kotyk has produced detailed studies of the sinicization of Indo-Iranian
+astrology in the Tang and Song courts \cite{kotyk2018sinicization,kotyk2017buddhist}.
+Kotyk establishes the Buddhist monastic networks---particularly Amoghavajra's
+school---through which Indian astronomical texts circulated in the eighth century.
+Our \S\ref{sec:tang} on the Tang transmission depends heavily on Kotyk's
+reconstruction of institutional context.
+
+Liu Ts'un-yan's work on the Jesuit encounter with Chinese astrology
+\cite{liu2020missionary} provides the documentary foundation for our account of
+Mode~5 (foreign correction) in \S\ref{sec:jesuit}.  The Jesuit reform was not
+merely a technical event; it was an act of epistemic authority, and Liu's analysis
+of Schall von Bell's rhetorical strategies illuminates why the reversion of Ketu
+to the descending node was politically possible in 1645.
+
+A companion paper, ``When the Stars Disagree: A Cross-Civilizational Analysis
+of Computational Errors in Astronomical Divination,'' presents a broader taxonomy
+of error types arising from coordinate-frame mismatches across the Chinese,
+Hellenistic, Indian, and Persian traditions.  The present paper concentrates on
+the transformation \emph{mechanisms} rather than the error \emph{outcomes}.
+
+\subsection*{Structure of the Paper}
+
+Section~\ref{sec:indian} describes the Indian original: the conceptual status of
+Rahu and Ketu in Sanskrit \textit{siddh\=anta} astronomy and the ecliptic sidereal
+coordinate frame in which they were embedded.  Sections~\ref{sec:tang}--\ref{sec:jesuit}
+trace the four dynasties and four coordinate regimes in sequence.
+Section~\ref{sec:fossil} analyses the ongoing algorithmic fossilization in modern
+software.  Section~\ref{sec:computation} presents the computational verification.
+Section~\ref{sec:discussion} draws the six modes together into the theoretical
+framework and discusses their applicability beyond the Ketu case.
+Section~\ref{sec:conclusion} concludes.
 
 % === §2 The Indian Original ===================================================
 \section{The Indian Original: Rahu, Ketu, and Ecliptic Sidereal Coordinates}
