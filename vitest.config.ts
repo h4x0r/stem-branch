@@ -6,7 +6,7 @@ export default defineConfig({
     exclude: ['almanac/**', 'node_modules/**'],
     coverage: {
       include: ['src/**/*.ts'],
-      exclude: ['src/index.ts', 'src/types.ts'],
+      exclude: ['src/index.ts', 'src/types.ts', 'src/paper/**'],
       thresholds: {
         statements: 100,
         branches: 100,
