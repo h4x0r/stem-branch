@@ -103,7 +103,7 @@ export { computeFourPillars } from './four-pillars';
 
 // ── 真太陽時 (True Solar Time) ─────────────────────────────
 export { equationOfTime, trueSolarTime } from './true-solar-time';
-export { equationOfTimeVSOP } from './solar-longitude';
+export { equationOfTimeVSOP, solarEclipticState } from './solar-longitude';
 
 // ── 生肖 (Chinese Zodiac) ──────────────────────────────────
 export {
