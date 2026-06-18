@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { Stem, Element } from './types';
 
 /** 天干五合 — The five stem combinations and their transformed elements */

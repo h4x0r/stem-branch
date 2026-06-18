@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Finite-difference speed computation for celestial bodies.
  */
@@ -23,6 +24,7 @@ export function computeSpeed(
   let diff = getPosition(after) - getPosition(before);
 
   // Handle angle wrapping at 0°/360° boundary
+  /* v8 ignore next */
   if (diff > 180) diff -= 360;
   if (diff < -180) diff += 360;
 

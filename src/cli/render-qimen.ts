@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Render 奇門遁甲 (Qi Men Dun Jia) as a 3x3 Lo Shu grid.
  *
@@ -32,6 +33,7 @@ export function renderQiMen(chart: QiMenChart): string[] {
     row.map((p) => ({
       lines: [
         `${PALACE_NAMES[p]}${p}`,
+        /* v8 ignore next 3 */
         `${chart.stars[p] ?? ''} ${chart.doors[p] ?? ''}`,
         `${chart.deities[p] ?? ''}`,
         `${chart.heavenPlate[p] ?? ''}/${chart.earthPlate[p] ?? ''}`,

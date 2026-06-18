@@ -1613,3 +1613,45 @@ describe('wallClockToSolarTime – detailed verification', () => {
     expect(result.equationOfTime).toBeGreaterThan(-17);
   });
 });
+
+// ═══════════════════════════════════════════════════════════════
+//  Intl fallback — timezones NOT in embedded transition table
+// ═══════════════════════════════════════════════════════════════
+
+describe('utcToLocal — Intl fallback for non-embedded timezones', () => {
+  it('Pacific/Chatham (UTC+12:45) falls back to Intl and returns correct local time', () => {
+    // Pacific/Chatham is NOT in the embedded tz table
+    // 2024-06-15T00:00:00Z → Jun 15, 12:45 in Chatham (CHAST = UTC+12:45)
+    const utc = new Date('2024-06-15T00:00:00Z');
+    const local = utcToLocal(utc, 'Pacific/Chatham');
+    expect(local.year).toBe(2024);
+    expect(local.month).toBe(6);
+    expect(local.day).toBe(15);
+    expect(local.hour).toBe(12);
+    expect(local.minute).toBe(45);
+  });
+
+  it('Pacific/Marquesas (UTC-9:30) falls back to Intl and returns correct local time', () => {
+    // Pacific/Marquesas is NOT in the embedded tz table
+    // 2024-06-15T12:00:00Z → Jun 15, 02:30 in Marquesas
+    const utc = new Date('2024-06-15T12:00:00Z');
+    const local = utcToLocal(utc, 'Pacific/Marquesas');
+    expect(local.year).toBe(2024);
+    expect(local.month).toBe(6);
+    expect(local.day).toBe(15);
+    expect(local.hour).toBe(2);
+    expect(local.minute).toBe(30);
+  });
+});
+
+describe('localToUtc — Intl fallback for non-embedded timezones', () => {
+  it('Pacific/Chatham round-trips through Intl fallback', () => {
+    // Chatham: local Jun 15 12:45 CHAST → UTC Jun 15 00:00
+    const utc = localToUtc(2024, 6, 15, 12, 45, 'Pacific/Chatham');
+    expect(utc.getUTCFullYear()).toBe(2024);
+    expect(utc.getUTCMonth()).toBe(5); // 0-indexed
+    expect(utc.getUTCDate()).toBe(15);
+    expect(utc.getUTCHours()).toBe(0);
+    expect(utc.getUTCMinutes()).toBe(0);
+  });
+});

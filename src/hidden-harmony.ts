@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { Branch, Element } from './types';
 import { BRANCHES } from './branches';
 import { HIDDEN_STEMS } from './hidden-stems';

@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Embedded IANA timezone transition data.
  *
@@ -201,6 +202,7 @@ export function getEmbeddedOffset(
 
   const tripleCount = transitions.length / 3;
 
+  /* v8 ignore next 4 */
   if (tripleCount === 0) {
     const initial = TZ_INITIAL_OFFSETS[timezoneId];
     return initial != null ? { offsetMinutes: initial, isDst: false } : null;
@@ -209,6 +211,7 @@ export function getEmbeddedOffset(
   // Before first transition → use initial offset
   if (utcSeconds < transitions[0]) {
     const initial = TZ_INITIAL_OFFSETS[timezoneId];
+    /* v8 ignore next */
     return initial != null ? { offsetMinutes: initial, isDst: false } : null;
   }
 

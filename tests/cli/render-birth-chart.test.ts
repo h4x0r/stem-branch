@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { renderBirthChart } from '../../src/cli/render-birth-chart';
+import { computeBirthChart } from '../../src/birth-chart';
 import type { BirthChartData, BirthChartPosition, BirthChartAspect } from '../../src/birth-chart-types';
 
 /** Minimal enriched position for testing the renderer. */
@@ -75,10 +76,10 @@ function makeChart(overrides: Partial<BirthChartData> = {}): BirthChartData {
 }
 
 describe('renderBirthChart', () => {
-  it('renders the Birth Chart title', () => {
+  it('renders the Western Natal Chart title', () => {
     const lines = renderBirthChart(makeChart());
     const joined = lines.join('\n');
-    expect(joined).toContain('Birth Chart');
+    expect(joined).toContain('Western Natal Chart');
   });
 
   it('renders all six chart angles: ASC, DSC, MC, IC, Vertex, Eq. ASC', () => {
@@ -218,5 +219,43 @@ describe('renderBirthChart', () => {
     const joined = lines.join('\n');
     // ASC at 245.32° → Sagittarius (240-270)
     expect(joined).toContain('Sagittarius');
+  });
+});
+
+describe('renderBirthChart — void of course moon', () => {
+  it('renders "Yes" when voidOfCourseMoon is true', () => {
+    const chart = makeChart({ voidOfCourseMoon: true });
+    const text = renderBirthChart(chart).join('\n');
+    expect(text).toContain('VOC Moon');
+    expect(text).toContain('Yes');
+  });
+
+  it('renders "No" when voidOfCourseMoon is false', () => {
+    const chart = makeChart({ voidOfCourseMoon: false });
+    const text = renderBirthChart(chart).join('\n');
+    expect(text).toContain('VOC Moon');
+    expect(text).toContain('No');
+  });
+});
+
+describe('renderBirthChart — mutual receptions', () => {
+  it('renders mutual receptions when present', () => {
+    const chartWithMR = makeChart({
+      mutualReceptions: [{ body1: 'Sun', body2: 'Moon', type: 'domicile' }],
+    });
+    const text = renderBirthChart(chartWithMR).join('\n');
+    expect(text).toContain('Mutual Receptions');
+    expect(text).toContain('Sun');
+    expect(text).toContain('Moon');
+    expect(text).toContain('domicile');
+  });
+});
+
+describe('renderBirthChart — research extension', () => {
+  it('renders research data when present', () => {
+    const chart = computeBirthChart(new Date('2024-06-15T14:30:00Z'), 25.03, 121.56, { research: true });
+    const text = renderBirthChart(chart).join('\n');
+    // Research sections include Extended Speed Data
+    expect(text).toContain('Extended Speed Data');
   });
 });

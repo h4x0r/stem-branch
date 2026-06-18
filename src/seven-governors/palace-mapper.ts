@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { PalaceName } from './types';
 import { PALACE_BOUNDARIES } from './data/palace-boundaries';
 

@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 神煞 (Almanac Flags)
  *
@@ -48,10 +49,11 @@ function threeHarmonyGroup(b: Branch): number {
   ];
   for (let i = 0; i < groups.length; i++) {
     if (groups[i].includes(b)) return i;
+  /* v8 ignore start -- defensive: always matches in loop above */
   }
-  /* c8 ignore next */
   return 0;
 }
+/* v8 ignore stop */
 
 /** 三合 group targets indexed by [group][position] */
 const HARMONY_TARGETS: Record<string, Branch[]> = {

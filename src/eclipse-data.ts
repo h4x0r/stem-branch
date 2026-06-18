@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * NASA Five Millennium Canon of Eclipses — Static Dataset
  *

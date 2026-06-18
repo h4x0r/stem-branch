@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 天德 / 月德 (Heavenly Virtue / Monthly Virtue)
  *

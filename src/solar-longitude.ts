@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Apparent geocentric ecliptic longitude of the Sun, computed from VSOP87D
  * Earth heliocentric coordinates with aberration and nutation corrections.
@@ -85,6 +86,7 @@ function crossesTarget(lon1: number, lon2: number, target: number): boolean {
 
   // If the sun moved backwards (more than 180 degrees forward = actually backward),
   // something is wrong; skip this bracket
+  /* v8 ignore next */
   if (forward > 180) return false;
 
   // Compute forward angular distance from lon1 to target

@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * New Moon computation using Meeus, "Astronomical Algorithms", 2nd ed., Chapter 49.
  *

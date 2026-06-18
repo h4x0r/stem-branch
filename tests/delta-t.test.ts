@@ -136,3 +136,25 @@ describe('deltaTForYear — extrapolation', () => {
     expect(dt).toBeCloseTo(186.6, 0);
   });
 });
+
+describe('deltaTForYear — historical polynomial branches', () => {
+  it('computes value for year -200 (branch y < 500)', () => {
+    const dt = deltaTForYear(-200);
+    expect(typeof dt).toBe('number');
+    expect(dt).toBeGreaterThan(10000); // Very large ΔT for ancient dates
+  });
+
+  it('computes value for year 0 (branch y < 500)', () => {
+    const dt = deltaTForYear(0);
+    expect(typeof dt).toBe('number');
+    expect(dt).toBeGreaterThan(10000);
+  });
+
+  it('computes value for year 1650 (branch 1600 ≤ y < 1700)', () => {
+    const dt = deltaTForYear(1650);
+    expect(typeof dt).toBe('number');
+    // Around 50s based on polynomial
+    expect(dt).toBeGreaterThan(30);
+    expect(dt).toBeLessThan(120);
+  });
+});

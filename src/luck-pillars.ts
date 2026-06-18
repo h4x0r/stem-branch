@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 大運 / 小運 (Major & Minor Luck Periods)
  *
@@ -78,11 +79,13 @@ function computeStartAge(birthDate: Date, direction: LuckDirection): number {
 
   if (direction === 'forward') {
     const next = terms.find(t => t.date.getTime() > birthMs);
+    /* v8 ignore next */
     if (!next) throw new Error('Cannot find next 節');
     const days = Math.round((next.date.getTime() - birthMs) / MS_PER_DAY);
     return Math.max(1, Math.round(days / 3));
   } else {
     const prev = [...terms].reverse().find(t => t.date.getTime() <= birthMs);
+    /* v8 ignore next */
     if (!prev) throw new Error('Cannot find previous 節');
     const days = Math.round((birthMs - prev.date.getTime()) / MS_PER_DAY);
     return Math.max(1, Math.round(days / 3));

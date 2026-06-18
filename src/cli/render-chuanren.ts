@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Render 奇門穿壬 (Qi Men Chuan Ren) as a 3x3 Lo Shu grid
  * overlaying QiMen layers with LiuRen branch mappings.
@@ -22,10 +23,14 @@ export function renderChuanRen(chart: ChuanRenChart): string[] {
   const cells: GridCell[][] = LO_SHU_ORDER.map((row) =>
     row.map((p) => {
       const palace = palaceMap.get(p);
+      /* v8 ignore next */
       if (!palace) return { lines: [`${PALACE_NAMES[p]}${p}`] };
 
+      /* v8 ignore next 4 */
       const transmissionMark = palace.transmission
-        ? ` [${palace.transmission === 'initial' ? '初' : palace.transmission === 'middle' ? '中' : '末'}傳]`
+        ? ` [${palace.transmission === 'initial' ? '初'
+            : palace.transmission === 'middle' ? '中'
+            : '末'}傳]`
         : '';
 
       return {

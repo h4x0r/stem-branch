@@ -11,6 +11,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { getMoonPosition } from '../src/moon/moon';
+import { computeElpArguments, computeMoonPosition } from '../src/moon/elpmpp02';
 import type { GeocentricPosition } from '../src/types';
 
 describe('getMoonPosition', () => {
@@ -114,5 +115,67 @@ describe('getMoonPosition', () => {
       expect(Math.abs(dLon)).toBeGreaterThan(0.3);
       expect(Math.abs(dLon)).toBeLessThan(0.8);
     });
+  });
+});
+
+describe('computeElpArguments', () => {
+  it('returns arguments for J2000.0 (T=0)', () => {
+    const args = computeElpArguments(0);
+    expect(typeof args.D).toBe('number');
+    expect(typeof args.F).toBe('number');
+    expect(typeof args.L).toBe('number');
+    expect(typeof args.Lp).toBe('number');
+  });
+
+  it('returns arguments for a known T value', () => {
+    // T = 0.2436 (some time after J2000)
+    const args = computeElpArguments(0.2436);
+    expect(Number.isFinite(args.D)).toBe(true);
+    expect(Number.isFinite(args.F)).toBe(true);
+    expect(Number.isFinite(args.L)).toBe(true);
+    expect(Number.isFinite(args.Lp)).toBe(true);
+  });
+
+  it('returns all planetary mean longitudes as finite numbers', () => {
+    const args = computeElpArguments(0.5);
+    expect(Number.isFinite(args.W1)).toBe(true);
+    expect(Number.isFinite(args.zeta)).toBe(true);
+    expect(Number.isFinite(args.Me)).toBe(true);
+    expect(Number.isFinite(args.Ve)).toBe(true);
+    expect(Number.isFinite(args.EM)).toBe(true);
+    expect(Number.isFinite(args.Ma)).toBe(true);
+    expect(Number.isFinite(args.Ju)).toBe(true);
+    expect(Number.isFinite(args.Sa)).toBe(true);
+    expect(Number.isFinite(args.Ur)).toBe(true);
+    expect(Number.isFinite(args.Ne)).toBe(true);
+  });
+});
+
+describe('computeMoonPosition', () => {
+  it('returns position for T=0 (J2000.0)', () => {
+    const pos = computeMoonPosition(0);
+    expect(Number.isFinite(pos.longitude)).toBe(true);
+    expect(Number.isFinite(pos.latitude)).toBe(true);
+    expect(Number.isFinite(pos.distance)).toBe(true);
+    // Distance should be in reasonable range (~356,500 - 406,700 km)
+    expect(pos.distance).toBeGreaterThan(350000);
+    expect(pos.distance).toBeLessThan(410000);
+  });
+
+  it('returns position for negative T (historical date)', () => {
+    // T = -0.5 (~1975)
+    const pos = computeMoonPosition(-0.5);
+    expect(Number.isFinite(pos.longitude)).toBe(true);
+    expect(Number.isFinite(pos.latitude)).toBe(true);
+    expect(pos.distance).toBeGreaterThan(350000);
+    expect(pos.distance).toBeLessThan(410000);
+  });
+
+  it('longitude and latitude are in radian range', () => {
+    const pos = computeMoonPosition(0.2436);
+    // Longitude: any radian value (normalized internally)
+    expect(Number.isFinite(pos.longitude)).toBe(true);
+    // Latitude: Moon max ~±0.1 rad (~±5.3°)
+    expect(Math.abs(pos.latitude)).toBeLessThan(0.15);
   });
 });

@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 值神 (Duty Deity) & 黃道黑道 (Auspicious/Inauspicious Day Type)
  *

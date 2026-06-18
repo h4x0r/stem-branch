@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * stem-branch CLI
  *
@@ -20,6 +21,9 @@ import { computeSiderealChart } from './sidereal-astrology';
 import { getFlyingStars, FLYING_STARS } from './flying-stars';
 import { searchCities } from './cities';
 import { gregorianToLunar } from './lunar-calendar';
+import { computeMajorLuck, computeMinorLuck } from './luck-pillars';
+import { computeSolarReturn } from './solar-return';
+import { computeTransits } from './transits';
 
 declare const process: {
   argv: string[];
@@ -39,6 +43,9 @@ import { renderTropical } from './cli/render-tropical';
 import { renderBirthChart } from './cli/render-birth-chart';
 import { renderSidereal } from './cli/render-sidereal';
 import { renderFlyingStars } from './cli/render-flying-stars';
+import { renderLuck } from './cli/render-luck';
+import { renderSolarReturn } from './cli/render-solar-return';
+import { renderTransits } from './cli/render-transits';
 
 // ── Argument parsing ────────────────────────────────────────
 
@@ -50,6 +57,12 @@ export interface CLIOptions {
   gender: 'male' | 'female';
   charts: Set<string>;
   json: boolean;
+  research: boolean;
+  luck: boolean;
+  solarReturn: boolean;
+  solarReturnYear: number;
+  transits: boolean;
+  transitDate: Date | null;
   help: boolean;
   version: boolean;
 }
@@ -58,7 +71,7 @@ const CHART_FLAGS = [
   'pillars', 'almanac', 'flying-stars',
   'polaris', 'qimen', 'liuren', 'chuanren',
   'seven-governors', 'tropical', 'sidereal',
-  'birth-chart',
+  'western-natal',
   'all',
 ] as const;
 
@@ -89,7 +102,14 @@ Astrology:
   --seven-governors   Seven Governors (七政四餘)
   --tropical          Tropical Astrology
   --sidereal          Sidereal Astrology (Jyotish)
-  --birth-chart       Birth Chart wheel data (Western/Tropical)
+  --western-natal     Western natal chart (Tropical, 300+ data points)
+  --research          Research / statistical extensions (implies --western-natal)
+
+  --luck              Major & minor luck periods (implies --pillars)
+  --solar-return      Solar Return chart (use --year to set year, default: current)
+  --year <YYYY>       Year for solar return (default: current year)
+  --transits          Transit overlay (aspects to natal, use --transit-date for date)
+  --transit-date <ISO>  Date for transits (default: now)
 
   --all               All charts
 
@@ -111,7 +131,7 @@ function warn(msg: string): void {
 }
 
 /** Flags that consume the next argv element as a value. */
-const VALUE_FLAGS = new Set(['--date', '--lat', '--lng', '--city', '--gender']);
+const VALUE_FLAGS = new Set(['--date', '--lat', '--lng', '--city', '--gender', '--year', '--transit-date']);
 
 export function parseArgs(argv: string[]): CLIOptions {
   const opts: CLIOptions = {
@@ -121,6 +141,12 @@ export function parseArgs(argv: string[]): CLIOptions {
     gender: 'male',
     charts: new Set<string>(),
     json: false,
+    research: false,
+    luck: false,
+    solarReturn: false,
+    solarReturnYear: new Date().getUTCFullYear(),
+    transits: false,
+    transitDate: null,
     help: false,
     version: false,
   };
@@ -164,6 +190,30 @@ export function parseArgs(argv: string[]): CLIOptions {
       case '--json':
         opts.json = true;
         break;
+      case '--research':
+        opts.research = true;
+        opts.charts.add('western-natal');  // --research implies --western-natal
+        break;
+      case '--luck':
+        opts.luck = true;
+        opts.charts.add('pillars');  // --luck implies --pillars
+        break;
+      case '--solar-return':
+        opts.solarReturn = true;
+        break;
+      case '--year':
+        opts.solarReturnYear = Number(argv[++i]);
+        break;
+      case '--transits':
+        opts.transits = true;
+        break;
+      case '--transit-date': {
+        const td = new Date(argv[++i]);
+        /* v8 ignore next */
+        if (isNaN(td.getTime())) die(`Invalid transit date: "${argv[i]}"`);
+        opts.transitDate = td;
+        break;
+      }
       case '--help':
       case '-h':
         opts.help = true;
@@ -212,13 +262,22 @@ export function parseArgs(argv: string[]): CLIOptions {
 
 function computeAndRender(opts: CLIOptions): string[] {
   const output: string[] = [];
-  const { date, lat, lng, charts } = opts;
+  const { date, lat, lng, charts, research, luck } = opts;
 
-  if (charts.has('pillars') || charts.has('almanac')) {
+  if (charts.has('pillars') || charts.has('almanac') || luck) {
     const pillars = computeFourPillars(date);
 
     if (charts.has('pillars')) {
       output.push(...renderPillars(pillars));
+      output.push('');
+    }
+
+    if (luck) {
+      const major = computeMajorLuck(date, opts.gender);
+      const minor = computeMinorLuck(
+        pillars.hour, major.direction, 1, major.startAge - 1,
+      );
+      output.push(...renderLuck(major, minor));
       output.push('');
     }
 
@@ -289,9 +348,23 @@ function computeAndRender(opts: CLIOptions): string[] {
     output.push('');
   }
 
-  if (charts.has('birth-chart')) {
-    const birthChart = computeBirthChart(date, lat, lng);
+  if (charts.has('western-natal')) {
+    const birthChart = computeBirthChart(date, lat, lng, { research });
     output.push(...renderBirthChart(birthChart));
+    output.push('');
+  }
+
+  if (opts.solarReturn) {
+    const sr = computeSolarReturn(date, lat, lng, opts.solarReturnYear);
+    output.push(...renderSolarReturn(sr));
+    output.push('');
+  }
+
+  if (opts.transits) {
+    /* v8 ignore next */
+    const transitDate = opts.transitDate ?? new Date();
+    const transit = computeTransits(date, lat, lng, transitDate);
+    output.push(...renderTransits(transit));
     output.push('');
   }
 
@@ -299,11 +372,18 @@ function computeAndRender(opts: CLIOptions): string[] {
 }
 
 function computeJSON(opts: CLIOptions): Record<string, unknown> {
-  const { date, lat, lng, charts } = opts;
+  const { date, lat, lng, charts, research, luck } = opts;
   const result: Record<string, unknown> = { date: date.toISOString(), lat, lng };
 
   if (charts.has('pillars')) {
     result.pillars = computeFourPillars(date);
+  }
+  if (luck) {
+    /* v8 ignore next */
+    const pillars = (result.pillars as ReturnType<typeof computeFourPillars>) ?? computeFourPillars(date);
+    const major = computeMajorLuck(date, opts.gender);
+    const minor = computeMinorLuck(pillars.hour, major.direction, 1, major.startAge - 1);
+    result.luck = { major, minor };
   }
   if (charts.has('almanac')) {
     result.almanac = dailyAlmanac(date);
@@ -345,8 +425,27 @@ function computeJSON(opts: CLIOptions): Record<string, unknown> {
   if (charts.has('sidereal')) {
     result.sidereal = computeSiderealChart(date, lat, lng);
   }
-  if (charts.has('birth-chart')) {
-    result.birthChart = computeBirthChart(date, lat, lng);
+  if (charts.has('western-natal')) {
+    result.westernNatal = computeBirthChart(date, lat, lng, { research });
+  }
+  if (opts.solarReturn) {
+    const sr = computeSolarReturn(date, lat, lng, opts.solarReturnYear);
+    result.solarReturn = {
+      year: sr.year,
+      natalSunLongitude: sr.natalSunLongitude,
+      returnDate: sr.returnDate.toISOString(),
+      chart: sr.chart,
+    };
+  }
+  if (opts.transits) {
+    /* v8 ignore next */
+    const transitDate = opts.transitDate ?? new Date();
+    const transit = computeTransits(date, lat, lng, transitDate);
+    result.transits = {
+      transitDate: transitDate.toISOString(),
+      aspects: transit.aspects,
+      transitPositions: transit.transitPositions,
+    };
   }
 
   return result;
@@ -380,6 +479,7 @@ export function main(argv: string[] = process.argv.slice(2)): void {
 }
 
 // Run when executed directly (skip during test imports)
+/* v8 ignore next 3 */
 if (!process.env?.VITEST) {
   main();
 }

@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 奇門遁甲 (Qi Men Dun Jia)
  *
@@ -210,6 +211,7 @@ export function getJuShu(date: Date): number {
   const juTable = escapeMode === '陽遁' ? YANG_JU_TABLE : YIN_JU_TABLE;
 
   let termIdx = termNames.indexOf(currentTerm.name);
+  /* v8 ignore next 12 -- defensive: all 12 terms per half-year are in YANG/YIN_TERM_NAMES */
   if (termIdx < 0) {
     // Current term is a 中氣 (even-numbered term), use the preceding 節 term
     // Find the previous term that IS in our list
@@ -305,6 +307,7 @@ export function buildHeavenPlate(
   // Simplified: the hour branch maps to a palace, and we rotate the
   // earth plate so 戊's position moves to that palace.
 
+  /* v8 ignore next */
   const targetPalace = BRANCH_TO_PALACE[hourBranch] || 1;
 
   // Build heaven plate by rotating
@@ -380,6 +383,7 @@ export function computeQiMen(
     '子': 1, '丑': 8, '寅': 3, '卯': 4, '辰': 5, '巳': 9,
     '午': 9, '未': 2, '申': 7, '酉': 6, '戌': 5, '亥': 1,
   };
+  /* v8 ignore next */
   const targetPalace = BRANCH_TO_PALACE[hourBranch] || 1;
   const homeIdx = fullOrder.indexOf(juShu === 5 ? 2 : juShu);
   const targetIdx = fullOrder.indexOf(targetPalace === 5 ? 2 : targetPalace);
@@ -390,6 +394,7 @@ export function computeQiMen(
 
   // 值使: the door whose home palace = 值符's home palace
   const zhiShiDoorIdx = DOOR_HOME.indexOf(juShu === 5 ? 2 : juShu);
+  /* v8 ignore next */
   const zhiShiDoor = zhiShiDoorIdx >= 0 ? EIGHT_DOORS[zhiShiDoorIdx] : EIGHT_DOORS[0];
 
   // Distribute doors

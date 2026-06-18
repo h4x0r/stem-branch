@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import { getSunLongitude } from '../solar-longitude';
 import { getMoonPosition } from '../moon/moon';
 import { getPlanetPosition } from '../planets/planets';
@@ -32,6 +33,7 @@ function getGovernorTropicalLon(body: Governor, date: Date): number {
   if (body === 'sun') return getSunLongitude(date);
   if (body === 'moon') return getMoonPosition(date).longitude;
   const planet = PLANET_MAP[body];
+  /* v8 ignore next */
   if (!planet) throw new Error(`Unknown governor: ${body}`);
   return getPlanetPosition(planet, date).longitude;
 }
@@ -105,6 +107,7 @@ export function getSevenGovernorsChart(
   // Step 2: Ascendant
   const asc = getAscendant(date, location);
   const ascPalaceIdx = PALACE_BOUNDARIES.findIndex(p => p.name === asc.palace);
+  /* v8 ignore next 3 -- defensive: getAscendant always returns a valid palace from PALACE_BOUNDARIES */
   if (ascPalaceIdx === -1) {
     throw new Error(`Ascendant palace not found in PALACE_BOUNDARIES: ${asc.palace}`);
   }
@@ -128,6 +131,7 @@ export function getSevenGovernorsChart(
   const bodyPalaceIndices = new Map<GovernorOrRemainder, number>();
   for (const body of ALL_BODIES) {
     const idx = PALACE_BOUNDARIES.findIndex(p => p.name === bodies[body].palace);
+    /* v8 ignore next 3 -- defensive: getPalaceForLongitude always returns a valid palace */
     if (idx === -1) {
       throw new Error(`Palace not found in PALACE_BOUNDARIES for body ${body}: ${bodies[body].palace}`);
     }

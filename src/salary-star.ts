@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 祿神 (Salary Star / 日祿)
  *

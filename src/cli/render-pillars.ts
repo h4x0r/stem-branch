@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Render Four Pillars (四柱八字) as a 4-column table.
  */

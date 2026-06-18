@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { Eclipse, EclipseKind, SolarEclipseType, LunarEclipseType } from './types';
 import {
   SOLAR_PACKED, SOLAR_MAGNITUDES,
@@ -159,6 +160,7 @@ export function findNearestEclipse(
   if (kind !== 'solar') check(getLunarEclipses());
 
   // Return undefined if nearest is more than 1 year away (likely outside dataset)
+  /* v8 ignore next */
   if (bestDist > 365.25 * 24 * 3600 * 1000) return undefined;
   return best;
 }

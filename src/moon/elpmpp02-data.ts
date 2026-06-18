@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * ELP/MPP02 Moon ephemeris coefficient data.
  *

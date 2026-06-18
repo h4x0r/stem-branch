@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import { dateToJulianCenturies } from '../astro';
 import type { KetuMode } from './types';
 

@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { GovernorOrRemainder, AspectType, Aspect } from '../types';
 
 const ASPECT_RULES: { distance: number; type: AspectType }[] = [

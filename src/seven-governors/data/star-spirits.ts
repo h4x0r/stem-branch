@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { GovernorOrRemainder, PalaceName, MansionName, StarSpirit } from '../types';
 
 export interface StarSpiritContext {

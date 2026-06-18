@@ -35,4 +35,24 @@ describe('star spirits', () => {
     const ctx = makeCtx([['jupiter', 5]], 5);
     expect(evaluateStarSpirits(ctx).map(s => s.name)).toContain('祿存');
   });
+  it('日月夾命 activates with reversed Sun/Moon positions (covers || branch)', () => {
+    // First test has sun=2,moon=4,asc=3 → sunIdx===adjLeft && moonIdx===adjRight
+    // This test reverses: sun=4,moon=2,asc=3 → sunIdx===adjRight && moonIdx===adjLeft
+    const ctx = makeCtx([['sun', 4], ['moon', 2]], 3);
+    expect(evaluateStarSpirits(ctx).map(s => s.name)).toContain('日月夾命');
+  });
+  it('火鈴夾命 activates when Mars and Ketu flank ascendant', () => {
+    // marsIdx === adjLeft && ketuIdx === adjRight
+    const ctx = makeCtx([['mars', 2], ['ketu', 4]], 3);
+    expect(evaluateStarSpirits(ctx).map(s => s.name)).toContain('火鈴夾命');
+  });
+  it('火鈴夾命 activates with reversed Mars/Ketu (covers || branch)', () => {
+    // marsIdx === adjRight && ketuIdx === adjLeft
+    const ctx = makeCtx([['mars', 4], ['ketu', 2]], 3);
+    expect(evaluateStarSpirits(ctx).map(s => s.name)).toContain('火鈴夾命');
+  });
+  it('火鈴夾命 does NOT activate when Mars is missing', () => {
+    const ctx = makeCtx([['ketu', 2]], 3);
+    expect(evaluateStarSpirits(ctx).map(s => s.name)).not.toContain('火鈴夾命');
+  });
 });

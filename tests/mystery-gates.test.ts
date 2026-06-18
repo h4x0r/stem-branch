@@ -157,3 +157,119 @@ describe('computeQiMenForDate', () => {
     expect(JSON.stringify(a.heavenPlate)).not.toBe(JSON.stringify(b.heavenPlate));
   });
 });
+
+describe('getJuShu — 中氣 boundary', () => {
+  it('returns a valid 局數 for a date on 春分 (中氣)', () => {
+    // 春分 2024 ≈ March 20. A date shortly after is still in YANG_TERM_NAMES.
+    const result = getJuShu(new Date(Date.UTC(2024, 2, 22, 6)));
+    expect(result).toBeGreaterThanOrEqual(1);
+    expect(result).toBeLessThanOrEqual(9);
+  });
+
+  it('returns a valid 局數 for a date between 春分 and 清明', () => {
+    // ~March 25 is after 春分 (~Mar 20) and before 清明 (~Apr 4)
+    const result = getJuShu(new Date(Date.UTC(2024, 2, 25, 10)));
+    expect(result).toBeGreaterThanOrEqual(1);
+    expect(result).toBeLessThanOrEqual(9);
+  });
+
+  it('returns a valid 局數 for a date on 秋分 (陰遁 中氣)', () => {
+    // 秋分 2024 ≈ Sep 22
+    const result = getJuShu(new Date(Date.UTC(2024, 8, 23, 6)));
+    expect(result).toBeGreaterThanOrEqual(1);
+    expect(result).toBeLessThanOrEqual(9);
+  });
+});
+
+describe('computeQiMenForDate — 陰遁 (yin escape)', () => {
+  it('should produce a chart with 陰遁 escape mode for a date after summer solstice', () => {
+    // 2024-09-15 is well after summer solstice (~Jun 21) and before winter solstice (~Dec 21)
+    const chart = computeQiMenForDate(new Date('2024-09-15T10:00:00+08:00'));
+    expect(chart.escapeMode).toBe('陰遁');
+    expect(chart.juShu).toBeGreaterThanOrEqual(1);
+    expect(chart.juShu).toBeLessThanOrEqual(9);
+    // Verify plates, stars, doors, and deities are populated
+    for (let i = 1; i <= 9; i++) {
+      expect(chart.earthPlate[i]).toBeTruthy();
+      expect(chart.heavenPlate[i]).toBeTruthy();
+    }
+    const starValues = Object.values(chart.stars);
+    expect(starValues.length).toBeGreaterThanOrEqual(8);
+    const doorValues = Object.values(chart.doors);
+    expect(doorValues.length).toBeGreaterThanOrEqual(8);
+    const deityValues = Object.values(chart.deities);
+    expect(deityValues.length).toBeGreaterThanOrEqual(8);
+    // 陰遁 uses different deity set (勾陳/朱雀 instead of 白虎/玄武)
+    const allDeities = deityValues.join(',');
+    // It should have 值符 (always present)
+    expect(allDeities).toContain('值符');
+  });
+});
+
+describe('computeQiMen — palace 5 guards', () => {
+  it('should handle juShu === 5 (center palace borrows to 2)', () => {
+    // juShu 5 exercises the "=== 5 ? 2 : x" guards on lines 318, 386, 394
+    const earthPlate = buildEarthPlate(5, '陽遁');
+    expect(earthPlate[5]).toBeTruthy();
+
+    const chart = computeQiMen('甲', '子', 5, '陽遁');
+    expect(chart.juShu).toBe(5);
+    expect(chart.zhiFu.star).toBeTruthy();
+    expect(chart.zhiShi.door).toBeTruthy();
+  });
+
+  it('should handle juShu === 5 with 陰遁', () => {
+    const chart = computeQiMen('甲', '子', 5, '陰遁');
+    expect(chart.escapeMode).toBe('陰遁');
+    expect(chart.juShu).toBe(5);
+    expect(chart.zhiFu.star).toBeTruthy();
+    expect(chart.zhiShi.door).toBeTruthy();
+  });
+
+  it('should handle hourBranch 辰 (targetPalace === 5) with 陽遁', () => {
+    // 辰 maps to palace 5 in BRANCH_TO_PALACE, exercising targetPalace === 5 ? 2 : targetPalace
+    const earthPlate = buildEarthPlate(1, '陽遁');
+    const heavenPlate = buildHeavenPlate(earthPlate, '辰', 1, '陽遁');
+    const earthVals = Object.values(earthPlate).sort();
+    const heavenVals = Object.values(heavenPlate).sort();
+    expect(heavenVals).toEqual(earthVals);
+  });
+
+  it('should handle hourBranch 戌 (targetPalace === 5) with 陰遁', () => {
+    // 戌 also maps to palace 5
+    const earthPlate = buildEarthPlate(3, '陰遁');
+    const heavenPlate = buildHeavenPlate(earthPlate, '戌', 3, '陰遁');
+    const earthVals = Object.values(earthPlate).sort();
+    const heavenVals = Object.values(heavenPlate).sort();
+    expect(heavenVals).toEqual(earthVals);
+  });
+
+  it('should handle combined juShu === 5 AND targetPalace === 5', () => {
+    // Both guards triggered simultaneously
+    const chart = computeQiMen('甲', '辰', 5, '陽遁');
+    expect(chart.juShu).toBe(5);
+    expect(chart.zhiFu.star).toBeTruthy();
+
+    const chart2 = computeQiMen('甲', '戌', 5, '陰遁');
+    expect(chart2.escapeMode).toBe('陰遁');
+    expect(chart2.zhiFu.star).toBeTruthy();
+  });
+});
+
+describe('getEscapeMode — winter branch', () => {
+  it('returns 陽遁 for dates in January (after winter solstice)', () => {
+    // January 15 is after winter solstice (~Dec 21) → 陽遁
+    const mode = getEscapeMode(new Date('2024-01-15T10:00:00Z'));
+    expect(mode).toBe('陽遁');
+  });
+
+  it('returns 陰遁 for dates in October (before winter solstice, after summer)', () => {
+    const mode = getEscapeMode(new Date('2024-10-15T10:00:00Z'));
+    expect(mode).toBe('陰遁');
+  });
+
+  it('returns 陽遁 for dates after winter solstice in December', () => {
+    const mode = getEscapeMode(new Date('2024-12-25T10:00:00Z'));
+    expect(mode).toBe('陽遁');
+  });
+});

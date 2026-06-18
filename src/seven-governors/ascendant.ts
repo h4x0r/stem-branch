@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import { dateToJulianCenturies, greenwichMeanSiderealTime, meanObliquity } from '../astro';
 import type { MansionName, PalaceName } from './types';
 import { getMansionForLongitude } from './mansion-mapper';

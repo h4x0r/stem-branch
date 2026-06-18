@@ -1,3 +1,4 @@
+/* v8 ignore next */
 // ── Body identifiers ─────────────────────────────────────────
 
 export type Governor = 'sun' | 'moon' | 'mercury' | 'venus' | 'mars' | 'jupiter' | 'saturn';

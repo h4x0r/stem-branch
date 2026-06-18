@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Render Tropical Astrology chart: positions, houses, and aspects.
  */

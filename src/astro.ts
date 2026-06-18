@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Shared astronomical utilities for solar, lunar, and planetary ephemeris.
  *

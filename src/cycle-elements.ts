@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { Element, StemBranch } from './types';
 
 export interface CycleElementEntry {

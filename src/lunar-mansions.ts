@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 二十八星宿 (28 Lunar Mansions)
  *

@@ -118,3 +118,49 @@ describe('findAlcochoden', () => {
     expect(result).toBe('Sun');
   });
 });
+
+describe('computeFirdaria — night chart', () => {
+  it('uses NIGHT_FIRDARIA sequence for night births', () => {
+    const birth = new Date('1990-01-15T23:00:00Z'); // night time
+    const query = new Date('1990-02-15T00:00:00Z');
+    const result = computeFirdaria(birth, false, query); // isDayChart = false
+    // Night sequence starts with Moon
+    expect(result.ruler).toBe('Moon');
+  });
+});
+
+describe('findPrenatalSyzygy — close to new moon', () => {
+  it('handles birth shortly after a new moon', () => {
+    // New moon on 2024-01-11T11:57Z — birth a few hours later
+    const birth = new Date('2024-01-11T15:00:00Z');
+    const result = findPrenatalSyzygy(birth);
+    expect(result.type).toBe('new');
+    expect(result.date.getTime()).toBeLessThan(birth.getTime());
+  });
+
+  it('handles birth shortly before next new moon (full moon is prenatal syzygy)', () => {
+    // Full moon on 2024-01-25T17:54Z, next new moon ~Feb 9
+    const birth = new Date('2024-02-08T00:00:00Z');
+    const result = findPrenatalSyzygy(birth);
+    expect(result.type).toBe('full');
+    expect(result.date.getTime()).toBeLessThan(birth.getTime());
+  });
+
+  it('handles k overshoot: birth just before a new moon triggers k-- adjustment', () => {
+    // New moon on 2024-02-09T22:59Z — birth 1 hour before it
+    // Initial k estimate may land on or past the new moon, requiring k--
+    const birth = new Date('2024-02-09T22:00:00Z');
+    const result = findPrenatalSyzygy(birth);
+    expect(result.date.getTime()).toBeLessThan(birth.getTime());
+    // The prenatal syzygy should be the full moon before this (~Jan 25)
+    expect(result.type).toBe('full');
+  });
+
+  it('handles k overshoot: birth moments after midnight following a new moon', () => {
+    // New moon on 2024-04-08T18:21Z — birth just minutes after
+    // The truncation in k = Math.floor(...) might overshoot for edge-case dates
+    const birth = new Date('2024-04-08T18:30:00Z');
+    const result = findPrenatalSyzygy(birth);
+    expect(result.date.getTime()).toBeLessThan(birth.getTime());
+  });
+});

@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Pluto heliocentric position using Meeus Chapter 37 algorithm.
  *

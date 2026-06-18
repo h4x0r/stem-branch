@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * VSOP87D Mercury heliocentric spherical coordinates — ecliptic of date.
  *

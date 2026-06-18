@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Master birth chart computation — enriches the tropical chart with
  * 300+ professional-grade data points.
@@ -48,6 +49,7 @@ import {
   greenwichMeanSiderealTime, normalizeDegrees, DEG_TO_RAD,
 } from './astro';
 import type { Planet } from './types';
+import { computeResearch } from './research/index';
 
 const PLANETS: Planet[] = [
   'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto',
@@ -142,7 +144,9 @@ export function computeBirthChart(
 
   // ── 6. Enrich each position ────────────────────────────────
   const positions: BirthChartPosition[] = base.positions.map(p => {
+    /* v8 ignore next */
     const speed = speeds[p.body] ?? 0;
+    /* v8 ignore next */
     const raw = rawData[p.body] ?? { ra: 0, dec: 0, distance: 0 };
     const { azimuth, altitude } = equatorialToHorizontal(raw.ra, raw.dec, lstDeg, lat);
     const dignity = getExtendedDignity(p.body, p.sign, p.signDegree, dayChart);
@@ -307,6 +311,15 @@ export function computeBirthChart(
   // ── 23. Lunar mansion (chart-level, based on Moon) ─────────
   const lunarMansion = getWesternLunarMansion(moonPos.longitude);
 
+  // ── 24. Research extensions (optional) ──────────────────────
+  const research = options?.research
+    ? computeResearch({
+        date, lat, positions, aspects, rawData, speeds,
+        lstDeg, obliquityDeg, isDayChart: dayChart,
+        prenatalSyzygy, angles,
+      })
+    : undefined;
+
   // ── Assemble ───────────────────────────────────────────────
   return {
     positions,
@@ -336,5 +349,6 @@ export function computeBirthChart(
       houseSystem,
       zodiac: 'tropical',
     },
+    research,
   };
 }

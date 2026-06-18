@@ -128,6 +128,36 @@ describe('computeMoonPhase', () => {
     const result = computeMoonPhase(30, 120);
     expect(result.angle).toBeCloseTo(90, 10);
   });
+
+  it('Sun 0°, Moon 60° → Crescent (elongation 45-90)', () => {
+    const result = computeMoonPhase(0, 60);
+    expect(result.name).toBe('Crescent');
+    expect(result.angle).toBeCloseTo(60, 10);
+  });
+
+  it('Sun 0°, Moon 150° → Gibbous (elongation 135-180)', () => {
+    const result = computeMoonPhase(0, 150);
+    expect(result.name).toBe('Gibbous');
+    expect(result.angle).toBeCloseTo(150, 10);
+  });
+
+  it('Sun 0°, Moon 240° → Disseminating (elongation 225-270)', () => {
+    const result = computeMoonPhase(0, 240);
+    expect(result.name).toBe('Disseminating');
+    expect(result.angle).toBeCloseTo(240, 10);
+  });
+
+  it('Sun 0°, Moon 290° → Last Quarter (elongation 270-315)', () => {
+    const result = computeMoonPhase(0, 290);
+    expect(result.name).toBe('Last Quarter');
+    expect(result.angle).toBeCloseTo(290, 10);
+  });
+
+  it('Sun 0°, Moon 330° → Balsamic (elongation ≥ 315)', () => {
+    const result = computeMoonPhase(0, 330);
+    expect(result.name).toBe('Balsamic');
+    expect(result.angle).toBeCloseTo(330, 10);
+  });
 });
 
 describe('getPlanetaryDay', () => {
@@ -213,6 +243,10 @@ describe('isOutOfBounds', () => {
 });
 
 describe('detectChartPattern', () => {
+  it('returns Splay for empty input (L117 guard)', () => {
+    expect(detectChartPattern([])).toBe('Splay');
+  });
+
   it('detects Bundle when all within 120°', () => {
     const longitudes = [10, 30, 50, 70, 90, 100, 110, 115, 120, 125];
     expect(detectChartPattern(longitudes)).toBe('Bundle');
@@ -223,10 +257,57 @@ describe('detectChartPattern', () => {
     expect(detectChartPattern(longitudes)).toBe('Bowl');
   });
 
-  it('detects Splash when across 7+ signs', () => {
-    // Spread across 10 different signs
-    const longitudes = [5, 35, 65, 95, 125, 155, 185, 215, 245, 335];
-    expect(detectChartPattern(longitudes)).toBe('Splash');
+  it('detects Bucket when one handle planet outside the 180° rim', () => {
+    // 9 planets clustered in 0°-160° (span=160°, within 180°), plus 1 "handle" at 220°
+    // Span of all 10 = 220°. Remove handle → remaining span 160° ≤ 180° → Bucket.
+    const longitudes = [0, 10, 30, 50, 70, 90, 110, 140, 160, 220];
+    expect(detectChartPattern(longitudes)).toBe('Bucket');
+  });
+
+  it('detects Locomotive when span ≤ 240° with maxGap 60-180°', () => {
+    // All planets within 240°, one big gap of ~120°
+    // Planets from 0° to 230°, gap from 230° to 360° = 130° (between 60° and 180°)
+    const longitudes = [0, 30, 50, 80, 110, 140, 160, 190, 210, 230];
+    expect(detectChartPattern(longitudes)).toBe('Locomotive');
+  });
+
+  it('detects See-Saw when exactly two large gaps ≥ 60°', () => {
+    // Two groups with span > 270 (skips Bucket) and maxGap < 180 (skips Bowl).
+    // Group 1: 0, 30, 60, 90, 120  Group 2: 185, 215, 245, 275
+    // Gaps: 30,30,30,30,65,30,30,30,85 → maxGap=85 → span=275
+    // span>270→skip Bucket; maxGap≤180 but span>240→skip Locomotive
+    // Large gaps (≥60°): 65, 85 → exactly 2 → See-Saw
+    const longitudes = [0, 30, 60, 90, 120, 185, 215, 245, 275];
+    expect(detectChartPattern(longitudes)).toBe('See-Saw');
+  });
+
+  it('detects Splash when 7+ signs are occupied (L168)', () => {
+    // 8 signs occupied with 3 large gaps (≥60°) so See-Saw (exactly 2) doesn't match.
+    // Ari(15), Tau(45), Gem(75), Can(105), Vir(165), Lib(195), Sco(225), Cap(285)
+    // Gaps: 30,30,30,60,30,30,60,90 → 3 large gaps → not See-Saw
+    // Span: 270 > 240 → not Locomotive
+    const longitudes = [15, 45, 75, 105, 165, 195, 225, 285];
+    const result = detectChartPattern(longitudes);
+    expect(result).toBe('Splash');
+  });
+
+  it('returns Splay as default for irregular clusters', () => {
+    // 5-6 signs occupied, no single clear pattern; span > 270, 3+ large gaps, < 7 signs
+    // Planets in only 5 signs, with 3 large gaps
+    const longitudes = [10, 15, 70, 75, 150, 155, 240, 245, 330, 335];
+    // 5 clusters in 5 sign regions, gaps: 55°, 55°, 75°, 85°, 85°, 35° → 3 large gaps
+    // Not See-Saw (more than 2 large gaps), not Splash (only 5 signs occupied per 30° bins)
+    // Signs: 0, 2, 5, 8, 11 = 5 signs → < 7 → not Splash
+    // Span: 335-10 = 325° → > 270 → not Bucket range
+    // maxGap ~35°? Let me recalculate
+    // sorted: 10,15,70,75,150,155,240,245,330,335
+    // gaps: 5, 55, 5, 75, 5, 85, 5, 85, 5, 35
+    // maxGap = 85, span = 360-85 = 275
+    // > 270 → Bucket check skipped. maxGap=85, 60≤85≤180, span=275 > 240 → not Locomotive
+    // large gaps (≥60): 75, 85, 85 → 3 → not See-Saw
+    // signs: 0,2,5,8,11 → 5 → not Splash
+    // → Splay
+    expect(detectChartPattern(longitudes)).toBe('Splay');
   });
 });
 
@@ -319,6 +400,16 @@ describe('isOriental', () => {
     const result = isOriental(120, 100);
     expect(result).toBe(false);
   });
+
+  it('returns null when body is conjunct with Sun (diff === 0)', () => {
+    // Same longitude → diff = normalizeDegrees(100 - 100) = 0
+    expect(isOriental(100, 100)).toBeNull();
+  });
+
+  it('returns null when body is exactly opposite Sun (diff === 180)', () => {
+    // Body at 10°, Sun at 190° → diff = normalizeDegrees(190 - 10) = 180
+    expect(isOriental(10, 190)).toBeNull();
+  });
 });
 
 describe('isVoidOfCourseMoon', () => {
@@ -334,6 +425,16 @@ describe('isVoidOfCourseMoon', () => {
     // Moon at 28° Aries (28°), speed 12°/day, only planet at 200° (Libra 20°)
     // Moon leaves Aries at 30°, only 2° to go. No Ptolemaic aspect within 2°.
     const result = isVoidOfCourseMoon(28, 12, 'Aries', [{ longitude: 200 }], [0, 60, 90, 120, 180]);
+    expect(result).toBe(true);
+  });
+
+  it('returns true when Moon speed is zero (stationary)', () => {
+    const result = isVoidOfCourseMoon(15, 0, 'Aries', [{ longitude: 80 }], [0, 60, 90, 120, 180]);
+    expect(result).toBe(true);
+  });
+
+  it('returns true when Moon speed is negative (retrograde)', () => {
+    const result = isVoidOfCourseMoon(15, -2, 'Aries', [{ longitude: 80 }], [0, 60, 90, 120, 180]);
     expect(result).toBe(true);
   });
 });

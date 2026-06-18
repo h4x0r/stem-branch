@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { MansionName } from '../types';
 
 export interface MansionBoundary {

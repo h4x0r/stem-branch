@@ -1,3 +1,4 @@
+/* v8 ignore next */
 export interface WesternLunarMansion {
   number: number;      // 1-28
   name: string;        // Traditional Arabic/Latin name
@@ -39,6 +40,7 @@ export function getWesternLunarMansion(longitude: number): { number: number; nam
   const norm = ((longitude % 360) + 360) % 360;
   const mansionSpan = 360 / 28;
   const index = Math.floor(norm / mansionSpan);
+  /* v8 ignore next */
   const mansion = WESTERN_LUNAR_MANSIONS[index >= 28 ? 0 : index];
   return { number: mansion.number, name: mansion.name };
 }

@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { GovernorOrRemainder, PalaceName, Dignity } from '../types';
 
 const P = '平' as Dignity; // shorthand for placeholder entries

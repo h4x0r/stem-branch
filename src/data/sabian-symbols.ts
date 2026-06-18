@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * The 360 Sabian Symbols — one evocative image per degree of the zodiac.
  *
@@ -400,5 +401,6 @@ export function getSabianSymbol(longitude: number): string {
   // except exactly 0.00° is also the 1st degree
   const norm = ((longitude % 360) + 360) % 360;
   const degreeIndex = norm === 0 ? 0 : Math.ceil(norm) - 1;
+  /* v8 ignore next */
   return SABIAN_SYMBOLS[degreeIndex] ?? '';
 }

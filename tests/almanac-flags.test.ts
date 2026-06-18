@@ -45,6 +45,7 @@ import {
 
   // Aggregate
   getAlmanacFlags,
+  getAlmanacFlagsForPillars,
 
   // Constants
   ALMANAC_FLAG_REGISTRY,
@@ -595,5 +596,287 @@ describe('getAlmanacFlags', () => {
     const flags = getAlmanacFlags(new Date(2024, 5, 15));
     const names = flags.map(f => f.name);
     expect(new Set(names).size).toBe(names.length);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  isFourWaste — ?? false path (undefined season)
+// ═══════════════════════════════════════════════════════════════
+
+describe('isFourWaste — undefined season fallback', () => {
+  it('returns false for out-of-range season index (hits ?? false)', () => {
+    // FOUR_WASTE only has indices 0-3; season 5 produces undefined
+    expect(isFourWaste('庚', '申', 5)).toBe(false);
+  });
+
+  it('returns false for negative season index', () => {
+    expect(isFourWaste('壬', '子', -1)).toBe(false);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  getAlmanacFlagsForPillars — full function coverage
+// ═══════════════════════════════════════════════════════════════
+
+describe('getAlmanacFlagsForPillars', () => {
+  // Helper to build a FourPillars object
+  function makePillars(
+    y: [Stem, Branch], m: [Stem, Branch], d: [Stem, Branch], h: [Stem, Branch],
+  ) {
+    return {
+      year:  { stem: y[0], branch: y[1] },
+      month: { stem: m[0], branch: m[1] },
+      day:   { stem: d[0], branch: d[1] },
+      hour:  { stem: h[0], branch: h[1] },
+    };
+  }
+
+  it('returns an array of AlmanacFlagResult objects', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丁', '卯'], ['庚', '午'], ['壬', '申'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    expect(Array.isArray(flags)).toBe(true);
+    for (const f of flags) {
+      expect(f).toHaveProperty('name');
+      expect(f).toHaveProperty('english');
+      expect(typeof f.auspicious).toBe('boolean');
+      expect(f.positions.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('detects Commanding Star (魁罡) for 壬辰 day pillar', () => {
+    // 壬辰 is in COMMANDING_SET
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['壬', '辰'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const commanding = flags.find(f => f.english === 'Commanding Star');
+    expect(commanding).toBeDefined();
+    expect(commanding!.positions).toContain('day');
+  });
+
+  it('detects Ten Evils (十惡大敗) for 甲辰 day pillar', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '辰'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const tenEvils = flags.find(f => f.english === 'Ten Evils');
+    expect(tenEvils).toBeDefined();
+    expect(tenEvils!.positions).toContain('day');
+  });
+
+  it('detects Yin-Yang Error (陰差陽錯) for 丙子 day pillar', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['丙', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const yyErr = flags.find(f => f.english === 'Yin-Yang Error');
+    expect(yyErr).toBeDefined();
+    expect(yyErr!.positions).toContain('day');
+  });
+
+  it('detects Month Break when day branch clashes month branch', () => {
+    // 子 clashes 午
+    const pillars = makePillars(
+      ['甲', '寅'], ['丙', '午'], ['甲', '子'], ['甲', '寅'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 1);
+    const monthBreak = flags.find(f => f.english === 'Month Break');
+    expect(monthBreak).toBeDefined();
+    expect(monthBreak!.positions).toContain('day');
+  });
+
+  it('detects Year Break when day branch clashes year branch', () => {
+    // 子 clashes 午
+    const pillars = makePillars(
+      ['甲', '午'], ['丙', '寅'], ['甲', '子'], ['甲', '寅'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const yearBreak = flags.find(f => f.english === 'Year Break');
+    expect(yearBreak).toBeDefined();
+    expect(yearBreak!.positions).toContain('day');
+  });
+
+  it('detects Heaven\'s Pardon (天赦日) for 戊寅 day in spring', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['戊', '寅'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const pardon = flags.find(f => f.english === "Heaven's Pardon");
+    expect(pardon).toBeDefined();
+    expect(pardon!.positions).toContain('day');
+  });
+
+  it('detects Gold Spirit (金神) for 己巳 day pillar', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['己', '巳'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const gold = flags.find(f => f.english === 'Gold Spirit');
+    expect(gold).toBeDefined();
+    expect(gold!.positions).toContain('day');
+  });
+
+  it('detects Ten Spirits (十靈日) for 甲辰 day pillar', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '辰'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const tenSpirits = flags.find(f => f.english === 'Ten Spirits');
+    expect(tenSpirits).toBeDefined();
+    expect(tenSpirits!.positions).toContain('day');
+  });
+
+  it('detects Heaven Net (天羅) for 戌 day branch', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '戌'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const net = flags.find(f => f.english === 'Heaven Net');
+    expect(net).toBeDefined();
+    expect(net!.positions).toContain('day');
+  });
+
+  it('detects Earth Trap (地網) for 辰 day branch', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['壬', '辰'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const trap = flags.find(f => f.english === 'Earth Trap');
+    expect(trap).toBeDefined();
+    expect(trap!.positions).toContain('day');
+  });
+
+  it('detects Four Waste (四廢) for 庚申 day in spring', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['庚', '申'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const waste = flags.find(f => f.english === 'Four Waste');
+    expect(waste).toBeDefined();
+    expect(waste!.positions).toContain('day');
+  });
+
+  it('detects Three Wonders (三奇貴人) for 乙丙丁 stems', () => {
+    const pillars = makePillars(
+      ['乙', '丑'], ['丙', '寅'], ['丁', '卯'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const wonders = flags.find(f => f.english === 'Three Wonders');
+    expect(wonders).toBeDefined();
+    expect(wonders!.positions).toEqual(['year', 'month', 'day']);
+  });
+
+  // ── Tests for the [] (false) branches of day-pillar ternaries ──
+
+  it('does NOT produce Commanding Star for 甲子 day pillar', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const commanding = flags.find(f => f.english === 'Commanding Star');
+    expect(commanding).toBeUndefined();
+  });
+
+  it('does NOT produce Ten Evils for 甲子 day pillar', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const tenEvils = flags.find(f => f.english === 'Ten Evils');
+    expect(tenEvils).toBeUndefined();
+  });
+
+  it('does NOT produce Yin-Yang Error for 甲子 day pillar', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const yyErr = flags.find(f => f.english === 'Yin-Yang Error');
+    expect(yyErr).toBeUndefined();
+  });
+
+  it('does NOT produce Month Break when day and month branches match', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '寅'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const monthBreak = flags.find(f => f.english === 'Month Break');
+    expect(monthBreak).toBeUndefined();
+  });
+
+  it('does NOT produce Year Break when day and year branches match', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const yearBreak = flags.find(f => f.english === 'Year Break');
+    expect(yearBreak).toBeUndefined();
+  });
+
+  it('does NOT produce Heaven\'s Pardon for non-matching day in season', () => {
+    // Spring expects 戊寅; use 甲子 day instead
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const pardon = flags.find(f => f.english === "Heaven's Pardon");
+    expect(pardon).toBeUndefined();
+  });
+
+  it('does NOT produce Gold Spirit for 甲子 day pillar', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const gold = flags.find(f => f.english === 'Gold Spirit');
+    expect(gold).toBeUndefined();
+  });
+
+  it('does NOT produce Ten Spirits for 甲子 day pillar', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const tenSpirits = flags.find(f => f.english === 'Ten Spirits');
+    expect(tenSpirits).toBeUndefined();
+  });
+
+  it('does NOT produce Heaven Net for 子 day branch', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const net = flags.find(f => f.english === 'Heaven Net');
+    expect(net).toBeUndefined();
+  });
+
+  it('does NOT produce Earth Trap for 子 day branch', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const trap = flags.find(f => f.english === 'Earth Trap');
+    expect(trap).toBeUndefined();
+  });
+
+  it('does NOT produce Four Waste for non-matching day in season', () => {
+    // Spring expects 庚申 or 辛酉; use 甲子
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const waste = flags.find(f => f.english === 'Four Waste');
+    expect(waste).toBeUndefined();
+  });
+
+  it('does NOT produce Three Wonders for non-sequential stems', () => {
+    const pillars = makePillars(
+      ['甲', '子'], ['丙', '寅'], ['甲', '子'], ['甲', '子'],
+    );
+    const flags = getAlmanacFlagsForPillars(pillars, 0);
+    const wonders = flags.find(f => f.english === 'Three Wonders');
+    expect(wonders).toBeUndefined();
   });
 });

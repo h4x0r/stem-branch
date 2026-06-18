@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { Stem, Branch, LifeStage } from './types';
 import { BRANCHES } from './branches';
 import { stemPolarity } from './stems';

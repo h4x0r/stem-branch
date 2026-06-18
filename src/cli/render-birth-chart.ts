@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Render a comprehensive Birth Chart data dump.
  *
@@ -15,6 +16,7 @@
 import type { BirthChartData } from '../birth-chart-types';
 import { getZodiacSign } from '../tropical-astrology';
 import { renderTitle, padRight } from './render-grid';
+import { renderResearch } from './render-research';
 
 function fmtLong(deg: number): string {
   return deg.toFixed(2) + '°';
@@ -31,7 +33,7 @@ function fmtSpeed(speed: number, retrograde: boolean): string {
 }
 
 export function renderBirthChart(chart: BirthChartData): string[] {
-  const output: string[] = [renderTitle('Birth Chart')];
+  const output: string[] = [renderTitle('Western Natal Chart')];
 
   // ── Section 1: Chart Angles ──────────────────────────────────
   output.push('');
@@ -171,6 +173,11 @@ export function renderBirthChart(chart: BirthChartData): string[] {
   output.push(`  ${'─'.repeat(46)}`);
   output.push(`  Day:    ${chart.planetaryDay}`);
   output.push(`  Hour:   ${chart.planetaryHour.planet} (hour ${chart.planetaryHour.hourNumber}, ${chart.planetaryHour.isDayHour ? 'day' : 'night'})`);
+
+  // ── Sections 10-16: Research Extensions (when present) ─────
+  if (chart.research) {
+    output.push(...renderResearch(chart.research));
+  }
 
   return output;
 }

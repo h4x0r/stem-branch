@@ -331,6 +331,9 @@ export type {
   Distributions, Hemispheres,
   MoonPhaseResult, PlanetaryHourResult, SolarProximityResult,
   FirdariaResult, ProfectionResult, PrenatalSyzygyResult, MutualReception,
+  // Research extensions
+  ExtendedSpeed, SpeculumEntry, ResearchPosition,
+  MidpointEntry, MidpointStructure, ResearchData,
 } from './birth-chart-types';
 
 // ── 西洋命盤輔助 (Birth Chart Utilities) ─────────────────────
@@ -369,6 +372,25 @@ export {
 } from './time-lords';
 
 export { equatorialToHorizontal } from './astro';
+
+// ── 研究擴展 (Research Extensions) ──────────────────────────
+export { computeResearch } from './research/index';
+export type { ResearchInput } from './research/index';
+export { toDial90 } from './research/ninety-degree-dial';
+export { computeLinearSpeed, computeExtendedSpeed, AVERAGE_SPEEDS } from './research/extended-speed';
+export { computeSpeculumEntry } from './research/speculum';
+export { computeMidpoints, shortArcMidpoint, findMidpointStructures } from './research/midpoints';
+export { computeGauquelinSector, isGauquelinPlusZone } from './research/gauquelin';
+export { computeAccidentalDignity, computeAlmutenFiguris } from './research/accidental-dignity';
+export { isHayz, isHalb, isBesieged, isViaCombusta, isJoyByHouse } from './research/classical-conditions';
+
+// ── 太陽回歸 (Solar Return) ──────────────────────────────────
+export { computeSolarReturn } from './solar-return';
+export type { SolarReturnResult } from './solar-return';
+
+// ── 行星過運 (Transits) ──────────────────────────────────────
+export { computeTransits, findCrossAspects } from './transits';
+export type { TransitResult, CrossAspect } from './transits';
 
 export { getChironPosition } from './planets/chiron';
 

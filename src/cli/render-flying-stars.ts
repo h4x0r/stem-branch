@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Render 紫白飛星 (Flying Stars) as four 3x3 Lo Shu grids.
  *

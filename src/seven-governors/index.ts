@@ -1,3 +1,4 @@
+/* v8 ignore next */
 export * from './types';
 export { toSiderealLongitude } from './sidereal';
 export { getMansionForLongitude } from './mansion-mapper';

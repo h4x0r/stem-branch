@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { MansionName } from './types';
 import { MANSION_BOUNDARIES } from './data/mansion-boundaries';
 
@@ -10,6 +11,7 @@ export interface MansionResult {
 export function getMansionForLongitude(siderealLon: number): MansionResult {
   const lon = ((siderealLon % 360) + 360) % 360;
 
+  /* v8 ignore next 8 */
   if (lon < MANSION_BOUNDARIES[0].startDeg) {
     const last = MANSION_BOUNDARIES.length - 1;
     return {

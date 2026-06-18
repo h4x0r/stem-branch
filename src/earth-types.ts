@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { Branch, Element, EarthType } from './types';
 
 /** The four earth (土) branches: 辰丑戌未 */

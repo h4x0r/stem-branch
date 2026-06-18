@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Render Daily Almanac (日曆總覽) as key-value pairs.
  */

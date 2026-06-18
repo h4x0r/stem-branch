@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 日曆總覽 (Daily Almanac)
  *

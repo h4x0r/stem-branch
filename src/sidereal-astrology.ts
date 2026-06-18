@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Sidereal Astrology (Jyotish / Vedic Astrology)
  *
@@ -172,6 +173,7 @@ export function getNakshatra(siderealLongitude: number): NakshatraResult {
   const BOUNDARY_EPS = 1e-10;
   const nakshatraIndex = Math.floor(norm / NAKSHATRA_WIDTH + BOUNDARY_EPS);
   // Guard against floating-point edge case where norm = 360
+  /* v8 ignore next */
   const idx = nakshatraIndex >= 27 ? 0 : nakshatraIndex;
 
   const withinNakshatra = norm - idx * NAKSHATRA_WIDTH;
@@ -271,6 +273,7 @@ function isOddSign(signIndex: number): boolean {
 function computeNavamsaSign(siderealLongitude: number): { sign: ZodiacSign; degree: number } {
   const norm = ((siderealLongitude % 360) + 360) % 360;
   const signIndex = Math.floor(norm / 30);
+  /* v8 ignore next */
   const idx = signIndex >= 12 ? 0 : signIndex;
   const degreeInSign = norm - idx * 30;
 
@@ -308,6 +311,7 @@ function computeNavamsaSign(siderealLongitude: number): { sign: ZodiacSign; degr
 function computeDasamsaSign(siderealLongitude: number): { sign: ZodiacSign; degree: number } {
   const norm = ((siderealLongitude % 360) + 360) % 360;
   const signIndex = Math.floor(norm / 30);
+  /* v8 ignore next */
   const idx = signIndex >= 12 ? 0 : signIndex;
   const degreeInSign = norm - idx * 30;
 

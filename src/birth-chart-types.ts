@@ -153,11 +153,81 @@ export interface Hemispheres {
   west: number;
 }
 
+// ── Research / Statistical Extensions ────────────────────────
+
+/** Per-body extended speed data for cosmobiology research. */
+export interface ExtendedSpeed {
+  latitudeSpeed: number;    // °/day
+  distanceSpeed: number;    // AU/day (or km/day for Moon)
+  relativeSpeed: number;    // ratio to average (1.0 = average)
+  fast: boolean;            // relativeSpeed > 1.0
+}
+
+/** Per-body speculum entry for primary direction research. */
+export interface SpeculumEntry {
+  ad: number;               // ascensional difference (°)
+  oa: number;               // oblique ascension (°)
+  od: number;               // oblique descension (°)
+  md: number;               // meridian distance (°)
+  dsa: number;              // diurnal semi-arc (°)
+  nsa: number;              // nocturnal semi-arc (°)
+  sa: number;               // active semi-arc (diurnal or nocturnal)
+  umd: number;              // upper meridian distance (°)
+  hd: number;               // horizon distance (°)
+  temporalHour: number;     // proportional hour size (°)
+  pole: number;             // Regiomontanus pole (°)
+}
+
+/** Per-body research extensions. */
+export interface ResearchPosition {
+  body: string;
+  extendedSpeed: ExtendedSpeed;
+  speculum: SpeculumEntry;
+  dialPosition90: number;   // longitude % 90
+  gauquelinSector: number;  // 1-36
+  gauquelinPlusZone: boolean;
+  accidentalDignityScore: number;
+  // Classical accidental conditions
+  hayz: boolean;            // sect + hemisphere + sign gender all match
+  halb: boolean;            // sect matches but not full hayz
+  besieged: boolean;        // between two malefics with no benefic intervening
+  viaCombusta: boolean;     // Moon in Libra 15° – Scorpio 15°
+  joyByHouse: boolean;      // planet in its house of joy
+}
+
+/** Midpoint between two bodies. */
+export interface MidpointEntry {
+  body1: string;
+  body2: string;
+  longitude: number;        // midpoint longitude [0, 360)
+  dial90: number;           // longitude % 90
+  sign: string;
+  signDegree: number;
+}
+
+/** Body at another pair's midpoint (within orb). */
+export interface MidpointStructure {
+  body: string;             // planet at the midpoint
+  body1: string;            // first body of the pair
+  body2: string;            // second body of the pair
+  orb: number;              // how close (°)
+}
+
+/** Chart-level research data. */
+export interface ResearchData {
+  positions: ResearchPosition[];
+  midpoints: MidpointEntry[];
+  midpointStructures: MidpointStructure[];
+  partileAspects: BirthChartAspect[];
+  almutenFiguris: string | null;
+}
+
 // ── Chart-level data ─────────────────────────────────────────
 
 export interface BirthChartOptions {
   houseSystem?: HouseSystem;
   queryDate?: Date;   // for time-lord calculations (default: birthDate)
+  research?: boolean; // enable research/statistical extensions
 }
 
 export interface BirthChartData {
@@ -198,4 +268,6 @@ export interface BirthChartData {
   lunarMansion: { number: number; name: string };
   // Settings
   settings: { houseSystem: HouseSystem; zodiac: 'tropical' };
+  // Research / statistical extensions (present when --research flag is used)
+  research?: ResearchData;
 }

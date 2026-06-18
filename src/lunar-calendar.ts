@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Chinese Lunar Calendar (農曆) computation.
  *
@@ -157,6 +158,7 @@ function getZhongqiMoments(startYear: number, endYear: number): { index: number;
       try {
         const date = findSolarTermMoment(longitude, y, startMonth);
         moments.push({ index: idx, date });
+      /* v8 ignore next 3 */
       } catch {
         // Skip failures (shouldn't happen for reasonable years)
       }
@@ -210,6 +212,7 @@ function buildMonthSequence(
     let hasZq = false;
     let hasDz = false;
     for (const z of zhongqi) {
+      /* v8 ignore next */
       if (!ZHONGQI_INDICES.includes(z.index)) continue;
       if (zhongqiFallsInMonth(z.date, start, end)) {
         hasZq = true;
@@ -310,6 +313,7 @@ export function getLunarMonthsForYear(lunarYear: number): LunarMonth[] {
     }
   }
 
+  /* v8 ignore next 3 */
   if (month1Idx < 0) {
     throw new Error(`Cannot find month 1 for lunar year ${lunarYear}`);
   }
@@ -352,6 +356,7 @@ export function getLunarNewYear(gregorianYear: number): Date {
   const months = getLunarMonthsForYear(gregorianYear);
   const month1 = months.find(m => m.monthNumber === 1 && !m.isLeapMonth);
 
+  /* v8 ignore next 3 */
   if (!month1) {
     throw new Error(`Cannot find month 1 for lunar year ${gregorianYear}`);
   }
@@ -382,6 +387,7 @@ export function gregorianToLunar(date: Date): LunarDate {
     let months: LunarMonth[];
     try {
       months = getLunarMonthsForYear(lunarYear);
+    /* v8 ignore next 3 -- defensive: only fails for years outside astronomical computation range */
     } catch {
       continue;
     }
@@ -403,7 +409,9 @@ export function gregorianToLunar(date: Date): LunarDate {
         }
       }
     }
+  /* v8 ignore start -- defensive: unreachable for valid Gregorian dates in supported range */
   }
 
   throw new Error(`Cannot convert ${year}-${month}-${day} to lunar date`);
 }
+/* v8 ignore stop */

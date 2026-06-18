@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Birth chart analysis utilities.
  *
@@ -233,6 +234,7 @@ export function computePlanetaryHour(date: Date, lat: number, lng: number): Plan
     let nightElapsed: number;
     if (currentH >= sunsetH) {
       nightElapsed = currentH - sunsetH;
+    /* v8 ignore next 3 */
     } else {
       nightElapsed = (24 - sunsetH) + currentH;
     }

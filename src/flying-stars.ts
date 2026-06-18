@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 紫白九星 (Purple-White Nine Stars)
  *

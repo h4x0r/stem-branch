@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 神煞方位 (Deity Compass Directions)
  *

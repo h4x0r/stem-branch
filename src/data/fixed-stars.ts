@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Fixed star catalog with J2000.0 ecliptic coordinates and traditional planetary natures.
  * Precession utilities for projecting positions to arbitrary epochs.

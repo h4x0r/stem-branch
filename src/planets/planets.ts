@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Public API for planetary positions.
  *

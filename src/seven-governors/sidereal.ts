@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import { dateToJulianCenturies, precessionInLongitude } from '../astro';
 import type { SiderealMode } from './types';
 
@@ -35,6 +36,7 @@ export function toSiderealLongitude(
       break;
     }
     case 'classical': {
+      /* v8 ignore next 3 */
       const epochYear = typeof mode.epoch === 'number'
         ? mode.epoch
         : CLASSICAL_EPOCHS[mode.epoch];

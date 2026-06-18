@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Render Sidereal Astrology (Jyotish) chart:
  * ayanamsa, positions with nakshatras, Vimshottari dashas, divisional charts.

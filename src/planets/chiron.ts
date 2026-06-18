@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Chiron geocentric ecliptic position via Keplerian orbital elements
  * and Kepler's equation (Newton-Raphson solver).

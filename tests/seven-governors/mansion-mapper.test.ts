@@ -70,4 +70,28 @@ describe('getMansionForLongitude', () => {
     expect(result.name).toBe('牛');
     expect(result.degree).toBeCloseTo(0.5, 1);
   });
+
+  it('-5° normalizes to 355°', () => {
+    const neg = getMansionForLongitude(-5);
+    const pos = getMansionForLongitude(355);
+    expect(neg.name).toBe(pos.name);
+    expect(neg.degree).toBeCloseTo(pos.degree, 6);
+    expect(neg.index).toBe(pos.index);
+  });
+
+  it('-180° normalizes to 180°', () => {
+    const neg = getMansionForLongitude(-180);
+    const pos = getMansionForLongitude(180);
+    expect(neg.name).toBe(pos.name);
+    expect(neg.degree).toBeCloseTo(pos.degree, 6);
+    expect(neg.index).toBe(pos.index);
+  });
+
+  it('361° normalizes to 1°', () => {
+    const over = getMansionForLongitude(361);
+    const norm = getMansionForLongitude(1);
+    expect(over.name).toBe(norm.name);
+    expect(over.degree).toBeCloseTo(norm.degree, 6);
+    expect(over.index).toBe(norm.index);
+  });
 });

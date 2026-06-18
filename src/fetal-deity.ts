@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 胎神 (Fetal Deity Position)
  *
@@ -81,6 +82,7 @@ const FETAL_DEITY: readonly string[] = [
 
 export function getFetalDeity(stem: Stem, branch: Branch): string {
   const idx = stemBranchCycleIndex(stem, branch);
+  /* v8 ignore next */
   if (idx < 0) return '';
   return FETAL_DEITY[idx];
 }

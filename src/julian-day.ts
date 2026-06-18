@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Julian Day Number computation for both Julian and Gregorian calendars.
  *

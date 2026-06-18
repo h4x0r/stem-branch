@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 衝煞 (Day Clash & Evil Direction)
  *

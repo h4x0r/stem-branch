@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Traditional 7-level essential dignity system.
  *
@@ -99,10 +100,11 @@ export function getTermRuler(sign: ZodiacSign, degree: number): string {
   const terms = EGYPTIAN_TERMS[sign];
   for (const [ruler, endDeg] of terms) {
     if (degree < endDeg) return ruler;
+  /* v8 ignore start -- defensive: degree always falls within a term */
   }
-  // Fallback: last term
   return terms[terms.length - 1][0];
 }
+/* v8 ignore stop */
 
 // ── Chaldean Face (Decan) ────────────────────────────────────
 

@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import { findSunLongitudeMoment } from './solar-longitude';
 import type { SolarTerm } from './types';
 

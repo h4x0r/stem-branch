@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { Stem, Branch, TenRelation } from './types';
 import { STEM_ELEMENT, stemPolarity } from './stems';
 import { getElementRelation } from './elements';

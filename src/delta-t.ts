@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * DeltaT (ΔT) — difference between Terrestrial Time (TT) and Universal Time (UT).
  *

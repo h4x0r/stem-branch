@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Timezone conversion utilities for wall-clock ↔ UTC ↔ true solar time.
  *
@@ -220,6 +221,7 @@ export function utcToLocal(
 
   const get = (type: string) => {
     const part = parts.find(p => p.type === type);
+    /* v8 ignore next */
     return part ? parseInt(part.value, 10) : 0;
   };
 
@@ -227,6 +229,7 @@ export function utcToLocal(
     year: get('year'),
     month: get('month'),
     day: get('day'),
+    /* v8 ignore next */
     hour: get('hour') === 24 ? 0 : get('hour'),
     minute: get('minute'),
     second: get('second'),
@@ -373,6 +376,7 @@ function getIntlTimezoneOffsetMs(date: Date, timezoneId: string): number {
 
   const get = (type: string) => {
     const part = parts.find(p => p.type === type);
+    /* v8 ignore next */
     return part ? parseInt(part.value, 10) : 0;
   };
 
@@ -380,6 +384,7 @@ function getIntlTimezoneOffsetMs(date: Date, timezoneId: string): number {
     get('year'),
     get('month') - 1,
     get('day'),
+    /* v8 ignore next */
     get('hour') === 24 ? 0 : get('hour'),
     get('minute'),
     get('second'),

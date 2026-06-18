@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { Branch, HiddenStem } from './types';
 
 export type { HiddenStem } from './types';

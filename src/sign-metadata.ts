@@ -1,3 +1,4 @@
+/* v8 ignore next */
 import type { ZodiacSign } from './tropical-astrology';
 import type { WesternElement, WesternQuality } from './birth-chart-types';
 

@@ -8,6 +8,7 @@ import {
   computeSixRen,
   computeSixRenForDate,
 } from '../src/six-ren';
+import { BRANCHES } from '../src/branches';
 
 // ═══════════════════════════════════════════════════════════════
 //  Constants
@@ -307,5 +308,221 @@ describe('computeSixRenForDate', () => {
     const date = new Date(2024, 5, 15, 14, 30); // 2:30pm → 未時
     const chart = computeSixRenForDate(date);
     expect(chart.hourBranch).toBe('未');
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  伏吟 (Still Plates) — offset 0
+// ═══════════════════════════════════════════════════════════════
+
+describe('伏吟 (Still Plates) — offset 0', () => {
+  // When monthlyGeneral === hourBranch, offset is 0 → handleStillPlates
+  // Use monthlyGeneral='午' and hourBranch='午'
+  it('produces 伏吟 method', () => {
+    const chart = computeSixRen('甲', '子', '午', '午');
+    expect(chart.method).toBe('伏吟');
+  });
+
+  it('uses clash-based chain for transmissions', () => {
+    const chart = computeSixRen('甲', '子', '午', '午');
+    // In 伏吟, middle transmission = clash of initial, final = clash of middle (= initial)
+    expect(chart.transmissions.final).toBe(chart.transmissions.initial);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  返吟 (Clash Plates) — offset 6
+// ═══════════════════════════════════════════════════════════════
+
+describe('返吟 (Clash Plates) — offset 6', () => {
+  // When monthlyGeneral is 6 positions from hourBranch → handleClashPlates
+  // hourBranch='子' (idx 0), monthlyGeneral='午' (idx 6): offset = (6-0+12)%12 = 6
+  it('produces 返吟 method', () => {
+    const chart = computeSixRen('甲', '子', '子', '午');
+    expect(chart.method).toBe('返吟');
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  handleNoConquest — 遙剋
+// ═══════════════════════════════════════════════════════════════
+
+describe('handleNoConquest — 遙剋', () => {
+  it('single keOnStem: upper element conquers day stem element', () => {
+    // 甲(木) 丑日 子時 月將酉 → offset=9
+    // Lessons: 亥(水)/寅(木), 申(金)/亥(水), 戌(土)/丑(土), 未(土)/戌(土)
+    // No direct 剋 in any lesson.
+    // keOnStem: only 申(金) conquers 木 → single → initial=申
+    const chart = computeSixRen('甲', '丑', '子', '酉');
+    expect(chart.method).toBe('遙剋');
+    expect(chart.transmissions.initial).toBe('申');
+    expect(chart.transmissions.middle).toBe('巳');  // plates[申]
+    expect(chart.transmissions.final).toBe('寅');   // plates[巳]
+  });
+
+  it('single stemKeOn: day stem element conquers upper element', () => {
+    // 丙(火) 卯日 子時 月將寅 → offset=2
+    // Lessons: 未(土)/巳(火), 酉(金)/未(土), 巳(火)/卯(木), 未(土)/巳(火)
+    // No direct 剋 in any lesson.
+    // keOnStem: none (no upper conquers 火)
+    // stemKeOn: only 酉(金) — 火剋金 → single → initial=酉
+    const chart = computeSixRen('丙', '卯', '子', '寅');
+    expect(chart.method).toBe('遙剋');
+    expect(chart.transmissions.initial).toBe('酉');
+    expect(chart.transmissions.middle).toBe('亥');  // plates[酉]
+    expect(chart.transmissions.final).toBe('丑');   // plates[亥]
+  });
+
+  it('multiple keOnStem: selectByPolarity picks yang branch for yang stem', () => {
+    // 甲(木,陽) 卯日 子時 月將酉 → offset=9
+    // Lessons: 亥(水)/寅(木), 申(金)/亥(水), 子(水)/卯(木), 酉(金)/子(水)
+    // No direct 剋 in any lesson.
+    // keOnStem: 申(金,陽) and 酉(金,陰) both conquer 木
+    // selectByPolarity: 甲=陽 → picks 申(陽) over 酉(陰)
+    const chart = computeSixRen('甲', '卯', '子', '酉');
+    expect(chart.method).toBe('遙剋');
+    expect(chart.transmissions.initial).toBe('申');
+    expect(chart.transmissions.middle).toBe('巳');
+    expect(chart.transmissions.final).toBe('寅');
+  });
+
+  it('multiple stemKeOn: selectByPolarity picks yang branch for yang stem', () => {
+    // 甲(木,陽) 酉日 子時 月將辰 → offset=4
+    // Lessons: 午(火)/寅(木), 戌(土)/午(火), 丑(土)/酉(金), 巳(火)/丑(土)
+    // No direct 剋 in any lesson. keOnStem: none.
+    // stemKeOn: 戌(土,陽) and 丑(土,陰) — 木剋土
+    // selectByPolarity: 甲=陽 → picks 戌(陽) over 丑(陰)
+    const chart = computeSixRen('甲', '酉', '子', '辰');
+    expect(chart.method).toBe('遙剋');
+    expect(chart.transmissions.initial).toBe('戌');
+    expect(chart.transmissions.middle).toBe('寅');
+    expect(chart.transmissions.final).toBe('午');
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  handleNoConquest — 別責
+// ═══════════════════════════════════════════════════════════════
+
+describe('handleNoConquest — 別責', () => {
+  it('no 剋, no 遙剋, lessons not all identical → 別責', () => {
+    // 丙(火) 辰日 子時 月將丑 → offset=1
+    // Lessons: 午(火)/巳(火), 未(土)/午(火), 巳(火)/辰(土), 午(火)/巳(火)
+    // No direct 剋 in any lesson.
+    // keOnStem: none (no upper element conquers 火)
+    // stemKeOn: none (火 doesn't conquer any upper element: 火,土,火,火)
+    // Not all lessons identical → 別責, initial = L1.upper = 午
+    const chart = computeSixRen('丙', '辰', '子', '丑');
+    expect(chart.method).toBe('別責');
+    expect(chart.transmissions.initial).toBe('午');
+    expect(chart.transmissions.middle).toBe('未');  // plates[午]
+    expect(chart.transmissions.final).toBe('申');   // plates[未]
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  getMonthlyGeneral fallback paths
+// ═══════════════════════════════════════════════════════════════
+
+describe('getMonthlyGeneral fallback paths', () => {
+  it('handles dates before 大寒 (early January)', () => {
+    // Jan 5, 2024 is before 大寒 (~Jan 20) → falls back to previous year's terms
+    const result = getMonthlyGeneral(new Date('2024-01-05T00:00:00Z'));
+    expect(BRANCHES.includes(result)).toBe(true);
+  });
+
+  it('handles date in early November before 小雪', () => {
+    // Nov 1 is typically before 小雪 (~Nov 22)
+    const result = getMonthlyGeneral(new Date('2024-11-01T00:00:00Z'));
+    expect(BRANCHES.includes(result)).toBe(true);
+  });
+
+  it('handles date in December after 冬至', () => {
+    // Dec 25 is after 冬至 (~Dec 21) → should match 冬至 → 丑
+    const result = getMonthlyGeneral(new Date('2024-12-25T00:00:00Z'));
+    expect(result).toBe('丑');
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  Night-time generals
+// ═══════════════════════════════════════════════════════════════
+
+describe('Night-time generals', () => {
+  it('uses different noble person position at night', () => {
+    // Night hours: 酉 (17:00-19:00), 戌 (19:00-21:00), 亥 (21:00-23:00), 子 (23:00-01:00)
+    const dayChart = computeSixRen('甲', '子', '午', '未');  // 午 is daytime
+    const nightChart = computeSixRen('甲', '子', '子', '未');  // 子 is nighttime
+    // They should have different heavenly generals
+    expect(dayChart.generals).not.toEqual(nightChart.generals);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  比用 — multiple 剋, polarity resolves to single winner
+// ═══════════════════════════════════════════════════════════════
+
+describe('比用 — normal path', () => {
+  it('甲子日 子時 月將巳: 3 下賊上, polarity=陽 picks 子 → 比用', () => {
+    // 甲(木,陽) 子日 子時 月將巳 → offset=5
+    // Lessons: 未(土)/寅(木), 子(水)/未(土), 巳(火)/子(水), 戌(土)/巳(火)
+    // 下賊上: L1 寅(木)剋未(土), L2 未(土)剋子(水), L3 子(水)剋巳(火)
+    // 3 candidates. matchByPolarity: 甲=陽 → 子(陽) is only match → 比用
+    const chart = computeSixRen('甲', '子', '子', '巳');
+    expect(chart.method).toBe('比用');
+    expect(chart.transmissions.initial).toBe('子');
+    expect(chart.transmissions.middle).toBe('巳');  // plates[子]
+    expect(chart.transmissions.final).toBe('戌');   // plates[巳]
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  涉害 — multiple 剋, polarity doesn't resolve
+// ═══════════════════════════════════════════════════════════════
+
+describe('涉害 — normal path', () => {
+  it('甲卯日 子時 月將辰: 2 下賊上 with distinct branches, both 陰 → 涉害', () => {
+    // 甲(木,陽) 卯日 子時 月將辰 → offset=4
+    // Lessons: 午(火)/寅(木), 戌(土)/午(火), 未(土)/卯(木), 亥(水)/未(土)
+    // 下賊上: L3 卯(木)剋未(土), L4 未(土)剋亥(水) → 2 candidates: 未(陰), 亥(陰)
+    // matchByPolarity: 甲=陽, but both 未 and 亥 are 陰 → no match → keep both
+    // → measureHarmDepth resolves → 涉害
+    const chart = computeSixRen('甲', '卯', '子', '辰');
+    expect(chart.method).toBe('涉害');
+    expect(chart.transmissions.initial).toBe('未');
+    expect(chart.transmissions.middle).toBe('亥');  // plates[未]
+    expect(chart.transmissions.final).toBe('卯');   // plates[亥]
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  返吟 — multiple conquests sub-paths
+// ═══════════════════════════════════════════════════════════════
+
+describe('返吟 — multiple conquests', () => {
+  it('甲卯日 子時 月將午: 2 下賊上, polarity=陽 picks 寅 → 返吟 比用 path', () => {
+    // 甲(木,陽) 卯日 子時 月將午 → offset=6
+    // Lessons: 申(金)/寅(木), 寅(木)/申(金), 酉(金)/卯(木), 卯(木)/酉(金)
+    // 下賊上: L2 申(金)→寅 is 上剋下; L2 寅(木)/申(金) → 金剋木 → 下賊上? No...
+    // Actually: L2: upper=寅(木), lower=申(金). 金剋木: lower conquers upper → 下賊上
+    // L4: upper=卯(木), lower=酉(金). 金剋木: lower conquers upper → 下賊上
+    // 2 下賊上 candidates: 寅(陽), 卯(陰). 甲=陽 → picks 寅
+    const chart = computeSixRen('甲', '卯', '子', '午');
+    expect(chart.method).toBe('返吟');
+    expect(chart.transmissions.initial).toBe('寅');
+    expect(chart.transmissions.middle).toBe('申');  // plates[寅]=申 (offset 6)
+    expect(chart.transmissions.final).toBe('寅');   // plates[申]=寅
+  });
+
+  it('甲子日 子時 月將午: 2 下賊上 both 陽 → 返吟 涉害 path', () => {
+    // 甲(木,陽) 子日 子時 月將午 → offset=6
+    // Lessons: 申(金)/寅(木), 寅(木)/申(金), 午(火)/子(水), 子(水)/午(火)
+    // 下賊上: L2 寅(木,陽)/申(金) → 下賊上, L3 午(火,陽)/子(水) → 下賊上
+    // matchByPolarity: both 寅(陽) and 午(陽) match 甲(陽) → still 2 → measureHarmDepth
+    const chart = computeSixRen('甲', '子', '子', '午');
+    expect(chart.method).toBe('返吟');
+    expect(chart.transmissions.initial).toBe('寅');
+    expect(chart.transmissions.middle).toBe('申');  // plates[寅]=申
+    expect(chart.transmissions.final).toBe('寅');   // plates[申]=寅
   });
 });

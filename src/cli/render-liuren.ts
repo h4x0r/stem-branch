@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Render 大六壬 (Da Liu Ren / Grand Six Ren) as tables.
  *

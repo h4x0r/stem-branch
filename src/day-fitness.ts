@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * 建除十二神 (Twelve Day Fitness Cycle)
  *

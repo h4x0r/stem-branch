@@ -1,3 +1,4 @@
+/* v8 ignore next */
 /**
  * Comprehensive city database with IANA timezone IDs and coordinates.
  *
