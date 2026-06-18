@@ -6,8 +6,8 @@
  * eliminating the need for an external precession formula and avoiding the
  * frame-mismatch issue that occurs with VSOP87B + separate precession.
  *
- * Includes sxwnl's DE405 correction polynomial to compensate for VSOP87
- * truncation errors, achieving sub-second solar term precision.
+ * Includes a JPL DE441-fitted even-polynomial correction to compensate for
+ * VSOP87 truncation errors, achieving sub-second solar term precision.
  */
 
 import { EARTH_L, EARTH_R, evaluateVsopSeries } from './vsop87d-earth';
@@ -25,7 +25,7 @@ import {
  * VSOP87D gives heliocentric coordinates referred to the ecliptic of date
  * (precession is built into the coefficients). We apply:
  * 1. Evaluate VSOP87D heliocentric longitude L and radius R
- * 2. Apply sxwnl's DE405 correction (compensates for VSOP87 truncation)
+ * 2. Apply DE441-fitted even-polynomial correction (compensates for VSOP87 truncation)
  * 3. Convert to geocentric: lon = L + PI
  * 4. Apply nutation in longitude (IAU2000B, 77 lunisolar terms)
  * 5. Apply aberration correction
@@ -48,7 +48,9 @@ export function getSunLongitude(date: Date): number {
   // Least-squares fit to 1,008 solar-term crossings against JPL DE441
   // over 42 years (209–2493 CE, systematic + random sampling, seed=42).
   // Even-only terms (τ², τ⁴, τ⁶) ensure symmetric accuracy for past/future.
-  // Residuals: mean 1.27s, max 3.76s across 209–2493 CE (vs 26.4s / 61.7s prior).
+  // Longitude-fit residual: mean 1.27s, max 3.76s across 209–2493 CE (vs 26.4s /
+  // 61.7s prior). End-to-end solar-term timing vs JPL DE441 is 1.05s mean /
+  // 3.05s max over the same 1,008 crossings (see docs accuracy.md).
   // Units: arcseconds → radians (divided by 206264.806)
   const tau2 = tau * tau;
   L += (-0.106674 - 0.616597 * tau2 + 0.315446 * tau2 * tau2
@@ -163,7 +165,7 @@ export function findSunLongitudeMoment(
  * Where:
  *   L₀ = Sun's geometric mean longitude (polynomial in T)
  *   α  = Sun's apparent right ascension (from apparent ecliptic longitude
- *         via VSOP87D + IAU2000B nutation + DE405 correction + aberration)
+ *         via VSOP87D + IAU2000B nutation + DE441 correction + aberration)
  *   0.0057183° = aberration constant, compensating for aberration already
  *                included in the apparent α
  *
