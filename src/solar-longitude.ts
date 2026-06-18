@@ -7,39 +7,48 @@
  * eliminating the need for an external precession formula and avoiding the
  * frame-mismatch issue that occurs with VSOP87B + separate precession.
  *
- * Includes sxwnl's DE405 correction polynomial to compensate for VSOP87
- * truncation errors, achieving sub-second solar term precision.
+ * Includes a JPL DE441-fitted even-polynomial correction to compensate for
+ * VSOP87 truncation errors, achieving sub-second solar term precision.
  */
 
 import { EARTH_L, EARTH_R, evaluateVsopSeries } from './vsop87d-earth';
 import {
   DEG_TO_RAD, RAD_TO_DEG, ARCSEC_TO_RAD,
-  dateToJulianMillennia, dateToJulianCenturies,
+  dateToJD_TT, dateToJulianCenturies,
   delaunayArgs, nutationDpsi, nutationDeps,
   meanObliquity,
   normalizeDegrees, normalizeRadians,
 } from './astro';
 
 /**
- * Compute apparent geocentric ecliptic longitude of the Sun in degrees [0, 360).
+ * Geocentric solar ecliptic state at a Julian Ephemeris Day (TT).
+ *
+ * Returns the Sun's geocentric longitude in the shape downstream ephemeris
+ * provider contracts expect, leaving the time-scale boundary to the caller:
+ * - `trueLongitudeDegrees`     — mean equinox of date (VSOP87D + DE441
+ *   correction, no nutation/aberration)
+ * - `apparentLongitudeDegrees` — true equinox of date (+ IAU2000B nutation
+ *   + aberration)
+ * - `radiusAu`                 — Sun–Earth distance in AU
+ *
+ * The input is Julian Ephemeris Day in Terrestrial Time, so the UTC↔TT / ΔT
+ * boundary stays outside the astronomy — callers that own their own ΔT model
+ * can feed a TT instant directly.
  *
  * VSOP87D gives heliocentric coordinates referred to the ecliptic of date
- * (precession is built into the coefficients). We apply:
- * 1. Evaluate VSOP87D heliocentric longitude L and radius R
- * 2. Apply sxwnl's DE405 correction (compensates for VSOP87 truncation)
- * 3. Convert to geocentric: lon = L + PI
- * 4. Apply nutation in longitude (IAU2000B, 77 lunisolar terms)
- * 5. Apply aberration correction
- * 6. Normalize to [0, 360)
+ * (precession is built into the coefficients), so no external precession or
+ * FK5 correction is needed.
  *
- * No external precession or FK5 correction needed with VSOP87D.
- *
- * @param date - The moment to compute longitude for
- * @returns Solar longitude in degrees [0, 360)
+ * @param jdeTT - Julian Ephemeris Day in Terrestrial Time
+ * @returns Geocentric solar longitudes (degrees [0, 360)) and radius (AU)
  */
-export function getSunLongitude(date: Date): number {
-  const tau = dateToJulianMillennia(date);
-  const T = dateToJulianCenturies(date);
+export function solarEclipticState(jdeTT: number): {
+  trueLongitudeDegrees: number;
+  apparentLongitudeDegrees: number;
+  radiusAu: number;
+} {
+  const tau = (jdeTT - 2451545.0) / 365250.0;
+  const T = (jdeTT - 2451545.0) / 36525.0;
 
   // Heliocentric longitude and radius from VSOP87D (radians / AU)
   let L = evaluateVsopSeries(EARTH_L, tau);
@@ -49,26 +58,42 @@ export function getSunLongitude(date: Date): number {
   // Least-squares fit to 1,008 solar-term crossings against JPL DE441
   // over 42 years (209–2493 CE, systematic + random sampling, seed=42).
   // Even-only terms (τ², τ⁴, τ⁶) ensure symmetric accuracy for past/future.
-  // Residuals: mean 1.27s, max 3.76s across 209–2493 CE (vs 26.4s / 61.7s prior).
+  // Longitude-fit residual: mean 1.27s, max 3.76s across 209–2493 CE (vs 26.4s /
+  // 61.7s prior). End-to-end solar-term timing vs JPL DE441 is 1.05s mean /
+  // 3.05s max over the same 1,008 crossings (see docs accuracy.md).
   // Units: arcseconds → radians (divided by 206264.806)
   const tau2 = tau * tau;
   L += (-0.106674 - 0.616597 * tau2 + 0.315446 * tau2 * tau2
     - 0.050315 * tau2 * tau2 * tau2) / 206264.806;
 
-  // Convert heliocentric to geocentric: add 180 degrees (PI radians)
-  let lon = L + Math.PI;
+  // Convert heliocentric to geocentric (add 180° / PI rad). Before nutation
+  // and aberration this is the mean equinox of date.
+  const geoTrue = L + Math.PI;
 
-  // Nutation in longitude (IAU2000B, 77 lunisolar terms)
+  // Nutation in longitude (IAU2000B, 77 lunisolar terms) + aberration
+  // (Ron & Vondrak, ~20.4898" constant) give the apparent (true-equinox) place.
   const args = delaunayArgs(T);
   const dpsi = nutationDpsi(args.l, args.lp, args.F, args.D, args.Om, T);
-  lon += dpsi * ARCSEC_TO_RAD;
+  const apparent = geoTrue + dpsi * ARCSEC_TO_RAD + (-20.4898 / R) * ARCSEC_TO_RAD;
 
-  // Aberration correction (Ron & Vondrak, ~20.4898" constant of aberration)
-  lon += (-20.4898 / R) * ARCSEC_TO_RAD;
+  return {
+    trueLongitudeDegrees: normalizeRadians(geoTrue) * RAD_TO_DEG,
+    apparentLongitudeDegrees: normalizeRadians(apparent) * RAD_TO_DEG,
+    radiusAu: R,
+  };
+}
 
-  // Normalize to [0, 2*PI) then convert to degrees
-  lon = normalizeRadians(lon);
-  return lon * RAD_TO_DEG;
+/**
+ * Compute apparent geocentric ecliptic longitude of the Sun in degrees [0, 360).
+ *
+ * Thin wrapper over {@link solarEclipticState}: converts the UT `date` to
+ * Julian Ephemeris Day (TT) via ΔT and returns the apparent longitude.
+ *
+ * @param date - The moment to compute longitude for (UT)
+ * @returns Solar longitude in degrees [0, 360)
+ */
+export function getSunLongitude(date: Date): number {
+  return solarEclipticState(dateToJD_TT(date)).apparentLongitudeDegrees;
 }
 
 /**
@@ -165,7 +190,7 @@ export function findSunLongitudeMoment(
  * Where:
  *   L₀ = Sun's geometric mean longitude (polynomial in T)
  *   α  = Sun's apparent right ascension (from apparent ecliptic longitude
- *         via VSOP87D + IAU2000B nutation + DE405 correction + aberration)
+ *         via VSOP87D + IAU2000B nutation + DE441 correction + aberration)
  *   0.0057183° = aberration constant, compensating for aberration already
  *                included in the apparent α
  *

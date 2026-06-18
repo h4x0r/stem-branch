@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { getSunLongitude, findSunLongitudeMoment } from '../src/solar-longitude';
+import { getSunLongitude, findSunLongitudeMoment, solarEclipticState } from '../src/solar-longitude';
+import { dateToJD_TT } from '../src/astro';
 
 describe('getSunLongitude', () => {
   it('returns longitude in degrees [0, 360)', () => {
@@ -76,5 +77,37 @@ describe('findSunLongitudeMoment', () => {
     // Sun moves ~1 degree/day = ~0.04 arcsec/sec, so 2 sec ~ 0.08 arcsec ~ 0.000023 deg
     // But we search to 1-second precision in time, so longitude precision is ~0.01 degrees
     expect(Math.min(lon, 360 - lon)).toBeLessThan(0.01);
+  });
+});
+
+describe('solarEclipticState (JDE-in, provider-shaped out)', () => {
+  // Samples away from the 0/360 wrap so true/apparent stay comparable.
+  const samples = [
+    new Date(Date.UTC(2000, 0, 1, 12, 0, 0)),
+    new Date(Date.UTC(1985, 5, 21, 0, 0, 0)),
+    new Date(Date.UTC(2024, 7, 22, 17, 28, 0)),
+  ];
+
+  it('apparent longitude equals getSunLongitude for the same TT instant', () => {
+    for (const d of samples) {
+      const state = solarEclipticState(dateToJD_TT(d));
+      expect(state.apparentLongitudeDegrees).toBeCloseTo(getSunLongitude(d), 9);
+    }
+  });
+
+  it('true and apparent longitudes are in [0, 360) and differ only by nutation + aberration', () => {
+    const state = solarEclipticState(dateToJD_TT(samples[0]));
+    for (const v of [state.trueLongitudeDegrees, state.apparentLongitudeDegrees]) {
+      expect(v).toBeGreaterThanOrEqual(0);
+      expect(v).toBeLessThan(360);
+    }
+    // |Δψ| (<17.2") + aberration (~20.5") < ~38" ≈ 0.011°
+    expect(Math.abs(state.apparentLongitudeDegrees - state.trueLongitudeDegrees)).toBeLessThan(0.02);
+  });
+
+  it('returns the Sun–Earth distance in AU within the annual range', () => {
+    const r = solarEclipticState(dateToJD_TT(samples[0])).radiusAu;
+    expect(r).toBeGreaterThan(0.98);
+    expect(r).toBeLessThan(1.02);
   });
 });
