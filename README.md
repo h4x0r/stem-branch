@@ -154,6 +154,26 @@ const chart = getSevenGovernorsChart(
 | `searchCities(query)` | Search 143 cities by name or pinyin |
 | [+ 10 more →](https://h4x0r.github.io/stem-branch/api/timezone) | |
 
+## Rust port
+
+A native Rust port of the solar ephemeris core lives in [`rust/`](rust/) — no
+JavaScript, no dependencies. `solar_ecliptic_state(jde_tt)` returns the Sun's
+geocentric ecliptic longitude (mean and apparent) and Sun–Earth distance from
+the full VSOP87D Earth series, the DE441-fitted correction, and IAU2000B
+nutation.
+
+```rust
+use stembranch::solar_ecliptic_state;
+let s = solar_ecliptic_state(2451545.0); // JDE (TT)
+// s.apparent_longitude_degrees ≈ 280.368  (J2000.0)
+```
+
+Its VSOP87D and nutation coefficient tables are generated from this repo's
+TypeScript source, so the two implementations share one source of truth and
+cannot silently drift. Validated against **JPL DE441** to a max **0.081″** over
+1900–2100 CE — see [`rust/README.md`](rust/README.md) for the residual table and
+methodology.
+
 ## Documentation
 
 - **[Getting Started](https://h4x0r.github.io/stem-branch/getting-started)** — install, examples, and "What's Inside" overview
@@ -162,6 +182,7 @@ const chart = getSevenGovernorsChart(
 - **[Algorithms](https://h4x0r.github.io/stem-branch/algorithms/overview)** — how solar longitude, four pillars, and lunar calendar are computed
 - **[Accuracy Report](https://h4x0r.github.io/stem-branch/accuracy)** — full validation against JPL DE441, Swiss Ephemeris, and sxwnl
 - **[Seven Governors](https://h4x0r.github.io/stem-branch/seven-governors)** — 七政四餘 computation methods and historical context
+- **[Rust binding](rust/README.md)** — native Rust port of the solar ephemeris core, validated against JPL DE441 (max 0.081″)
 
 ## License
 
