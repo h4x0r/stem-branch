@@ -440,11 +440,11 @@ graph LR
         SB2 -- "mean 1.05s · max 3.05s" --> JPL2
     end
 
-    style SB1 fill:#d4edda,stroke:#28a745
-    style SB2 fill:#d4edda,stroke:#28a745
-    style JPL1 fill:#cce5ff,stroke:#004085
-    style JPL2 fill:#cce5ff,stroke:#004085
-    style SX fill:#fff3cd,stroke:#856404
+    style SB1 fill:#d4edda,stroke:#28a745,color:#1b1b1f
+    style SB2 fill:#d4edda,stroke:#28a745,color:#1b1b1f
+    style JPL1 fill:#cce5ff,stroke:#004085,color:#1b1b1f
+    style JPL2 fill:#cce5ff,stroke:#004085,color:#1b1b1f
+    style SX fill:#fff3cd,stroke:#856404,color:#1b1b1f
 ```
 
 ### 3.11 Extended range computation: −2000 to +5000 CE (10,392 terms)
@@ -622,10 +622,10 @@ block-beta
   C["stem-branch · VSOP87D + DE441 even polynomial\nComputed: −2,000 → +5,000 CE · 10,392 terms · 0 failures\nJPL-validated: 209–2,493 CE · mean 1.05 s\nSweet spot |ΔL| < 0.5″: 0–4,000 CE"]
   D["sxwnl · VSOP87D + DE405 cubic\nPractical: 1,800–2,200 CE\nValidated: 1,900–2,100 CE · mean 2.38 s vs JPL\n|ΔL| < stem-branch: 1,933–2,012 CE only 1.1%"]
 
-  style A fill:#cce5ff,stroke:#004085
-  style B fill:#e2e3e5,stroke:#383d41
-  style C fill:#d4edda,stroke:#28a745
-  style D fill:#fff3cd,stroke:#856404
+  style A fill:#cce5ff,stroke:#004085,color:#1b1b1f
+  style B fill:#e2e3e5,stroke:#383d41,color:#1b1b1f
+  style C fill:#d4edda,stroke:#28a745,color:#1b1b1f
+  style D fill:#fff3cd,stroke:#856404,color:#1b1b1f
 ```
 
 | Source | Computed range | JPL-validated | Sweet spot | Key design |
