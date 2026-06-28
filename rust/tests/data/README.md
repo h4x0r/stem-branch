@@ -13,7 +13,8 @@
   1900–2100 CE, embedded directly in `tests/de441_oracle.rs::CASES`. Includes
   both round-time (00:00 / 12:00) and off-round (03:00 / 06:00) instants at full
   Julian-day precision.
-- **Ground-truth tier:** Tier 1 — the answer values are authored by JPL, not by us.
+- **Independence:** the answer values are authored by JPL, not by us — an
+  external check, not a fixture we generated and then asserted against.
 - **License / redistribution:** JPL Horizons output is a U.S. Government work and
   is in the public domain.
 

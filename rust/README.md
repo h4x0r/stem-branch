@@ -26,8 +26,8 @@ an independent third-party oracle, the same reference the upstream TypeScript
 [`stem-branch`](https://h4x0r.github.io/stem-branch/accuracy) is validated
 against. The test asserts
 `solar_ecliptic_state().apparent_longitude_degrees` against JPL's apparent
-geocentric ecliptic longitude of the Sun. This is ground-truth **tier 1**: the
-expected values are authored by JPL, not by us, so the test is not circular.
+geocentric ecliptic longitude of the Sun. The expected values are authored by
+JPL, not by us, so the test is an independent check rather than a circular one.
 
 **Result — apparent ecliptic longitude vs JPL DE441 (1900–2100 CE):**
 
