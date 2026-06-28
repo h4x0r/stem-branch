@@ -2,8 +2,8 @@
 //!
 //! The reference apparent ecliptic longitudes come from the JPL Horizons system
 //! (DE441 ephemeris) — an independent third-party oracle, the same one the
-//! TypeScript stem-branch validates against. Ground-truth tier 1 (values are
-//! authored by JPL, not by us). Provenance: `tests/data/README.md`.
+//! TypeScript stem-branch validates against. The expected values are authored by
+//! JPL, not by us, so this is an independent check. Provenance: `tests/data/README.md`.
 
 use stembranch::solar_ecliptic_state;
 
