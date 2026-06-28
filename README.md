@@ -162,6 +162,7 @@ const chart = getSevenGovernorsChart(
 - **[Algorithms](https://h4x0r.github.io/stem-branch/algorithms/overview)** — how solar longitude, four pillars, and lunar calendar are computed
 - **[Accuracy Report](https://h4x0r.github.io/stem-branch/accuracy)** — full validation against JPL DE441, Swiss Ephemeris, and sxwnl
 - **[Seven Governors](https://h4x0r.github.io/stem-branch/seven-governors)** — 七政四餘 computation methods and historical context
+- **[Rust binding](rust/README.md)** — native Rust port of the solar ephemeris core, validated against JPL DE441 (max 0.081″)
 
 ## License
 
