@@ -4,7 +4,7 @@ import footnote from 'markdown-it-footnote';
 
 export default withMermaid(defineConfig({
   title: 'stem-branch',
-  description: 'The most accurate open-source Chinese calendar engine — solar terms, lunar calendar, BaZi, divination, and sidereal astrology from first principles.',
+  description: 'The most accurate open-source Chinese calendar engine — solar terms, lunisolar calendar, BaZi, divination, and sidereal astrology from first principles.',
   base: '/stem-branch/',
   lang: 'en',
   cleanUrls: true,
@@ -66,7 +66,7 @@ export default withMermaid(defineConfig({
           { text: 'Overview', link: '/algorithms/overview' },
           { text: 'Solar Longitude', link: '/algorithms/solar-longitude' },
           { text: 'Four Pillars', link: '/algorithms/four-pillars' },
-          { text: 'Lunar Calendar', link: '/algorithms/lunar-calendar' },
+          { text: 'Lunisolar Calendar', link: '/algorithms/lunar-calendar' },
         ],
       },
       {

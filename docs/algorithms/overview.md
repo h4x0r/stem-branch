@@ -10,7 +10,7 @@ graph TD
   B -->|corrected longitude| C["IAU2000B Nutation<br/>(77 lunisolar terms)"]
   C -->|apparent geocentric longitude| D["Newton-Raphson Root Finding<br/>→ solar term crossing moments"]
   D --> E["Four Pillars (四柱)"]
-  D --> F["Lunar Calendar (農曆)"]
+  D --> F["Lunisolar Calendar (農曆)"]
   D --> G["Solar Term Moments (節氣)"]
   E --> H["Divination Systems<br/>大六壬 · 奇門遁甲 · 紫微斗數<br/>神煞 · 飛星 · 建除 · 德星"]
 ```
@@ -23,7 +23,7 @@ graph TD
 |--------|------|-------------|
 | Solar Longitude | `solar-longitude.ts` | VSOP87D + DE441 correction + IAU2000B nutation |
 | Solar Terms | `solar-terms.ts` | Newton-Raphson root finding for 24 節氣 |
-| Lunar Calendar | `lunar.ts` | Meeus Ch. 49 new moons + solar term interpolation |
+| Lunisolar Calendar | `lunar.ts` | Meeus Ch. 49 new moons + solar term interpolation |
 | Delta T | `delta-t.ts` | ΔT = TT - UT (Espenak & Meeus + sxwnl tables) |
 | True Solar Time | `true-solar-time.ts` | Equation of Time via VSOP87D apparent RA |
 | Eclipses | `eclipses.ts` | Solar/lunar eclipse detection |

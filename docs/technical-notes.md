@@ -47,9 +47,9 @@ TT = UT + ΔT. The model uses three regimes:
 | 2016-2050 | Cubic spline table | sxwnl (許劍偉) |
 | After 2050 | Parabolic extrapolation | Morrison & Stephenson (2004) |
 
-### Lunar calendar algorithm
+### Lunisolar calendar algorithm
 
-The lunar calendar uses a 冬至-anchor approach:
+The lunisolar calendar uses a 冬至-anchor approach:
 
 1. Find the 冬至 (Winter Solstice) moment for the target year and adjacent years
 2. Enumerate all new moons (Meeus Ch. 49) between consecutive 冬至 dates
@@ -65,7 +65,7 @@ The lunar calendar uses a 冬至-anchor approach:
 |---|---|---|
 | Solar longitude | VSOP87D | Full 2,425-term planetary theory + DE405 correction |
 | New moon | Meeus Ch. 49 | 25 periodic + 14 planetary correction terms |
-| Lunar calendar | Computed | 冬至-anchor algorithm with zhongqi month numbering |
+| Lunisolar calendar | Computed | 冬至-anchor algorithm with zhongqi month numbering |
 | Julian Day | Meeus Ch. 7 | Julian/Gregorian calendar conversion |
 | DeltaT (ΔT) | Espenak & Meeus + sxwnl | Polynomial (pre-2016), sxwnl cubic table (2016-2050), parabolic extrapolation (2050+) |
 | Nutation | IAU2000B | 77-term lunisolar nutation series |
@@ -94,7 +94,7 @@ Validated against [sxwnl](https://github.com/sxwnl/sxwnl), the gold standard Chi
 | Lunar New Year (農曆) | 61 dates | 1990-2050 | **100%** match |
 | Intercalary Months (閏月) | 10 years | 2001-2025 | **100%** match |
 
-Lunar calendar validated against Hong Kong Observatory / USNO data, including correct handling of the 二〇三三年問題 (2033 problem).
+Lunisolar calendar validated against Hong Kong Observatory / USNO data, including correct handling of the 二〇三三年問題 (2033 problem).
 
 ### Solar term timing precision
 
@@ -124,7 +124,7 @@ A 3-way comparison would determine whether the ~0.6s stembranch-vs-sxwnl deviati
 
 ### The 2033 problem (二〇三三年問題)
 
-In 2033, the standard Chinese lunar calendar algorithm produces an ambiguity in intercalary month assignment. The issue arises because:
+In 2033, the standard Chinese lunisolar calendar algorithm produces an ambiguity in intercalary month assignment. The issue arises because:
 
 1. Between the 冬至 (Winter Solstice) of 2033 and 2034, there are **13 lunar months** (13 new moons), requiring one to be designated intercalary (閏月)
 2. The standard rule — "the first month without a 中氣 (Zhongqi) is the leap month" — identifies 月 11 (the 11th month) as lacking a Zhongqi

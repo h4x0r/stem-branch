@@ -4,7 +4,7 @@
  *
  * Single-call entry point that composes every major module into
  * one structured result for a given date. Showcases: four pillars,
- * solar terms, lunar calendar, zodiac, day fitness, flying stars,
+ * solar terms, lunisolar calendar, zodiac, day fitness, flying stars,
  * almanac flags, Six Ren divination, eclipses, and element analysis.
  */
 

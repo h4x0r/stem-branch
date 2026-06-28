@@ -179,7 +179,7 @@ methodology.
 - **[Getting Started](https://h4x0r.github.io/stem-branch/getting-started)** — install, examples, and "What's Inside" overview
 - **[API Reference](https://h4x0r.github.io/stem-branch/api/astronomy)** — full export tables and TypeScript types
 - **[Reference Tables](https://h4x0r.github.io/stem-branch/reference/almanac-flags)** — 神煞, 建除十二神, 天德月德, 神煞方位 lookup tables
-- **[Algorithms](https://h4x0r.github.io/stem-branch/algorithms/overview)** — how solar longitude, four pillars, and lunar calendar are computed
+- **[Algorithms](https://h4x0r.github.io/stem-branch/algorithms/overview)** — how solar longitude, four pillars, and lunisolar calendar are computed
 - **[Accuracy Report](https://h4x0r.github.io/stem-branch/accuracy)** — full validation against JPL DE441, Swiss Ephemeris, and sxwnl
 - **[Seven Governors](https://h4x0r.github.io/stem-branch/seven-governors)** — 七政四餘 computation methods and historical context
 - **[Rust binding](rust/README.md)** — native Rust port of the solar ephemeris core, validated against JPL DE441 (max 0.081″)

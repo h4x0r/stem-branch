@@ -1,10 +1,10 @@
-# Lunar Calendar (農曆)
+# Lunisolar Calendar (農曆)
 
-stembranch computes the Chinese lunar calendar from first principles using astronomical new moon calculations and solar term interpolation.
+stembranch computes the Chinese lunisolar calendar from first principles using astronomical new moon calculations and solar term interpolation.
 
 ## How It Works
 
-The Chinese lunar calendar is a lunisolar calendar:
+The Chinese calendar (農曆) is lunisolar — lunar months reconciled with the solar year:
 - **Months** start at each new moon (朔日)
 - **Year boundaries** are aligned with the solar cycle via intercalary (leap) months
 - **Month numbering** is determined by which major solar term (中氣) falls within each lunar month

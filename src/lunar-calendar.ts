@@ -1,6 +1,6 @@
 /* v8 ignore next */
 /**
- * Chinese Lunar Calendar (農曆) computation.
+ * Chinese Lunisolar Calendar (農曆) computation.
  *
  * Computes lunar months, intercalary months (閏月), and Lunar New Year dates
  * from first principles using astronomical new moon computation (Meeus Ch. 49)

@@ -1,11 +1,11 @@
 ---
 title: "Astronomy — stem-branch API Reference"
-description: "Astronomical foundations: solar terms, lunar calendar, eclipses, Julian Day, ΔT computation. Full VSOP87D with DE441 correction."
+description: "Astronomical foundations: solar terms, lunisolar calendar, eclipses, Julian Day, ΔT computation. Full VSOP87D with DE441 correction."
 ---
 
 # Astronomy
 
-Astronomical computation layer underpinning the entire library. Provides sub-second precision solar term moments via VSOP87D with DE441 polynomial correction, lunar calendar generation from Meeus Ch. 49 new moon series, and a 5,000-year eclipse catalogue. All functions accept and return standard JS `Date` objects in UTC.
+Astronomical computation layer underpinning the entire library. Provides sub-second precision solar term moments via VSOP87D with DE441 polynomial correction, lunisolar calendar generation from Meeus Ch. 49 new moon series, and a 5,000-year eclipse catalogue. All functions accept and return standard JS `Date` objects in UTC.
 
 ### DeltaT (ΔT)
 
@@ -40,7 +40,7 @@ Astronomical computation layer underpinning the entire library. Provides sub-sec
 | `newMoonJDE(k)` | JDE of new moon for lunation number k (Meeus Ch. 49) |
 | `findNewMoonsInRange(startJD, endJD)` | All new moon JDEs in a Julian Day range |
 
-### Lunar Calendar (農曆)
+### Lunisolar Calendar (農曆)
 
 | Export | Description |
 |---|---|

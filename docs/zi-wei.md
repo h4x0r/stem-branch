@@ -12,7 +12,7 @@ head:
 **See also:** [Da Liu Ren (大六壬)](da-liu-ren) · [Mystery Gates (奇門遁甲)](mystery-gates) · [Seven Governors (七政四餘)](seven-governors)
 
 Chinese natal astrology system placing 14 major stars and numerous auxiliary
-stars into 12 life-domain palaces, based on lunar calendar birth data. Unlike
+stars into 12 life-domain palaces, based on lunisolar calendar birth data. Unlike
 七政四餘 (which computes real planetary positions), 紫微斗數 uses purely
 mathematical placement rules — the "stars" are symbolic constructs, not
 astronomical bodies.
@@ -34,7 +34,7 @@ Three features distinguish ZWDS from other Chinese mantic systems:
    observation or ephemeris computation. This stands in sharp contrast to
    七政四餘, which requires actual planetary longitudes[^hopeng].
 
-2. **Lunar calendar input.** ZWDS takes the lunar (陰曆) date as its primary
+2. **Lunisolar calendar input.** ZWDS takes the lunar (陰曆) date as its primary
    input, unlike 四柱八字 (BaZi / Four Pillars), which uses solar-term
    boundaries (節氣). Two people born on the same Gregorian date may receive
    different ZWDS charts if their births fall on different sides of a lunar
@@ -129,8 +129,8 @@ counter-clockwise through the palaces.
 
 This point deserves emphasis because it is a common source of confusion. BaZi
 (四柱八字) uses **solar terms** (節氣) to determine month boundaries — the
-"month" in BaZi changes at a solar term, not at the new moon. ZWDS uses the
-**lunar calendar** — the month changes at the new moon (朔日). The two systems
+"month" in BaZi changes at a solar term, not at the new moon. ZWDS (紫微斗數) uses the
+**lunisolar calendar** — the month changes at the new moon (朔日). The two systems
 can therefore assign different months to the same birth date, especially for
 births falling near the boundary between solar terms and lunar months.
 
