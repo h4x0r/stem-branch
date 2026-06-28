@@ -23,7 +23,8 @@ boundary is the caller's responsibility.
 
 The implementation is validated against **JPL Horizons (DE441 ephemeris)** —
 an independent third-party oracle, the same reference the upstream TypeScript
-`stem-branch` is validated against. The test asserts
+[`stem-branch`](https://h4x0r.github.io/stem-branch/accuracy) is validated
+against. The test asserts
 `solar_ecliptic_state().apparent_longitude_degrees` against JPL's apparent
 geocentric ecliptic longitude of the Sun. This is ground-truth **tier 1**: the
 expected values are authored by JPL, not by us, so the test is not circular.
