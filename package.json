@@ -1,6 +1,6 @@
 {
   "name": "@4n6h4x0r/stem-branch",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Chinese calendar, astronomy, and 干支 (Heavenly Stems & Earthly Branches) computation library",
   "homepage": "https://h4x0r.github.io/stem-branch/",
   "type": "module",
