@@ -44,12 +44,12 @@ fn moon_sun_conjunction_at_new_moons() {
 #[test]
 fn matches_ts_elpmpp02_reference_values() {
     // (civil date 00:00 UT, lon°, lat°, distance km) from the TS ELP/MPP02 engine.
-    let cases: &[((i32, u32, u32), f64, f64, f64)] = &[
-        ((2000, 1, 1), 217.293477, 5.231311, 400933.20),
-        ((2024, 1, 25), 116.101986, 4.964651, 399130.64),
-        ((2025, 6, 11), 256.704005, -4.960896, 400566.14),
+    let cases: &[(i32, u32, u32, f64, f64, f64)] = &[
+        (2000, 1, 1, 217.293477, 5.231311, 400933.20),
+        (2024, 1, 25, 116.101986, 4.964651, 399130.64),
+        (2025, 6, 11, 256.704005, -4.960896, 400566.14),
     ];
-    for &((y, m, d), lon, lat, dist) in cases {
+    for &(y, m, d, lon, lat, dist) in cases {
         let p = moon_position(jde_tt_at_midnight(y, m, d));
         assert!(
             wrap_diff_deg(p.longitude_degrees, lon) < 1e-3,

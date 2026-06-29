@@ -12,8 +12,10 @@
 #![forbid(unsafe_code)]
 
 mod delta_t;
+mod elpmpp02_data;
 mod julian;
 mod lunisolar;
+mod moon;
 mod new_moon;
 mod nutation_data;
 mod solar_terms;
@@ -25,17 +27,18 @@ pub use lunisolar::{
     gregorian_to_lunisolar, lunar_months_for_year, lunar_new_year, CivilDate, LunarMonth,
     LunisolarDate,
 };
+pub use moon::{moon_position, MoonState};
 pub use new_moon::{find_new_moons_in_range, new_moon_jde};
 pub use solar_terms::{find_solar_term_moment, SOLAR_TERM_LONGITUDES};
 
 use core::f64::consts::{PI, TAU};
-use nutation_data::NUT_COEFFS;
+use nutation_data::{NUT_COEFFS, NUT_OBLIQ};
 use vsop87d_earth::{EARTH_L, EARTH_R};
 
 /// Radians per arcsecond (π / 180 / 3600).
-const ARCSEC_TO_RAD: f64 = PI / 180.0 / 3600.0;
+pub(crate) const ARCSEC_TO_RAD: f64 = PI / 180.0 / 3600.0;
 /// Degrees per radian.
-const RAD_TO_DEG: f64 = 180.0 / PI;
+pub(crate) const RAD_TO_DEG: f64 = 180.0 / PI;
 
 /// Geocentric solar ecliptic state at a Julian Ephemeris Day (TT).
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -100,7 +103,7 @@ fn eval_vsop_series(series: &[&[[f64; 3]]], tau: f64) -> f64 {
 
 /// The five Delaunay fundamental arguments (radians) at Julian century `t` (TT).
 /// Returns `(l, l', F, D, Ω)`. Source: IERS Conventions (2010), Table 5.2a.
-fn delaunay_args(t: f64) -> (f64, f64, f64, f64, f64) {
+pub(crate) fn delaunay_args(t: f64) -> (f64, f64, f64, f64, f64) {
     let t2 = t * t;
     let t3 = t2 * t;
     let t4 = t3 * t;
@@ -127,7 +130,7 @@ fn delaunay_args(t: f64) -> (f64, f64, f64, f64, f64) {
 }
 
 /// Nutation in longitude (Δψ) in arcseconds, IAU2000B (77 lunisolar terms).
-fn nutation_dpsi(l: f64, lp: f64, f: f64, d: f64, om: f64, t: f64) -> f64 {
+pub(crate) fn nutation_dpsi(l: f64, lp: f64, f: f64, d: f64, om: f64, t: f64) -> f64 {
     let mut dpsi = 0.0;
     for row in NUT_COEFFS {
         let arg = row[0] * l + row[1] * lp + row[2] * f + row[3] * d + row[4] * om;
@@ -137,7 +140,18 @@ fn nutation_dpsi(l: f64, lp: f64, f: f64, d: f64, om: f64, t: f64) -> f64 {
     dpsi / 1e7
 }
 
+/// Nutation in obliquity (Δε) in arcseconds, IAU2000B (parallel to `NUT_COEFFS`).
+pub(crate) fn nutation_deps(l: f64, lp: f64, f: f64, d: f64, om: f64, t: f64) -> f64 {
+    let mut deps = 0.0;
+    for (row, obliq) in NUT_COEFFS.iter().zip(NUT_OBLIQ) {
+        let arg = row[0] * l + row[1] * lp + row[2] * f + row[3] * d + row[4] * om;
+        deps += (obliq[0] + obliq[1] * t) * arg.cos();
+    }
+    // 0.1 microarcseconds -> arcseconds.
+    deps / 1e7
+}
+
 /// Normalize an angle in radians to `[0, 2π)`.
-fn normalize_radians(rad: f64) -> f64 {
+pub(crate) fn normalize_radians(rad: f64) -> f64 {
     ((rad % TAU) + TAU) % TAU
 }
