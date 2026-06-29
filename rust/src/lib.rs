@@ -11,8 +11,22 @@
 
 #![forbid(unsafe_code)]
 
+mod delta_t;
+mod julian;
+mod lunisolar;
+mod new_moon;
 mod nutation_data;
+mod solar_terms;
 mod vsop87d_earth;
+
+pub use delta_t::delta_t_for_year;
+pub use julian::{jd_from_ymd, ymd_from_jd};
+pub use lunisolar::{
+    gregorian_to_lunisolar, lunar_months_for_year, lunar_new_year, CivilDate, LunarMonth,
+    LunisolarDate,
+};
+pub use new_moon::{find_new_moons_in_range, new_moon_jde};
+pub use solar_terms::{find_solar_term_moment, SOLAR_TERM_LONGITUDES};
 
 use core::f64::consts::{PI, TAU};
 use nutation_data::NUT_COEFFS;

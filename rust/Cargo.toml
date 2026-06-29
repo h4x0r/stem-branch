@@ -32,4 +32,6 @@ unreadable_literal = { level = "allow", priority = 1 }
 many_single_char_names = { level = "allow", priority = 1 }
 similar_names = { level = "allow", priority = 1 }
 cast_possible_truncation = { level = "allow", priority = 1 }
+cast_possible_wrap = { level = "allow", priority = 1 }
+cast_sign_loss = { level = "allow", priority = 1 }
 cast_precision_loss = { level = "allow", priority = 1 }

@@ -120,9 +120,9 @@ fn gregorian_to_lunisolar_known_conversions() {
 
 #[test]
 fn new_moon_k0_is_2000_jan_06() {
-    // Meeus: k = 0 → 2000 January 6 new moon, JDE ≈ 2451550.1.
+    // Meeus: k = 0 → the 2000-01-06 new moon; corrected JDE ≈ 2451550.260.
     let jde = new_moon_jde(0);
-    assert!((jde - 2451550.1).abs() < 0.05, "k=0 JDE {jde}");
+    assert!((jde - 2451550.260).abs() < 0.01, "k=0 JDE {jde}");
     let bj = beijing_date(jde - 64.0 / 86400.0); // rough ΔT≈64s → UT
     assert_eq!((bj.year, bj.month), (2000, 1), "k=0 Beijing month");
 }
