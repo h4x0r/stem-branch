@@ -2,7 +2,7 @@
 
 How stem-branch's astronomical core is checked, against what reference, and how
 to reproduce it. This covers both the TypeScript package
-(`@4n6h4x0r/stem-branch`) and the Rust port (`stembranch-core`), which share a
+(`@4n6h4x0r/stem-branch`) and the Rust port (`stem-branch` on crates.io), which share a
 single generated coefficient source and therefore the same numerical model.
 
 ## Reference oracle (independent)

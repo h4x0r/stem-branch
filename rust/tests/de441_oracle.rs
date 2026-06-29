@@ -5,7 +5,7 @@
 //! TypeScript stem-branch validates against. The expected values are authored by
 //! JPL, not by us, so this is an independent check. Provenance: `tests/data/README.md`.
 
-use stembranch::solar_ecliptic_state;
+use stem_branch::solar_ecliptic_state;
 
 /// `(JD_TT, JPL apparent geocentric ecliptic longitude in degrees)`.
 /// Sampled across 1900–2100 CE at full Julian-day precision (round-time and
