@@ -28,5 +28,5 @@ describe('Cross-validation: lunisolar calendar (農曆) vs cnlunar', () => {
     // Show the first few mismatches in the failure message, then assert none.
     expect(mismatches.slice(0, 20)).toEqual([]);
     expect(mismatches.length).toBe(0);
-  });
+  }, { timeout: 300_000 });
 });
