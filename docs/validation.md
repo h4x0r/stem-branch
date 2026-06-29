@@ -96,3 +96,12 @@ we match HKO exactly, including boundaries as tight as 2 minutes (2018); beyond,
 near-midnight boundaries are ΔT-prediction-bound. The engine takes a JDE in TT and
 is checked in that frame, so a far-future calendar date is only as certain as ΔT
 allows.
+
+**How it's handled.** Rather than print a guess as fact, the conversion result
+carries a `boundaryUncertain` / `boundary_uncertain` flag — true when the deciding
+new moon is within the ΔT-prediction uncertainty of Beijing midnight (zero margin
+for ΔT-observed years ≤ 2050; beyond, the gap between the default ΔT and the
+standard long-term parabola). And ΔT is **pluggable** — `gregorianToLunisolar(date,
+{ deltaT })` / `gregorian_to_lunisolar_with(date, deltaT)` accept a caller-supplied
+ΔT model, so a consumer who must match a specific authority's published calendar
+can supply that authority's ΔT.
