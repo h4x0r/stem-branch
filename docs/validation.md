@@ -32,6 +32,11 @@ between tabulated hours cannot hide.
   the same source by
   [`scripts/gen-rust-solar-data.mjs`](../scripts/gen-rust-solar-data.mjs); the
   two engines cannot silently drift.
+- **Moon apparent position** (ELP/MPP02): the strongest check is independent —
+  at each new moon (from Meeus Ch. 49), the Moon's apparent ecliptic longitude
+  must equal the Sun's (VSOP87D + DE441) to <0.02°, three independently-derived
+  theories agreeing on the conjunction; plus parity with the upstream ELP/MPP02
+  engine and physical bounds (distance 356,000–407,000 km, |latitude| < 5.3°).
 - **Chinese lunisolar calendar** (TS and Rust) vs published reference data:
   Lunar New Year dates (2000, 2020–2025, 2033), leap-month numbers
   (2017→閏6, 2020→閏4, 2023→閏2, 2025→閏6), the 冬至-anchor month numbering, and

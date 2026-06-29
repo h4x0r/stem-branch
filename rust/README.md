@@ -7,9 +7,10 @@
 
 Native Rust port of [stem-branch](https://github.com/h4x0r/stem-branch)'s
 astronomical core. Computes the Sun's geocentric ecliptic state (full VSOP87D
-Earth series + JPL DE441-fitted correction + IAU2000B nutation) and the full
-Chinese lunisolar calendar (new moons, solar terms, and 閏月 leap months) — no
-runtime dependencies, no JavaScript.
+Earth series + JPL DE441-fitted correction + IAU2000B nutation), the Moon's
+apparent position (full ELP/MPP02 theory), and the complete Chinese lunisolar
+calendar (new moons, solar terms, and 閏月 leap months) — no runtime
+dependencies, no JavaScript.
 
 ```rust
 use stem_branch::solar_ecliptic_state;
@@ -34,6 +35,19 @@ assert_eq!((d.year, d.month, d.day, d.is_leap_month), (2023, 2, 1, true));
 // Lunar New Year (正月初一) 2024 falls on 2024-02-10 (Beijing).
 let lny = lunar_new_year(2024);
 assert_eq!((lny.year, lny.month, lny.day), (2024, 2, 10));
+```
+
+The Moon's apparent geocentric position (ELP/MPP02):
+
+```rust
+use stem_branch::moon_position;
+
+// Julian Ephemeris Day (TT). At a new moon the Moon's longitude meets the Sun's.
+let m = moon_position(2451545.0);
+// m.longitude_degrees / m.latitude_degrees — apparent ecliptic, of date
+// m.distance_km                            — geocentric distance
+// m.ra_degrees / m.dec_degrees             — apparent equatorial
+assert!((356_000.0..=407_000.0).contains(&m.distance_km));
 ```
 
 Input is a Julian Ephemeris Day in **Terrestrial Time**; the UTC↔TT / ΔT
@@ -94,8 +108,8 @@ truncated-remainder (`%`) semantics for argument reduction and the literal
 
 ## Scope
 
-Covers the solar ephemeris (`solar_ecliptic_state`) and the full Chinese
-lunisolar calendar (`gregorian_to_lunisolar`, `lunar_months_for_year`,
-`lunar_new_year`, plus `new_moon_jde` and `find_solar_term_moment`). The Moon
-*position* ephemeris (ELP/MPP02) and the planets share the same series machinery
-upstream and can be ported the same way when needed.
+Covers the solar ephemeris (`solar_ecliptic_state`), the Moon ephemeris
+(`moon_position`, ELP/MPP02), and the full Chinese lunisolar calendar
+(`gregorian_to_lunisolar`, `lunar_months_for_year`, `lunar_new_year`, plus
+`new_moon_jde` and `find_solar_term_moment`). The planets share the same VSOP
+series machinery upstream and can be ported the same way when needed.
