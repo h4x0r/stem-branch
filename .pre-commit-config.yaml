@@ -1,0 +1,39 @@
+# Local parity with CI: the same secret-scan, format, and lint gates run here
+# before each commit so green-local implies green-CI. Install with `pre-commit
+# install`. Hook revs are Renovate-managed.
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=2048"]
+
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: cargo fmt (rust/)
+        entry: bash -c 'cd rust && cargo fmt --check'
+        language: system
+        files: ^rust/.*\.rs$
+        pass_filenames: false
+      - id: cargo-clippy
+        name: cargo clippy (rust/)
+        entry: bash -c 'cd rust && cargo clippy --all-targets --all-features -- -D warnings'
+        language: system
+        files: ^rust/.*\.(rs|toml)$
+        pass_filenames: false
+      - id: tsc
+        name: tsc --noEmit (TypeScript)
+        entry: npm run lint
+        language: system
+        files: \.ts$
+        pass_filenames: false

@@ -6,8 +6,30 @@ rust-version = "1.75"
 license = "Apache-2.0"
 description = "Native Rust port of stem-branch's solar ephemeris core (full VSOP87D Earth series + JPL DE441-fitted correction + IAU2000B nutation)."
 repository = "https://github.com/h4x0r/stem-branch"
+homepage = "https://h4x0r.github.io/stem-branch"
+documentation = "https://docs.rs/stembranch-core"
+readme = "README.md"
+authors = ["Albert Hui <i@hack9u.online>"]
 keywords = ["astronomy", "vsop87", "ephemeris", "sun", "de441"]
 categories = ["science", "mathematics"]
 
 [lib]
 name = "stembranch"
+
+# Pure-computation library (no untrusted input): base lint tier only — no
+# `unwrap_used`/`expect_used` deny and no fuzz target, per the panic-free recipe.
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+correctness = "deny"
+suspicious = "deny"
+# Pragmatic allows for dense astronomical code (coefficient tables + standard
+# single-letter Delaunay-argument names l, l', F, D, Ω).
+module_name_repetitions = { level = "allow", priority = 1 }
+must_use_candidate = { level = "allow", priority = 1 }
+missing_panics_doc = { level = "allow", priority = 1 }
+unreadable_literal = { level = "allow", priority = 1 }
+many_single_char_names = { level = "allow", priority = 1 }
+similar_names = { level = "allow", priority = 1 }
+cast_possible_truncation = { level = "allow", priority = 1 }
+cast_precision_loss = { level = "allow", priority = 1 }

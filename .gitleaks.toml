@@ -1,0 +1,20 @@
+# gitleaks configuration for stem-branch. Extends the bundled default ruleset;
+# adds a path allowlist for the binary calibration blob (not a secret store).
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Project-specific allowlist"
+paths = [
+    # Byte-reversed JPEG kept as calibration data — opaque binary, scanning it
+    # only yields false positives.
+    '''scripts/jpl-calibration-20210620\.bin''',
+    # Generated / vendored / build-output trees (all gitignored, never source).
+    # Keeps a full `gitleaks dir .` clean and fast; the pre-commit hook only
+    # scans staged files regardless.
+    '''(^|/)node_modules/''',
+    '''(^|/)\.next/''',
+    '''(^|/)\.vercel/''',
+    '''(^|/)target/''',
+    '''(^|/)dist/''',
+]

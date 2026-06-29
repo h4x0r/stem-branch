@@ -65,7 +65,7 @@ const NUT = extractArray(astro, 'NUT_COEFFS');
 const nutRs =
   header +
   '/// IAU2000B nutation-in-longitude terms (77 lunisolar).\n' +
-  '/// Columns: [l, l\', F, D, Omega, dpsi_sin, dpsi_sin_T], the last two in\n' +
+  '/// Columns: `[l, l\', F, D, Omega, dpsi_sin, dpsi_sin_T]`, the last two in\n' +
   '/// units of 0.1 microarcseconds. arg = sum(col[0..5] * delaunay), and\n' +
   '/// dpsi += (col[5] + col[6]*T) * sin(arg).\n' +
   `#[rustfmt::skip]\npub static NUT_COEFFS: &[[f64; 7]] = &[\n` +

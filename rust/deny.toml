@@ -1,0 +1,29 @@
+# cargo-deny policy for stembranch-core.
+# The crate has zero runtime dependencies, so these checks are a forward-looking
+# guard: any future dependency must clear advisories, an allowed license, and a
+# trusted source before it can land.
+
+[graph]
+all-features = true
+
+[advisories]
+version = 2
+yanked = "deny"
+ignore = []
+
+[licenses]
+version = 2
+# Deny-by-default: only the crate's own license is allowed. The crate has zero
+# dependencies, so a future dep introduces an unlisted license and fails this
+# check loudly — at which point its license is added here as a deliberate
+# decision (MIT, BSD-*, ISC, etc.) rather than waved through.
+allow = ["Apache-2.0"]
+confidence-threshold = 0.93
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

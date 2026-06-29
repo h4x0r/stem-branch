@@ -1,5 +1,10 @@
 # stembranch (Rust)
 
+[![Crates.io](https://img.shields.io/crates/v/stembranch-core.svg)](https://crates.io/crates/stembranch-core)
+[![Docs.rs](https://docs.rs/stembranch-core/badge.svg)](https://docs.rs/stembranch-core)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://github.com/h4x0r/stem-branch/blob/main/rust/LICENSE)
+[![Rust CI](https://github.com/h4x0r/stem-branch/actions/workflows/rust.yml/badge.svg)](https://github.com/h4x0r/stem-branch/actions/workflows/rust.yml)
+
 Native Rust port of [stem-branch](https://github.com/h4x0r/stem-branch)'s solar
 ephemeris core. Computes the Sun's geocentric ecliptic state from the full
 VSOP87D Earth series, a JPL DE441-fitted correction polynomial, and IAU2000B
@@ -77,7 +82,3 @@ truncated-remainder (`%`) semantics for argument reduction and the literal
 Current surface is the solar ephemeris core (`solar_ecliptic_state`). Moon
 (ELP/MPP02) and the planets share the same VSOP/series machinery upstream and
 can be ported the same way.
-
-## License
-
-Apache-2.0.

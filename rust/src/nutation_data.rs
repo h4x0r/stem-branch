@@ -5,7 +5,7 @@
 #![allow(clippy::approx_constant)]
 
 /// IAU2000B nutation-in-longitude terms (77 lunisolar).
-/// Columns: [l, l', F, D, Omega, dpsi_sin, dpsi_sin_T], the last two in
+/// Columns: `[l, l', F, D, Omega, dpsi_sin, dpsi_sin_T]`, the last two in
 /// units of 0.1 microarcseconds. arg = sum(col[0..5] * delaunay), and
 /// dpsi += (col[5] + col[6]*T) * sin(arg).
 #[rustfmt::skip]
