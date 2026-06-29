@@ -315,11 +315,11 @@ Western astrology does face a version of the shared chart problem with twins, si
 
 ### 6.1 Input Variables
 
-ZWDS uses the **lunar calendar** date (year, month, day, hour) plus **gender** as inputs. Key differences from BaZi:
+ZWDS uses the **lunisolar calendar** date (year, month, day, hour) plus **gender** as inputs. Key differences from BaZi:
 
 | Feature | BaZi | Zi Wei Dou Shu |
 |---------|------|----------------|
-| Calendar basis | Solar (solar terms determine months) | Lunar (Chinese lunar calendar) |
+| Calendar basis | Solar (solar terms determine months) | Lunisolar (Chinese lunisolar calendar) |
 | Inputs | Year, Month, Day, Hour | Year, Month, Day, Hour, **Gender** |
 | Gender effect | Determines luck pillar direction | Determines palace interaction direction (clockwise/counterclockwise) |
 | Chart structure | 8 characters in linear pillars | 100+ stars distributed across 12 palaces |
@@ -332,7 +332,7 @@ The combinatorial count for ZWDS is more complex than for BaZi because of the st
 **Naive input-based calculation:**
 - Birth year Heavenly Stem: 10
 - Birth month: 12 (plus possible intercalary months)
-- Birth day: 30 (lunar calendar days per month)
+- Birth day: 30 (lunisolar calendar days per month)
 - Birth hour: 12
 - Gender: 2
 
@@ -355,7 +355,7 @@ However, the actual number of distinct chart configurations is debated:
 
 **Arguments that ZWDS faces the same problem:**
 1. The base number of unique charts may actually be *lower* than BaZi (86,400 vs. 518,400 without gender)
-2. The lunar calendar creates additional ambiguity (intercalary month controversy)
+2. The lunisolar calendar creates additional ambiguity (intercalary month controversy)
 3. All the same external factors (environment, effort, merit) still apply
 
 **Conclusion:** ZWDS provides greater **interpretive granularity** per chart (more stars, more palaces, more interactions to analyze), but its **combinatorial space** of unique natal charts is comparable to or smaller than BaZi's. The shared chart problem is not solved by either system at a mathematical level; both systems rely on the same philosophical frameworks (Cosmic Trinity, hidden virtue, personal agency) to explain divergent outcomes.

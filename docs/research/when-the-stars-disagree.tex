@@ -343,11 +343,11 @@ astronomical computation as a source of \zh{局} assignment error.
 The debate between methods has persisted since the Song dynasty and reflects
 a fundamental tension between mathematical regularity (the sexagenary cycle)
 and observational astronomy (the solar terms). It is structurally analogous
-to the lunar calendar's \zh{閏月} mechanism
+to the lunisolar calendar\footnote{The Chinese civil calendar (\zh{農曆}) is \emph{lunisolar}: its months track the Moon (new moon to new moon), while leap months (\zh{閏月}) keyed to the solar terms (\zh{中氣}) keep the year aligned with the tropical cycle. It is widely but imprecisely called the ``lunar calendar'' in English---and \zh{陰曆} (literally ``lunar calendar'') in Chinese---yet a \emph{purely} lunar calendar, such as the Islamic Hijri, applies no solar reconciliation and drifts ${\sim}11$~days per year against the seasons. We use ``lunisolar'' throughout for precision.}'s \zh{閏月} mechanism
 (Section~\ref{subsec:error_2033}): both are intercalation strategies that
 reconcile incommensurate cycles.
 
-\subsection{\zh{紫微斗數}: The Lunar Calendar Dependency}
+\subsection{\zh{紫微斗數}: The Lunisolar Calendar Dependency}
 \label{subsec:ziwei}
 
 \zh{紫微斗數} (\textit{Z\v{i} W\={e}i D\`{o}u Sh\`{u}}, ``Purple Star
@@ -380,7 +380,7 @@ computational dependency chain is:
         a lunar ephemeris (e.g., ELP/MPP02 \cite{ytliu_sunmoon}).
   \item \textbf{Intercalary month determination} (\zh{閏月}): The standard
         rule designates the first lunar month without a \zh{中氣} as
-        intercalary---linking the lunar calendar back to solar term
+        intercalary---linking the lunisolar calendar back to solar term
         computation.
   \item \textbf{Palace assignment}: The lunar month number (1--12,
         potentially with \zh{閏}) feeds into the palace-star algorithms.
@@ -419,7 +419,7 @@ no celestial event.
 
 \textbf{Approach~4: Use solar terms directly.} Some practitioners argue
 that the month number should be determined by solar terms rather than the
-lunar calendar, effectively converting \zh{紫微斗數} to a solar-based
+lunisolar calendar, effectively converting \zh{紫微斗數} to a solar-based
 system. This is explicitly rejected by the \zh{紫微斗數全集} \cite{zwds_quanji}:
 ``\zh{不依五星要過節，只論年月日時生}'' (``Do not follow the Five Stars'
 method of using solar terms; consider only the year, month, day, and hour
@@ -855,7 +855,7 @@ competing algorithmic solutions that diverge at boundary cases.}
     \newline (2)~\zh{拆補法}: astronomy-primary; split at exact \zh{節}
     \newline (3)~\zh{茅山法}: reset at each \zh{節}, ignore Branch associations \\
 \addlinespace
-Lunar calendar
+Lunisolar calendar
   & 12 synodic months ($\sim$354~d)
   & 365.2422-day tropical year
   & $\sim$11~d/yr deficit
@@ -903,7 +903,7 @@ reference frame (sidereal vs.\ tropical, mean vs.\ true Sun).
 \textbf{Boundary convergence.} The competing algorithms agree in the vast
 majority of cases---they diverge only near transition boundaries. For
 \zh{奇門遁甲}, this ``danger zone'' spans $\sim$1.1\% of moments (near
-solar term boundaries). For the lunar calendar, it manifests as the rare
+solar term boundaries). For the lunisolar calendar, it manifests as the rare
 ``fake \zh{閏月}'' ($<$1\% of months post-1645). For \zh{大六壬}, the
 three methods agree whenever the Sun is far from a \zh{中氣} boundary.
 This creates a pernicious situation: competing methods appear equivalent
@@ -945,18 +945,18 @@ even pre-Keplerian astronomy could compute tolerably.
 If \zh{八字} achieved robustness by reducing its astronomical input to
 solar terms, \zh{紫微斗數} took this logic one step further: it
 abandoned real-time ephemeris computation entirely.  Its input is the
-\emph{lunar calendar date}---a discrete integer triple (year, month,
+\emph{lunisolar calendar date}---a discrete integer triple (year, month,
 day) plus a two-hour \zh{時辰}---and its output is produced by purely
 algorithmic formulas that distribute 14~major stars across 12~palaces.
 No planetary position, no ecliptic longitude, no equation of time
 enters the calculation at runtime.  The ``stars'' (\zh{紫微},
 \zh{天府}, \zh{天機}, etc.)\ are virtual: their names evoke celestial
 bodies, but their palace placements are determined by table lookup from
-the lunar date, not by observation~\cite{zwds_quanshu, zwds_quanji}.
+the lunisolar date, not by observation~\cite{zwds_quanshu, zwds_quanji}.
 
 This makes \zh{紫微斗數} the most computationally robust of the five
 systems.  Its only astronomical dependency is \emph{upstream}: the
-lunar calendar itself requires accurate solar term computation (for
+lunisolar calendar itself requires accurate solar term computation (for
 \zh{中氣}-based intercalation) and new moon determination (for month
 boundaries).  Once the calendar date is fixed, the chart construction
 is a closed combinatorial procedure immune to any astronomical
@@ -976,7 +976,7 @@ The five systems thus form a \emph{computational robustness spectrum}:
 \zh{七政四餘} & 7 planetary positions (sidereal) & Fragile \\
 \zh{大六壬} & Solar + lunar conjunction & Moderate \\
 \zh{八字} / \zh{奇門遁甲} & Solar terms (tropical) & Robust \\
-\zh{紫微斗數} & Lunar calendar date (integer) & Maximal \\
+\zh{紫微斗數} & Lunisolar calendar date (integer) & Maximal \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1974,7 +1974,7 @@ The five systems discussed in this paper split across both frames:
     historical \zh{日躔法} (Sun's position in 12 sidereal
     \zh{星次}).
   \item \textbf{Hybrid}: \zh{紫微斗數} avoids the question entirely
-    by using the lunar calendar date---a discrete quantity that
+    by using the lunisolar calendar date---a discrete quantity that
     inherits its tropical dependence from the intercalation
     algorithm without ever querying a zodiacal position.
 \end{itemize}

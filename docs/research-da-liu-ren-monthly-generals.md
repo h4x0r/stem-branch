@@ -141,7 +141,7 @@ The Heaven Plate "代表地球圍繞太陽公轉的位置" (represents Earth's o
 
 | Component | Lunar Dependency | Precision Needed |
 |-----------|-----------------|-----------------|
-| Lunar calendar month | Synodic month (new moon cycle) | ~few hours (for 合朔 timing) |
+| Lunisolar calendar month | Synodic month (new moon cycle) | ~few hours (for 合朔 timing) |
 | Historical 合神 method | New moon timing determines 月將 switch | ~few hours |
 | Modern 中氣 method | **No lunar dependency** | N/A |
 

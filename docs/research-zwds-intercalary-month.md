@@ -15,7 +15,7 @@ calendar birth year, month, day, and double-hour (時辰).
   (《北斗七星延命經》, 《太上說南斗六司延壽度人妙經》), not from observational astronomy.
   [Wikipedia: 紫微斗數](https://zh.wikipedia.org/zh-hant/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B0)
 - Unlike 八字 (BaZi/Four Pillars), which is tied to solar terms, ZWDS uses the purely
-  lunar calendar. 《紫微斗數全集·起例歌訣總括》: 「不依五星要過節，只論年月日時生」
+  lunisolar calendar. 《紫微斗數全集·起例歌訣總括》: 「不依五星要過節，只論年月日時生」
 
 ---
 
@@ -75,7 +75,7 @@ Source: [十四主星詳解](https://zwayyuan.com/main-stars/),
 
 ## 3. Chart Construction Algorithm
 
-### Step 1: Lunar Calendar Conversion
+### Step 1: Lunisolar Calendar Conversion
 Convert Gregorian birth date → lunar (農曆) date. Requires precise new moon calculations.
 
 ### Step 2: Locate 命宮 (Destiny Palace)
@@ -358,7 +358,7 @@ Source: [百日火靈師傅 — 洛陽時間](https://www.astroziweifirespiritch
 
 ## 8. Computational Requirements
 
-### 8.1 For Lunar Calendar Generation
+### 8.1 For Lunisolar Calendar Generation
 
 | Computation | Purpose | Precision Required |
 |---|---|---|
