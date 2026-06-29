@@ -28,7 +28,10 @@ fn wrap_diff_deg(a: f64, b: f64) -> f64 {
 
 #[test]
 fn moon_sun_conjunction_at_new_moons() {
-    // At each new moon, apparent Moon longitude ≈ apparent Sun longitude.
+    // Solver self-consistency only: `new_moon_jde` now refines to the Sun–Moon
+    // conjunction using these very functions, so this confirms the refinement
+    // converged — it is NOT independent. The independent moon-timing check (JPL
+    // instants as input) is `jpl_lunar_phase.rs::moon_timing_matches_jpl_phases`.
     for k in [-12, -5, 0, 1, 12, 60] {
         let jde = new_moon_jde(k);
         let moon = moon_position(jde).longitude_degrees;
