@@ -118,4 +118,27 @@ mod tests {
         assert!(v.windows(2).all(|w| w[0] < w[1]));
         assert!(v.iter().all(|&x| (2451545.0..=2451605.0).contains(&x)));
     }
+
+    #[test]
+    fn new_moon_is_a_true_conjunction() {
+        // At the new moon, the Moon's apparent longitude (ELP/MPP02) must equal
+        // the Sun's (VSOP87D + DE441). Meeus Ch.49 alone lands ~1 minute off
+        // (~0.0085° of elongation); the conjunction refinement must close that to
+        // sub-arcsecond.
+        for k in [-100, -12, 0, 12, 100] {
+            let jde = new_moon_jde(k);
+            let sun = crate::solar_ecliptic_state(jde).apparent_longitude_degrees;
+            let moon = crate::moon_position(jde).longitude_degrees;
+            let mut d = (moon - sun) % 360.0;
+            if d > 180.0 {
+                d -= 360.0;
+            } else if d < -180.0 {
+                d += 360.0;
+            }
+            assert!(
+                d.abs() < 1e-4,
+                "k={k}: elongation {d}° — new moon not at conjunction"
+            );
+        }
+    }
 }
