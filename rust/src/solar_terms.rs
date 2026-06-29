@@ -12,6 +12,25 @@ pub const SOLAR_TERM_LONGITUDES: [f64; 24] = [
     135.0, 150.0, 165.0, 180.0, 195.0, 210.0, 225.0, 240.0, 255.0, 270.0,
 ];
 
+/// Traditional-Chinese names of the 24 solar terms, index-aligned with
+/// [`SOLAR_TERM_LONGITUDES`] (index 0 = 小寒 @ 285°). Ported verbatim from the
+/// TypeScript `SOLAR_TERM_NAMES` (`src/solar-terms.ts`).
+#[rustfmt::skip]
+pub const SOLAR_TERM_NAMES: [&str; 24] = [
+    "小寒", "大寒", "立春", "雨水", "驚蟄", "春分", "清明", "穀雨", "立夏", "小滿", "芒種", "夏至",
+    "小暑", "大暑", "立秋", "處暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至",
+];
+
+/// The solar term in effect at apparent ecliptic longitude `deg` — the term whose
+/// longitude is the greatest one at or before `deg` (circular). Terms sit every
+/// 15° starting from `SOLAR_TERM_LONGITUDES[0]` (小寒, 285°). Inputs are
+/// normalized, so negative or `>360` longitudes are accepted.
+#[must_use]
+pub fn solar_term_for_longitude(deg: f64) -> &'static str {
+    let idx = ((deg - SOLAR_TERM_LONGITUDES[0]).rem_euclid(360.0) / 15.0).floor() as usize % 24;
+    SOLAR_TERM_NAMES[idx]
+}
+
 fn normalize_degrees(d: f64) -> f64 {
     d.rem_euclid(360.0)
 }

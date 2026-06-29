@@ -16,6 +16,7 @@ mod elpmpp02_data;
 mod julian;
 mod lunisolar;
 mod moon;
+mod names;
 mod new_moon;
 mod nutation_data;
 mod solar_terms;
@@ -28,8 +29,11 @@ pub use lunisolar::{
     LunisolarDate,
 };
 pub use moon::{moon_position, MoonState};
+pub use names::{EARTHLY_BRANCHES, HEAVENLY_STEMS};
 pub use new_moon::{find_new_moons_in_range, new_moon_jde};
-pub use solar_terms::{find_solar_term_moment, SOLAR_TERM_LONGITUDES};
+pub use solar_terms::{
+    find_solar_term_moment, solar_term_for_longitude, SOLAR_TERM_LONGITUDES, SOLAR_TERM_NAMES,
+};
 
 use core::f64::consts::{PI, TAU};
 use nutation_data::{NUT_COEFFS, NUT_OBLIQ};
