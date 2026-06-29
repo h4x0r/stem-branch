@@ -25,8 +25,8 @@ mod vsop87d_earth;
 pub use delta_t::delta_t_for_year;
 pub use julian::{jd_from_ymd, ymd_from_jd};
 pub use lunisolar::{
-    gregorian_to_lunisolar, lunar_months_for_year, lunar_new_year, CivilDate, LunarMonth,
-    LunisolarDate,
+    gregorian_to_lunisolar, gregorian_to_lunisolar_with, lunar_months_for_year, lunar_new_year,
+    CivilDate, LunarMonth, LunisolarDate,
 };
 pub use moon::{moon_position, MoonState};
 pub use names::{EARTHLY_BRANCHES, HEAVENLY_STEMS};

@@ -9,7 +9,7 @@ use std::collections::HashMap;
 use crate::delta_t::delta_t_for_year;
 use crate::julian::{jd_from_ymd, ymd_from_jd};
 use crate::new_moon::find_new_moons_in_range;
-use crate::solar_terms::{find_solar_term_moment, SOLAR_TERM_LONGITUDES};
+use crate::solar_terms::{find_solar_term_moment_dt, SOLAR_TERM_LONGITUDES};
 
 /// A Gregorian civil date in Beijing time.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -26,6 +26,11 @@ pub struct LunisolarDate {
     pub month: u32,
     pub day: u32,
     pub is_leap_month: bool,
+    /// True if the deciding new moon is within the ΔT-prediction uncertainty of
+    /// Beijing midnight, so the date could shift by a day under a different but
+    /// equally plausible future ΔT model. Always false for ΔT-observed years
+    /// (≤ 2050); see `docs/validation.md` "ΔT limit".
+    pub boundary_uncertain: bool,
 }
 
 /// One month of a lunisolar year: its number, leap flag, Gregorian start date
@@ -36,6 +41,8 @@ pub struct LunarMonth {
     pub is_leap_month: bool,
     pub start: CivilDate,
     pub days: u32,
+    /// True if this month's start new moon is ΔT-uncertain (see [`LunisolarDate`]).
+    pub boundary_uncertain: bool,
 }
 
 /// 中氣 (zhongqi) indices into `SOLAR_TERM_LONGITUDES` — the 12 mid-month terms.
@@ -46,9 +53,33 @@ const DONGZHI_INDEX: usize = 23;
 /// Sequential month numbers between two consecutive month-11 (冬至) anchors.
 const SEQ: [u32; 11] = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-fn jde_to_jd_ut(jde: f64) -> f64 {
+fn jde_to_jd_ut(jde: f64, dt: fn(f64) -> f64) -> f64 {
     let year = 2000.0 + (jde - 2451545.0) / 365.25;
-    jde - delta_t_for_year(year) / 86400.0
+    jde - dt(year) / 86400.0
+}
+
+/// Espenak–Meeus long-term ΔT parabola — a standard, higher future extrapolation
+/// than the default model; used only to size the boundary-uncertainty margin.
+fn em_parabola(year: f64) -> f64 {
+    let u = (year - 1820.0) / 100.0;
+    -20.0 + 32.0 * u * u
+}
+
+/// Whether a month-start new moon is close enough to Beijing midnight that a
+/// different (plausible) ΔT model would move it to the adjacent day. Zero margin
+/// for ΔT-observed years (≤ 2050); beyond, the margin is the gap between the
+/// supplied ΔT and the standard long-term parabola.
+fn start_is_uncertain(start_jd_ut: f64, dt: fn(f64) -> f64) -> bool {
+    let beijing = start_jd_ut + 8.0 / 24.0;
+    let year = ymd_from_jd(beijing).0;
+    if year <= 2050 {
+        return false;
+    }
+    let sigma_sec = (em_parabola(f64::from(year)) - dt(f64::from(year))).max(0.0);
+    let shifted = beijing + 0.5;
+    let frac = shifted - shifted.floor();
+    let dist_sec = frac.min(1.0 - frac) * 86400.0;
+    dist_sec < sigma_sec
 }
 
 fn beijing_civil(jd_ut: f64) -> CivilDate {
@@ -79,23 +110,23 @@ fn zhongqi_falls_in_month(zq_jd: f64, month_start_jd: f64, next_month_jd: f64) -
 }
 
 /// New-moon instants (JD UT) spanning the given year range, with ±30-day padding.
-fn new_moon_jd_uts(start_year: i32, end_year: i32) -> Vec<f64> {
+fn new_moon_jd_uts(start_year: i32, end_year: i32, dt: fn(f64) -> f64) -> Vec<f64> {
     let start_jd = jd_from_ymd(start_year, 1, 1) - 30.0;
     let end_jd = jd_from_ymd(end_year + 1, 2, 28) + 30.0;
     find_new_moons_in_range(start_jd, end_jd)
         .into_iter()
-        .map(jde_to_jd_ut)
+        .map(|jde| jde_to_jd_ut(jde, dt))
         .collect()
 }
 
 /// 中氣 moments (term index, JD UT) over the year range, sorted chronologically.
-fn zhongqi_moments(start_year: i32, end_year: i32) -> Vec<(usize, f64)> {
+fn zhongqi_moments(start_year: i32, end_year: i32, dt: fn(f64) -> f64) -> Vec<(usize, f64)> {
     let mut moments = Vec::new();
     for y in start_year..=end_year {
         for &idx in &ZHONGQI_INDICES {
             let longitude = SOLAR_TERM_LONGITUDES[idx];
             let start_month = if idx < 2 { 1 } else { (idx / 2 + 1) as u32 };
-            if let Some(jd) = find_solar_term_moment(longitude, y, start_month) {
+            if let Some(jd) = find_solar_term_moment_dt(longitude, y, start_month, dt) {
                 moments.push((idx, jd));
             }
         }
@@ -211,14 +242,14 @@ pub fn lunar_months_for_year(lunar_year: i32) -> Vec<LunarMonth> {
     if let Some(v) = MONTHS_CACHE.with(|c| c.borrow().get(&lunar_year).cloned()) {
         return v;
     }
-    let result = compute_lunar_months_for_year(lunar_year);
+    let result = compute_lunar_months_for_year(lunar_year, delta_t_for_year);
     MONTHS_CACHE.with(|c| c.borrow_mut().insert(lunar_year, result.clone()));
     result
 }
 
-fn compute_lunar_months_for_year(lunar_year: i32) -> Vec<LunarMonth> {
-    let new_moons = new_moon_jd_uts(lunar_year - 1, lunar_year + 1);
-    let zhongqi = zhongqi_moments(lunar_year - 1, lunar_year + 1);
+fn compute_lunar_months_for_year(lunar_year: i32, dt: fn(f64) -> f64) -> Vec<LunarMonth> {
+    let new_moons = new_moon_jd_uts(lunar_year - 1, lunar_year + 1, dt);
+    let zhongqi = zhongqi_moments(lunar_year - 1, lunar_year + 1, dt);
     let sequence = build_month_sequence(&new_moons, &zhongqi);
 
     let month1_idx = sequence
@@ -238,6 +269,7 @@ fn compute_lunar_months_for_year(lunar_year: i32) -> Vec<LunarMonth> {
             is_leap_month: m.is_leap_month,
             start: beijing_civil(m.start_jd),
             days: m.days,
+            boundary_uncertain: start_is_uncertain(m.start_jd, dt),
         });
     }
     result
@@ -262,9 +294,28 @@ pub fn lunar_new_year(gregorian_year: i32) -> CivilDate {
 /// Panics if the date cannot be converted (outside the supported range).
 #[must_use]
 pub fn gregorian_to_lunisolar(date: CivilDate) -> LunisolarDate {
+    convert(date, true, delta_t_for_year)
+}
+
+/// As [`gregorian_to_lunisolar`], with a caller-supplied ΔT model
+/// (decimal year → seconds) — e.g. to match an authority's calendar at a
+/// ΔT-uncertain far-future boundary. Bypasses the per-year cache.
+///
+/// # Panics
+/// Panics if the date cannot be converted (outside the supported range).
+#[must_use]
+pub fn gregorian_to_lunisolar_with(date: CivilDate, dt: fn(f64) -> f64) -> LunisolarDate {
+    convert(date, false, dt)
+}
+
+fn convert(date: CivilDate, cached: bool, dt: fn(f64) -> f64) -> LunisolarDate {
     let target_jd = civil_jd(date);
     for lunar_year in [date.year, date.year - 1, date.year + 1] {
-        let months = lunar_months_for_year(lunar_year);
+        let months = if cached {
+            lunar_months_for_year(lunar_year)
+        } else {
+            compute_lunar_months_for_year(lunar_year, dt)
+        };
         for m in months.iter().rev() {
             let start_jd = civil_jd(m.start);
             if target_jd >= start_jd {
@@ -275,6 +326,7 @@ pub fn gregorian_to_lunisolar(date: CivilDate) -> LunisolarDate {
                         month: m.month_number,
                         day: lunar_day as u32,
                         is_leap_month: m.is_leap_month,
+                        boundary_uncertain: m.boundary_uncertain,
                     };
                 }
             }

@@ -7,7 +7,7 @@
 
 use stem_branch::{
     find_new_moons_in_range, find_solar_term_moment, gregorian_to_lunisolar, lunar_months_for_year,
-    lunar_new_year, new_moon_jde, ymd_from_jd, CivilDate, LunisolarDate,
+    lunar_new_year, new_moon_jde, ymd_from_jd, CivilDate,
 };
 
 /// Beijing civil date of an instant given as JD(UT).
@@ -69,52 +69,25 @@ fn leap_months_match_published_record() {
 
 #[test]
 fn gregorian_to_lunisolar_known_conversions() {
-    let cases: &[((i32, u32, u32), LunisolarDate)] = &[
-        (
-            (2024, 2, 10),
-            LunisolarDate {
-                year: 2024,
-                month: 1,
-                day: 1,
-                is_leap_month: false,
-            },
-        ),
-        (
-            (2023, 1, 22),
-            LunisolarDate {
-                year: 2023,
-                month: 1,
-                day: 1,
-                is_leap_month: false,
-            },
-        ),
-        (
-            (2024, 6, 29),
-            LunisolarDate {
-                year: 2024,
-                month: 5,
-                day: 24,
-                is_leap_month: false,
-            },
-        ),
+    // gregorian (y, m, d) -> lunar (year, month, day, is_leap)
+    let cases: &[(i32, u32, u32, i32, u32, u32, bool)] = &[
+        (2024, 2, 10, 2024, 1, 1, false),
+        (2023, 1, 22, 2023, 1, 1, false),
+        (2024, 6, 29, 2024, 5, 24, false),
         // 閏二月初一 2023 — the leap month case.
-        (
-            (2023, 3, 22),
-            LunisolarDate {
-                year: 2023,
-                month: 2,
-                day: 1,
-                is_leap_month: true,
-            },
-        ),
+        (2023, 3, 22, 2023, 2, 1, true),
     ];
-    for &((y, m, d), expected) in cases {
-        let got = gregorian_to_lunisolar(CivilDate {
+    for &(y, m, d, ly, lm, ld, leap) in cases {
+        let r = gregorian_to_lunisolar(CivilDate {
             year: y,
             month: m,
             day: d,
         });
-        assert_eq!(got, expected, "{y}-{m}-{d}");
+        assert_eq!(
+            (r.year, r.month, r.day, r.is_leap_month),
+            (ly, lm, ld, leap),
+            "{y}-{m}-{d}"
+        );
     }
 }
 

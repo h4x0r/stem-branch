@@ -51,10 +51,10 @@ fn crosses_target(lon1: f64, lon2: f64, target: f64) -> bool {
 
 /// Apparent solar ecliptic longitude (degrees) as a function of civil time
 /// expressed as JD(UT); converts UT→TT via ΔT exactly as `dateToJD_TT` does.
-fn apparent_longitude_ut(jd_ut: f64) -> f64 {
+fn apparent_longitude_ut(jd_ut: f64, dt: fn(f64) -> f64) -> f64 {
     let (y, m, _) = ymd_from_jd(jd_ut);
     let decimal_year = f64::from(y) + (f64::from(m) - 0.5) / 12.0;
-    let jd_tt = jd_ut + delta_t_for_year(decimal_year) / 86400.0;
+    let jd_tt = jd_ut + dt(decimal_year) / 86400.0;
     solar_ecliptic_state(jd_tt).apparent_longitude_degrees
 }
 
@@ -62,17 +62,21 @@ fn apparent_longitude_ut(jd_ut: f64) -> f64 {
 /// from `start_jd_ut` for up to `search_days`. Returns `None` if no crossing is
 /// found in the window. Resolves to ~1 second.
 #[must_use]
-pub fn find_sun_longitude_moment(
+/// Find the JD(UT) at which the Sun reaches `target_longitude`, scanning forward
+/// from `start_jd_ut` for up to `search_days`, using a caller-supplied ΔT model.
+/// Returns `None` if no crossing is found; resolves to ~1 second.
+pub(crate) fn find_sun_longitude_moment_dt(
     target_longitude: f64,
     start_jd_ut: f64,
     search_days: u32,
+    dt: fn(f64) -> f64,
 ) -> Option<f64> {
     let target = normalize_degrees(target_longitude);
-    let mut prev_lon = apparent_longitude_ut(start_jd_ut);
+    let mut prev_lon = apparent_longitude_ut(start_jd_ut, dt);
     let mut bracket: Option<(f64, f64)> = None;
     for d in 1..=search_days {
         let current = start_jd_ut + f64::from(d);
-        let current_lon = apparent_longitude_ut(current);
+        let current_lon = apparent_longitude_ut(current, dt);
         if crosses_target(prev_lon, current_lon, target) {
             bracket = Some((start_jd_ut + f64::from(d - 1), current));
             break;
@@ -84,8 +88,8 @@ pub fn find_sun_longitude_moment(
     while hi - lo > one_second {
         let mid = lo + (hi - lo) / 2.0;
         if crosses_target(
-            apparent_longitude_ut(lo),
-            apparent_longitude_ut(mid),
+            apparent_longitude_ut(lo, dt),
+            apparent_longitude_ut(mid, dt),
             target,
         ) {
             hi = mid;
@@ -100,8 +104,18 @@ pub fn find_sun_longitude_moment(
 /// from the first of `start_month`. Returns `None` if not found in 120 days.
 #[must_use]
 pub fn find_solar_term_moment(target_longitude: f64, year: i32, start_month: u32) -> Option<f64> {
+    find_solar_term_moment_dt(target_longitude, year, start_month, delta_t_for_year)
+}
+
+/// As [`find_solar_term_moment`], with a caller-supplied ΔT model.
+pub(crate) fn find_solar_term_moment_dt(
+    target_longitude: f64,
+    year: i32,
+    start_month: u32,
+    dt: fn(f64) -> f64,
+) -> Option<f64> {
     let start = jd_from_ymd(year, start_month, 1);
-    find_sun_longitude_moment(target_longitude, start, 120)
+    find_sun_longitude_moment_dt(target_longitude, start, 120, dt)
 }
 
 #[cfg(test)]
@@ -134,6 +148,9 @@ mod tests {
     #[test]
     fn no_crossing_returns_none() {
         // 270° will not occur in the few days after Jan 1.
-        assert!(find_sun_longitude_moment(270.0, jd_from_ymd(2024, 1, 1), 3).is_none());
+        assert!(
+            find_sun_longitude_moment_dt(270.0, jd_from_ymd(2024, 1, 1), 3, delta_t_for_year)
+                .is_none()
+        );
     }
 }
