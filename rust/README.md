@@ -109,7 +109,9 @@ truncated-remainder (`%`) semantics for argument reduction and the literal
 ## Scope
 
 Covers the solar ephemeris (`solar_ecliptic_state`), the Moon ephemeris
-(`moon_position`, ELP/MPP02), and the full Chinese lunisolar calendar
+(`moon_position`, ELP/MPP02), the full Chinese lunisolar calendar
 (`gregorian_to_lunisolar`, `lunar_months_for_year`, `lunar_new_year`, plus
-`new_moon_jde` and `find_solar_term_moment`). The planets share the same VSOP
-series machinery upstream and can be ported the same way when needed.
+`new_moon_jde` and `find_solar_term_moment`), and the Traditional-Chinese name
+labels (`SOLAR_TERM_NAMES` + `solar_term_for_longitude`, `HEAVENLY_STEMS`,
+`EARTHLY_BRANCHES`) so consumers need not hard-code them. The planets share the
+same VSOP series machinery upstream and can be ported the same way when needed.
