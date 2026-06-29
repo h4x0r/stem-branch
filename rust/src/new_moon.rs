@@ -6,10 +6,10 @@ use core::f64::consts::PI;
 
 const DEG: f64 = PI / 180.0;
 
-/// JDE (TT) of the new moon for integer lunation number `k`.
-#[must_use]
+/// Meeus Ch.49 estimate of the new-moon JDE (TT) — accurate to ~1 minute. Used
+/// as the starting point for the exact conjunction refinement in [`new_moon_jde`].
 #[allow(clippy::many_single_char_names)]
-pub fn new_moon_jde(k: i32) -> f64 {
+fn meeus_new_moon(k: i32) -> f64 {
     let k = f64::from(k);
     let t = k / 1236.85;
     let t2 = t * t;
@@ -76,6 +76,41 @@ pub fn new_moon_jde(k: i32) -> f64 {
         jde += amp * ((c0 + c1 * k + c2 * t2) * DEG).sin();
     }
 
+    jde
+}
+
+/// Moon−Sun apparent ecliptic longitude difference (degrees), wrapped to
+/// `(-180, 180]`. Zero at conjunction (new moon). Nutation in longitude is added
+/// to both bodies and cancels here; the dominant terms are the geometric places.
+fn sun_moon_elongation_deg(jde: f64) -> f64 {
+    let sun = crate::solar_ecliptic_state(jde).apparent_longitude_degrees;
+    let moon = crate::moon_position(jde).longitude_degrees;
+    let mut d = (moon - sun) % 360.0;
+    if d > 180.0 {
+        d -= 360.0;
+    } else if d < -180.0 {
+        d += 360.0;
+    }
+    d
+}
+
+/// JDE (TT) of the true new moon (定朔) for integer lunation `k`: the Meeus Ch.49
+/// estimate refined to the exact Sun–Moon apparent-longitude conjunction using
+/// the ELP/MPP02 Moon and VSOP87D + DE441 Sun. Sub-arcsecond — far tighter than
+/// Meeus alone (~1 minute), which is what fixes the rare near-midnight calendar
+/// boundary where a coarser instant could land on the wrong day.
+#[must_use]
+pub fn new_moon_jde(k: i32) -> f64 {
+    // Elongation increases at the synodic rate ≈ 12.1907°/day; Newton from the
+    // Meeus estimate converges to f64 noise in a couple of steps.
+    let mut jde = meeus_new_moon(k);
+    for _ in 0..6 {
+        let e = sun_moon_elongation_deg(jde);
+        jde -= e / 12.190_749;
+        if e.abs() < 1e-9 {
+            break;
+        }
+    }
     jde
 }
 
