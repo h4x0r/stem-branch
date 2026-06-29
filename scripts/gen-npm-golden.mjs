@@ -50,10 +50,9 @@ for (let y = 1950; y <= 2050; y++) {
 // (2424 dates) and the Rust published-anchor oracle, so a leaner grid suffices.
 for (let y = 1950; y <= 2050; y++) {
   for (const m of [1, 4, 7, 10]) {
-    for (const day of [1, 15]) {
-      const r = gregorianToLunisolar(new Date(y, m - 1, day));
-      lines.push(`lunisolar ${y} ${m} ${day} ${r.year} ${r.month} ${r.day} ${r.isLeapMonth ? 1 : 0}`);
-    }
+    const day = 1;
+    const r = gregorianToLunisolar(new Date(y, m - 1, day));
+    lines.push(`lunisolar ${y} ${m} ${day} ${r.year} ${r.month} ${r.day} ${r.isLeapMonth ? 1 : 0}`);
   }
 }
 
