@@ -50,7 +50,7 @@ describe('dailyAlmanac', () => {
   });
 
   // ── Lunar calendar ──────────────────────────────────────
-  it('should return a lunar date with valid fields', () => {
+  it('should return a lunisolar date with valid fields', () => {
     result = dailyAlmanac(TEST_DATE);
     expect(result.lunar.year).toBe(2024);
     expect(result.lunar.month).toBeGreaterThanOrEqual(1);

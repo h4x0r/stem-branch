@@ -37,7 +37,7 @@ const pillars = computeFourPillars(new Date(2024, 1, 10, 14, 30));
 
 ### Daily Almanac (日曆總覽)
 
-One call, everything at once — four pillars, lunar date, solar terms, zodiac, day fitness, flying stars, almanac flags, Six Ren chart, eclipses, and element analysis:
+One call, everything at once — four pillars, lunisolar date, solar terms, zodiac, day fitness, flying stars, almanac flags, Six Ren chart, eclipses, and element analysis:
 
 ```typescript
 import { dailyAlmanac } from '@4n6h4x0r/stem-branch';

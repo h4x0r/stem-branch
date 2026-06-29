@@ -34,7 +34,7 @@ Three features distinguish ZWDS from other Chinese mantic systems:
    observation or ephemeris computation. This stands in sharp contrast to
    七政四餘, which requires actual planetary longitudes[^hopeng].
 
-2. **Lunisolar calendar input.** ZWDS takes the lunar (陰曆) date as its primary
+2. **Lunisolar calendar input.** ZWDS takes the 農曆 (lunisolar) date as its primary
    input, unlike 四柱八字 (BaZi / Four Pillars), which uses solar-term
    boundaries (節氣). Two people born on the same Gregorian date may receive
    different ZWDS charts if their births fall on different sides of a lunar
@@ -306,7 +306,7 @@ respect:
 
 | Dimension | 紫微斗數 (ZWDS) | 四柱八字 (BaZi) |
 |-----------|---------------|----------------|
-| Calendar basis | Lunar (陰曆) | Solar terms (節氣) |
+| Calendar basis | Lunisolar (農曆) | Solar terms (節氣) |
 | Output format | 12-palace visual chart (命盤) | Four text-based pillars (四柱) |
 | Core units | Symbolic stars in palaces | Heavenly Stems and Earthly Branches |
 | Day's role | Day number directly controls star placement | Day pillar determines the Day Master (日主) |

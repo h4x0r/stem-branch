@@ -376,7 +376,7 @@ Source: [百日火靈師傅 — 洛陽時間](https://www.astroziweifirespiritch
 | Five Element Bureau | From 納音五行 (60 Jiazi table) | Lookup table |
 
 The ZWDS algorithm itself uses only **integer arithmetic** and **lookup tables** — no
-floating-point astronomy is needed once the lunar date is established.
+floating-point astronomy is needed once the lunisolar date is established.
 
 ### 8.3 True Solar Time (Optional Correction)
 

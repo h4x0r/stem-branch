@@ -46,7 +46,7 @@ Astronomical computation layer underpinning the entire library. Provides sub-sec
 |---|---|
 | `getLunarMonthsForYear(lunarYear)` | All lunar months for a year (12 or 13) |
 | `getLunarNewYear(gregorianYear)` | Lunar New Year date (正月初一) |
-| `gregorianToLunar(date)` | Convert Gregorian date to lunar date |
+| `gregorianToLunisolar(date)` | Convert Gregorian date to lunisolar date |
 
 ### Eclipses (日月食)
 
@@ -65,7 +65,7 @@ Astronomical computation layer underpinning the entire library. Provides sub-sec
 ```typescript
 interface SolarTerm { name: string; longitude: number; date: Date; }
 interface LunarMonth { monthNumber: number; isLeapMonth: boolean; startDate: Date; days: number; }
-interface LunarDate { year: number; month: number; day: number; isLeapMonth: boolean; }
+interface LunisolarDate { year: number; month: number; day: number; isLeapMonth: boolean; }
 
 type EclipseKind = 'solar' | 'lunar';
 type SolarEclipseType = 'T' | 'A' | 'P' | 'H';

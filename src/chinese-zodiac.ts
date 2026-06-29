@@ -2,7 +2,7 @@
 import type { Branch, ChineseZodiacAnimal, ChineseZodiacResult, YearBoundary } from './types';
 import { BRANCHES } from './branches';
 import { findSpringStart } from './solar-terms';
-import { getLunarNewYear } from './lunar-calendar';
+import { getLunarNewYear } from './lunisolar-calendar';
 
 /** 生肖 (Chinese Zodiac Animals) mapped to 地支 in order */
 export const ZODIAC_ANIMALS: readonly ChineseZodiacAnimal[] = [

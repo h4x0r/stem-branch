@@ -66,7 +66,7 @@ export default withMermaid(defineConfig({
           { text: 'Overview', link: '/algorithms/overview' },
           { text: 'Solar Longitude', link: '/algorithms/solar-longitude' },
           { text: 'Four Pillars', link: '/algorithms/four-pillars' },
-          { text: 'Lunisolar Calendar', link: '/algorithms/lunar-calendar' },
+          { text: 'Lunisolar Calendar', link: '/algorithms/lunisolar-calendar' },
         ],
       },
       {

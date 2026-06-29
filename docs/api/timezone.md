@@ -56,4 +56,4 @@ Regions: China (44), Taiwan (8), Hong Kong (2), Southeast Asia (20), East Asia (
 
 | Export | Description |
 |---|---|
-| `dailyAlmanac(date)` | Complete almanac: pillars, lunar date, solar terms, zodiac, day fitness, flying stars, almanac flags, Six Ren, eclipses, element analysis |
+| `dailyAlmanac(date)` | Complete almanac: pillars, lunisolar date, solar terms, zodiac, day fitness, flying stars, almanac flags, Six Ren, eclipses, element analysis |

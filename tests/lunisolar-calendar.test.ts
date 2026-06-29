@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getLunarNewYear, gregorianToLunar, getLunarMonthsForYear } from '../src/lunar-calendar';
+import { getLunarNewYear, gregorianToLunisolar, getLunarMonthsForYear } from '../src/lunisolar-calendar';
 
 // ═══════════════════════════════════════════════════════════════════════
 // Known Lunar New Year dates (Gregorian)
@@ -166,29 +166,29 @@ describe('getLunarMonthsForYear — 閏月 detection', () => {
   );
 });
 
-describe('gregorianToLunar', () => {
+describe('gregorianToLunisolar', () => {
   it('2024-02-10 is 正月初一 (Lunar New Year)', { timeout: 30_000 }, () => {
-    const result = gregorianToLunar(new Date(2024, 1, 10));
+    const result = gregorianToLunisolar(new Date(2024, 1, 10));
     expect(result.month).toBe(1);
     expect(result.day).toBe(1);
     expect(result.isLeapMonth).toBe(false);
   });
 
   it('2024-02-09 is 十二月三十 (day before LNY)', { timeout: 30_000 }, () => {
-    const result = gregorianToLunar(new Date(2024, 1, 9));
+    const result = gregorianToLunisolar(new Date(2024, 1, 9));
     expect(result.month).toBe(12);
     expect(result.day).toBeGreaterThanOrEqual(29);
     expect(result.isLeapMonth).toBe(false);
   });
 
   it('2023-03-22 is in 閏二月 (intercalary 2nd month)', { timeout: 30_000 }, () => {
-    const result = gregorianToLunar(new Date(2023, 2, 22));
+    const result = gregorianToLunisolar(new Date(2023, 2, 22));
     expect(result.month).toBe(2);
     expect(result.isLeapMonth).toBe(true);
   });
 
   it('lunar day is between 1 and 30', { timeout: 30_000 }, () => {
-    const result = gregorianToLunar(new Date(2024, 5, 15));
+    const result = gregorianToLunisolar(new Date(2024, 5, 15));
     expect(result.day).toBeGreaterThanOrEqual(1);
     expect(result.day).toBeLessThanOrEqual(30);
   });

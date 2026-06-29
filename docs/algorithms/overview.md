@@ -23,7 +23,7 @@ graph TD
 |--------|------|-------------|
 | Solar Longitude | `solar-longitude.ts` | VSOP87D + DE441 correction + IAU2000B nutation |
 | Solar Terms | `solar-terms.ts` | Newton-Raphson root finding for 24 節氣 |
-| Lunisolar Calendar | `lunar.ts` | Meeus Ch. 49 new moons + solar term interpolation |
+| Lunisolar Calendar | `lunisolar-calendar.ts` | Meeus Ch. 49 new moons + solar term interpolation |
 | Delta T | `delta-t.ts` | ΔT = TT - UT (Espenak & Meeus + sxwnl tables) |
 | True Solar Time | `true-solar-time.ts` | Equation of Time via VSOP87D apparent RA |
 | Eclipses | `eclipses.ts` | Solar/lunar eclipse detection |

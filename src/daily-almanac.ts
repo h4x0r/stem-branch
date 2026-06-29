@@ -13,14 +13,14 @@ import type {
   ChineseZodiacResult, WesternZodiacResult,
   Eclipse,
 } from './types';
-import type { LunarDate } from './lunar-calendar';
+import type { LunisolarDate } from './lunisolar-calendar';
 import type { DayFitness } from './day-fitness';
 import type { FlyingStarInfo } from './flying-stars';
 import type { AlmanacFlagResult } from './almanac-flags';
 import type { SixRenChart } from './six-ren';
 
 import { julianDayNumber } from './julian-day';
-import { gregorianToLunar } from './lunar-calendar';
+import { gregorianToLunisolar } from './lunisolar-calendar';
 import { computeFourPillars } from './four-pillars';
 import { getSolarTermsForYear } from './solar-terms';
 import { getChineseZodiac } from './chinese-zodiac';
@@ -42,7 +42,7 @@ export interface DailyAlmanac {
   julianDay: number;
 
   /** Lunar (農曆) date */
-  lunar: LunarDate;
+  lunar: LunisolarDate;
 
   /** Four Pillars (四柱八字) */
   pillars: FourPillars;
@@ -124,7 +124,7 @@ export function dailyAlmanac(date: Date): DailyAlmanac {
   const d = date.getUTCDate();
 
   const julianDay = julianDayNumber(y, m, d);
-  const lunar = gregorianToLunar(date);
+  const lunar = gregorianToLunisolar(date);
   const pillars = computeFourPillars(date);
   const solarTerm = findSurroundingTerms(date);
   const chineseZodiac = getChineseZodiac(date);

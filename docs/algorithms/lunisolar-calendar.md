@@ -54,13 +54,9 @@ stembranch handles this correctly — validated against Hong Kong Observatory da
 ## API
 
 ```typescript
-import { gregorianToLunar, lunarToGregorian } from 'stem-branch';
+import { gregorianToLunisolar } from 'stem-branch';
 
-// Gregorian → Lunar
-gregorianToLunar(new Date(2024, 1, 10));
+// Gregorian → lunisolar (農曆) date
+gregorianToLunisolar(new Date(2024, 1, 10));
 // → { year: 2024, month: 1, day: 1, isLeapMonth: false }
-
-// Lunar → Gregorian
-lunarToGregorian(2024, 1, 1, false);
-// → Date (2024-02-10)
 ```

@@ -35,7 +35,7 @@ export interface LunarMonth {
   days: number;
 }
 
-export interface LunarDate {
+export interface LunisolarDate {
   /** Lunar year */
   year: number;
   /** Lunar month (1-12) */
@@ -371,12 +371,12 @@ export function getLunarNewYear(gregorianYear: number): Date {
 }
 
 /**
- * Convert a Gregorian date to a Chinese lunar date.
+ * Convert a Gregorian date to a Chinese lunisolar date.
  *
  * @param date - Gregorian date (local time interpreted as Beijing date)
- * @returns Lunar date with year, month, day, and leap month flag
+ * @returns Lunisolar date with year, month, day, and leap month flag
  */
-export function gregorianToLunar(date: Date): LunarDate {
+export function gregorianToLunisolar(date: Date): LunisolarDate {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -412,6 +412,6 @@ export function gregorianToLunar(date: Date): LunarDate {
   /* v8 ignore start -- defensive: unreachable for valid Gregorian dates in supported range */
   }
 
-  throw new Error(`Cannot convert ${year}-${month}-${day} to lunar date`);
+  throw new Error(`Cannot convert ${year}-${month}-${day} to lunisolar date`);
 }
 /* v8 ignore stop */

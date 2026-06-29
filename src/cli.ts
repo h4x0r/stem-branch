@@ -20,7 +20,7 @@ import { computeBirthChart } from './birth-chart';
 import { computeSiderealChart } from './sidereal-astrology';
 import { getFlyingStars, FLYING_STARS } from './flying-stars';
 import { searchCities } from './cities';
-import { gregorianToLunar } from './lunar-calendar';
+import { gregorianToLunisolar } from './lunisolar-calendar';
 import { computeMajorLuck, computeMinorLuck } from './luck-pillars';
 import { computeSolarReturn } from './solar-return';
 import { computeTransits } from './transits';
@@ -300,7 +300,7 @@ function computeAndRender(opts: CLIOptions): string[] {
   }
 
   if (charts.has('polaris')) {
-    const lunar = gregorianToLunar(date);
+    const lunar = gregorianToLunisolar(date);
     const ziwei = computeZiWei({
       year: date.getFullYear(),
       month: lunar.month,
@@ -398,7 +398,7 @@ function computeJSON(opts: CLIOptions): Record<string, unknown> {
     };
   }
   if (charts.has('polaris')) {
-    const lunar = gregorianToLunar(date);
+    const lunar = gregorianToLunisolar(date);
     result.polaris = computeZiWei({
       year: date.getFullYear(),
       month: lunar.month,

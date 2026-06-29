@@ -131,8 +131,8 @@ export type { CalendarType } from './julian-day';
 export { newMoonJDE, findNewMoonsInRange } from './new-moon';
 
 // ── 農曆 (Lunisolar Calendar) ──────────────────────────────────
-export { getLunarMonthsForYear, getLunarNewYear, gregorianToLunar } from './lunar-calendar';
-export type { LunarMonth, LunarDate } from './lunar-calendar';
+export { getLunarMonthsForYear, getLunarNewYear, gregorianToLunisolar } from './lunisolar-calendar';
+export type { LunarMonth, LunisolarDate } from './lunisolar-calendar';
 
 // ── 建除十二神 (Twelve Day Fitness) ──────────────────────────
 export {

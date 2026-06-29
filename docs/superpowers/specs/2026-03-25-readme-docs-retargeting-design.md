@@ -265,7 +265,7 @@ notes, not user-facing documentation.
 
 ## Out of scope
 
-- Rewriting the content of algorithm pages (overview, solar-longitude, four-pillars, lunar-calendar)
+- Rewriting the content of algorithm pages (overview, solar-longitude, four-pillars, lunisolar-calendar)
 - Rewriting accuracy.md (already revised in previous session)
 - Rewriting technical-notes.md
 - Rewriting seven-governors.md content
