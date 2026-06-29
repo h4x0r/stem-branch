@@ -3,6 +3,9 @@
 //! `lunisolar-calendar`. All instants are carried as JD(UT); civil dates are
 //! Beijing time (UTC+8), matching the authoritative algorithm.
 
+use std::cell::RefCell;
+use std::collections::HashMap;
+
 use crate::delta_t::delta_t_for_year;
 use crate::julian::{jd_from_ymd, ymd_from_jd};
 use crate::new_moon::find_new_moons_in_range;
@@ -190,6 +193,13 @@ fn build_month_sequence(new_moons: &[f64], zhongqi: &[(usize, f64)]) -> Vec<Numb
         .collect()
 }
 
+thread_local! {
+    /// Per-year cache — the conjunction new-moon solve (ELP + VSOP per lunation)
+    /// is expensive, and a year is recomputed on every date query without it.
+    /// Keyed by `lunar_year`; the result is a pure function of it.
+    static MONTHS_CACHE: RefCell<HashMap<i32, Vec<LunarMonth>>> = RefCell::new(HashMap::new());
+}
+
 /// Lunar months for the lunisolar year whose 正月 falls in `lunar_year` — 12
 /// months, or 13 in a leap year.
 ///
@@ -198,6 +208,15 @@ fn build_month_sequence(new_moons: &[f64], zhongqi: &[(usize, f64)]) -> Vec<Numb
 /// astronomical range).
 #[must_use]
 pub fn lunar_months_for_year(lunar_year: i32) -> Vec<LunarMonth> {
+    if let Some(v) = MONTHS_CACHE.with(|c| c.borrow().get(&lunar_year).cloned()) {
+        return v;
+    }
+    let result = compute_lunar_months_for_year(lunar_year);
+    MONTHS_CACHE.with(|c| c.borrow_mut().insert(lunar_year, result.clone()));
+    result
+}
+
+fn compute_lunar_months_for_year(lunar_year: i32) -> Vec<LunarMonth> {
     let new_moons = new_moon_jd_uts(lunar_year - 1, lunar_year + 1);
     let zhongqi = zhongqi_moments(lunar_year - 1, lunar_year + 1);
     let sequence = build_month_sequence(&new_moons, &zhongqi);
