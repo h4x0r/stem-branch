@@ -62,6 +62,7 @@ writeFileSync(join(root, 'rust/src/vsop87d_earth.rs'), vsopRs);
 
 const astro = readFileSync(join(root, 'src/astro.ts'), 'utf8');
 const NUT = extractArray(astro, 'NUT_COEFFS');
+const NUT_OBLIQ = extractArray(astro, 'NUT_OBLIQ_COEFFS');
 const nutRs =
   header +
   '/// IAU2000B nutation-in-longitude terms (77 lunisolar).\n' +
@@ -70,11 +71,49 @@ const nutRs =
   '/// dpsi += (col[5] + col[6]*T) * sin(arg).\n' +
   `#[rustfmt::skip]\npub static NUT_COEFFS: &[[f64; 7]] = &[\n` +
   NUT.map((r) => '    [' + r.map(f).join(', ') + ']').join(',\n') +
+  '\n];\n\n' +
+  '/// IAU2000B nutation-in-obliquity coefficients, parallel to `NUT_COEFFS`\n' +
+  '/// rows. Columns: `[deps_cos, deps_cos_T]` in 0.1 microarcseconds.\n' +
+  '/// deps += (col[0] + col[1]*T) * cos(arg).\n' +
+  `#[rustfmt::skip]\npub static NUT_OBLIQ: &[[f64; 2]] = &[\n` +
+  NUT_OBLIQ.map((r) => '    [' + r.map(f).join(', ') + ']').join(',\n') +
   '\n];\n';
 writeFileSync(join(root, 'rust/src/nutation_data.rs'), nutRs);
+
+// ── ELP/MPP02 Moon ephemeris tables ──────────────────────────────────────
+const elp = readFileSync(join(root, 'src/moon/elpmpp02-data.ts'), 'utf8');
+const elpTable = (name, width) => {
+  const arr = extractArray(elp, name);
+  return (
+    `#[rustfmt::skip]\npub static ${name}: &[[f64; ${width}]] = &[\n` +
+    arr.map((r) => '    [' + r.map(f).join(', ') + ']').join(',\n') +
+    '\n];\n'
+  );
+};
+const MAIN_TABLES = ['MAIN_LONG', 'MAIN_LAT', 'MAIN_DIST'];
+const PERT_TABLES = [
+  'PERT_LONG_T0', 'PERT_LONG_T1', 'PERT_LONG_T2', 'PERT_LONG_T3',
+  'PERT_LAT_T0', 'PERT_LAT_T1', 'PERT_LAT_T2',
+  'PERT_DIST_T0', 'PERT_DIST_T1', 'PERT_DIST_T2', 'PERT_DIST_T3',
+];
+const elpRs =
+  header +
+  '// ELP/MPP02 Moon ephemeris tables (corr=1, fitted to DE405/DE406).\n' +
+  '// MAIN_* rows: [D, F, L, Lp, A, b1, b2, b3, b4, b5].\n' +
+  '// PERT_* rows: [D, F, L, Lp, Me, Ve, EM, Ma, Ju, Sa, Ur, Ne, zeta, amplitude, phase].\n' +
+  MAIN_TABLES.map((n) => elpTable(n, 10)).join('\n') +
+  '\n' +
+  PERT_TABLES.map((n) => elpTable(n, 15)).join('\n');
+writeFileSync(join(root, 'rust/src/elpmpp02_data.rs'), elpRs);
+const elpRows = [...MAIN_TABLES, ...PERT_TABLES].reduce(
+  (n, name) => n + extractArray(elp, name).length,
+  0,
+);
 
 console.log(
   `EARTH_L: ${EARTH_L.reduce((n, s) => n + s.length, 0)} terms, ` +
   `EARTH_R: ${EARTH_R.reduce((n, s) => n + s.length, 0)} terms, ` +
-  `NUT_COEFFS: ${NUT.length} rows`
+  `NUT_COEFFS: ${NUT.length} rows, ` +
+  `NUT_OBLIQ: ${NUT_OBLIQ.length} rows, ` +
+  `ELP/MPP02: ${elpRows} terms`
 );
