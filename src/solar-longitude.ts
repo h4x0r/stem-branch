@@ -131,52 +131,76 @@ function crossesTarget(lon1: number, lon2: number, target: number): boolean {
  * @param searchDays - Number of days to search from startDate
  * @returns The Date when the Sun reaches the target longitude, or null if not found
  */
+/** Core crossing finder parameterized by a longitude-at-millis function. */
+function findCrossingMoment(
+  lonAt: (ms: number) => number,
+  targetLongitude: number,
+  startMs: number,
+  searchDays: number,
+): Date | null {
+  const target = normalizeDegrees(targetLongitude);
+  const dayMs = 86400000;
+
+  let prevLon = lonAt(startMs);
+  let lo: number | null = null;
+  let hi: number | null = null;
+  for (let d = 1; d <= searchDays; d++) {
+    const currentMs = startMs + d * dayMs;
+    const currentLon = lonAt(currentMs);
+    if (crossesTarget(prevLon, currentLon, target)) {
+      lo = startMs + (d - 1) * dayMs;
+      hi = currentMs;
+      break;
+    }
+    prevLon = currentLon;
+  }
+  if (lo === null || hi === null) return null;
+
+  // Binary search within the bracket to ~1 second precision (1000ms).
+  let bracketLo = lo;
+  let bracketHi = hi;
+  while (bracketHi - bracketLo > 1000) {
+    const mid = bracketLo + Math.floor((bracketHi - bracketLo) / 2);
+    if (crossesTarget(lonAt(bracketLo), lonAt(mid), target)) {
+      bracketHi = mid;
+    } else {
+      bracketLo = mid;
+    }
+  }
+  return new Date(bracketLo + Math.floor((bracketHi - bracketLo) / 2));
+}
+
 export function findSunLongitudeMoment(
   targetLongitude: number,
   startDate: Date,
   searchDays: number,
 ): Date | null {
-  const target = normalizeDegrees(targetLongitude);
-  const startMs = startDate.getTime();
-  const dayMs = 86400000;
+  return findCrossingMoment(
+    (ms) => getSunLongitude(new Date(ms)),
+    targetLongitude,
+    startDate.getTime(),
+    searchDays,
+  );
+}
 
-  // Coarse scan: step 1 day at a time, find the bracket where longitude crosses target
-  let prevLon = getSunLongitude(startDate);
-  let bracketStartMs: number | null = null;
-  let bracketEndMs: number | null = null;
-
-  for (let d = 1; d <= searchDays; d++) {
-    const currentMs = startMs + d * dayMs;
-    const currentLon = getSunLongitude(new Date(currentMs));
-
-    if (crossesTarget(prevLon, currentLon, target)) {
-      bracketStartMs = startMs + (d - 1) * dayMs;
-      bracketEndMs = currentMs;
-      break;
-    }
-
-    prevLon = currentLon;
-  }
-
-  if (bracketStartMs === null || bracketEndMs === null) return null;
-
-  // Binary search within the bracket to ~1 second precision (1000ms)
-  let lo = bracketStartMs;
-  let hi = bracketEndMs;
-
-  while (hi - lo > 1000) {
-    const mid = lo + Math.floor((hi - lo) / 2);
-    const midLon = getSunLongitude(new Date(mid));
-
-    if (crossesTarget(getSunLongitude(new Date(lo)), midLon, target)) {
-      hi = mid;
-    } else {
-      lo = mid;
-    }
-  }
-
-  // Return the midpoint of the final bracket
-  return new Date(lo + Math.floor((hi - lo) / 2));
+/**
+ * As {@link findSunLongitudeMoment}, but the apparent solar longitude is
+ * evaluated with a caller-supplied ΔT model (decimal year → seconds) instead of
+ * the built-in one.
+ */
+export function findSunLongitudeMomentWithDeltaT(
+  targetLongitude: number,
+  startDate: Date,
+  searchDays: number,
+  deltaT: (decimalYear: number) => number,
+): Date | null {
+  const lonAt = (ms: number): number => {
+    const jdUT = ms / 86400000 + 2440587.5;
+    const d = new Date(ms);
+    const decimalYear = d.getUTCFullYear() + (d.getUTCMonth() + 0.5) / 12;
+    return solarEclipticState(jdUT + deltaT(decimalYear) / 86400).apparentLongitudeDegrees;
+  };
+  return findCrossingMoment(lonAt, targetLongitude, startDate.getTime(), searchDays);
 }
 
 // ── Equation of Time (VSOP87D-based, Meeus Ch. 28) ──────────────────────

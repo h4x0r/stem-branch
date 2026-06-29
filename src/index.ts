@@ -133,7 +133,7 @@ export { newMoonJDE, findNewMoonsInRange } from './new-moon';
 
 // ── 農曆 (Lunisolar Calendar) ──────────────────────────────────
 export { getLunarMonthsForYear, getLunarNewYear, gregorianToLunisolar } from './lunisolar-calendar';
-export type { LunarMonth, LunisolarDate } from './lunisolar-calendar';
+export type { LunarMonth, LunisolarDate, DeltaTFn } from './lunisolar-calendar';
 
 // ── 建除十二神 (Twelve Day Fitness) ──────────────────────────
 export {

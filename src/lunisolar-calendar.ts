@@ -19,8 +19,11 @@
  */
 
 import { newMoonJDE, findNewMoonsInRange } from './new-moon';
-import { findSolarTermMoment, SOLAR_TERM_LONGITUDES } from './solar-terms';
+import { findSolarTermMomentWithDeltaT, SOLAR_TERM_LONGITUDES } from './solar-terms';
 import { deltaTForYear } from './delta-t';
+
+/** ΔT model: decimal year → seconds (TT = UT + ΔT). */
+export type DeltaTFn = (decimalYear: number) => number;
 
 // ── Types ────────────────────────────────────────────────────
 
@@ -33,6 +36,8 @@ export interface LunarMonth {
   startDate: Date;
   /** Number of days in this month (29 or 30) */
   days: number;
+  /** True if this month's start new moon is ΔT-uncertain (see LunisolarDate). */
+  boundaryUncertain: boolean;
 }
 
 export interface LunisolarDate {
@@ -44,6 +49,13 @@ export interface LunisolarDate {
   day: number;
   /** True if this date is in an intercalary month */
   isLeapMonth: boolean;
+  /**
+   * True if the deciding new moon is within the ΔT-prediction uncertainty of
+   * Beijing midnight, so the date could shift by a day under a different but
+   * equally plausible future ΔT model. Always false for ΔT-observed years
+   * (≤ 2050); see docs/validation.md "ΔT limit".
+   */
+  boundaryUncertain: boolean;
 }
 
 // ── Constants ────────────────────────────────────────────────
@@ -83,12 +95,37 @@ const lnyCache = new Map<number, Date>();
 
 // ── Helpers ──────────────────────────────────────────────────
 
-/** Convert JDE (Terrestrial Time) to a Date in UTC */
-function jdeToUTCDate(jde: number): Date {
+/** Convert JDE (Terrestrial Time) to a Date in UTC, using a ΔT model. */
+function jdeToUTCDate(jde: number, deltaT: DeltaTFn): Date {
   const year = 2000 + (jde - 2451545) / 365.25;
-  const dt = deltaTForYear(year);
-  const jdUT = jde - dt / 86400;
+  const jdUT = jde - deltaT(year) / 86400;
   return new Date((jdUT - 2440587.5) * 86400000);
+}
+
+/** Espenak–Meeus long-term ΔT parabola — standard higher future extrapolation. */
+function emParabola(year: number): number {
+  const u = (year - 1820) / 100;
+  return -20 + 32 * u * u;
+}
+
+/**
+ * Whether a month-start new moon is close enough to Beijing midnight that a
+ * different (plausible) ΔT model would move it to the adjacent day. Zero margin
+ * for ΔT-observed years (≤ 2050); beyond, the margin is the gap between the
+ * supplied ΔT and the standard long-term parabola.
+ */
+function startIsUncertain(newMoonUTC: Date, deltaT: DeltaTFn): boolean {
+  const bj = new Date(newMoonUTC.getTime() + BEIJING_OFFSET_MS);
+  const year = bj.getUTCFullYear();
+  if (year <= 2050) return false;
+  const sigma = Math.max(0, emParabola(year) - deltaT(year));
+  const secsIntoDay =
+    bj.getUTCHours() * 3600 +
+    bj.getUTCMinutes() * 60 +
+    bj.getUTCSeconds() +
+    bj.getUTCMilliseconds() / 1000;
+  const distToMidnight = Math.min(secsIntoDay, 86400 - secsIntoDay);
+  return distToMidnight < sigma;
 }
 
 /** Get the Beijing calendar date for a UTC Date */
@@ -138,17 +175,21 @@ function zhongqiFallsInMonth(
 /**
  * Get new moon UTC dates in a year range.
  */
-function getNewMoonDates(startYear: number, endYear: number): Date[] {
+function getNewMoonDates(startYear: number, endYear: number, deltaT: DeltaTFn): Date[] {
   const startJD = Date.UTC(startYear, 0, 1) / 86400000 + 2440587.5 - 30;
   const endJD = Date.UTC(endYear + 1, 1, 28) / 86400000 + 2440587.5 + 30;
-  return findNewMoonsInRange(startJD, endJD).map(jde => jdeToUTCDate(jde));
+  return findNewMoonsInRange(startJD, endJD).map(jde => jdeToUTCDate(jde, deltaT));
 }
 
 /**
  * Get zhongqi moments for a year range.
  * Returns { index, date } sorted chronologically.
  */
-function getZhongqiMoments(startYear: number, endYear: number): { index: number; date: Date }[] {
+function getZhongqiMoments(
+  startYear: number,
+  endYear: number,
+  deltaT: DeltaTFn,
+): { index: number; date: Date }[] {
   const moments: { index: number; date: Date }[] = [];
 
   for (let y = startYear; y <= endYear; y++) {
@@ -156,7 +197,7 @@ function getZhongqiMoments(startYear: number, endYear: number): { index: number;
       const longitude = SOLAR_TERM_LONGITUDES[idx];
       const startMonth = idx < 2 ? 1 : Math.floor(idx / 2) + 1;
       try {
-        const date = findSolarTermMoment(longitude, y, startMonth);
+        const date = findSolarTermMomentWithDeltaT(longitude, y, startMonth, deltaT);
         moments.push({ index: idx, date });
       /* v8 ignore next 3 */
       } catch {
@@ -291,13 +332,19 @@ function buildMonthSequence(
  *
  * @param lunarYear - The Gregorian year in which the Lunar New Year falls
  */
-export function getLunarMonthsForYear(lunarYear: number): LunarMonth[] {
-  const cached = monthsCache.get(lunarYear);
-  if (cached) return cached;
+export function getLunarMonthsForYear(
+  lunarYear: number,
+  deltaT: DeltaTFn = deltaTForYear,
+): LunarMonth[] {
+  const useCache = deltaT === deltaTForYear;
+  if (useCache) {
+    const cached = monthsCache.get(lunarYear);
+    if (cached) return cached;
+  }
 
   // Compute over a wide range to capture the full lunar year
-  const newMoons = getNewMoonDates(lunarYear - 1, lunarYear + 1);
-  const zhongqi = getZhongqiMoments(lunarYear - 1, lunarYear + 1);
+  const newMoons = getNewMoonDates(lunarYear - 1, lunarYear + 1, deltaT);
+  const zhongqi = getZhongqiMoments(lunarYear - 1, lunarYear + 1, deltaT);
   const sequence = buildMonthSequence(newMoons, zhongqi);
 
   // Find month 1 for this year: the first non-leap month 1
@@ -331,13 +378,16 @@ export function getLunarMonthsForYear(lunarYear: number): LunarMonth[] {
       isLeapMonth: m.isLeapMonth,
       startDate: beijingMidnight(m.startDate),
       days: m.days,
+      boundaryUncertain: startIsUncertain(m.startDate, deltaT),
     });
   }
 
-  monthsCache.set(lunarYear, result);
-  if (monthsCache.size > 20) {
-    const firstKey = monthsCache.keys().next().value;
-    if (firstKey !== undefined) monthsCache.delete(firstKey);
+  if (useCache) {
+    monthsCache.set(lunarYear, result);
+    if (monthsCache.size > 20) {
+      const firstKey = monthsCache.keys().next().value;
+      if (firstKey !== undefined) monthsCache.delete(firstKey);
+    }
   }
 
   return result;
@@ -376,7 +426,11 @@ export function getLunarNewYear(gregorianYear: number): Date {
  * @param date - Gregorian date (local time interpreted as Beijing date)
  * @returns Lunisolar date with year, month, day, and leap month flag
  */
-export function gregorianToLunisolar(date: Date): LunisolarDate {
+export function gregorianToLunisolar(
+  date: Date,
+  options: { deltaT?: DeltaTFn } = {},
+): LunisolarDate {
+  const deltaT = options.deltaT ?? deltaTForYear;
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
@@ -386,7 +440,7 @@ export function gregorianToLunisolar(date: Date): LunisolarDate {
   for (const lunarYear of [year, year - 1, year + 1]) {
     let months: LunarMonth[];
     try {
-      months = getLunarMonthsForYear(lunarYear);
+      months = getLunarMonthsForYear(lunarYear, deltaT);
     /* v8 ignore next 3 -- defensive: only fails for years outside astronomical computation range */
     } catch {
       continue;
@@ -405,6 +459,7 @@ export function gregorianToLunisolar(date: Date): LunisolarDate {
             month: m.monthNumber,
             day: lunarDay,
             isLeapMonth: m.isLeapMonth,
+            boundaryUncertain: m.boundaryUncertain,
           };
         }
       }

@@ -1,5 +1,5 @@
 /* v8 ignore next */
-import { findSunLongitudeMoment } from './solar-longitude';
+import { findSunLongitudeMoment, findSunLongitudeMomentWithDeltaT } from './solar-longitude';
 import type { SolarTerm } from './types';
 
 /**
@@ -53,6 +53,21 @@ export const MONTH_BOUNDARY_INDICES = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22
 export function findSolarTermMoment(targetLongitude: number, year: number, startMonth: number = 1): Date {
   const startDate = new Date(Date.UTC(year, startMonth - 1, 1));
   const result = findSunLongitudeMoment(targetLongitude, startDate, 120);
+  if (!result) {
+    throw new Error(`Could not find solar longitude ${targetLongitude}° in year ${year}`);
+  }
+  return result;
+}
+
+/** As {@link findSolarTermMoment}, with a caller-supplied ΔT model. */
+export function findSolarTermMomentWithDeltaT(
+  targetLongitude: number,
+  year: number,
+  startMonth: number,
+  deltaT: (decimalYear: number) => number,
+): Date {
+  const startDate = new Date(Date.UTC(year, startMonth - 1, 1));
+  const result = findSunLongitudeMomentWithDeltaT(targetLongitude, startDate, 120, deltaT);
   if (!result) {
     throw new Error(`Could not find solar longitude ${targetLongitude}° in year ${year}`);
   }
