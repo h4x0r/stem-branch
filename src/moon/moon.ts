@@ -55,3 +55,18 @@ export function getMoonPosition(date: Date): GeocentricPosition {
     dec: dec * RAD_TO_DEG,
   };
 }
+
+/**
+ * Apparent geocentric ecliptic longitude of the Moon (degrees, of date) at a
+ * Julian Ephemeris Day in TT. The jde-based core of {@link getMoonPosition}'s
+ * longitude — used by the true-conjunction new-moon solver.
+ */
+export function moonApparentLongitude(jdeTT: number): number {
+  const T = (jdeTT - 2451545.0) / 36525.0;
+  const moon = computeMoonPosition(T);
+  const pA = precessionInLongitude(T);
+  const dArgs = delaunayArgs(T);
+  const dpsi = nutationDpsi(dArgs.l, dArgs.lp, dArgs.F, dArgs.D, dArgs.Om, T);
+  const lon = normalizeRadians(moon.longitude + (pA + dpsi) * ARCSEC_TO_RAD);
+  return normalizeDegrees(lon * RAD_TO_DEG);
+}

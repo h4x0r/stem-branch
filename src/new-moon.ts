@@ -11,16 +11,18 @@
  *   k = -1 → previous new moon (~Dec 7, 1999)
  */
 
+import { solarEclipticState } from './solar-longitude';
+import { moonApparentLongitude } from './moon/moon';
+
 const DEG = Math.PI / 180;
 
 /**
- * Compute the JDE (Julian Ephemeris Day in TT) of the new moon
- * for lunation number k.
+ * Meeus Ch.49 estimate of the new-moon JDE (TT) — accurate to ~1 minute. Used as
+ * the starting point for the exact conjunction refinement in `newMoonJDE`.
  *
  * @param k - Integer lunation number (0 = 2000 Jan 6 new moon)
- * @returns JDE of the new moon
  */
-export function newMoonJDE(k: number): number {
+function meeusNewMoonJDE(k: number): number {
   const T = k / 1236.85;
   const T2 = T * T;
   const T3 = T2 * T;
@@ -127,6 +129,36 @@ export function newMoonJDE(k: number): number {
     0.000023 * Math.sin(A14);
 
   return JDE;
+}
+
+/** Moon−Sun apparent ecliptic longitude difference (deg), wrapped to (−180, 180]. */
+function sunMoonElongation(jde: number): number {
+  const sun = solarEclipticState(jde).apparentLongitudeDegrees;
+  const moon = moonApparentLongitude(jde);
+  let d = (moon - sun) % 360;
+  if (d > 180) d -= 360;
+  else if (d < -180) d += 360;
+  return d;
+}
+
+/**
+ * JDE (TT) of the true new moon (定朔) for lunation k: the Meeus Ch.49 estimate
+ * refined to the exact Sun–Moon apparent-longitude conjunction using the
+ * ELP/MPP02 Moon and VSOP87D + DE441 Sun. Sub-arcsecond (Meeus alone is ~1 min).
+ *
+ * @param k - Integer lunation number (0 = 2000 Jan 6 new moon)
+ * @returns JDE of the true new moon
+ */
+export function newMoonJDE(k: number): number {
+  // Elongation rises at the synodic rate ≈ 12.1907°/day; Newton from the Meeus
+  // estimate converges in a couple of steps.
+  let jde = meeusNewMoonJDE(k);
+  for (let i = 0; i < 6; i++) {
+    const e = sunMoonElongation(jde);
+    jde -= e / 12.190749;
+    if (Math.abs(e) < 1e-9) break;
+  }
+  return jde;
 }
 
 /**

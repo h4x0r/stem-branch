@@ -263,7 +263,7 @@ export {
 export type { CityTimezone, CityRegionKey, CityRegion } from './cities';
 
 // ── 月亮 (Moon Ephemeris) ──────────────────────────────────
-export { getMoonPosition } from './moon/moon';
+export { getMoonPosition, moonApparentLongitude } from './moon/moon';
 
 // ── 行星 (Planet Ephemeris) ────────────────────────────────
 export { getPlanetPosition } from './planets/planets';
