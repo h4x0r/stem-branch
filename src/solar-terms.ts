@@ -23,6 +23,17 @@ export const SOLAR_TERM_LONGITUDES: readonly number[] = [
 ];
 
 /**
+ * The solar term (節氣) in effect at apparent ecliptic longitude `deg` — the term
+ * whose longitude is the greatest one at or before `deg` (circular). Terms sit
+ * every 15° from SOLAR_TERM_LONGITUDES[0] (小寒, 285°). Negative or >360 inputs
+ * are normalized.
+ */
+export function solarTermForLongitude(deg: number): string {
+  const offset = (((deg - SOLAR_TERM_LONGITUDES[0]) % 360) + 360) % 360;
+  return SOLAR_TERM_NAMES[Math.floor(offset / 15) % 24];
+}
+
+/**
  * 節 (Jie) term indices — the 12 terms that mark month boundaries.
  * These are the odd-indexed terms in the traditional numbering:
  * 小寒(0), 立春(2), 驚蟄(4), 清明(6), 立夏(8), 芒種(10),

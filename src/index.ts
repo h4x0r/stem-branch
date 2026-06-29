@@ -94,6 +94,7 @@ export { deltaT, deltaTForYear } from './delta-t';
 // ── 節氣 (Solar Terms) ─────────────────────────────────────
 export {
   SOLAR_TERM_NAMES, SOLAR_TERM_LONGITUDES, MONTH_BOUNDARY_INDICES,
+  solarTermForLongitude,
   findSolarTermMoment, getSolarTermsForYear, findSpringStart,
   getMonthBoundaryTerms, getSolarMonthExact,
 } from './solar-terms';
