@@ -32,6 +32,12 @@ between tabulated hours cannot hide.
   the same source by
   [`scripts/gen-rust-solar-data.mjs`](../scripts/gen-rust-solar-data.mjs); the
   two engines cannot silently drift.
+- **Chinese lunisolar calendar** (TS and Rust) vs published reference data:
+  Lunar New Year dates (2000, 2020–2025, 2033), leap-month numbers
+  (2017→閏6, 2020→閏4, 2023→閏2, 2025→閏6), the 冬至-anchor month numbering, and
+  Gregorian→lunisolar conversions including the 2023 閏二月. These dates are
+  independently published (e.g. Hong Kong Observatory conversion tables), so the
+  check is external, not a self-consistent round-trip.
 
 Headline residual against JPL DE441 and the full methodology (sxwnl comparison,
 solar-term timing) are in the [accuracy report](https://h4x0r.github.io/stem-branch/accuracy).

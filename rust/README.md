@@ -5,10 +5,11 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://github.com/h4x0r/stem-branch/blob/main/rust/LICENSE)
 [![Rust CI](https://github.com/h4x0r/stem-branch/actions/workflows/rust.yml/badge.svg)](https://github.com/h4x0r/stem-branch/actions/workflows/rust.yml)
 
-Native Rust port of [stem-branch](https://github.com/h4x0r/stem-branch)'s solar
-ephemeris core. Computes the Sun's geocentric ecliptic state from the full
-VSOP87D Earth series, a JPL DE441-fitted correction polynomial, and IAU2000B
-nutation — no runtime dependencies, no JavaScript.
+Native Rust port of [stem-branch](https://github.com/h4x0r/stem-branch)'s
+astronomical core. Computes the Sun's geocentric ecliptic state (full VSOP87D
+Earth series + JPL DE441-fitted correction + IAU2000B nutation) and the full
+Chinese lunisolar calendar (new moons, solar terms, and 閏月 leap months) — no
+runtime dependencies, no JavaScript.
 
 ```rust
 use stem_branch::solar_ecliptic_state;
@@ -19,6 +20,20 @@ assert!((s.apparent_longitude_degrees - 280.368152).abs() < 1.0 / 3600.0);
 // s.true_longitude_degrees   — mean equinox of date
 // s.apparent_longitude_degrees — + IAU2000B nutation + aberration
 // s.radius_au                 — Sun–Earth distance
+```
+
+The Chinese lunisolar calendar — Lunar New Year, leap months (閏月), conversion:
+
+```rust
+use stem_branch::{gregorian_to_lunisolar, lunar_new_year, CivilDate};
+
+// 2023-03-22 is 閏二月初一 — day 1 of the leap 2nd month of 2023.
+let d = gregorian_to_lunisolar(CivilDate { year: 2023, month: 3, day: 22 });
+assert_eq!((d.year, d.month, d.day, d.is_leap_month), (2023, 2, 1, true));
+
+// Lunar New Year (正月初一) 2024 falls on 2024-02-10 (Beijing).
+let lny = lunar_new_year(2024);
+assert_eq!((lny.year, lny.month, lny.day), (2024, 2, 10));
 ```
 
 Input is a Julian Ephemeris Day in **Terrestrial Time**; the UTC↔TT / ΔT
@@ -79,6 +94,8 @@ truncated-remainder (`%`) semantics for argument reduction and the literal
 
 ## Scope
 
-Current surface is the solar ephemeris core (`solar_ecliptic_state`). Moon
-(ELP/MPP02) and the planets share the same VSOP/series machinery upstream and
-can be ported the same way.
+Covers the solar ephemeris (`solar_ecliptic_state`) and the full Chinese
+lunisolar calendar (`gregorian_to_lunisolar`, `lunar_months_for_year`,
+`lunar_new_year`, plus `new_moon_jde` and `find_solar_term_moment`). The Moon
+*position* ephemeris (ELP/MPP02) and the planets share the same series machinery
+upstream and can be ported the same way when needed.
