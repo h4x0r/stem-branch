@@ -129,3 +129,14 @@ describe('findNewMoonsInRange', () => {
     }
   });
 });
+
+import { fullMoonJDE } from '../src/new-moon';
+describe('fullMoonJDE', () => {
+  it('matches the 2024-01-25 17:54 UTC full moon (almanac, tier-1)', () => {
+    // Lunation 297: new moon 2024-01-11, full moon 2024-01-25 17:54 UTC.
+    const jde = fullMoonJDE(297);
+    const date = new Date((jde - 2440587.5) * 86400000);
+    const expected = Date.parse('2024-01-25T17:54:00Z');
+    expect(Math.abs(date.getTime() - expected) / 60000).toBeLessThan(5); // within 5 min
+  });
+});

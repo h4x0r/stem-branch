@@ -129,7 +129,7 @@ export { julianDayNumber, jdToCalendarDate, julianCalendarToDate } from './julia
 export type { CalendarType } from './julian-day';
 
 // ── 朔日 (New Moon) ────────────────────────────────────────
-export { newMoonJDE, findNewMoonsInRange } from './new-moon';
+export { newMoonJDE, fullMoonJDE, findNewMoonsInRange } from './new-moon';
 
 // ── 農曆 (Lunisolar Calendar) ──────────────────────────────────
 export { getLunarMonthsForYear, getLunarNewYear, gregorianToLunisolar } from './lunisolar-calendar';

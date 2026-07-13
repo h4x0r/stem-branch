@@ -7,7 +7,7 @@ import type { FirdariaResult, ProfectionResult, PrenatalSyzygyResult } from './b
 import type { ZodiacSign } from './tropical-astrology';
 import { getZodiacSign } from './tropical-astrology';
 import { SIGN_RULER } from './sign-metadata';
-import { newMoonJDE } from './new-moon';
+import { newMoonJDE, fullMoonJDE } from './new-moon';
 import { normalizeDegrees } from './astro';
 import { getSunLongitude } from './solar-longitude';
 import { getExtendedDignity } from './dignity-tables';
@@ -133,8 +133,8 @@ export function findPrenatalSyzygy(birthDate: Date): PrenatalSyzygyResult {
     nmJDE = newMoonJDE(k);
   }
 
-  // Check if a full moon (k + 0.5) falls between the new moon and birth
-  const fmJDE = newMoonJDE(k + 0.5);
+  // Check if the full moon of this lunation falls between the new moon and birth
+  const fmJDE = fullMoonJDE(k);
 
   if (fmJDE > nmJDE && fmJDE < jdBirth) {
     // Full moon is the prenatal syzygy

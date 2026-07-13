@@ -162,6 +162,29 @@ export function newMoonJDE(k: number): number {
 }
 
 /**
+ * JDE (TT) of the true full moon (望) for lunation `k`: the Moon–Sun apparent
+ * opposition (elongation 180°). Starts half a synodic month after the new moon
+ * of the same lunation, then Newton-refines to the exact opposition.
+ *
+ * Note: {@link newMoonJDE} always converges to the *conjunction* (elongation 0),
+ * so `newMoonJDE(k + 0.5)` does NOT yield a full moon — this function does.
+ *
+ * @param k - Integer lunation number (0 = 2000 Jan 6 new moon)
+ * @returns JDE of the true full moon following new moon `k`
+ */
+export function fullMoonJDE(k: number): number {
+  let jde = newMoonJDE(k) + 29.530588861 / 2;
+  for (let i = 0; i < 8; i++) {
+    // Offset from opposition, wrapped to (−180, 180].
+    let e = sunMoonElongation(jde) - 180;
+    if (e <= -180) e += 360;
+    jde -= e / 12.190749;
+    if (Math.abs(e) < 1e-9) break;
+  }
+  return jde;
+}
+
+/**
  * Find all new moon JDEs in a Julian Day range.
  *
  * @param startJD - Start of range (JD)
