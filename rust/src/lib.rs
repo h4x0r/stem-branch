@@ -89,6 +89,70 @@ pub fn solar_ecliptic_state(jde_tt: f64) -> SolarState {
     }
 }
 
+/// Astronomical unit in kilometres (IAU 2012 definition).
+pub(crate) const AU_KM: f64 = 149_597_870.7;
+
+/// Illumination geometry of the Moon at a Julian Ephemeris Day (TT), from the
+/// Moon's and Sun's geocentric positions (ELP/MPP02 + VSOP87D). Computed per
+/// Meeus, *Astronomical Algorithms* 2e, chapter 48 — using the true geocentric
+/// elongation (including the Moon's ecliptic latitude) and the Sun/Moon
+/// distances, not a longitude-only approximation.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct MoonPhase {
+    /// Geocentric ecliptic-longitude elongation Moon−Sun, degrees `[0, 360)`:
+    /// 0 = new, 90 = first quarter, 180 = full, 270 = last quarter. Drives the
+    /// phase name and the waxing/waning sense.
+    pub elongation_deg: f64,
+    /// Phase angle *i* (the Sun–Moon–Earth angle), degrees `[0, 180]`: 0 = full,
+    /// 180 = new (Meeus eq. 48.3).
+    pub phase_angle_deg: f64,
+    /// Illuminated fraction of the Moon's disc, `0.0`–`1.0` (Meeus eq. 48.1,
+    /// `k = (1 + cos i) / 2`).
+    pub illuminated_fraction: f64,
+    /// `true` while waxing (new → full, elongation in `(0, 180)`), `false` while
+    /// waning (full → new).
+    pub waxing: bool,
+}
+
+/// Compute the Moon's phase geometry (elongation, phase angle, illuminated
+/// fraction) at the given Julian Ephemeris Day in Terrestrial Time.
+///
+/// Uses the true geocentric elongation ψ from Meeus eq. 48.2
+/// (`cos ψ = cos β · cos(λ_moon − λ_sun)`, β = the Moon's ecliptic latitude) and
+/// the phase angle from eq. 48.3 with the real Sun and Moon distances, so the
+/// illuminated fraction is accurate near the quarters where the latitude term
+/// matters — not the longitude-only shortcut.
+#[must_use]
+pub fn moon_phase(jde_tt: f64) -> MoonPhase {
+    let moon = moon_position(jde_tt);
+    let sun = solar_ecliptic_state(jde_tt);
+
+    let lam_m = moon.longitude_degrees.to_radians();
+    let lam_s = sun.apparent_longitude_degrees.to_radians();
+    let beta = moon.latitude_degrees.to_radians();
+
+    // Meeus 48.2: true geocentric elongation ψ (the Sun's ecliptic latitude ≈ 0).
+    let cos_psi = beta.cos() * (lam_m - lam_s).cos();
+    let psi = cos_psi.clamp(-1.0, 1.0).acos(); // [0, π]
+
+    // Meeus 48.3: phase angle i from Sun distance R and Moon distance Δ.
+    let r_km = sun.radius_au * AU_KM;
+    let delta_km = moon.distance_km;
+    let i = (r_km * psi.sin()).atan2(delta_km - r_km * cos_psi); // [0, π]
+    let illuminated_fraction = (1.0 + i.cos()) / 2.0;
+
+    // Longitude-difference elongation for phase ordering / waxing sense.
+    let elongation_deg =
+        (moon.longitude_degrees - sun.apparent_longitude_degrees).rem_euclid(360.0);
+
+    MoonPhase {
+        elongation_deg,
+        phase_angle_deg: i.to_degrees(),
+        illuminated_fraction,
+        waxing: elongation_deg < 180.0,
+    }
+}
+
 /// Evaluate a VSOP87 series: a sum over powers of `tau`, each power weighting a
 /// sum of `A * cos(B + C * tau)` terms.
 fn eval_vsop_series(series: &[&[[f64; 3]]], tau: f64) -> f64 {
