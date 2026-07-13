@@ -3,6 +3,10 @@
   "version": "0.8.0",
   "description": "Chinese calendar, astronomy, and 干支 (Heavenly Stems & Earthly Branches) computation library",
   "homepage": "https://h4x0r.github.io/stem-branch/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h4x0r/stem-branch.git"
+  },
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.cjs",
